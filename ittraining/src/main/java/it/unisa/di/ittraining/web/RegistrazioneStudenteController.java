@@ -64,7 +64,6 @@ public class RegistrazioneStudenteController {
 			
 			studentiService.registraStudente(studente);
 			
-			return "redirect:/registrazione-successo";
 	    	
 	    }
 	    
