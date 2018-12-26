@@ -10,8 +10,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String getHome(Model model) {
-			if (!model.containsAttribute("RegistrazioneStudenteForm")) {
-				model.addAttribute("RegistrazioneStudenteForm", new RegistrazioneStudenteForm());
+			if (!model.containsAttribute("registrazioneStudente")) {
+				model.addAttribute("registrazioneStudente", new RegistrazioneStudenteForm());
 			}
 			
 			if (!model.containsAttribute("registrazioneSegreteria")) {
@@ -26,6 +26,6 @@ public class HomeController {
 				model.addAttribute("registrazioneAziendale", new RegistrazioneSTTForm());
 			}
 		
-		return "Home";
+		return "aggiungi-ente";
 	}
 }

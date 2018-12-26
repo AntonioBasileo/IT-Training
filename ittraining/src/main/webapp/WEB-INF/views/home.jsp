@@ -29,7 +29,7 @@
 		
 	    
 	    <!--Import Google Icon Font-->
-	      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	</head>
 	
 	<body>
@@ -61,14 +61,16 @@
 				      		<div class="row">
 				      
 				        		<div class="input-field col s12">
+				        			<i class="material-icons prefix">account_circle</i>
 				          			<input id="username-login" type="text" class="validate">
-				          			<label for="username-login"><i class="material-icons left">account_circle</i>Username</label>
+				          			<label for="username-login">Username</label>
 				       			 </div>
 				      		</div>
 				      	<div class="row">
 				        	<div class="input-field col s12">
+				        		<i class="material-icons prefix">lock</i>
 				          		<input id="password-login" type="password" class="validate">
-				          		<label for="password-login"><i class="material-icons left">lock</i>Password</label>
+				          		<label for="password-login">Password</label>
 				        	</div>
 				      	</div>
 			      
@@ -103,16 +105,18 @@
 			      </div>
 			    <div class="collapsible-body">
 			  <div class="row">
-			    <form:form cssClass="col s12" action ="/richiesta-registrazione-studente" method = "POST" modelAttribute = "RegistrazioneStudenteForm">
+			    <form:form cssClass="col s12" action ="/richiesta-registrazione-studente" method = "POST" modelAttribute = "registrazioneStudente">
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix"></i>
 			          <form:input path="nome" id="first_name_studente" type="text" cssClass="validate"/>
-			          <label for="first_name_studente"><i class="material-icons left"></i>Nome</label>
+			          <label for="first_name_studente">Nome</label>
 			        </div>
 			        
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix"></i>
 			          <form:input path="cognome" id="last_name_studente" type="text" cssClass="validate"/>
-			          <label for="last_name_studente"><i class="material-icons left"></i>Cognome</label>
+			          <label for="last_name_studente">Cognome</label>
 			        </div>
 			      </div>
 			      
@@ -186,36 +190,41 @@
 			      
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">keyboard</i>
 			          <form:input path="matricola" id="matricola" type="text" cssClass="validate"/>
-			          <label for="matricola"><i class="material-icons left">keyboard</i>Matricola</label>
+			          <label for="matricola">Matricola</label>
 			        </div>
 			      </div>
 			      
 				  <div class="row">
 				     <div class="input-field col s6">
+				       <i class="material-icons prefix">account_circle</i>
 				       <form:input path="username" id="username-studente" type="text" cssClass="validate"/>
-				       <label for="username-studente"><i class="material-icons left">account_circle</i>Username</label>
+				       <label for="username-studente">Username</label>
 				     </div>
 				  </div>
 				  
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">mail</i>
 			          <form:input path="email" id="email_studente" type="email" cssClass="validate"/>
-			          <label for="email_studente"><i class="material-icons left">mail</i>Email</label>
+			          <label for="email_studente">Email</label>
 			        </div>
 			      </div>
 			      
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">lock</i>
 			          <form:input path="password" id="password_studente" type="password" cssClass="validate"/>
-			          <label for="password_studente"><i class="material-icons left">lock</i>Password</label>
+			          <label for="password_studente">Password</label>
 			        </div>
 			      </div>
 			      
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">lock_outline</i>
 			          <form:input path="confermaPassword" id="confirm_password_studente" type="password" cssClass="validate"/>
-			          <label for="confirm_password_studente"><i class="material-icons left">lock_outline</i>Conferma password</label>
+			          <label for="confirm_password_studente">Conferma password</label>
 			        </div>
 			      </div>
 			      
@@ -244,13 +253,15 @@
 			    <form:form cssClass="col s12" action ="/richiesta-registrazione-segreteria" method = "POST" modelAttribute = "registrazioneSegreteria">
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix"></i>
 			          <form:input path="nome" id="first_name_segreteria" type="text" cssClass="validate"/>
-			          <label for="first_name_segreteria"><i class="material-icons left"></i>Nome</label>
+			          <label for="first_name_segreteria">Nome</label>
 			        </div>
 			        
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix"></i>
 			          <form:input path="cognome" id="last_name_segreteria" type="text" cssClass="validate"/>
-			          <label for="last_name_segreteria"><i class="material-icons left"></i>Cognome</label>
+			          <label for="last_name_segreteria">Cognome</label>
 			        </div>
 			      </div>
 			      
@@ -323,29 +334,33 @@
         </div>  
 				  <div class="row">
 				     <div class="input-field col s6">
+				       <i class="material-icons prefix">account_circle</i>
 				       <form:input path="username" id="username-segreteria" type="text" cssClass="validate"/>
-				       <label for="username-segreteria"><i class="material-icons left">account_circle</i>Username</label>
+				       <label for="username-segreteria">Username</label>
 				     </div>
 				  </div>
 				  
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">mail</i>
 			          <form:input path="email" id="email_segreteria" type="email" cssClass="validate"/>
-			          <label for="email_segreteria"><i class="material-icons left">mail</i>Email</label>
+			          <label for="email_segreteria">Email</label>
 			        </div>
 			      </div>
 			      
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">lock</i>
 			          <form:input path="password" id="password_segreteria" type="password" cssClass="validate"/>
-			          <label for="password_segreteria"><i class="material-icons left">lock</i>Password</label>
+			          <label for="password_segreteria">Password</label>
 			        </div>
 			      </div>
 			      
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">lock_outline</i>
 			          <form:input path="confermaPassword" id="confirm_password_studente" type="password" cssClass="validate"/>
-			          <label for="confirm_password_segreteria"><i class="material-icons left">lock_outline</i>Conferma password</label>
+			          <label for="confirm_password_segreteria">Conferma password</label>
 			        </div>
 			      </div>
 			      
@@ -374,13 +389,15 @@
 			    <form:form cssClass="col s12" action ="/richiesta-registrazione-accademico" method = "POST" modelAttribute = "registrazioneAccademico">
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix"></i>
 			          <form:input path="nome" id="first_name_accademico" type="text" cssClass="validate"/>
-			          <label for="first_name_accademico"><i class="material-icons left"></i>Nome</label>
+			          <label for="first_name_accademico">Nome</label>
 			        </div>
 			        
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix"></i>
 			          <form:input path="cognome" id="last_name_accademico" type="text" cssClass="validate"/>
-			          <label for="last_name_accademico"><i class="material-icons left"></i>Cognome</label>
+			          <label for="last_name_accademico">Cognome</label>
 			        </div>
 			      </div>
 			      
@@ -454,29 +471,33 @@
 			      
 				  <div class="row">
 				     <div class="input-field col s6">
+				       <i class="material-icons prefix">account_circle</i>
 				       <form:input path="username" id="username-accademico" type="text" cssClass="validate"/>
-				       <label for="username-accademico"><i class="material-icons left">account_circle</i>Username</label>
+				       <label for="username-accademico">Username</label>
 				     </div>
 				  </div>
 				  
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">mail</i>
 			          <form:input path="email" id="email_accademico" type="email" cssClass="validate"/>
-			          <label for="email_accademico"><i class="material-icons left">mail</i>Email</label>
+			          <label for="email_accademico">Email</label>
 			        </div>
 			      </div>
 			      
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">lock</i>
 			          <form:input path="password" id="password_accademico" type="password" cssClass="validate"/>
-			          <label for="password_accademico"><i class="material-icons left">lock</i>Password</label>
+			          <label for="password_accademico">Password</label>
 			        </div>
 			      </div>
 			      
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">lock_outline</i>
 			          <form:input path="confermaPassword" id="confirm_password_accademico" type="password" cssClass="validate"/>
-			          <label for="confirm_password_studente"><i class="material-icons left">lock_outline</i>Conferma password</label>
+			          <label for="confirm_password_studente">Conferma password</label>
 			        </div>
 			      </div>
 			      
@@ -505,13 +526,15 @@
 			    <form:form cssClass="col s12" action ="/richiesta-registrazione-aziendale" method = "POST" modelAttribute = "registrazioneAziendale">
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix"></i>
 			          <form:input path="nome" id="first_name_aziendale" type="text" cssClass="validate"/>
-			          <label for="first_name_aziendale"><i class="material-icons left"></i>Nome</label>
+			          <label for="first_name_aziendale">Nome</label>
 			        </div>
 			        
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix"></i>
 			          <form:input path="cognome" id="last_name_aziendale" type="text" cssClass="validate"/>
-			          <label for="last_name_aziendale"><i class="material-icons left"></i>Cognome</label>
+			          <label for="last_name_aziendale">Cognome</label>
 			        </div>
 			      </div>
 			      
@@ -585,29 +608,33 @@
 			      
 				  <div class="row">
 				     <div class="input-field col s6">
+				       <i class="material-icons prefix">account_circle</i>
 				       <form:input path="username" id="username-aziendale" type="text" cssClass="validate"/>
-				       <label for="username-aziendale"><i class="material-icons left">account_circle</i>Username</label>
+				       <label for="username-aziendale">Username</label>
 				     </div>
 				  </div>
 				  
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">mail</i>
 			          <form:input path="email" id="email_aziendale" type="email" cssClass="validate"/>
-			          <label for="email_aziendale"><i class="material-icons left">mail</i>Email</label>
+			          <label for="email_aziendale">Email</label>
 			        </div>
 			      </div>
 			      
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">lock</i>
 			          <form:input path="password" id="password_aziendale" type="password" cssClass="validate"/>
-			          <label for="password_aziendale"><i class="material-icons left">lock</i>Password</label>
+			          <label for="password_aziendale">Password</label>
 			        </div>
 			      </div>
 			      
 			      <div class="row">
 			        <div class="input-field col s6">
+			          <i class="material-icons prefix">lock_outline</i>
 			          <form:input path="confermaPassword" id="confirm_password_aziendale" type="password" cssClass="validate"/>
-			          <label for="confirm_password_aziendale"><i class="material-icons left">lock_outline</i>Conferma password</label>
+			          <label for="confirm_password_aziendale">Conferma password</label>
 			        </div>
 			      </div>
 			      

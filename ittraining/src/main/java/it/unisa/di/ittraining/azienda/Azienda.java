@@ -16,6 +16,19 @@ public class Azienda {
 	private String nome;
 	private String sede;
 	private String indirizzo;
+
+	  
+	/** Costante che definisce la minima lunghezza del campo nome. */
+	public static final int MIN_LUNGHEZZA_NOME = 2;
+	  
+	/** Costante che definisce la massima lunghezza del campo nome. */
+	public static final int MAX_LUNGHEZZA_NOME = 255;
+	  
+	/** Costante che definisce la minima lunghezza del campo indirizzo. */
+	public static final int MIN_LUNGHEZZA_INDIRIZZO = 2;
+	  
+    /** Costante che definisce la massima lunghezza del campo indirizzo. */
+	public static final int MAX_LUNGHEZZA_INDIRIZZO = 255;
 	
 	@OneToMany
 	private List<TutorAziendale> tutorAziendali;
