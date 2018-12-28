@@ -9,7 +9,7 @@ public class MatricolaStudenteNonValidaException extends Exception {
   private static final long serialVersionUID = -1767675619185354971L;
   
   /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
-  private static final String messaggioDefault = " MATRICOLA non valida";
+  private static final String messaggioDefault = " Matricola non valida";
   
   /**
    * Costruisce un'eccezione che ha come messaggio {@link #messaggioDefault}.

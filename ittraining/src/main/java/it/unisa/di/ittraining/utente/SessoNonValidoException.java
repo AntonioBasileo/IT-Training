@@ -6,9 +6,11 @@ package it.unisa.di.ittraining.utente;
  */
 public class SessoNonValidoException extends Exception {
 
-  private static final long serialVersionUID = -7113370896659709468L;
-
-  /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1293006327981246934L;
+/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
   private static final String messaggioDefault = "Sesso non valido";
   
   /**

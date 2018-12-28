@@ -1,14 +1,16 @@
 package it.unisa.di.ittraining.utente;
 
 /**
- * Eccezione lanciata quando il controllo sull'username di un utente fallisce perché questo è già
+ * Eccezione lanciata quando il controllo sull'username di un utente fallisce perché già
  * presente nel sistema.
  */
 public class UsernameEsistenteException extends Exception {
-
-  private static final long serialVersionUID = 6746818670147635153L;
   
-  /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2352224561228810672L;
+/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
   private static final String messaggioDefault = "Username già presente";
   
   /**

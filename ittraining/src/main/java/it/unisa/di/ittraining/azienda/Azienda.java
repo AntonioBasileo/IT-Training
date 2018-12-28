@@ -16,6 +16,7 @@ public class Azienda {
 	private String nome;
 	private String sede;
 	private String indirizzo;
+	private String telefono;
 
 	  
 	/** Costante che definisce la minima lunghezza del campo nome. */
@@ -23,12 +24,22 @@ public class Azienda {
 	  
 	/** Costante che definisce la massima lunghezza del campo nome. */
 	public static final int MAX_LUNGHEZZA_NOME = 255;
+	
+	  
+	/** Costante che definisce la minima lunghezza del campo nome. */
+	public static final int MIN_LUNGHEZZA_SEDE = 2;
+		  
+	/** Costante che definisce la massima lunghezza del campo nome. */
+	public static final int MAX_LUNGHEZZA_SEDE = 35;
 	  
 	/** Costante che definisce la minima lunghezza del campo indirizzo. */
 	public static final int MIN_LUNGHEZZA_INDIRIZZO = 2;
 	  
     /** Costante che definisce la massima lunghezza del campo indirizzo. */
 	public static final int MAX_LUNGHEZZA_INDIRIZZO = 255;
+	
+	/** Costante che definisce il formato del campo telefono*/
+	public static final String TELEFONO_PATTERN = "^[0-9]{2,4}[0-9]{4,7}$";
 	
 	@OneToMany
 	private List<TutorAziendale> tutorAziendali;
@@ -70,6 +81,22 @@ public class Azienda {
 	
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public List<DomandaTirocinio> getDomande() {
+		return domande;
+	}
+
+	public void setDomande(List<DomandaTirocinio> domande) {
+		this.domande = domande;
 	}
 
 }

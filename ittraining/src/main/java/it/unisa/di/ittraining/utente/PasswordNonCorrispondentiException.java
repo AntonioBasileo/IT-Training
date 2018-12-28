@@ -1,8 +1,17 @@
 package it.unisa.di.ittraining.utente;
 
+/**
+ * 
+ * Eccezione lanciata quando i valori dei campi Password e Conferma password non corrispondono
+ *
+ */
 public class PasswordNonCorrispondentiException extends Exception {
 
-	  /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6429064271308527098L;
+	/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
 	  private static final String messaggioDefault = "Le email non corrispondono";
 	  
 	  /**

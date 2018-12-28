@@ -2,12 +2,15 @@ package it.unisa.di.ittraining.web;
 
 import java.time.LocalDate;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.TutorAziendale;
@@ -56,12 +59,23 @@ public class RegistrazioneController {
 	private UtenteService utentiService;
 
 	@RequestMapping(value = "/richiesta-registrazione-studente", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneStudente(@ModelAttribute("registrazioneStudente") RegistrazioneStudenteForm registrazioneStudente, BindingResult result) 
+	public String elaboraRichiestaIscrizioneStudente(@ModelAttribute("registrazioneStudente") RegistrazioneStudenteForm registrazioneStudente, BindingResult result, 
+			RedirectAttributes redirectAttributes) 
 			throws UsernameNonValidoException, UsernameEsistenteException, PasswordNonValidaException, 
 			PasswordNonCorrispondentiException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, 
 			CognomeNonValidoException, SessoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, DataDiNascitaNonValidaException {
 		
 		validator.validate(registrazioneStudente, result);
+		
+
+	    if (result.hasErrors()) {
+	      redirectAttributes
+	          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneStudente",
+	                             result);
+	      redirectAttributes.addFlashAttribute("registrazioneStudente", registrazioneStudente);
+	      
+	      return "redirect:/home";
+	    }
 		
 	    // Genera un oggetto LocalDate a partire dagli interi presenti nel form
 	    LocalDate date = LocalDate.of(registrazioneStudente.getAnnoNascita(),
@@ -81,7 +95,6 @@ public class RegistrazioneController {
 		    studente.setSesso(registrazioneStudente.getSesso());
 			
 			studentiService.registraStudente(studente);
-			
 	    	
 	    }
 	    
@@ -90,11 +103,18 @@ public class RegistrazioneController {
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-segreteria", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneSegreteria(@ModelAttribute("registrazioneSegreteria") RegistrazioneSTTForm registrazioneSegreteria, BindingResult result) throws UsernameNonValidoException, 
+	public String elaboraRichiestaIscrizioneSegreteria(HttpSession session, @ModelAttribute("registrazioneSegreteria") RegistrazioneSTTForm registrazioneSegreteria, BindingResult result, RedirectAttributes redirectAttributes) throws UsernameNonValidoException, 
 	UsernameEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, 
 	CognomeNonValidoException, SessoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, DataDiNascitaNonValidaException {
 		
 		validatorSTT.validate(registrazioneSegreteria, result);
+		
+
+	    if (result.hasErrors()) {
+	      
+	      
+	      return "redirect:/home";
+	    }
 		
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form
 	    LocalDate date = LocalDate.of(registrazioneSegreteria.getAnnoNascita(),
@@ -121,11 +141,18 @@ public class RegistrazioneController {
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-accademico", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneTutorAccademico(@ModelAttribute("registrazioneAccademico") RegistrazioneSTTForm registrazioneAccademico, BindingResult result) throws PasswordNonValidaException,
+	public String elaboraRichiestaIscrizioneTutorAccademico(HttpSession session, @ModelAttribute("registrazioneAccademico") RegistrazioneSTTForm registrazioneAccademico, BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException,
 	PasswordNonCorrispondentiException, UsernameNonValidoException, UsernameEsistenteException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException,
 	SessoNonValidoException, CognomeNonValidoException, DataDiNascitaNonValidaException {
 		
 		validatorSTT.validate(registrazioneAccademico, result);
+		
+
+	    if (result.hasErrors()) {
+	      
+	      
+	      return "redirect:/home";
+	    }
 		
 	    // Genera un oggetto LocalDate a partire dagli interi presenti nel form
 	    LocalDate date = LocalDate.of(registrazioneAccademico.getAnnoNascita(),
@@ -151,11 +178,18 @@ public class RegistrazioneController {
 	}
 	
 	@RequestMapping(value = "/richiesta-registrazione-aziendale", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizione(@ModelAttribute("registrazioneAziendale") RegistrazioneSTTForm registrazioneAziendale, BindingResult result) throws PasswordNonValidaException,
+	public String elaboraRichiestaIscrizioneTutorAziendale(HttpSession session, @ModelAttribute("registrazioneAziendale") RegistrazioneSTTForm registrazioneAziendale, BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException,
 	PasswordNonCorrispondentiException, UsernameNonValidoException, UsernameEsistenteException, EmailEsistenteException, EmailNonValidaException,
 	NomeNonValidoException, CognomeNonValidoException, SessoNonValidoException, DataDiNascitaNonValidaException {
 		
 		validatorSTT.validate(registrazioneAziendale, result);
+		
+
+	    if (result.hasErrors()) {
+	      
+	      
+	      return "redirect:/home";
+	    }
 		
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form
 	    LocalDate date = LocalDate.of(registrazioneAziendale.getAnnoNascita(),

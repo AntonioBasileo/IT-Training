@@ -3,6 +3,9 @@ package it.unisa.di.ittraining.web;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
+import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
+import it.unisa.di.ittraining.studente.StudentiService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
@@ -26,11 +29,13 @@ import org.springframework.stereotype.Component;
 public class RegistrazioneStudenteFormValidator implements Validator {
 	  
 	  @Autowired
-	  private UtenteService utenteService;
+	  private UtenteService utentiService;
 
+	  @Autowired
+	  private StudentiService studentiService;
 	  
 	  /**
-	   * Permette di definire le classi cui il validatore è applicabile.
+	   * Permette di definire le classi cui poter applicare il validatore.
 	   */
 	  @Override
 	  public boolean supports(Class<?> clazz) {
@@ -42,45 +47,64 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		  RegistrazioneStudenteForm form = (RegistrazioneStudenteForm) target;
 		  
 		  try {
-			utenteService.validaNome(form.getNome());
+			  utentiService.validaNome(form.getNome());
 		} catch (NomeNonValidoException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.rejectValue("nome", "form.nome.nonValido");
 		}
 		  
 		  try {
-			utenteService.validaCognome(form.getCognome());
+			  utentiService.validaCognome(form.getCognome());
 		} catch (CognomeNonValidoException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.rejectValue("cognome", "form.cognome.nonValido");
 		}
 		  
 		  try {
-			utenteService.validaUsername(form.getUsername());
-		} catch (UsernameNonValidoException | UsernameEsistenteException e) {
+			studentiService.validaMatricolaStudente(form.getMatricola());
+		} catch (MatricolaStudenteNonValidaException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		  
-		  try {
-			utenteService.validaEmail(form.getEmail());
-		} catch (EmailEsistenteException | EmailNonValidaException e) {
+			errors.rejectValue("matricola", "form.matricola.nonValida");
+		} catch (MatricolaStudenteEsistenteException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.rejectValue("matricola", "form.matricola.giàEsistente");
 		}
 		  
 		  try {
-			utenteService.validaPasswords(form.getPassword(), form.getConfermaPassword());
-		} catch (PasswordNonValidaException | PasswordNonCorrispondentiException e) {
+			  utentiService.validaUsername(form.getUsername());
+		} catch (UsernameNonValidoException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.rejectValue("username", "form.username.nonValido");
+		} catch (UsernameEsistenteException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("username", "form.username.usernameEsistente");
 		}
 		  
 		  try {
-			utenteService.validaSesso(form.getSesso());
+			  utentiService.validaEmail(form.getEmail());
+		} catch (EmailEsistenteException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("email", "form.email.emailEsistente");
+		} catch (EmailNonValidaException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("email", "form.email.nonValida");
+		}
+		  
+		  try {
+			  utentiService.validaPasswords(form.getPassword(), form.getConfermaPassword());
+		} catch (PasswordNonValidaException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("email", "form.password.passwordOconfermaPasswordNonValide");
+		} catch (PasswordNonCorrispondentiException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("confermaPassword", "form.confermaPassword.nonCorrispondenti");
+		}
+		  
+		  try {
+			  utentiService.validaSesso(form.getSesso());
 		} catch (SessoNonValidoException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.rejectValue("sesso", "form.sesso.nonValido");
 		}
 		  
 		  try {
@@ -94,9 +118,9 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		                                    form.getMeseNascita(), 
 		                                    form.getGiornoNascita());
 		      
-		      utenteService.validaDataDiNascita(data);
+		      utentiService.validaDataDiNascita(data);
 		    } catch (DataDiNascitaNonValidaException | DateTimeException e) {
-		      e.printStackTrace();
+		      System.out.println("Nu va buon a dat scem!");
 		    } 
 	  }
 }

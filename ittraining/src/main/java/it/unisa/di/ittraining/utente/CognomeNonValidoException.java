@@ -5,10 +5,12 @@ package it.unisa.di.ittraining.utente;
  * è valido oppure è nullo.
  */
 public class CognomeNonValidoException extends Exception {
-
-  private static final long serialVersionUID = 2341633524001032349L;
   
-  /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
   private static final String messaggioDefault = "Cognome non valido";
   
   /**

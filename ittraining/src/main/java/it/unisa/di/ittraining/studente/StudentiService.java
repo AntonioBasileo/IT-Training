@@ -58,15 +58,21 @@ public class StudentiService {
 	  public String validaMatricolaStudente(String matricolaStudente)
 		         throws MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException {
 		    if (matricolaStudente == null) {
+		    	
 		      throw new MatricolaStudenteNonValidaException();
+		      
 		    } else {
+		    	
 		      matricolaStudente = matricolaStudente.trim();
 		      
 		      if (!matricolaStudente.matches(Studente.MATRICOLA_PATTERN)) {
 		        throw new MatricolaStudenteNonValidaException();
+		        
 		      } else if (studenteRepository.existsByMatricola(matricolaStudente)) {
 		        throw new MatricolaStudenteEsistenteException();
+		        
 		      } else {
+		    	  
 		        return matricolaStudente;
 		      }
 		    }

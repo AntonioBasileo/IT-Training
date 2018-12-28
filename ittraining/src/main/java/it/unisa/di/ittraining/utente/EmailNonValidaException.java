@@ -5,10 +5,12 @@ package it.unisa.di.ittraining.utente;
  * rispetta il pattern oppure è nulla.
  */
 public class EmailNonValidaException extends Exception {
-
-  private static final long serialVersionUID = 7088610255259067066L;
   
-  /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -705389791392738255L;
+/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
   private static final String messaggioDefault = "E-mail non valida";
   
   /**

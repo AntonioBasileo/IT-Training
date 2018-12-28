@@ -6,9 +6,11 @@ package it.unisa.di.ittraining.utente;
  */
 public class NomeNonValidoException extends Exception {
   
-  private static final long serialVersionUID = 7342436857930048127L;
-  
-  /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4627707425541950819L;
+/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
   private static final String messaggioDefault = "Nome non valido";
   
   /**
