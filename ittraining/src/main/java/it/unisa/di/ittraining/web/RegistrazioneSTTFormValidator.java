@@ -44,51 +44,51 @@ public class RegistrazioneSTTFormValidator implements Validator {
 			  utentiService.validaNome(form.getNome());
 		} catch (NomeNonValidoException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("nome", "form.nome.nonValido");
+			errors.rejectValue("nome", "formRegistrazione.nome.nonValido");
 		}
 		  
 		  try {
 			  utentiService.validaCognome(form.getCognome());
 		} catch (CognomeNonValidoException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("cognome", "form.cognome.nonValido");
+			errors.rejectValue("cognome", "formRegistrazione.cognome.nonValido");
 		}
 		  
 		  try {
 			  utentiService.validaUsername(form.getUsername());
 		} catch (UsernameNonValidoException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("username", "form.username.nonValido");
+			errors.rejectValue("username", "formRegistrazione.username.nonValido");
 		} catch (UsernameEsistenteException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("username", "form.username.usernameEsistente");
+			errors.rejectValue("username", "formRegistrazione.username.usernameEsistente");
 		}
 		  
 		  try {
 			  utentiService.validaEmail(form.getEmail());
 		} catch (EmailEsistenteException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("email", "form.email.emailEsistente");
+			errors.rejectValue("email", "formRegistrazioneEsistente.email.emailEsistente");
 		} catch (EmailNonValidaException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("email", "form.email.nonValida");
+			errors.rejectValue("email", "formRegistrazione.email.nonValida");
 		}
 		  
 		  try {
 			  utentiService.validaPasswords(form.getPassword(), form.getConfermaPassword());
 		} catch (PasswordNonValidaException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("email", "form.password.passwordOconfermaPasswordNonValide");
+			errors.rejectValue("password", "formRegistrazione.password.passwordsNonValide");
 		} catch (PasswordNonCorrispondentiException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("confermaPassword", "form.confermaPassword.nonCorrispondenti");
+			errors.rejectValue("password", "formRegistrazione.confermaPassword.nonCorrispondenti");
 		}
 		  
 		  try {
 			  utentiService.validaSesso(form.getSesso());
 		} catch (SessoNonValidoException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("sesso", "form.sesso.nonValido");
+			errors.rejectValue("sesso", "formRegistrazione.sesso.nonValido");
 		}
 		  
 		  try {
@@ -104,7 +104,7 @@ public class RegistrazioneSTTFormValidator implements Validator {
 		      
 		      utentiService.validaDataDiNascita(data);
 		    } catch (DataDiNascitaNonValidaException | DateTimeException e) {
-		      System.out.println("Nu va buon a dat scem!");
+		    	errors.rejectValue("giornoNascita", "formRegistrazione.data.nonValida");
 		    } 
 	  }
 }

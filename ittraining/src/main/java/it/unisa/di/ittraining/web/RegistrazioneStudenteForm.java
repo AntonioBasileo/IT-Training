@@ -79,8 +79,6 @@ public class RegistrazioneStudenteForm {
 		this.confermaPassword = confermaPassword;
 	}
 
-
-
 	private String nome;
 	private String cognome;
 	private String sesso;
@@ -92,5 +90,6 @@ public class RegistrazioneStudenteForm {
 	private String email;
 	private String password;
 	private String confermaPassword;
+	private String testoNotifica;
 	
 }

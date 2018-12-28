@@ -2,6 +2,7 @@ package it.unisa.di.ittraining.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +22,31 @@ public class AggiungiEnteController {
 	
 	@Autowired
 	private AziendaService aziendaService;
+	
+	@RequestMapping("/convenzione")
+	public String mostraFormConvenzione(Model model) {
+		
+		if (!model.containsAttribute("convenzioneForm")) {
+			model.addAttribute("convenzioneForm", new AggiungiEnteForm());
+		}
+		
+		return "aggiungi-ente";
+	}
 
 	@RequestMapping("/segreteria/aggiungi-ente")
 	public String aggiungiEnte(@ModelAttribute("convenzioneForm") AggiungiEnteForm convenzioneForm, BindingResult result, RedirectAttributes redirectAttributes) 
 			throws IndirizzoNonValidoException, NomeNonValidoException, SedeNonValidaException {
+		
 		validator.validate(convenzioneForm, result);
+		
+		if (result.hasErrors()) {
+		      redirectAttributes
+		          .addFlashAttribute("org.springframework.validation.BindingResult.convenzioneForm",
+		                             result);
+		      redirectAttributes.addFlashAttribute("convenzioneForm", convenzioneForm);
+		      
+		      return "redirect:/convenzione";
+		 }
 		
 		Azienda azienda = new Azienda();
 		
@@ -36,6 +57,6 @@ public class AggiungiEnteController {
 		
 		aziendaService.registraAzienda(azienda);
 		
-		return "aggiungi-ente.jsp";
+		return "redirect:/convenzione";
 	}
 }

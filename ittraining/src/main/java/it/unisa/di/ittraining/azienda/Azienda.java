@@ -2,9 +2,13 @@ package it.unisa.di.ittraining.azienda;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+
 import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
+import it.unisa.di.ittraining.progettoformativo.ProgettoFormativo;
 
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -17,6 +21,15 @@ public class Azienda {
 	private String sede;
 	private String indirizzo;
 	private String telefono;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "azienda")
+	private List<TutorAziendale> tutorAziendali;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "azienda")
+	private List<DomandaTirocinio> domande;
+	
+	@OneToMany
+	private List<ProgettoFormativo> progetti;
 
 	  
 	/** Costante che definisce la minima lunghezza del campo nome. */
@@ -40,12 +53,6 @@ public class Azienda {
 	
 	/** Costante che definisce il formato del campo telefono*/
 	public static final String TELEFONO_PATTERN = "^[0-9]{2,4}[0-9]{4,7}$";
-	
-	@OneToMany
-	private List<TutorAziendale> tutorAziendali;
-	
-	@OneToMany
-	private List<DomandaTirocinio> domande;
 
 	public Azienda() {
 		
