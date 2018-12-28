@@ -20,10 +20,10 @@ public class Studente extends Utente {
 	/** Espressione regolare che definisce il formato del campo matricola. */
     public static final String MATRICOLA_PATTERN = "^[0-9]{10}$";
 	  
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
 	private List<DomandaTirocinio> domandeTirocinio;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
 	private List<Registro> registri;
 	
 	public Studente() {
