@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 public class RegistrazioneSTTFormValidator implements Validator {
 	  
 	  @Autowired
-	  private UtenteService utenteService;
+	  private UtenteService utentiService;
 
 	  
 	  /**
@@ -35,51 +35,60 @@ public class RegistrazioneSTTFormValidator implements Validator {
 	  public boolean supports(Class<?> clazz) {
 	    return RegistrazioneSTTForm.class.isAssignableFrom(clazz);
 	  }
-	  
+
 	  @Override
 	  public void validate(Object target, Errors errors) {
 		  RegistrazioneSTTForm form = (RegistrazioneSTTForm) target;
 		  
 		  try {
-			utenteService.validaNome(form.getNome());
+			  utentiService.validaNome(form.getNome());
 		} catch (NomeNonValidoException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.rejectValue("nome", "form.nome.nonValido");
 		}
 		  
 		  try {
-			utenteService.validaCognome(form.getCognome());
+			  utentiService.validaCognome(form.getCognome());
 		} catch (CognomeNonValidoException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.rejectValue("cognome", "form.cognome.nonValido");
 		}
 		  
 		  try {
-			utenteService.validaUsername(form.getUsername());
-		} catch (UsernameNonValidoException | UsernameEsistenteException e) {
+			  utentiService.validaUsername(form.getUsername());
+		} catch (UsernameNonValidoException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		  
-		  try {
-			utenteService.validaEmail(form.getEmail());
-		} catch (EmailEsistenteException | EmailNonValidaException e) {
+			errors.rejectValue("username", "form.username.nonValido");
+		} catch (UsernameEsistenteException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.rejectValue("username", "form.username.usernameEsistente");
 		}
 		  
 		  try {
-			utenteService.validaPasswords(form.getPassword(), form.getConfermaPassword());
-		} catch (PasswordNonValidaException | PasswordNonCorrispondentiException e) {
+			  utentiService.validaEmail(form.getEmail());
+		} catch (EmailEsistenteException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.rejectValue("email", "form.email.emailEsistente");
+		} catch (EmailNonValidaException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("email", "form.email.nonValida");
 		}
 		  
 		  try {
-			utenteService.validaSesso(form.getSesso());
+			  utentiService.validaPasswords(form.getPassword(), form.getConfermaPassword());
+		} catch (PasswordNonValidaException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("email", "form.password.passwordOconfermaPasswordNonValide");
+		} catch (PasswordNonCorrispondentiException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("confermaPassword", "form.confermaPassword.nonCorrispondenti");
+		}
+		  
+		  try {
+			  utentiService.validaSesso(form.getSesso());
 		} catch (SessoNonValidoException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.rejectValue("sesso", "form.sesso.nonValido");
 		}
 		  
 		  try {
@@ -93,9 +102,9 @@ public class RegistrazioneSTTFormValidator implements Validator {
 		                                    form.getMeseNascita(), 
 		                                    form.getGiornoNascita());
 		      
-		      utenteService.validaDataDiNascita(data);
+		      utentiService.validaDataDiNascita(data);
 		    } catch (DataDiNascitaNonValidaException | DateTimeException e) {
-		      e.printStackTrace();
+		      System.out.println("Nu va buon a dat scem!");
 		    } 
 	  }
 }

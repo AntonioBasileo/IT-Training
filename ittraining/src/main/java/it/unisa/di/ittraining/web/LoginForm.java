@@ -15,14 +15,7 @@ public class LoginForm {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRuolo() {
-		return ruolo;
-	}
-	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
-	}
 	
 	private String username;
 	private String password;
-	private String ruolo;
 }

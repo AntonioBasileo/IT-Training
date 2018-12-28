@@ -48,16 +48,16 @@
 	<div class="row"></div>
 	<div class="row"></div>
 	  <div class="row">
-	    <form class="col s12">
+	    <form:form class="col s12" action="/segreteria/aggiungi-ente" method="POST" modelAttribute="convenzioneForm">
 	      <div class="row">
 	        <div class="input-field col s6">
 	          <i class="material-icons prefix">account_circle</i>
-	          <input id="nome" type="text" class="validate">
+	          <form:input id="nome" type="text" class="validate"/>
 	          <label for="nome">Nome azienda</label>
 	        </div>
 	        <div class="input-field col s6">
 	          <i class="material-icons prefix">home</i>
-	          <input id="sede" type="tel" class="validate">
+	          <form:input id="sede" type="tel" class="validate"/>
 	          <label for="sede">Sede</label>
 	        </div>
 	      </div>
@@ -68,12 +68,12 @@
 	      <div class="row">
 	        <div class="input-field col s6">
 	          <i class="material-icons prefix">directions</i>
-	          <input id="indirizzo" type="text" class="validate">
+	          <form:input path="indirizzo" id="indirizzo" type="text" class="validate"/>
 	          <label for="indirizzo">Indirizzo</label>
 	        </div>
 	        <div class="input-field col s6">
 	          <i class="material-icons prefix">phone</i>
-	          <input id="telefono" type="tel" class="validate">
+	          <form:input id="telefono" type="tel" class="validate"/>
 	          <label for="telefono">Telefono</label>
 	        </div>
 	      </div>
@@ -82,7 +82,7 @@
 		  <button class="btn waves-effect waves-light" type="submit" name="action">Aggiungi
 			<i class="material-icons right">archive</i>
 		  </button>
-	    </form>
+	    </form:form>
 	  </div>
 	</div>
 

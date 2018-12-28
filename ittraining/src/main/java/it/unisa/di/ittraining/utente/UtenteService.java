@@ -6,6 +6,9 @@ import java.time.temporal.ChronoUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.unisa.di.ittraining.azienda.TutorAziendaleRepository;
+import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaRepository;
+import it.unisa.di.ittraining.studente.StudenteRepository;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.NomeNonValidoException;
 import it.unisa.di.ittraining.utente.SessoNonValidoException;
@@ -16,20 +19,18 @@ public class UtenteService {
 
 	 @Autowired
 	 private UtenteRepository utenteRepository;
+	 
+	 @Autowired
+	  private StudenteRepository studenteRepository;
+	  
+	 @Autowired
+	 private TutorAziendaleRepository delegatoRepository;
+	  
+	 @Autowired
+	 private ImpiegatoSegreteriaRepository impiegatoRepository;
 	
 	  
-	  /**
-	   * Controlla che il nome di un utente sia specificato e che la sua lunghezza rispetti i parametri
-	   * prestabiliti.
-	   * 
-	   * @param nome Stringa che rappresenta il nome da controllare
-	   * 
-	   * @return La stringa che rappresenta il nome da controllare bonificata
-	   * 
-	   * @throws NomeNonValidoException se il nome è nullo oppure se la sua lunghezza non rientra
-	   *         nell'intervallo che va da {@link UtenteRegistrato#MIN_LUNGHEZZA_NOME} a
-	   *         {@link UtenteRegistrato#MAX_LUNGHEZZA_NOME}
-	   */
+	  
 	  public String validaNome(String nome) throws NomeNonValidoException {
 	    if (nome == null) {
 	      throw new NomeNonValidoException();
@@ -45,21 +46,11 @@ public class UtenteService {
 	    }
 	  }
 	  
-	  /**
-	   * Controlla che il cognome di un utente sia specificato e che la sua lunghezza rispetti i
-	   * parametri prestabiliti.
-	   * 
-	   * @param cognome Stringa che rappresenta il cognome da controllare
-	   * 
-	   * @return La stringa che rappresenta il cognome da controllare bonificata
-	   * 
-	   * @throws CognomeNonValidoException se il cognome è nullo oppure se la sua lunghezza non rientra
-	   *         nell'intervallo che va da {@link UtenteRegistrato#MIN_LUNGHEZZA_NOME} a
-	   *         {@link UtenteRegistrato#MAX_LUNGHEZZA_NOME}
-	   */
+	  
 	  public String validaCognome(String cognome) throws CognomeNonValidoException {
 	    if (cognome == null) {
 	      throw new CognomeNonValidoException();
+	      
 	    } else {
 	      cognome = cognome.trim();
 	      
@@ -73,20 +64,21 @@ public class UtenteService {
 	  }
 	
 
-	public String validaSesso(String sesso) throws SessoNonValidoException {
-	   if (sesso == null) {
-	     throw new SessoNonValidoException();
-	   } else {
-	     sesso = sesso.trim();
-	      
-	     if (!sesso.equals(Utente.SESSO_MASCHILE)
-	         && !sesso.equals(Utente.SESSO_FEMMINILE)) {
-	       throw new SessoNonValidoException();
-	     } else {
-	       return sesso;
-	     }
-	   }
-	}
+	  public String validaSesso(String sesso) throws SessoNonValidoException {
+		   if (sesso == null) {
+		     throw new SessoNonValidoException();
+		     
+		   } else {
+		     sesso = sesso.trim();
+		      
+		     if (!sesso.equals(Utente.SESSO_MASCHILE)
+		         && !sesso.equals(Utente.SESSO_FEMMINILE)) {
+		       throw new SessoNonValidoException();
+		     } else {
+		       return sesso;
+		     }
+		   }
+		}
 	
 
 	 public LocalDate validaDataDiNascita(LocalDate dataDiNascita) 
@@ -94,7 +86,9 @@ public class UtenteService {
 	         
 	    if (dataDiNascita == null) {
 	      throw new DataDiNascitaNonValidaException();
+	      
 	    } else {
+	    	
 	      LocalDate oggi = LocalDate.now();
 	      long distanza = ChronoUnit.YEARS.between(dataDiNascita, oggi);
 	      
@@ -147,6 +141,51 @@ public class UtenteService {
 		
 		return password;
 	}
+	
+	public Utente getUtenteAutenticato() {  
+	    // Ottieni l'username dell'utente autenticato e restituisci null se non è presente alcun utente in sessione
+	    String username = (AutenticazioneHolder.getUtente());
+	    if (username == null) {
+	      return null;
+	    }
+	    
+	    Utente utente;
+	    
+	    // Controlla se l'username è associato ad un impiegato di segreteria
+	    utente = impiegatoRepository.findByUsername(username);
+	    if (utente != null) {
+	      return utente;
+	    }
+	    
+	    // Controlla se l'username è associato ad un tutor aziendale
+	    utente = delegatoRepository.findByUsername(username);
+	    if (utente != null) {
+	      return utente;
+	    }
+	    
+	    // Controlla se l'username è associato ad uno studente
+	    utente = studenteRepository.findByUsername(username);
+	    if (utente != null) {
+	      return utente;
+	    }
+	    
+	    // Dead code
+	    return null;
+	  }
+	  
+	  
+	  public void setUtenteAutenticato(String username) {
+	    // Se username è null, rimuovi la variabile di thread per prevenire memory leak
+	    if (username == null) {
+	      AutenticazioneHolder.setUtente(null);
+	      return;
+	    }
+	    
+	    if (utenteRepository.existsByUsername(username)) {
+	      AutenticazioneHolder.setUtente(username);
+	    }
+	    
+	  }
 
 	  
 	  /** 

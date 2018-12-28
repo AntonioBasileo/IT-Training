@@ -6,9 +6,11 @@ package it.unisa.di.ittraining.utente;
  */
 public class EmailEsistenteException extends Exception {
   
-  private static final long serialVersionUID = 1026733380479543860L;
-  
-  /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4482878426332060629L;
+/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
   private static final String messaggioDefault = "E-mail già presente";
   
   /**

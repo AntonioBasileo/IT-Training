@@ -1,14 +1,16 @@
 package it.unisa.di.ittraining.utente;
 
 /**
- * Eccezione lanciata quando il controllo sull'username di un utente fallisce perché questo non
+ * Eccezione lanciata quando il controllo sull'username di un utente fallisce non
  * rispetta il pattern oppure è nullo.
  */
 public class UsernameNonValidoException extends Exception {
-
-  private static final long serialVersionUID = -8870973825876004160L;
   
-  /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9212475312919318118L;
+/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
   private static final String messaggioDefault = "Username non valido";
   
   /**

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
@@ -25,6 +24,7 @@
 	    <!-- Compiled and minified JavaScript -->
 	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
+	    <script src="resources/js/materialize.js" type="text/javascript"></script>
 	    <script src="resources/js/home.js"></script>
 		
 	    
@@ -73,17 +73,7 @@
 				          		<label for="password-login">Password</label>
 				        	</div>
 				      	</div>
-			      
-						  <div class="row">
-							  <div class="input-field col s6">
-							    <select id="ruolo">
-							      <option value="studente">Studente</option>
-							      <option value="segreteria">Segreteria</option>
-							      <option value="tutor_accademico">Tutor accademico</option>
-							      <option value="tutor_aziendale">Tutor aziendale</option>
-							    </select>
-							  </div>
-						  </div>
+				      	
 					  	<button class="btn waves-effect waves-light" type="submit" name="action">Login
 					    	<i class="material-icons right">send</i>
 					  	</button>
@@ -111,12 +101,14 @@
 			          <i class="material-icons prefix"></i>
 			          <form:input path="nome" id="first_name_studente" type="text" cssClass="validate"/>
 			          <label for="first_name_studente">Nome</label>
+			          <form:errors path="nome" cssClass="helper-text" />
 			        </div>
 			        
 			        <div class="input-field col s6">
 			          <i class="material-icons prefix"></i>
 			          <form:input path="cognome" id="last_name_studente" type="text" cssClass="validate"/>
 			          <label for="last_name_studente">Cognome</label>
+			          <form:errors path="cognome" cssClass="helper-text" />
 			        </div>
 			      </div>
 			      
@@ -185,6 +177,10 @@
             <form:input
                         path="annoNascita"
                         id="iscrizione-annoDiNascita" /> 
+          </div>
+          
+          <div class="input-field col s12">
+            <form:errors path="giornoNascita" cssClass="helper-text" />
           </div>
         </div>
 			      
@@ -359,7 +355,7 @@
 			      <div class="row">
 			        <div class="input-field col s6">
 			          <i class="material-icons prefix">lock_outline</i>
-			          <form:input path="confermaPassword" id="confirm_password_studente" type="password" cssClass="validate"/>
+			          <form:input path="confermaPassword" id="confirm_password_segreteria" type="password" cssClass="validate"/>
 			          <label for="confirm_password_segreteria">Conferma password</label>
 			        </div>
 			      </div>
@@ -497,7 +493,7 @@
 			        <div class="input-field col s6">
 			          <i class="material-icons prefix">lock_outline</i>
 			          <form:input path="confermaPassword" id="confirm_password_accademico" type="password" cssClass="validate"/>
-			          <label for="confirm_password_studente">Conferma password</label>
+			          <label for="confirm_password_accademico">Conferma password</label>
 			        </div>
 			      </div>
 			      

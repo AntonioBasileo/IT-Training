@@ -26,6 +26,6 @@ public class HomeController {
 				model.addAttribute("registrazioneAziendale", new RegistrazioneSTTForm());
 			}
 		
-		return "aggiungi-ente";
+		return "home";
 	}
 }

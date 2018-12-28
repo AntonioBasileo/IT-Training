@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TutorAziendaleRepository extends JpaRepository<TutorAziendale, String> {
 
+	public TutorAziendale findByUsername(String username);
 }
