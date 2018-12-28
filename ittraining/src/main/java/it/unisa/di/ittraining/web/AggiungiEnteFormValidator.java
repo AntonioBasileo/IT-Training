@@ -41,28 +41,28 @@ public class AggiungiEnteFormValidator implements Validator {
 			utenteService.validaNome(form.getNome());
 		} catch (NomeNonValidoException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("nome", "form.nome.nonValido");
+			errors.rejectValue("nome", "formConvenzione.nome.nonValido");
 		}
 		  
 		 try {
 			aziendaService.validaIndirizzo(form.getIndirizzo());
 		} catch (IndirizzoNonValidoException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("indirizzo", "form.indirizzo.nonValido");
+			errors.rejectValue("indirizzo", "formConvenzione.indirizzo.nonValido");
 		}
 		  
 		 try {
 			aziendaService.validaSede(form.getSede());
 		} catch (SedeNonValidaException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("sede", "form.sede.nonValido");
+			errors.rejectValue("sede", "formConvenzione.sede.nonValida");
 		}
 		  
 		 try {
 			aziendaService.validaTelefono(form.getTelefono());
 		} catch (TelefonoNonValidoException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("telefono", "form.telefono.nonValido");
+			errors.rejectValue("telefono", "formConvenzione.telefono.nonValido");
 		} 			  
 		 
 	  }

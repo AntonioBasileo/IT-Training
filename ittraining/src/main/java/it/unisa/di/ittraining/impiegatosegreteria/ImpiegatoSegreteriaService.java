@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
-import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
@@ -30,7 +28,7 @@ public class ImpiegatoSegreteriaService {
 	@Transactional(rollbackFor = Exception.class)
 	public ImpiegatoSegreteria registraImpiegato(ImpiegatoSegreteria impiegato) throws UsernameNonValidoException, UsernameEsistenteException, PasswordNonValidaException, 
 	  PasswordNonCorrispondentiException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, CognomeNonValidoException, SessoNonValidoException, 
-	  MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, DataDiNascitaNonValidaException {
+	  DataDiNascitaNonValidaException {
 		  
 		    // Valida i campi dell'impiegato
 			impiegato.setUsername(service.validaUsername(impiegato.getUsername()));

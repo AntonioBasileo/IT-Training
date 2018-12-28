@@ -13,7 +13,15 @@ $(document).ready(function(){
 //select
 $(document).ready(function(){
   $('select').formSelect();
-});
+}); 
 
-//toast
-M.toast({html: 'I am a toast'});
+//toast  
+function mostraToast(testo) {
+	if(testo == "") {
+		return;
+	}
+		  
+	$(document).ready(function() {
+		M.toast({html: testo});
+	});
+}

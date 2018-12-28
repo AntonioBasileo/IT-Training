@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 
@@ -23,6 +24,9 @@ public class ProgettoFormativo {
 	 
 	 @OneToOne
 	 private DomandaTirocinio domanda;
+	 
+	 @ManyToOne
+	 private Azienda azieda;
 
 	public Long getId() {
 		return id;
