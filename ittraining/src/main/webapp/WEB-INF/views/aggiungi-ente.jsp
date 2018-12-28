@@ -4,13 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<meta charset="ISO-8859-1">
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="resources/images/logo.png" />
 		
 		<meta charset="ISO-8859-1">
 		
-		<title>Aggiungi ente</title>
+		<title>IT Training - Convenzione</title>
 		
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,6 +24,7 @@
 	    <!-- Compiled and minified JavaScript -->
 	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
+	    <script src="resources/js/home.js"></script>
 		
 	    
 	    <!--Import Google Icon Font-->
@@ -35,8 +35,8 @@
 	<nav>
 		<div class="nav-wrapper">
 			<ul id="nav-mobile" class="right">
-				<li><a href="/home"><i class="material-icons left">business_center</i>Aggiungi Convenzione</a></li>
-				<li><a href="/home"><i class="material-icons left">contact_mail</i>Lista Domande</a></li>
+				<li><a href="/convenzione"><i class="material-icons left">business_center</i>Aggiungi Convenzione</a></li>
+				<li><a href="/lista-domande"><i class="material-icons left">contact_mail</i>Lista Domande</a></li>
 				<li><a href="/home"><i class="material-icons left">home</i>IT Training</a></li>
 			</ul>
 		</div>
@@ -52,13 +52,15 @@
 	      <div class="row">
 	        <div class="input-field col s6">
 	          <i class="material-icons prefix">account_circle</i>
-	          <form:input id="nome" type="text" class="validate"/>
+	          <form:input path="nome" id="nome" type="text" class="validate"/>
 	          <label for="nome">Nome azienda</label>
+	          <form:errors path="nome" cssClass="helper-text red-text chip" />
 	        </div>
 	        <div class="input-field col s6">
 	          <i class="material-icons prefix">home</i>
-	          <form:input id="sede" type="tel" class="validate"/>
+	          <form:input path="sede" id="sede" type="tel" class="validate"/>
 	          <label for="sede">Sede</label>
+	          <form:errors path="sede" cssClass="helper-text red-text chip" />
 	        </div>
 	      </div>
 	      <div class="row"></div>
@@ -70,11 +72,13 @@
 	          <i class="material-icons prefix">directions</i>
 	          <form:input path="indirizzo" id="indirizzo" type="text" class="validate"/>
 	          <label for="indirizzo">Indirizzo</label>
+	          <form:errors path="indirizzo" cssClass="helper-text red-text chip" />
 	        </div>
 	        <div class="input-field col s6">
 	          <i class="material-icons prefix">phone</i>
-	          <form:input id="telefono" type="tel" class="validate"/>
+	          <form:input path="telefono" id="telefono" type="tel" class="validate"/>
 	          <label for="telefono">Telefono</label>
+	          <form:errors path="telefono" cssClass="helper-text red-text chip" />
 	        </div>
 	      </div>
 	      <div class="row"></div>

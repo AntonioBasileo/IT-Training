@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +60,7 @@ public class RegistrazioneController {
 	private UtenteService utentiService;
 
 	@RequestMapping(value = "/richiesta-registrazione-studente", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneStudente(@ModelAttribute("registrazioneStudente") RegistrazioneStudenteForm registrazioneStudente, BindingResult result, 
+	public String elaboraRichiestaIscrizioneStudente(@ModelAttribute("registrazioneStudente") RegistrazioneStudenteForm registrazioneStudente, Model model, BindingResult result, 
 			RedirectAttributes redirectAttributes) 
 			throws UsernameNonValidoException, UsernameEsistenteException, PasswordNonValidaException, 
 			PasswordNonCorrispondentiException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, 
@@ -105,17 +106,20 @@ public class RegistrazioneController {
 	@RequestMapping(value = "/richiesta-registrazione-segreteria", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneSegreteria(HttpSession session, @ModelAttribute("registrazioneSegreteria") RegistrazioneSTTForm registrazioneSegreteria, BindingResult result, RedirectAttributes redirectAttributes) throws UsernameNonValidoException, 
 	UsernameEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, 
-	CognomeNonValidoException, SessoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, DataDiNascitaNonValidaException {
+	CognomeNonValidoException, SessoNonValidoException, DataDiNascitaNonValidaException {
 		
 		validatorSTT.validate(registrazioneSegreteria, result);
-		
+
 
 	    if (result.hasErrors()) {
-	      
+	      redirectAttributes
+	          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneSegreteria",
+	                             result);
+	      redirectAttributes.addFlashAttribute("registrazioneSegreteria", registrazioneSegreteria);
 	      
 	      return "redirect:/home";
 	    }
-		
+	    
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form
 	    LocalDate date = LocalDate.of(registrazioneSegreteria.getAnnoNascita(),
 	    		registrazioneSegreteria.getMeseNascita(),
@@ -148,11 +152,14 @@ public class RegistrazioneController {
 		validatorSTT.validate(registrazioneAccademico, result);
 		
 
-	    if (result.hasErrors()) {
-	      
-	      
-	      return "redirect:/home";
-	    }
+		if (result.hasErrors()) {
+		      redirectAttributes
+		          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneAccademico",
+		                             result);
+		      redirectAttributes.addFlashAttribute("registrazioneAccademico", registrazioneAccademico);
+		      
+		      return "redirect:/home";
+		}
 		
 	    // Genera un oggetto LocalDate a partire dagli interi presenti nel form
 	    LocalDate date = LocalDate.of(registrazioneAccademico.getAnnoNascita(),
@@ -185,11 +192,14 @@ public class RegistrazioneController {
 		validatorSTT.validate(registrazioneAziendale, result);
 		
 
-	    if (result.hasErrors()) {
-	      
-	      
-	      return "redirect:/home";
-	    }
+		if (result.hasErrors()) {
+		      redirectAttributes
+		          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneAziendale",
+		                             result);
+		      redirectAttributes.addFlashAttribute("registrazioneAziendale", registrazioneAziendale);
+		      
+		      return "redirect:/home";
+		}
 		
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form
 	    LocalDate date = LocalDate.of(registrazioneAziendale.getAnnoNascita(),
