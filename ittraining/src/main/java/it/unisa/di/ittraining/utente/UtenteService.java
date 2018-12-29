@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import it.unisa.di.ittraining.azienda.TutorAziendaleRepository;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaRepository;
 import it.unisa.di.ittraining.studente.StudenteRepository;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoRepository;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.NomeNonValidoException;
 import it.unisa.di.ittraining.utente.SessoNonValidoException;
@@ -28,6 +29,22 @@ public class UtenteService {
 	  
 	 @Autowired
 	 private ImpiegatoSegreteriaRepository impiegatoRepository;
+	 
+	 @Autowired
+	 private TutorAccademicoRepository accademicoRepository;
+
+	  
+	 /** 
+	  * Costante che rappresenta la minima distanza in anni dalla data corrente 
+	  * per la data di nascita.
+	  */
+	 public static final int MIN_DISTANZA_ANNO_NASCITA = 17;
+	 
+	 /** 
+	  * Costante che rappresenta la massima distanza in anni dalla data corrente 
+	  * per la data di nascita.
+	  */
+	 public static final int MAX_DISTANZA_ANNO_NASCITA = 130;
 	
 	  
 	  
@@ -186,18 +203,52 @@ public class UtenteService {
 	    }
 	    
 	  }
-
 	  
-	  /** 
-	   * Costante che rappresenta la minima distanza in anni dalla data corrente 
-	   * per la data di nascita.
+	  public void login(String username, String password) throws UsernameNonEsistenteException, PasswordErrataException {
+		  Utente utente;
+		  
+		  if(!utenteRepository.existsByUsername(username)) throw new UsernameNonEsistenteException();
+		  
+		  utente = studenteRepository.findByUsernameAndPassword(username, password);
+		  
+		  if(utente != null) {
+			  AutenticazioneHolder.setUtente(username);
+			  
+			  return;
+		  }
+		  
+		  utente = impiegatoRepository.findByUsernameAndPassword(username, password);
+		  
+		  if(utente != null) {
+			  AutenticazioneHolder.setUtente(username);
+			  
+			  return;
+		  }
+		  
+		  utente = accademicoRepository.findByUsernameAndPassword(username, password);
+		  
+		  if(utente != null) {
+			  AutenticazioneHolder.setUtente(username);
+			  
+			  return;
+		  }
+		  
+		  utente = delegatoRepository.findByUsernameAndPassword(username, password);
+		  
+		  if(utente != null) {
+			  AutenticazioneHolder.setUtente(username);
+			  
+			  return;
+		  }
+		  
+		  throw new PasswordErrataException();
+	  }
+	  
+	  /**
+	   * Permette la rimozione dell'utente dalla sessione.
 	   */
-	  public static final int MIN_DISTANZA_ANNO_NASCITA = 17;
-	 
-	  /** 
-	   * Costante che rappresenta la massima distanza in anni dalla data corrente 
-	   * per la data di nascita.
-	   */
-	  public static final int MAX_DISTANZA_ANNO_NASCITA = 130;
+	  public void logout() { 
+		  AutenticazioneHolder.setUtente(null);
+	  }
 	
 }

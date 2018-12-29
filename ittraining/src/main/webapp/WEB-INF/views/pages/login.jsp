@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,7 @@
 		
 		<meta charset="ISO-8859-1">
 		
-		<title>IT Training - Registrazione tutor accademico</title>
+		<title>Login</title>
 		
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -23,35 +22,23 @@
 	    <!-- Compiled and minified JavaScript -->
 	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
-	    <script src="resources/js/initialize.js"></script>
-	    <script src="resources/js/registration.js"></script>
 		
 	    
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
-	<!-- Navbar -->
-	<nav>
-		<div class="nav-wrapper">
-			<ul id="nav-mobile" class="right">
-				<li><a href="/home"><i class="material-icons left">home</i>IT Training</a></li>
-			</ul>
-		</div>
-	</nav>
-		  
+
 	<div class="container">
-		
-		<input id="registrationsuccess" type="hidden" class="validate" value="${success}"/>
 	    <div class="row"></div>
 		<div class="row"></div>
-		<div class="row">
-			<h3 class="teal-text">Registrazione - Tutor Accademico</h3>
-		</div>
+		<div class="row"></div>
 	    <div class="row"></div>
 		<div class="row"></div>
 		
-		<jsp:include page="/WEB-INF/views/forms/registrazione-tutor-accademico.jsp" />
+		<jsp:include page="/WEB-INF/views/forms/login.jsp" />
 	</div>
+		
 </body>
 </html>

@@ -84,7 +84,7 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 			  utentiService.validaEmail(form.getEmail());
 		} catch (EmailEsistenteException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("email", "formRegistrazione.email.emailEsistente");
+			errors.rejectValue("email", "formRegistrazioneEsistente.email.emailEsistente");
 		} catch (EmailNonValidaException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("email", "formRegistrazione.email.nonValida");
