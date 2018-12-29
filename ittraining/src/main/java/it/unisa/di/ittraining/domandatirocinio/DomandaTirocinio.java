@@ -38,6 +38,10 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	private ProgettoFormativo progettoFormativo;
 	
 	private LocalDate data;
+	private LocalDate inizioTirocinio;
+	private LocalDate fineTirocinio;
+	private int status;
+	private int cfu;
 	
 	/**
 	 * Costante che rappresenta lo stato "in attesa" di una domanda di tirocinio.
@@ -60,21 +64,6 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	 * dall'azienda che offre il progetto formativo ad essa associato.
 	 */
 	public static final int RIFIUTATA = 2;
-	  
-	/**
-	 * Costante che rappresenta lo stato "approvato" di una domanda di tirocinio.
-	 * Una domanda di tirocinio si trova in questo stato quando è stata gestita ed approvata
-	 * dall'ufficio tirocini. <b>La domanda dev'essere stata precedentemente accettata</b> per potervi
-	 * assegnare questo stato.
-	 */
-	public static final int APPROVATA = 3;
-	  
-	/**
-	 * Costante che rappresenta lo stato "respinto" di una domanda di tirocinio.
-	 * Una domanda di tirocinio si trova in questo stato quando, sebbene accettata dall'azienda, la
-	 * domanda è stata respinta dall'ufficio tirocini.
-	 */
-	public static final int RESPINTA = 4;
 
 	/** Costante che definisce il numero minimo di CFU da poter associare ad una domanda. */
 	public static final int MIN_CFU = 1;
@@ -145,6 +134,38 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 
 	public void setData(LocalDate data) {
 		this.data = data;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getCfu() {
+		return cfu;
+	}
+
+	public void setCfu(int cfu) {
+		this.cfu = cfu;
+	}
+
+	public LocalDate getInizioTirocinio() {
+		return inizioTirocinio;
+	}
+
+	public void setInizioTirocinio(LocalDate inizioTirocinio) {
+		this.inizioTirocinio = inizioTirocinio;
+	}
+
+	public LocalDate getFineTirocinio() {
+		return fineTirocinio;
+	}
+
+	public void setFineTirocinio(LocalDate fineTirocinio) {
+		this.fineTirocinio = fineTirocinio;
 	}
 	
 }

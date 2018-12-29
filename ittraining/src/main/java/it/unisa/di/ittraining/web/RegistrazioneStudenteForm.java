@@ -90,6 +90,5 @@ public class RegistrazioneStudenteForm {
 	private String email;
 	private String password;
 	private String confermaPassword;
-	private String testoNotifica;
 	
 }

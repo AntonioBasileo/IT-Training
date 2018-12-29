@@ -10,21 +10,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String getHome(Model model) {
-			if (!model.containsAttribute("registrazioneStudente")) {
-				model.addAttribute("registrazioneStudente", new RegistrazioneStudenteForm());
-			}
-			
-			if (!model.containsAttribute("registrazioneSegreteria")) {
-				model.addAttribute("registrazioneSegreteria", new RegistrazioneSTTForm());
-			}
-			
-			if (!model.containsAttribute("registrazioneAccademico")) {
-				model.addAttribute("registrazioneAccademico", new RegistrazioneSTTForm());
-			}
-			
-			if (!model.containsAttribute("registrazioneAziendale")) {
-				model.addAttribute("registrazioneAziendale", new RegistrazioneSTTForm());
-			}
 		
 		return "home";
 	}

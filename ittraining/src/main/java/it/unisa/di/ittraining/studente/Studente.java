@@ -5,6 +5,7 @@ import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.registrotirocinio.Registro;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,7 +28,7 @@ public class Studente extends Utente {
 	private List<Registro> registri;
 	
 	public Studente() {
-		
+		this.domandeTirocinio = new ArrayList<DomandaTirocinio>();
 	}
 	
 	public Studente(String nome, String cognome, String matricola, LocalDate dataDiNascita) {
@@ -60,5 +61,14 @@ public class Studente extends Utente {
 	public void setRegistri(List<Registro> registri) {
 		this.registri = registri;
 	}
+	
+	public void addDomandaTirocinio(DomandaTirocinio domandaTirocinio) {
+	    if (!domandeTirocinio.contains(domandaTirocinio)) {
+	    	
+	      domandeTirocinio.add(domandaTirocinio);
+	      
+	      domandaTirocinio.setStudente(this);
+	    }
+	  }
 	
 }

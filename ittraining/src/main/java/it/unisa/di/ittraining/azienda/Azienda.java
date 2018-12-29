@@ -1,5 +1,6 @@
 package it.unisa.di.ittraining.azienda;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -55,7 +56,7 @@ public class Azienda {
 	public static final String TELEFONO_PATTERN = "^[0-9]{2,4}[0-9]{4,7}$";
 
 	public Azienda() {
-		
+		this.progetti = new ArrayList<ProgettoFormativo>();
 	}
 	
 	public List<TutorAziendale> getTutorAziendali() {

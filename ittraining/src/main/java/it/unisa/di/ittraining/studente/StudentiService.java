@@ -1,8 +1,5 @@
 package it.unisa.di.ittraining.studente;
 
-import java.util.List;
-import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +19,6 @@ import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteService;
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
-import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioRepository;
 
 @Service
 public class StudentiService {
