@@ -17,14 +17,5 @@ $(document).ready(function(){
 }); 
 
 
-//toast  
-function mostraToast(testo) {
-	if(testo == "") {
-		
-		return;
-	}
-		  
-	$(document).ready(function() {
-		M.toast({html: testo});
-	});
-}
+//toast
+M.toast({html: 'I am a toast!'})

@@ -8,5 +8,5 @@ public interface UtenteRepository extends JpaRepository<Utente, String> {
 
 	boolean existsByUsername(String username);
 	
-	boolean existsByEmail(String emanil);
+	boolean existsByEmail(String email);
 }

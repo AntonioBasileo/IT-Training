@@ -38,7 +38,7 @@
 		    <li><div class="user-view">
 		      <div class="background">
 		      </div>
-		      <a href="#user"><img class="circle" src="resources/images/logo.png"></a>
+		      <a><img class="circle" src="resources/images/logo.png"></a>
 		    </div></li>
 		    <li><a href="/registrazione-studente-form"><i class="material-icons">school</i>Studente</a></li>
 		    <li><a href="/registrazione-segreteria-form"><i class="material-icons">account_balance</i>Segreteria</a></li>
@@ -51,7 +51,8 @@
 		  <nav>
 		    <div class="nav-wrapper">
 		      <ul id="nav-mobile" class="right">
-		        <li><a data-target="slide-out" class="sidenav-trigger show-on-medium-and-up"><i class="material-icons left">add</i>REGISTRATI</a></li>
+		        <li><a data-target="slide-out" class="sidenav-trigger show-on-medium-and-up"><i class="material-icons left">add</i>Registrati</a></li>
+		        <li><a href="/login-form"><i class="material-icons left">account_circle</i>Login</a></li>
 		        <li><a href="/home"><i class="material-icons left">home</i>IT Training</a></li>
 		      </ul>
 		    </div>
@@ -59,6 +60,8 @@
 		
 		<!-- Container -->
 		<div class = "container">
+		
+			<h5>Benvenuto <c:out value="${nomeUtente}"/></h5>
 			<div class="row">
 				
 			</div>
