@@ -71,12 +71,10 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	/** Costante che definisce il numero massimo di CFU da poter associare ad una domanda. */
 	public static final int MAX_CFU = 18;
 	  
-	  /**
-	   * Definisce l'ordine di comparazione tra le domande di tirocinio in base al campo data.
-	   */
-	  
-	  
-	  @Override
+	/**
+	 * Definisce l'ordine di comparazione tra le domande di tirocinio in base al campo data.
+	 */
+	@Override
 	public int compareTo(DomandaTirocinio domanda) {
 	    
 	  if (getData().isBefore(domanda.getData())) {

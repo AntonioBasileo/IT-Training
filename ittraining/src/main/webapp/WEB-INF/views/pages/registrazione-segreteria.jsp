@@ -24,6 +24,7 @@
 	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
 	    <script src="resources/js/initialize.js"></script>
+	    <script src="resources/js/registration.js"></script>
 		
 	    
 	    <!--Import Google Icon Font-->
@@ -40,6 +41,8 @@
 	</nav>
 		  
 	<div class="container">
+		
+		<input id="registrationsuccess" type="hidden" class="validate" value="${success}"/>
 	    <div class="row"></div>
 		<div class="row"></div>
 		<div class="row">

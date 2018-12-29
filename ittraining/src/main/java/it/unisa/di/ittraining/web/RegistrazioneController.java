@@ -59,17 +59,18 @@ public class RegistrazioneController {
 	@Autowired
 	private UtenteService utentiService;
 	
-	@RequestMapping("/registrazione-studente-form")
+	@RequestMapping(value = "/registrazione-studente-form", method = RequestMethod.GET)
 	public String showRegistrazioneStudenteForm(Model model) {
 		
 		if (!model.containsAttribute("registrazioneStudente")) {
 			model.addAttribute("registrazioneStudente", new RegistrazioneStudenteForm());
+			
 		}
 		
 		return "registrazione-studente";
 	}
 
-	@RequestMapping("/registrazione-segreteria-form")
+	@RequestMapping(value = "/registrazione-segreteria-form", method = RequestMethod.GET)
 	public String showRegistrazioneSegreteriaForm(Model model) {
 
 		if (!model.containsAttribute("registrazioneSegreteria")) {
@@ -79,7 +80,7 @@ public class RegistrazioneController {
 		return "registrazione-segreteria";
 	}
 
-	@RequestMapping("/registrazione-accademico-form")
+	@RequestMapping(value = "/registrazione-accademico-form", method = RequestMethod.GET)
 	public String showRegistrazioneTutorAccademicoForm(Model model) {
 
 		if (!model.containsAttribute("registrazioneAccademico")) {
@@ -89,7 +90,7 @@ public class RegistrazioneController {
 		return "registrazione-tutor-accademico";
 	}
 
-	@RequestMapping("/registrazione-aziendale-form")
+	@RequestMapping(value = "/registrazione-aziendale-form", method = RequestMethod.GET)
 	public String showRegistrazioneTutorAziendaleForm(Model model) {
 
 		if (!model.containsAttribute("registrazioneAziendale")) {
@@ -139,12 +140,15 @@ public class RegistrazioneController {
 	    	
 	    }
 	    
+	    if(!model.containsAttribute("success"))
+	    	model.addAttribute("success", "success");
 	    
 		return "registrazione-studente";	
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-segreteria", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneSegreteria(HttpSession session, @ModelAttribute("registrazioneSegreteria") RegistrazioneSTTForm registrazioneSegreteria, BindingResult result, RedirectAttributes redirectAttributes) throws UsernameNonValidoException, 
+	public String elaboraRichiestaIscrizioneSegreteria(HttpSession session, @ModelAttribute("registrazioneSegreteria") RegistrazioneSTTForm registrazioneSegreteria, Model model,
+			BindingResult result, RedirectAttributes redirectAttributes) throws UsernameNonValidoException, 
 	UsernameEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, 
 	CognomeNonValidoException, SessoNonValidoException, DataDiNascitaNonValidaException {
 		
@@ -180,12 +184,15 @@ public class RegistrazioneController {
 			
 		}
 		
+		if(!model.containsAttribute("success"))
+	    	model.addAttribute("success", "success");
 		
 		return "registrazione-segreteria";
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-accademico", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneTutorAccademico(HttpSession session, @ModelAttribute("registrazioneAccademico") RegistrazioneSTTForm registrazioneAccademico, BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException,
+	public String elaboraRichiestaIscrizioneTutorAccademico(HttpSession session, @ModelAttribute("registrazioneAccademico") RegistrazioneSTTForm registrazioneAccademico, Model model, 
+			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException,
 	PasswordNonCorrispondentiException, UsernameNonValidoException, UsernameEsistenteException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException,
 	SessoNonValidoException, CognomeNonValidoException, DataDiNascitaNonValidaException {
 		
@@ -221,11 +228,15 @@ public class RegistrazioneController {
 	    	
 	    }
 	    
+	    if(!model.containsAttribute("success"))
+	    	model.addAttribute("success", "success");
+	    
 	    return "registrazione-tutor-accademico";
 	}
 	
 	@RequestMapping(value = "/richiesta-registrazione-aziendale", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneTutorAziendale(HttpSession session, @ModelAttribute("registrazioneAziendale") RegistrazioneSTTForm registrazioneAziendale, BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException,
+	public String elaboraRichiestaIscrizioneTutorAziendale(HttpSession session, @ModelAttribute("registrazioneAziendale") RegistrazioneSTTForm registrazioneAziendale, Model model,
+			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException,
 	PasswordNonCorrispondentiException, UsernameNonValidoException, UsernameEsistenteException, EmailEsistenteException, EmailNonValidaException,
 	NomeNonValidoException, CognomeNonValidoException, SessoNonValidoException, DataDiNascitaNonValidaException {
 		
@@ -260,6 +271,9 @@ public class RegistrazioneController {
 	    	tutorAziendaleService.registraTutorAziendale(tutor);
 	    	
 	    }
+	    
+	    if(!model.containsAttribute("success"))
+	    	model.addAttribute("success", "success");
 	    
 	    return "registrazione-tutor-aziendale";
 	}
