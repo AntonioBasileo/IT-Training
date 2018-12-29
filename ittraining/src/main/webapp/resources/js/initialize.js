@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	var instances = M.Slider.init(elems, true, 400, 500, 5000);
 });
 
-//badges
+
+//sidenav
 $(document).ready(function(){
-  $('.collapsible').collapsible();
-});
+    $('.sidenav').sidenav();
+ });
 
 
 //select
@@ -15,9 +16,11 @@ $(document).ready(function(){
   $('select').formSelect();
 }); 
 
+
 //toast  
 function mostraToast(testo) {
 	if(testo == "") {
+		
 		return;
 	}
 		  

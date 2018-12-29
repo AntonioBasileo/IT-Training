@@ -10,24 +10,18 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<!-- Registrazione Segreteria -->
-			    <div class="collapsible-header">
-			      <i class="material-icons">account_balance</i>
-			      Registrati come segreteria
-			      </div>
-			    <div class="collapsible-body">
+			  <!-- Registrazione Segreteria -->
 			  <div class="row">
 			    <form:form cssClass="col s12" action ="/richiesta-registrazione-segreteria" method = "POST" modelAttribute = "registrazioneSegreteria">
 			      <div class="row">
 			        <div class="input-field col s6">
-			          <i class="material-icons prefix"></i>
+			          <i class="material-icons prefix">child_care</i>
 			          <form:input path="nome" id="first_name_segreteria" type="text" cssClass="validate"/>
 			          <label for="first_name_segreteria">Nome</label>
 			          <form:errors path="nome" cssClass="helper-text red-text chip" />
 			        </div>
 			        
 			        <div class="input-field col s6">
-			          <i class="material-icons prefix"></i>
 			          <form:input path="cognome" id="last_name_segreteria" type="text" cssClass="validate"/>
 			          <label for="last_name_segreteria">Cognome</label>
 			          <form:errors path="cognome" cssClass="helper-text red-text chip" />
@@ -146,6 +140,4 @@
 				  </button>
 			    </form:form>
 		  	</div>
-			    
-		  </div>
 </html>

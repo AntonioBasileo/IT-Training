@@ -24,7 +24,7 @@
 	    <!-- Compiled and minified JavaScript -->
 	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
-	    <script src="resources/js/home.js"></script>
+	    <script src="resources/js/initialize.js"></script>
 		
 	    
 	    <!--Import Google Icon Font-->
@@ -32,12 +32,26 @@
 	</head>
 	
 	<body>
+	
+		<!-- Sidenav -->
+		  <ul id="slide-out" class="sidenav">
+		    <li><div class="user-view">
+		      <div class="background">
+		      </div>
+		      <a href="#user"><img class="circle" src="resources/images/logo.png"></a>
+		    </div></li>
+		    <li><a href="/registrazione-studente-form"><i class="material-icons">school</i>Studente</a></li>
+		    <li><a href="/registrazione-segreteria-form"><i class="material-icons">account_balance</i>Segreteria</a></li>
+		    <li><a href="/registrazione-accademico-form"><i class="material-icons">supervisor_account</i>Tutor accademico</a></li>
+		    <li><a href="/registrazione-aziendale-form"><i class="material-icons">business_center</i>Tutor aziendale</a></li>
+		  </ul>
+		  
 		  
 		<!-- Navbar -->
 		  <nav>
 		    <div class="nav-wrapper">
 		      <ul id="nav-mobile" class="right">
-		      <li><a href="/convenzione">Aggiungi convenzione</a></li>
+		        <li><a data-target="slide-out" class="sidenav-trigger show-on-medium-and-up"><i class="material-icons left">add</i>REGISTRATI</a></li>
 		        <li><a href="/home"><i class="material-icons left">home</i>IT Training</a></li>
 		      </ul>
 		    </div>
@@ -45,32 +59,9 @@
 		
 		<!-- Container -->
 		<div class = "container">
-		
-		<!-- Badges -->
-			<!-- Login -->
-			<ul class="collapsible popout">
-			  <li>
-			  	<jsp:include page="/WEB-INF/views/forms/login.jsp" />
-			  </li>
-			  
-			  <li>
-				<jsp:include page="/WEB-INF/views/forms/registrazione-studente.jsp" />
-			  </li>
-			  
-			  <li>
-			  	<jsp:include page="/WEB-INF/views/forms/registrazione-segreteria.jsp" />
-			  </li>
-			  
-			  <li>
-			  	<jsp:include page="/WEB-INF/views/forms/registrazione-tutor-accademico.jsp" />
-			  </li>
-			  
-			  <li>
-			  	<jsp:include page="/WEB-INF/views/forms/registrazione-tutor-aziendale.jsp" />
-			  </li>
-			</ul>
-			
-			
+			<div class="row">
+				
+			</div>
 			
 			<!-- Slider -->
 			  <div class="slider z-depth-2">

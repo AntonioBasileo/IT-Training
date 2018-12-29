@@ -58,6 +58,46 @@ public class RegistrazioneController {
 	
 	@Autowired
 	private UtenteService utentiService;
+	
+	@RequestMapping("/registrazione-studente-form")
+	public String showRegistrazioneStudenteForm(Model model) {
+		
+		if (!model.containsAttribute("registrazioneStudente")) {
+			model.addAttribute("registrazioneStudente", new RegistrazioneStudenteForm());
+		}
+		
+		return "registrazione-studente";
+	}
+
+	@RequestMapping("/registrazione-segreteria-form")
+	public String showRegistrazioneSegreteriaForm(Model model) {
+
+		if (!model.containsAttribute("registrazioneSegreteria")) {
+			model.addAttribute("registrazioneSegreteria", new RegistrazioneSTTForm());
+		}
+		
+		return "registrazione-segreteria";
+	}
+
+	@RequestMapping("/registrazione-accademico-form")
+	public String showRegistrazioneTutorAccademicoForm(Model model) {
+
+		if (!model.containsAttribute("registrazioneAccademico")) {
+			model.addAttribute("registrazioneAccademico", new RegistrazioneSTTForm());
+		}
+		
+		return "registrazione-tutor-accademico";
+	}
+
+	@RequestMapping("/registrazione-aziendale-form")
+	public String showRegistrazioneTutorAziendaleForm(Model model) {
+
+		if (!model.containsAttribute("registrazioneAziendale")) {
+			model.addAttribute("registrazioneAziendale", new RegistrazioneSTTForm());
+		}
+		
+		return "registrazione-tutor-aziendale";
+	}
 
 	@RequestMapping(value = "/richiesta-registrazione-studente", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneStudente(@ModelAttribute("registrazioneStudente") RegistrazioneStudenteForm registrazioneStudente, Model model, BindingResult result, 
@@ -75,7 +115,7 @@ public class RegistrazioneController {
 	                             result);
 	      redirectAttributes.addFlashAttribute("registrazioneStudente", registrazioneStudente);
 	      
-	      return "redirect:/home";
+	      return "registrazione-studente";
 	    }
 		
 	    // Genera un oggetto LocalDate a partire dagli interi presenti nel form
@@ -100,7 +140,7 @@ public class RegistrazioneController {
 	    }
 	    
 	    
-		return "redirect:/home";	
+		return "registrazione-studente";	
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-segreteria", method = RequestMethod.POST)
@@ -117,7 +157,7 @@ public class RegistrazioneController {
 	                             result);
 	      redirectAttributes.addFlashAttribute("registrazioneSegreteria", registrazioneSegreteria);
 	      
-	      return "redirect:/home";
+	      return "registrazione-segreteria";
 	    }
 	    
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form
@@ -141,7 +181,7 @@ public class RegistrazioneController {
 		}
 		
 		
-		return "redirect:/home";
+		return "registrazione-segreteria";
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-accademico", method = RequestMethod.POST)
@@ -158,7 +198,7 @@ public class RegistrazioneController {
 		                             result);
 		      redirectAttributes.addFlashAttribute("registrazioneAccademico", registrazioneAccademico);
 		      
-		      return "redirect:/home";
+		      return "registrazione-tutor-accademico";
 		}
 		
 	    // Genera un oggetto LocalDate a partire dagli interi presenti nel form
@@ -181,7 +221,7 @@ public class RegistrazioneController {
 	    	
 	    }
 	    
-	    return "redirect:/home";
+	    return "registrazione-tutor-accademico";
 	}
 	
 	@RequestMapping(value = "/richiesta-registrazione-aziendale", method = RequestMethod.POST)
@@ -198,7 +238,7 @@ public class RegistrazioneController {
 		                             result);
 		      redirectAttributes.addFlashAttribute("registrazioneAziendale", registrazioneAziendale);
 		      
-		      return "redirect:/home";
+		      return "registrazione-tutor-aziendale";
 		}
 		
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form
@@ -221,6 +261,6 @@ public class RegistrazioneController {
 	    	
 	    }
 	    
-	    return "redirect:/home";
+	    return "registrazione-tutor-aziendale";
 	}
 }
