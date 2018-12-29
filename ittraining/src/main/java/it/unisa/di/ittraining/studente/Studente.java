@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Studente extends Utente {
-	
+	//matricola dello studente
 	private String matricola;
 	  
 	/** Espressione regolare che definisce il formato del campo matricola. */
