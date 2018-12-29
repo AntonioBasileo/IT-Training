@@ -11,24 +11,18 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
- <!-- Registrazione Tutor Accademico -->
-			    <div class="collapsible-header">
-			      <i class="material-icons">supervisor_account</i>
-			      Registrati come tutor accademico
-			      </div>
-			    <div class="collapsible-body">
+ 			  <!-- Registrazione Tutor Accademico -->
 			  <div class="row">
 			    <form:form cssClass="col s12" action ="/richiesta-registrazione-accademico" method = "POST" modelAttribute = "registrazioneAccademico">
 			      <div class="row">
 			        <div class="input-field col s6">
-			          <i class="material-icons prefix"></i>
+			          <i class="material-icons prefix">child_care</i>
 			          <form:input path="nome" id="first_name_accademico" type="text" cssClass="validate"/>
 			          <label for="first_name_accademico">Nome</label>
 			          <form:errors path="nome" cssClass="helper-text red-text chip" />
 			        </div>
 			        
 			        <div class="input-field col s6">
-			          <i class="material-icons prefix"></i>
 			          <form:input path="cognome" id="last_name_accademico" type="text" cssClass="validate"/>
 			          <label for="last_name_accademico">Cognome</label>
 			          <form:errors path="cognome" cssClass="helper-text red-text chip" />
@@ -149,6 +143,4 @@
 				  </button>
 			    </form:form>
 		  	</div>
-			    
-		  </div>
 </html>
