@@ -46,6 +46,7 @@ public class UtenteController {
 		
 		
 		try {
+			
 			utenteService.login(loginForm.getUsername(), loginForm.getPassword());
 			
 			session.setAttribute("username", loginForm.getUsername());

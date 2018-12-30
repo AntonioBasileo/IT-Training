@@ -15,7 +15,3 @@ $(document).ready(function(){
 $(document).ready(function(){
   $('select').formSelect();
 }); 
-
-
-//toast
-M.toast({html: 'I am a toast!'})
