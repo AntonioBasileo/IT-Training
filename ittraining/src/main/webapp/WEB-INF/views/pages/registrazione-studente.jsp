@@ -30,22 +30,14 @@
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<!-- Navbar -->
-	<nav>
-		<div class="nav-wrapper">
-			<ul id="nav-mobile" class="right">
-				<li><a href="/home"><i class="material-icons left">home</i>IT Training</a></li>
-			</ul>
-		</div>
-	</nav>
+	<jsp:include page="/WEB-INF/views/nav/redirect.jsp" />
 		  
 	<div class="container">
 		
-		<input id="registrationsuccess" type="hidden" class="validate" value="${success}"/>
 	    <div class="row"></div>
 		<div class="row"></div>
 		<div class="row">
-			<h5 class="teal-text">Registrazione - Studente</h5>
+			<h4 class="teal-text">Registrazione - Studente</h4>
 		</div>
 	    <div class="row"></div>
 		<div class="row"></div>

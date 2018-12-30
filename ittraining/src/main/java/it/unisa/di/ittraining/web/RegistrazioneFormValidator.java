@@ -11,6 +11,7 @@ import it.unisa.di.ittraining.utente.NomeNonValidoException;
 import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
 import it.unisa.di.ittraining.utente.PasswordNonValidaException;
 import it.unisa.di.ittraining.utente.SessoNonValidoException;
+import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
 import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteService;
@@ -22,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RegistrazioneSTTFormValidator implements Validator {
+public class RegistrazioneFormValidator implements Validator {
 	  
 	  @Autowired
 	  private UtenteService utentiService;
@@ -33,12 +34,12 @@ public class RegistrazioneSTTFormValidator implements Validator {
 	   */
 	  @Override
 	  public boolean supports(Class<?> clazz) {
-	    return RegistrazioneSTTForm.class.isAssignableFrom(clazz);
+	    return RegistrazioneForm.class.isAssignableFrom(clazz);
 	  }
 
 	  @Override
 	  public void validate(Object target, Errors errors) {
-		  RegistrazioneSTTForm form = (RegistrazioneSTTForm) target;
+		  RegistrazioneForm form = (RegistrazioneForm) target;
 		  
 		  try {
 			  utentiService.validaNome(form.getNome());
@@ -52,6 +53,13 @@ public class RegistrazioneSTTFormValidator implements Validator {
 		} catch (CognomeNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("cognome", "formRegistrazione.cognome.nonValido");
+		}
+		  
+		  try {
+			utentiService.validaTelefono(form.getTelefono());
+		} catch (TelefonoNonValidoException e1) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("telefono", "formRegistrazione.telefono.nonValido");
 		}
 		  
 		  try {

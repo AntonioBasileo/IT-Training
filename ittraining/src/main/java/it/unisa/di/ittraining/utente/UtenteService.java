@@ -116,6 +116,14 @@ public class UtenteService {
 	     } 
 	  }
 	}
+	 
+	public String validaTelefono(String telefono) throws TelefonoNonValidoException {
+		if(telefono == null) throw new TelefonoNonValidoException("Il campo telefono non può essere nullo");
+		
+		if(!telefono.matches(Utente.TELEFONO_PATTERN)) throw new TelefonoNonValidoException("Il campo telefono non è valido");
+		
+		return telefono;
+	}
 		
 	public String validaUsername(String username) throws UsernameNonValidoException, UsernameEsistenteException {
 		if(username == null) throw new UsernameNonValidoException("Il campo username è nullo");

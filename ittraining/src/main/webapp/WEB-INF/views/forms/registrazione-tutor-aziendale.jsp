@@ -45,12 +45,11 @@
           <div class="input-field col s4">
             <i class="material-icons prefix">cake</i>
             <form:input
-              path="giornoNascita" id="iscrizione-giornoDiNascita-aziendale" />  
+              path="giornoNascita" id="iscrizione-giornoDiNascita-aziendale" /> 
+              <label for="iscrizione-giornoDiNascita-aziendale">Giorno</label> 
           </div>
           <div class="input-field col s5">
             <form:select path="meseNascita" id="iscrizione-meseDiNascita-aziendale">
-              <form:option value="" disabled="true" selected="selected">
-              </form:option>
               <form:option value="1">
                 Gennaio
               </form:option>
@@ -93,12 +92,31 @@
             <form:input
                         path="annoNascita"
                         id="iscrizione-annoDiNascita-aziendale" /> 
+                        <label for="iscrizione-annoDiNascita-aziendale">Anno</label>
           </div>
           
           <div class="input-field col s6">
             <form:errors path="giornoNascita" cssClass="helper-text red-text chip" />
           </div>
-        </div>
+        </div>   
+        
+		        <div class="row">
+		          <div class="input-field col s6">
+		            <i class="material-icons prefix">business_center</i>
+		            <form:input path="nomeAzienda" id="azienda" />
+		            <label for="nomeAienda">Nome azienda</label>
+		            <form:errors path="nomeAzienda" cssClass="helper-text red-text chip" />
+		          </div>
+		         </div> 
+		         
+        		<div class="row">
+				     <div class="input-field col s6">
+				       <i class="material-icons prefix">phone</i>
+				       <form:input path="telefono" id="telefono-aziendale" type="text" cssClass="validate"/>
+				       <label for="telefono-aziendale">Telefono</label>
+				       <form:errors path="telefono" cssClass="helper-text red-text chip" />
+				     </div>
+				  </div>
 			      
 				  <div class="row">
 				     <div class="input-field col s6">
@@ -135,9 +153,11 @@
 			        </div>
 			      </div>
 			      
-				  <button class="btn waves-effect waves-light" type="submit" name="action_aziendale">Registrati
-				    <i class="material-icons right">send</i>
-				  </button>
+			      <div class="row right">
+					  <button class="btn waves-effect waves-light" type="submit" name="action_segreteria">Registrati
+					    <i class="material-icons right">send</i>
+					  </button>
+				  </div>
 			    </form:form>
 		  	</div>
 </html>

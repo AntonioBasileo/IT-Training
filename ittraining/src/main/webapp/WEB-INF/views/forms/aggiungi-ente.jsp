@@ -12,7 +12,7 @@
 	<div class="row"></div>
 	<div class="row"></div>
 	  <div class="row">
-	    <form:form class="col s12" action="/segreteria/aggiungi-ente" method="POST" modelAttribute="convenzioneForm">
+	    <form:form class="col s12" action="/aggiungi-ente" method="POST" modelAttribute="convenzioneForm">
 	      <div class="row">
 	        <div class="input-field col s6">
 	          <i class="material-icons prefix">account_circle</i>

@@ -47,12 +47,11 @@
           <div class="input-field col s4">
             <i class="material-icons prefix">cake</i>
             <form:input
-              path="giornoNascita" id="iscrizione-giornoDiNascita-accademico" />  
+              path="giornoNascita" id="iscrizione-giornoDiNascita-accademico" />
+              <label for="iscrizione-giornoDiNascita-accademico">Giorno</label>  
           </div>
           <div class="input-field col s5">
             <form:select path="meseNascita" id="iscrizione-meseDiNascita-accademico">
-              <form:option value="" disabled="true" selected="selected">
-              </form:option>
               <form:option value="1">
                 Gennaio
               </form:option>
@@ -95,12 +94,21 @@
             <form:input
                         path="annoNascita"
                         id="iscrizione-annoDiNascita-accademico" /> 
+                        <label for="iscrizione-annoDiNascita-accademico">Anno</label> 
           </div>
           
           <div class="input-field col s6">
             <form:errors path="giornoNascita" cssClass="helper-text red-text chip" />
           </div>
-        </div>
+        </div>  
+        		<div class="row">
+				     <div class="input-field col s6">
+				       <i class="material-icons prefix">phone</i>
+				       <form:input path="telefono" id="telefono-accademico" type="text" cssClass="validate"/>
+				       <label for="telefono-accademico">Telefono</label>
+				       <form:errors path="telefono" cssClass="helper-text red-text chip" />
+				     </div>
+				  </div>
 			      
 				  <div class="row">
 				     <div class="input-field col s6">
@@ -138,9 +146,11 @@
 			        </div>
 			      </div>
 			      
-				  <button class="btn waves-effect waves-light" type="submit" name="action_studente">Registrati
-				    <i class="material-icons right">send</i>
-				  </button>
+			      <div class="row right">
+					  <button class="btn waves-effect waves-light" type="submit" name="action_segreteria">Registrati
+					    <i class="material-icons right">send</i>
+					  </button>
+				  </div>
 			    </form:form>
 		  	</div>
 </html>

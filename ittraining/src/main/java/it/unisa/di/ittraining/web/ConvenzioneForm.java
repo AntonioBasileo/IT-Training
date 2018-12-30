@@ -1,6 +1,6 @@
 package it.unisa.di.ittraining.web;
 
-public class AggiungiEnteForm {
+public class ConvenzioneForm {
 
 	
 	public String getNome() {

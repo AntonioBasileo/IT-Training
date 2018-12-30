@@ -1,6 +1,6 @@
 package it.unisa.di.ittraining.web;
 
-public class RegistrazioneStudenteForm {
+public class RegistrazioneForm {
 
 	public String getNome() {
 		return nome;
@@ -43,14 +43,6 @@ public class RegistrazioneStudenteForm {
 	public void setAnnoNascita(Integer annoNascita) {
 		this.annoNascita = annoNascita;
 	}
-
-	public String getMatricola() {
-		return matricola;
-	}
-	
-	public void setMatricola(String matricola) {
-		this.matricola = matricola;
-	}
 	
 	public String getUsername() {
 		return username;
@@ -92,6 +84,15 @@ public class RegistrazioneStudenteForm {
 		this.telefono = telefono;
 	}
 
+	public Integer getOreTotali() {
+		return oreTotali;
+	}
+	public void setOreTotali(Integer oreTotali) {
+		this.oreTotali = oreTotali;
+	}
+
+
+
 	private String nome;
 	private String cognome;
 	private String sesso;
@@ -99,10 +100,10 @@ public class RegistrazioneStudenteForm {
 	private Integer meseNascita;
 	private Integer annoNascita;
 	private String telefono;
-	private String matricola;
 	private String username;
 	private String email;
 	private String password;
 	private String confermaPassword;
+	private Integer oreTotali;
 	
 }

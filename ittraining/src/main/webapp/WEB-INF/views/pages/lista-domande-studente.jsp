@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +7,7 @@
 		
 		<meta charset="ISO-8859-1">
 		
-		<title>Compila domanda</title>
+		<title>Domande</title>
 		
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -20,29 +18,25 @@
 		<!-- Compiled and minified CSS -->
 	    <link rel="stylesheet" href="resources/css/materialize.min.css">
 	    <link rel="stylesheet" href="resources/css/materialize.css">
-	
-	    <!-- Compiled and minified JavaScript -->
-	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
-	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
-	    <script src="resources/js/initialize.js"></script>
-		
 	    
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+	
 	<jsp:include page="/WEB-INF/views/nav/nav-studente.jsp" />
 
 	<div class="container">
-		<div class="row"></div>
+	
+	    <div class="row"></div>
 		<div class="row"></div>
 		<div class="row">
-			<h4 class="teal-text">Compila domanda di tirocinio <c:out value="${nomeStudente}"/></h4>
+			<h4 class="teal-text">Lista delle domande di tirocnio inviate</h4>
 		</div>
-		<div class="row"></div>
-		<div class="row"></div>
 		
-		<jsp:include page="/WEB-INF/views/forms/compila-domanda.jsp" />
+		<jsp:include page="/WEB-INF/views/lists/lista-domande-studente.jsp" />
+		
 	</div>
+	
 </body>
 </html>
