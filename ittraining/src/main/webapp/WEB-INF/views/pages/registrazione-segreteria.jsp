@@ -24,7 +24,6 @@
 	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
 	    <script src="resources/js/initialize.js"></script>
-	    <script src="resources/js/registration.js"></script>
 		
 	    
 	    <!--Import Google Icon Font-->
@@ -46,7 +45,7 @@
 	    <div class="row"></div>
 		<div class="row"></div>
 		<div class="row">
-			<h3 class="teal-text">Registrazione - Segreteria</h3>
+			<h5 class="teal-text">Registrazione - Segreteria</h5>
 		</div>
 	    <div class="row"></div>
 		<div class="row"></div>

@@ -25,6 +25,7 @@ public class AutenticazioneInterceptor implements HandlerInterceptor {
 	                           HttpServletResponse response,
 	                           Object handler)
 	         throws Exception {
+		  
 	    // Ottieni la sessione del server
 	    HttpSession session = request.getSession();
 	    
@@ -32,11 +33,14 @@ public class AutenticazioneInterceptor implements HandlerInterceptor {
 	    String username = (String) session.getAttribute("username");
 	    
 	    if (username != null) {
+	    	
 	    	utenteService.setUtenteAutenticato(username);
+	    	
 	    }
 	    
 	    return true;
 	  }
+	  
 
 	  /**
 	   * Metodo eseguito dopo l'esecuzione di un controller ma prima del rendering della vista.
@@ -47,11 +51,14 @@ public class AutenticazioneInterceptor implements HandlerInterceptor {
 	                         Object handler,
 	                         ModelAndView modelAndView)
 	         throws Exception {
+		  
 	    // Fornisci ad ogni vista delegata un form per il login e l'oggetto utente che rappresenta
 	    // l'utente autenticato
 	    //request.setAttribute("loginForm", new LoginForm());
+		
 		request.setAttribute("utente", utenteService.getUtenteAutenticato());
 	  }
+	  
 
 	  @Override
 	  public void afterCompletion(HttpServletRequest request,
@@ -59,6 +66,7 @@ public class AutenticazioneInterceptor implements HandlerInterceptor {
 	                              Object handler,
 	                              Exception exception)
 	         throws Exception {
+		  
 	    // Previeni memory leak al termine dell'elaborazione della richiesta
 		utenteService.setUtenteAutenticato(null);
 	  }

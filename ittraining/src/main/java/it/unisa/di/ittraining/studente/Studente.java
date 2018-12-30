@@ -3,6 +3,7 @@ package it.unisa.di.ittraining.studente;
 import it.unisa.di.ittraining.utente.Utente;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.registrotirocinio.Registro;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Studente extends Utente {
@@ -26,6 +28,9 @@ public class Studente extends Utente {
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
 	private List<Registro> registri;
+
+	@OneToOne
+	private TutorAccademico tutor;
 	
 	public Studente() {
 		this.domandeTirocinio = new ArrayList<DomandaTirocinio>();
