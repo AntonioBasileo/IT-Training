@@ -34,72 +34,48 @@
 	<body>
 	
 		<!-- Sidenav -->
-		  <ul id="slide-out" class="sidenav">
-		    <li><div class="user-view">
-		      <div class="background">
-		      </div>
-		      <a><img class="circle" src="resources/images/logo.png"></a>
-		    </div></li>
-		    <li><a href="/registrazione-studente-form"><i class="material-icons">school</i>Studente</a></li>
-		    <li><a href="/registrazione-segreteria-form"><i class="material-icons">account_balance</i>Segreteria</a></li>
-		    <li><a href="/registrazione-accademico-form"><i class="material-icons">supervisor_account</i>Tutor accademico</a></li>
-		    <li><a href="/registrazione-aziendale-form"><i class="material-icons">business_center</i>Tutor aziendale</a></li>
-		  </ul>
-		  
-		  
-		<!-- Navbar -->
-		  <nav>
-		    <div class="nav-wrapper">
-		      <ul id="nav-mobile" class="right">
-		        <li><a data-target="slide-out" class="sidenav-trigger show-on-medium-and-up"><i class="material-icons left">add</i>Registrati</a></li>
-		        <li><a href="/login-form"><i class="material-icons left">account_circle</i>Login</a></li>
-		        <li><a href="/home"><i class="material-icons left">home</i>IT Training</a></li>
-		      </ul>
-		    </div>
-		  </nav>
+		<jsp:include page="/WEB-INF/views/nav/side-nav.jsp" />
+		 
+		 <%if(request.getAttribute("utente") == null) { %>
+		 
+			<!-- Navbar -->
+			<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
+			
+		<% } else if(request.getAttribute("utente").getClass().getSimpleName().equals("Studente")) { %>
+		
+			<!-- Navbar -->
+			<jsp:include page="/WEB-INF/views/nav/nav-studente.jsp" />
+			
+		<% } else if(request.getAttribute("utente").getClass().getSimpleName().equals("ImpiegatoSegreteria")) { %>
+		
+			<!-- Navbar -->
+			<jsp:include page="/WEB-INF/views/nav/nav-segreteria.jsp" />
+		
+		<% } else if(request.getAttribute("utente").getClass().getSimpleName().equals("TutorAccademico")) {   %>
+		
+			<!-- Navbar -->
+			<jsp:include page="/WEB-INF/views/nav/nav-accademico.jsp" />
+		
+		<% } else if(request.getAttribute("utente").getClass().getSimpleName().equals("TutorAziendale")) {  %>
+		
+			<!-- Navbar -->
+			<jsp:include page="/WEB-INF/views/nav/nav-aziendale.jsp" />
+		
+		<% } %>
 		
 		<!-- Container -->
 		<div class = "container">
 		
-			<h5>Benvenuto <c:out value="${nomeUtente}"/></h5>
-			<div class="row">
-				
-			</div>
+			<div class="row"></div>
+			<div class="row"></div>
 			
 			<!-- Slider -->
-			  <div class="slider z-depth-2">
-			    <ul class="slides">
-			      <li>
-			        <img src="resources/images/slider1.png"> <!-- random image -->
-			        <div class="caption right-align">
-			          <h4>Iscriviti alla piattaforma</h4>
-			          <h5 class="light grey-text text-lighten-3">Il tuo tirocinio a portata di click</h5>
-			        </div>
-			      </li>
-			      <li>
-			        <img src="resources/images/slider2.jpg"> <!-- random image -->
-			        <div class="caption right-align">
-			          <h4>Scegli il tuo progetto</h4>
-			          <h5 class="light grey-text text-lighten-3">Il tuo tirocinio a portata di click</h5>
-			        </div>
-			      </li>
-			      <li>
-			        <img src="resources/images/slider3.jpg"> <!-- random image -->
-			        <div class="caption right-align">
-			          <h4>Acquisisci esperienza</h4>
-			          <h5 class="light grey-text text-lighten-3">Il tuo tirocinio a portata di click</h5>
-			        </div>
-			      </li>
-			      <li>
-			        <img src="resources/images/slider4.jpg"> <!-- random image -->
-			        <div class="caption center-align">
-			          <h4>Plasma il tuo percorso!</h4>
-			          <h5 class="light grey-text text-lighten-3">Il tuo tirocinio a portata di click</h5>
-			        </div>
-			      </li>
-			    </ul>
-			    </div>
-			    
+			<jsp:include page="/WEB-INF/views/carousel/slider.jsp" />
+			
+			<div class="row"></div>
+			<div class="row"></div>
+			
+					    
 			    <!-- Cards -->
 				  <div class="row">
 					  <div class="col s12">
@@ -147,28 +123,7 @@
 		</div>
 				  
 				  <!-- Footer -->
-			        <footer class="page-footer">
-			          <div class="container">
-			            <div class="row">
-			              <div class="col l6 s12">
-			              </div>
-			              <div class="col l4 offset-l2 s12">
-			                <h5 class="white-text">Contatti sviluppatori</h5>
-			                <ul>
-			                  <li>antonio.basileo92@gmail.com</li>
-			                  <li>alessiadagosto@hotmail.it</li>
-			                  <li>lauraoliva@gmail.com</li>
-			                  <li>romualdomanzo@gmail.com</li>
-			                </ul>
-			              </div>
-			            </div>
-			          </div>
-			          <div class="footer-copyright">
-			            <div class="container">
-			            © 2019 Copyright Antonio Basileo, Alessia D'Agosto, Laura Oliva, Romualdo Manzo
-			            </div>
-			          </div>
-			        </footer>
+				  <jsp:include page="/WEB-INF/views/footer/footer.jsp" />
 		
 	</body>
 </html>

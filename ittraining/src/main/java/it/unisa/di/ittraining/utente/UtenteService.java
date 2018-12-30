@@ -163,6 +163,7 @@ public class UtenteService {
 	    // Ottieni l'username dell'utente autenticato e restituisci null se non è presente alcun utente in sessione
 	    String username = (AutenticazioneHolder.getUtente());
 	    if (username == null) {
+	    	
 	      return null;
 	    }
 	    
@@ -171,18 +172,28 @@ public class UtenteService {
 	    // Controlla se l'username è associato ad un impiegato di segreteria
 	    utente = impiegatoRepository.findByUsername(username);
 	    if (utente != null) {
+	    	
 	      return utente;
 	    }
 	    
 	    // Controlla se l'username è associato ad un tutor aziendale
 	    utente = delegatoRepository.findByUsername(username);
 	    if (utente != null) {
+	    	
 	      return utente;
+	    }
+	    
+	    // Controlla se l'username è associato ad un tutor accademico
+	    utente = accademicoRepository.findByUsername(username);
+	    if(utente != null) {
+	    	
+	    	return utente;
 	    }
 	    
 	    // Controlla se l'username è associato ad uno studente
 	    utente = studenteRepository.findByUsername(username);
 	    if (utente != null) {
+	    	
 	      return utente;
 	    }
 	    

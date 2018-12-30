@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DomandaTirocinioRepository extends JpaRepository<DomandaTirocinio, Long> {
 	
-	public List<DomandaTirocinio> findAll();
+	List<DomandaTirocinio> findAllByStudenteUsername(String username);
+	
+	List<DomandaTirocinio> findAll();
 }

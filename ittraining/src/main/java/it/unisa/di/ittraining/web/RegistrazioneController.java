@@ -99,6 +99,9 @@ public class RegistrazioneController {
 		
 		return "registrazione-tutor-aziendale";
 	}
+	
+	
+	
 
 	@RequestMapping(value = "/richiesta-registrazione-studente", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneStudente(@ModelAttribute("registrazioneStudente") RegistrazioneStudenteForm registrazioneStudente, Model model, BindingResult result, 
@@ -140,10 +143,7 @@ public class RegistrazioneController {
 	    	
 	    }
 	    
-	    if(!model.containsAttribute("success"))
-	    	model.addAttribute("success", "success");
-	    
-		return "registrazione-studente";	
+		return "redirect:/home";	
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-segreteria", method = RequestMethod.POST)
@@ -187,7 +187,7 @@ public class RegistrazioneController {
 		if(!model.containsAttribute("success"))
 	    	model.addAttribute("success", "success");
 		
-		return "registrazione-segreteria";
+		return "redirect:/home";
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-accademico", method = RequestMethod.POST)
@@ -231,7 +231,7 @@ public class RegistrazioneController {
 	    if(!model.containsAttribute("success"))
 	    	model.addAttribute("success", "success");
 	    
-	    return "registrazione-tutor-accademico";
+	    return "redirect:/home";
 	}
 	
 	@RequestMapping(value = "/richiesta-registrazione-aziendale", method = RequestMethod.POST)
@@ -275,6 +275,6 @@ public class RegistrazioneController {
 	    if(!model.containsAttribute("success"))
 	    	model.addAttribute("success", "success");
 	    
-	    return "registrazione-tutor-aziendale";
+	    return "redirect:/home";
 	}
 }
