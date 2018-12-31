@@ -7,4 +7,6 @@ public interface TutorAccademicoRepository extends JpaRepository<TutorAccademico
 	TutorAccademico findByUsername(String username);
 
 	TutorAccademico findByUsernameAndPassword(String username, String password);
+	
+	boolean existsByEmail(String email);
 }

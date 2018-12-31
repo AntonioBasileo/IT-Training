@@ -1,16 +1,21 @@
 package it.unisa.di.ittraining.domandatirocinio;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.progettoformativo.ProgettoFormativo;
+import it.unisa.di.ittraining.registrotirocinio.Registro;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 
@@ -37,6 +42,9 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	@OneToOne
 	private ProgettoFormativo progettoFormativo;
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "domanda")
+	private List<Registro> registri;
+	
 	private LocalDate data;
 	private LocalDate inizioTirocinio;
 	private LocalDate fineTirocinio;
@@ -53,21 +61,33 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	public static final int IN_ATTESA = 0;
 	  
 	/**
-	 * Costante che rappresenta lo stato "accettato" di una domanda di tirocinio.
+	 * Costante che rappresenta lo stato "accettata da parte del tutor aziendale" di una domanda di tirocinio.
 	 * Una domanda di tirocinio si trova in questo stato quando è stata gestita ed accettata 
 	 * dall'azienda che offre il progetto formativo ad essa associato.
 	 */
-	public static final int ACCETTATA = 1;
+	public static final int ACCETTATA_AZIENDA = 1;
 	  
 	/**
-	 * Costante che rappresenta lo stato "rifiutato" di una domanda di tirocinio.
+	 * Costante che rappresenta lo stato "rifiutata" di una domanda di tirocinio.
 	 * Una domanda di tirocinio si trova in questo stato quando è stata gestita e rifiutata 
 	 * dall'azienda che offre il progetto formativo ad essa associato.
 	 */
 	public static final int RIFIUTATA = 2;
-
-	/** Costante che definisce il numero minimo di CFU da poter associare ad una domanda. */
-	public static final int MIN_CFU = 1;
+	  
+	/**
+	 * Costante che rappresenta lo stato "attesa di accetazione da parte del tutor accademico" di una domanda di tirocinio.
+	 * Una domanda di tirocinio si trova in questo stato quando il tutor accademico deve ancora approvare il progetto formativo
+	 * associato alla domanda di tirocinio.
+	 */
+	public static final int IN_ATTESA_ACCADEMICO = 3;
+	  
+	/**
+	 * Costante che rappresenta lo stato "accettata" di una domanda di tirocinio.
+	 * Una domanda di tirocinio si trova in questo stato quando il tutor accademico ha approvato il progetto formativo
+	 * associato alla domanda di tirocinio. Da questo momento il tirocinio può avere inizio.
+	 */
+	public static final int ACCETTATA = 4;
+	
 	  
 	/** Costante che definisce il numero massimo di CFU da poter associare ad una domanda. */
 	public static final int MAX_CFU = 18;

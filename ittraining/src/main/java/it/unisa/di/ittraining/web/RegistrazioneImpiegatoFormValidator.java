@@ -8,10 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
-import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
-import it.unisa.di.ittraining.azienda.AziendaService;
-import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
+import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
@@ -26,16 +23,13 @@ import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 @Component
-public class RegistrazioneAziendaleFormValidator implements Validator {
-
+public class RegistrazioneImpiegatoFormValidator implements Validator {
+	  
 	  @Autowired
 	  private UtenteService utentiService;
 	  
 	  @Autowired
-	  private DomandaTirocinioService domandeService;
-	  
-	  @Autowired
-	  private AziendaService aziendeService;
+	  private ImpiegatoSegreteriaService impiegatiService;
 
 	  
 	  /**
@@ -43,12 +37,12 @@ public class RegistrazioneAziendaleFormValidator implements Validator {
 	   */
 	  @Override
 	  public boolean supports(Class<?> clazz) {
-	    return RegistrazioneAziendaleForm.class.isAssignableFrom(clazz);
+	    return RegistrazioneForm.class.isAssignableFrom(clazz);
 	  }
 
 	  @Override
 	  public void validate(Object target, Errors errors) {
-		  RegistrazioneAziendaleForm form = (RegistrazioneAziendaleForm) target;
+		  RegistrazioneForm form = (RegistrazioneForm) target;
 		  
 		  try {
 			  utentiService.validaNome(form.getNome());
@@ -82,13 +76,13 @@ public class RegistrazioneAziendaleFormValidator implements Validator {
 		}
 		  
 		  try {
-			  aziendeService.validaEmailAziendale(form.getEmail());
+			  impiegatiService.validaEmailImpiegato(form.getEmail());
 		} catch (EmailEsistenteException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("email", "formRegistrazioneEsistente.email.aziendale.emailEsistente");
+			errors.rejectValue("email", "formRegistrazioneEsistente.email.segreteria.emailEsistente");
 		} catch (EmailNonValidaException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("email", "formRegistrazione.email.aziendale.nonValida");
+			errors.rejectValue("email", "formRegistrazione.email.segreteria.nonValida");
 		}
 		  
 		  try {
@@ -109,19 +103,6 @@ public class RegistrazioneAziendaleFormValidator implements Validator {
 		}
 		  
 		  try {
-			  
-			  domandeService.validaNomeAzienda(form.getNomeAzienda());
-		} catch (AziendaNonValidaException e) {
-			
-			// TODO Auto-generated catch block
-			errors.rejectValue("nomeAzienda", "formConvenzione.nome.nonValido");
-		} catch (AziendaNonEsistenteException e) {
-			
-			// TODO Auto-generated catch block
-			errors.rejectValue("nomeAzienda", "formConvenzione.nome.nonEsistente");
-		}
-		  
-		  try {
 		      if (form.getAnnoNascita() == null
 		          || form.getMeseNascita() == null
 		          || form.getGiornoNascita() == null) {
@@ -137,4 +118,5 @@ public class RegistrazioneAziendaleFormValidator implements Validator {
 		    	errors.rejectValue("giornoNascita", "formRegistrazione.data.nonValida");
 		    } 
 	  }
+
 }

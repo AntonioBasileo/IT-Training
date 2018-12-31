@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	var instances = M.Slider.init(elems, true, 400, 500, 5000);
 });
 
+//badges
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+
 
 //sidenav
 $(document).ready(function(){

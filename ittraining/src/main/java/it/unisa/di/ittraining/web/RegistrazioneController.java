@@ -50,10 +50,13 @@ public class RegistrazioneController {
 	private AziendaService tutorAziendaleService;
 	
 	@Autowired
-	private RegistrazioneStudenteFormValidator validator;
+	private RegistrazioneStudenteFormValidator validatorStudente;
 	
 	@Autowired
-	private RegistrazioneFormValidator validatorStandard;
+	private RegistrazioneImpiegatoFormValidator validatorImpiegato;
+	
+	@Autowired
+	private RegistrazioneAccademicoFormValidator validatorAccademico;
 	
 	@Autowired
 	private RegistrazioneAziendaleFormValidator validatorAziendale;
@@ -110,7 +113,7 @@ public class RegistrazioneController {
 	public String elaboraRichiestaIscrizioneStudente(@ModelAttribute("registrazioneStudente") RegistrazioneStudenteForm registrazioneStudente, Model model, BindingResult result, 
 			RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
 		
-		validator.validate(registrazioneStudente, result);
+		validatorStudente.validate(registrazioneStudente, result);
 		
 
 	    if (result.hasErrors()) {
@@ -152,7 +155,7 @@ public class RegistrazioneController {
 	public String elaboraRichiestaIscrizioneSegreteria(HttpSession session, @ModelAttribute("registrazioneSegreteria") RegistrazioneForm registrazioneSegreteria, Model model,
 			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, UsernameNonValidoException, UsernameEsistenteException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, CognomeNonValidoException, SessoNonValidoException, DataDiNascitaNonValidaException, TelefonoNonValidoException {
 		
-		validatorStandard.validate(registrazioneSegreteria, result);
+		validatorImpiegato.validate(registrazioneSegreteria, result);
 
 
 	    if (result.hasErrors()) {
@@ -196,7 +199,7 @@ public class RegistrazioneController {
 	public String elaboraRichiestaIscrizioneTutorAccademico(HttpSession session, @ModelAttribute("registrazioneAccademico") RegistrazioneForm registrazioneAccademico, Model model, 
 			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
 		
-		validatorStandard.validate(registrazioneAccademico, result);
+		validatorAccademico.validate(registrazioneAccademico, result);
 		
 
 		if (result.hasErrors()) {

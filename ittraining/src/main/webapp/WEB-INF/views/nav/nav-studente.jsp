@@ -13,7 +13,7 @@
 		        <li><a href="/lista-enti"><i class="material-icons left">business_center</i>Lista convenzioni</a></li>
 		        <li><a href="/compila-domanda-form"><i class="material-icons left">create</i>Compila domanda</a></li>
 		        <li><a href="/domande-studente"><i class="material-icons left">collections</i>Domande tirocinio</a></li>
-		        <li><a href="#"><i class="material-icons left">event_note</i>Registri</a></li>
+		        <li><a href="/registro-form"><i class="material-icons left">event_note</i>Registri</a></li>
 		        <li><a href="/home"><i class="material-icons left">home</i>IT Training</a></li>
 		      </ul>
 		    </div>
