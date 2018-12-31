@@ -11,8 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import it.unisa.di.ittraining.utente.AutenticazioneHolder;
-
 @SuppressWarnings("deprecation")
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {

@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface AziendaRepository extends JpaRepository<Azienda, String> {
 
 	List<Azienda> findAll();
+	
+	Azienda findByNome(String nome);
+	
+	boolean existsByNome(String nome);
 }

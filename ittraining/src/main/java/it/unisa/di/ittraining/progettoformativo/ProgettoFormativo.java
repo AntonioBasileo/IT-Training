@@ -1,5 +1,6 @@
 package it.unisa.di.ittraining.progettoformativo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -22,7 +23,7 @@ public class ProgettoFormativo {
 	 @ManyToOne
 	 private TutorAziendale tutorAziendale;
 	 
-	 @OneToOne
+	 @OneToOne(cascade = CascadeType.ALL, mappedBy = "progettoFormativo")
 	 private DomandaTirocinio domanda;
 	 
 	 @ManyToOne

@@ -42,6 +42,7 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	private LocalDate fineTirocinio;
 	private int status;
 	private int cfu;
+	private int oreTotali;
 	
 	/**
 	 * Costante che rappresenta lo stato "in attesa" di una domanda di tirocinio.
@@ -165,5 +166,14 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	public void setFineTirocinio(LocalDate fineTirocinio) {
 		this.fineTirocinio = fineTirocinio;
 	}
+
+	public int getOreTotali() {
+		return oreTotali;
+	}
+
+	public void setOreTotali(int oreTotali) {
+		this.oreTotali = oreTotali;
+	}
+	
 	
 }

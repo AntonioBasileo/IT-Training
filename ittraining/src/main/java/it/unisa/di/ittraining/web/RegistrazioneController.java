@@ -17,8 +17,6 @@ import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteria;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaService;
-import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
-import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
@@ -31,6 +29,7 @@ import it.unisa.di.ittraining.utente.NomeNonValidoException;
 import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
 import it.unisa.di.ittraining.utente.PasswordNonValidaException;
 import it.unisa.di.ittraining.utente.SessoNonValidoException;
+import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
 import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteService;
@@ -54,10 +53,14 @@ public class RegistrazioneController {
 	private RegistrazioneStudenteFormValidator validator;
 	
 	@Autowired
-	private RegistrazioneSTTFormValidator validatorSTT;
+	private RegistrazioneFormValidator validatorStandard;
+	
+	@Autowired
+	private RegistrazioneAziendaleFormValidator validatorAziendale;
 	
 	@Autowired
 	private UtenteService utentiService;
+	
 	
 	@RequestMapping(value = "/registrazione-studente-form", method = RequestMethod.GET)
 	public String showRegistrazioneStudenteForm(Model model) {
@@ -74,7 +77,7 @@ public class RegistrazioneController {
 	public String showRegistrazioneSegreteriaForm(Model model) {
 
 		if (!model.containsAttribute("registrazioneSegreteria")) {
-			model.addAttribute("registrazioneSegreteria", new RegistrazioneSTTForm());
+			model.addAttribute("registrazioneSegreteria", new RegistrazioneForm());
 		}
 		
 		return "registrazione-segreteria";
@@ -84,7 +87,7 @@ public class RegistrazioneController {
 	public String showRegistrazioneTutorAccademicoForm(Model model) {
 
 		if (!model.containsAttribute("registrazioneAccademico")) {
-			model.addAttribute("registrazioneAccademico", new RegistrazioneSTTForm());
+			model.addAttribute("registrazioneAccademico", new RegistrazioneForm());
 		}
 		
 		return "registrazione-tutor-accademico";
@@ -94,7 +97,7 @@ public class RegistrazioneController {
 	public String showRegistrazioneTutorAziendaleForm(Model model) {
 
 		if (!model.containsAttribute("registrazioneAziendale")) {
-			model.addAttribute("registrazioneAziendale", new RegistrazioneSTTForm());
+			model.addAttribute("registrazioneAziendale", new RegistrazioneAziendaleForm());
 		}
 		
 		return "registrazione-tutor-aziendale";
@@ -105,10 +108,7 @@ public class RegistrazioneController {
 
 	@RequestMapping(value = "/richiesta-registrazione-studente", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneStudente(@ModelAttribute("registrazioneStudente") RegistrazioneStudenteForm registrazioneStudente, Model model, BindingResult result, 
-			RedirectAttributes redirectAttributes) 
-			throws UsernameNonValidoException, UsernameEsistenteException, PasswordNonValidaException, 
-			PasswordNonCorrispondentiException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, 
-			CognomeNonValidoException, SessoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, DataDiNascitaNonValidaException {
+			RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
 		
 		validator.validate(registrazioneStudente, result);
 		
@@ -130,6 +130,7 @@ public class RegistrazioneController {
 	    if(utentiService.validaPasswords(registrazioneStudente.getPassword(), registrazioneStudente.getConfermaPassword())) {
 	    	
 	    	Studente studente = new Studente();
+	    	
 		    studente.setNome(registrazioneStudente.getNome());
 		    studente.setCognome(registrazioneStudente.getCognome());
 		    studente.setEmail(registrazioneStudente.getEmail());
@@ -138,6 +139,7 @@ public class RegistrazioneController {
 		    studente.setUsername(registrazioneStudente.getUsername());
 		    studente.setPassword(registrazioneStudente.getPassword());
 		    studente.setSesso(registrazioneStudente.getSesso());
+		    studente.setTelefono(registrazioneStudente.getTelefono());
 			
 			studentiService.registraStudente(studente);
 	    	
@@ -147,12 +149,10 @@ public class RegistrazioneController {
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-segreteria", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneSegreteria(HttpSession session, @ModelAttribute("registrazioneSegreteria") RegistrazioneSTTForm registrazioneSegreteria, Model model,
-			BindingResult result, RedirectAttributes redirectAttributes) throws UsernameNonValidoException, 
-	UsernameEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, 
-	CognomeNonValidoException, SessoNonValidoException, DataDiNascitaNonValidaException {
+	public String elaboraRichiestaIscrizioneSegreteria(HttpSession session, @ModelAttribute("registrazioneSegreteria") RegistrazioneForm registrazioneSegreteria, Model model,
+			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, UsernameNonValidoException, UsernameEsistenteException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, CognomeNonValidoException, SessoNonValidoException, DataDiNascitaNonValidaException, TelefonoNonValidoException {
 		
-		validatorSTT.validate(registrazioneSegreteria, result);
+		validatorStandard.validate(registrazioneSegreteria, result);
 
 
 	    if (result.hasErrors()) {
@@ -172,6 +172,7 @@ public class RegistrazioneController {
 		if(utentiService.validaPasswords(registrazioneSegreteria.getPassword(), registrazioneSegreteria.getConfermaPassword())) {
 			
 			ImpiegatoSegreteria impiegato = new ImpiegatoSegreteria();
+			
 			impiegato.setNome(registrazioneSegreteria.getNome());
 			impiegato.setCognome(registrazioneSegreteria.getCognome());
 			impiegato.setSesso(registrazioneSegreteria.getSesso());
@@ -179,6 +180,7 @@ public class RegistrazioneController {
 			impiegato.setUsername(registrazioneSegreteria.getUsername());
 			impiegato.setPassword(registrazioneSegreteria.getPassword());
 			impiegato.setDataDiNascita(date);
+			impiegato.setTelefono(registrazioneSegreteria.getTelefono());
 			
 			segreteriaService.registraImpiegato(impiegato);
 			
@@ -191,12 +193,10 @@ public class RegistrazioneController {
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-accademico", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneTutorAccademico(HttpSession session, @ModelAttribute("registrazioneAccademico") RegistrazioneSTTForm registrazioneAccademico, Model model, 
-			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException,
-	PasswordNonCorrispondentiException, UsernameNonValidoException, UsernameEsistenteException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException,
-	SessoNonValidoException, CognomeNonValidoException, DataDiNascitaNonValidaException {
+	public String elaboraRichiestaIscrizioneTutorAccademico(HttpSession session, @ModelAttribute("registrazioneAccademico") RegistrazioneForm registrazioneAccademico, Model model, 
+			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
 		
-		validatorSTT.validate(registrazioneAccademico, result);
+		validatorStandard.validate(registrazioneAccademico, result);
 		
 
 		if (result.hasErrors()) {
@@ -216,6 +216,7 @@ public class RegistrazioneController {
 	    if(utentiService.validaPasswords(registrazioneAccademico.getPassword(), registrazioneAccademico.getConfermaPassword())) {
 	    	
 	    	TutorAccademico tutor = new TutorAccademico();
+	    	
 	    	tutor.setNome(registrazioneAccademico.getNome());
 	    	tutor.setCognome(registrazioneAccademico.getCognome());
 	    	tutor.setEmail(registrazioneAccademico.getEmail());
@@ -223,6 +224,7 @@ public class RegistrazioneController {
 	    	tutor.setUsername(registrazioneAccademico.getUsername());
 	    	tutor.setPassword(registrazioneAccademico.getPassword());
 	    	tutor.setSesso(registrazioneAccademico.getSesso());
+	    	tutor.setTelefono(registrazioneAccademico.getTelefono());
 			
 	    	tutorAccademicoService.registraTutorAccademico(tutor);
 	    	
@@ -235,12 +237,10 @@ public class RegistrazioneController {
 	}
 	
 	@RequestMapping(value = "/richiesta-registrazione-aziendale", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneTutorAziendale(HttpSession session, @ModelAttribute("registrazioneAziendale") RegistrazioneSTTForm registrazioneAziendale, Model model,
-			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException,
-	PasswordNonCorrispondentiException, UsernameNonValidoException, UsernameEsistenteException, EmailEsistenteException, EmailNonValidaException,
-	NomeNonValidoException, CognomeNonValidoException, SessoNonValidoException, DataDiNascitaNonValidaException {
+	public String elaboraRichiestaIscrizioneTutorAziendale(HttpSession session, @ModelAttribute("registrazioneAziendale") RegistrazioneAziendaleForm registrazioneAziendale, Model model,
+			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
 		
-		validatorSTT.validate(registrazioneAziendale, result);
+		validatorAziendale.validate(registrazioneAziendale, result);
 		
 
 		if (result.hasErrors()) {
@@ -260,6 +260,7 @@ public class RegistrazioneController {
 	    if(utentiService.validaPasswords(registrazioneAziendale.getPassword(), registrazioneAziendale.getConfermaPassword())) {
 	    	
 	    	TutorAziendale tutor = new TutorAziendale();
+	    	
 	    	tutor.setNome(registrazioneAziendale.getNome());
 	    	tutor.setCognome(registrazioneAziendale.getCognome());
 	    	tutor.setEmail(registrazioneAziendale.getEmail());
@@ -267,6 +268,8 @@ public class RegistrazioneController {
 	    	tutor.setUsername(registrazioneAziendale.getUsername());
 	    	tutor.setPassword(registrazioneAziendale.getPassword());
 	    	tutor.setSesso(registrazioneAziendale.getSesso());
+	    	tutor.setTelefono(registrazioneAziendale.getTelefono());
+	    	tutor.setAzienda(tutorAziendaleService.getAziendaByNome(registrazioneAziendale.getNomeAzienda()));
 			
 	    	tutorAziendaleService.registraTutorAziendale(tutor);
 	    	

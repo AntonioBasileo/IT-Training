@@ -76,4 +76,15 @@ public class Studente extends Utente {
 	    }
 	  }
 	
+	public int getCfu() {
+		int somma = 0;
+		
+		for(DomandaTirocinio t: domandeTirocinio) {
+			
+			 somma += t.getCfu();
+		}
+		
+		return somma;
+	}
+	
 }

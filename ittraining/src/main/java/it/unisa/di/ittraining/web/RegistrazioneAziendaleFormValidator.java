@@ -1,11 +1,16 @@
 package it.unisa.di.ittraining.web;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
-import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
-import it.unisa.di.ittraining.studente.StudentiService;
+import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
+import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
+import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
@@ -18,34 +23,28 @@ import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
 import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteService;
-import it.unisa.di.ittraining.web.RegistrazioneStudenteForm;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Component
-public class RegistrazioneStudenteFormValidator implements Validator {
-	  
-	  @Autowired
-	  private UtenteService utentiService;
+public class RegistrazioneAziendaleFormValidator implements Validator {
 
 	  @Autowired
-	  private StudentiService studentiService;
+	  private UtenteService utentiService;
+	  
+	  @Autowired
+	  private DomandaTirocinioService aziendeService;
+
 	  
 	  /**
-	   * Permette di definire le classi cui poter applicare il validatore.
+	   * Permette di definire le classi cui il validatore è applicabile.
 	   */
 	  @Override
 	  public boolean supports(Class<?> clazz) {
-	    return RegistrazioneStudenteForm.class.isAssignableFrom(clazz);
+	    return RegistrazioneAziendaleForm.class.isAssignableFrom(clazz);
 	  }
-	  
+
 	  @Override
 	  public void validate(Object target, Errors errors) {
-		  RegistrazioneStudenteForm form = (RegistrazioneStudenteForm) target;
+		  RegistrazioneAziendaleForm form = (RegistrazioneAziendaleForm) target;
 		  
 		  try {
 			  utentiService.validaNome(form.getNome());
@@ -66,16 +65,6 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		} catch (TelefonoNonValidoException e1) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("telefono", "formRegistrazione.telefono.nonValido");
-		}
-		  
-		  try {
-			studentiService.validaMatricolaStudente(form.getMatricola());
-		} catch (MatricolaStudenteNonValidaException e1) {
-			// TODO Auto-generated catch block
-			errors.rejectValue("matricola", "formRegistrazione.matricola.nonValida");
-		} catch (MatricolaStudenteEsistenteException e1) {
-			// TODO Auto-generated catch block
-			errors.rejectValue("matricola", "formRegistrazione.matricola.giàEsistente");
 		}
 		  
 		  try {
@@ -116,6 +105,19 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		}
 		  
 		  try {
+			  
+			aziendeService.validaNomeAzienda(form.getNomeAzienda());
+		} catch (AziendaNonValidaException e) {
+			
+			// TODO Auto-generated catch block
+			errors.rejectValue("nomeAzienda", "formConvenzione.nome.nonValido");
+		} catch (AziendaNonEsistenteException e) {
+			
+			// TODO Auto-generated catch block
+			errors.rejectValue("nomeAzienda", "formConvenzione.nome.nonEsistente");
+		}
+		  
+		  try {
 		      if (form.getAnnoNascita() == null
 		          || form.getMeseNascita() == null
 		          || form.getGiornoNascita() == null) {
@@ -128,7 +130,7 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		      
 		      utentiService.validaDataDiNascita(data);
 		    } catch (DataDiNascitaNonValidaException | DateTimeException e) {
-		      errors.rejectValue("giornoNascita", "formRegistrazione.data.nonValida");
+		    	errors.rejectValue("giornoNascita", "formRegistrazione.data.nonValida");
 		    } 
 	  }
 }
