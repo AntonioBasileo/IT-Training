@@ -21,8 +21,11 @@ public abstract class Utente {
 	protected String password = "";
 	protected String sesso;
 	
-	/** Espressione regolare che definisce il formato del campo username. */
-	public static final String NOME_COGNOME_PATTERN = "^[a-zA-Z]{2,}(\\s[a-zA-Z]*?)*$";
+	/** Espressione regolare che definisce il formato del campo nome. */
+	public static final String NOME_PATTERN = "^[a-zA-Z]{2,}(\\s[a-zA-Z]*?)*$";
+
+	/** Espressione regolare che definisce il formato del campo nome. */
+	public static final String COGNOME_PATTERN = "^([a-zA-Z]\\')?[a-zA-Z]{2,}(\\s[a-zA-Z]*?)*$";
 
 	/** Espressione regolare che definisce il formato del campo username. */
 	public static final String USERNAME_PATTERN = "^[a-zA-Z0-9]{6,24}$";
