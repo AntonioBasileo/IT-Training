@@ -1,8 +1,14 @@
 package it.unisa.di.ittraining.web;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
@@ -16,17 +22,14 @@ import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteService;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 @Component
-public class RegistrazioneFormValidator implements Validator {
+public class RegistrazioneAccademicoFormValidator implements Validator {
 	  
 	  @Autowired
 	  private UtenteService utentiService;
+	  
+	  @Autowired
+	  private TutorAccademicoService tutorService;
 
 	  
 	  /**
@@ -73,13 +76,13 @@ public class RegistrazioneFormValidator implements Validator {
 		}
 		  
 		  try {
-			  utentiService.validaEmail(form.getEmail());
+			  tutorService.validaEmailAccademico(form.getEmail());
 		} catch (EmailEsistenteException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("email", "formRegistrazioneEsistente.email.emailEsistente");
+			errors.rejectValue("email", "formRegistrazioneEsistente.email.accademico.emailEsistente");
 		} catch (EmailNonValidaException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("email", "formRegistrazione.email.nonValida");
+			errors.rejectValue("email", "formRegistrazione.email.accademico.nonValida");
 		}
 		  
 		  try {
@@ -115,4 +118,5 @@ public class RegistrazioneFormValidator implements Validator {
 		    	errors.rejectValue("giornoNascita", "formRegistrazione.data.nonValida");
 		    } 
 	  }
+
 }

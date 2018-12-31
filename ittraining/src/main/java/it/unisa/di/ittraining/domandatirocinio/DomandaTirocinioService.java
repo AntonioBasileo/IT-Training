@@ -13,7 +13,6 @@ import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaRepository;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
-import it.unisa.di.ittraining.utente.Utente;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 @Service
@@ -31,6 +30,11 @@ public class DomandaTirocinioService {
 	public List<DomandaTirocinio> elencaDomandeStudente(String username) {
 		
 		return domandeRep.findAllByStudenteUsername(username);
+	}
+	
+	public List<DomandaTirocinio> elencaDomandeStudenteStatus(String username, int status) {
+		
+		return domandeRep.findAllByStudenteUsernameAndStatus(username, status);
 	}
 	
 	
@@ -71,7 +75,7 @@ public class DomandaTirocinioService {
 	public String validaNomeAzienda(String azienda) throws AziendaNonValidaException, AziendaNonEsistenteException {
 		if(azienda == null) throw new AziendaNonValidaException("Il campo azienda non può essere nullo");
 		
-		if(azienda.length() > Utente.MAX_LUNGHEZZA_NOME || azienda.length() < Utente.MIN_LUNGHEZZA_NOME) throw new AziendaNonValidaException();
+		if(azienda.length() > 255 || azienda.length() < 2) throw new AziendaNonValidaException();
 		
 		if(!rep.existsByNome(azienda)) throw new AziendaNonEsistenteException("L'azienda indicata non esiste");
 		
@@ -86,7 +90,7 @@ public class DomandaTirocinioService {
 		
 		int somma = cfu + studente.getCfu();
 		
-		if(somma > 18 ) throw new MassimoNumeroCfuCumulabiliException();
+		if(somma > DomandaTirocinio.MAX_CFU ) throw new MassimoNumeroCfuCumulabiliException();
 		
 		return cfu;
 	}

@@ -51,41 +51,41 @@
               <label for="iscrizione-giornoDiNascita-accademico">Giorno</label>  
           </div>
           <div class="input-field col s5">
-            <form:select path="meseNascita" id="iscrizione-meseDiNascita-accademico">
-              <form:option value="1">
+            <form:select class="icons" path="meseNascita" id="iscrizione-meseDiNascita-accademico">
+              <form:option value="1" data-icon="resources/images/calendar.svg">
                 Gennaio
               </form:option>
-              <form:option value="2">
+              <form:option value="2" data-icon="resources/images/calendar.svg">
               	Febbraio
               </form:option>
-              <form:option value="3">
+              <form:option value="3" data-icon="resources/images/calendar.svg">
                 Marzo
               </form:option>
-              <form:option value="4">
+              <form:option value="4" data-icon="resources/images/calendar.svg">
                 Aprile
               </form:option>
-              <form:option value="5">
+              <form:option value="5" data-icon="resources/images/calendar.svg">
                 Maggio
               </form:option>
-              <form:option value="6">
+              <form:option value="6" data-icon="resources/images/calendar.svg">
                 Giugno
               </form:option>
-              <form:option value="7">
+              <form:option value="7" data-icon="resources/images/calendar.svg">
                 Luglio
               </form:option>
-              <form:option value="8">
+              <form:option value="8" data-icon="resources/images/calendar.svg">
                 Agosto
               </form:option>
-              <form:option value="9">
+              <form:option value="9" data-icon="resources/images/calendar.svg">
                 Settembre
               </form:option>
-              <form:option value="10">
+              <form:option value="10" data-icon="resources/images/calendar.svg">
                Ottobre
               </form:option>
-              <form:option value="11">
+              <form:option value="11" data-icon="resources/images/calendar.svg">
                Novembre
               </form:option>
-              <form:option value="12">
+              <form:option value="12" data-icon="resources/images/calendar.svg">
                Dicembre
               </form:option>
             </form:select>
@@ -97,12 +97,12 @@
                         <label for="iscrizione-annoDiNascita-accademico">Anno</label> 
           </div>
           
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <form:errors path="giornoNascita" cssClass="helper-text red-text chip" />
           </div>
         </div>  
         		<div class="row">
-				     <div class="input-field col s6">
+				     <div class="input-field col s12">
 				       <i class="material-icons prefix">phone</i>
 				       <form:input path="telefono" id="telefono-accademico" type="text" cssClass="validate"/>
 				       <label for="telefono-accademico">Telefono</label>
@@ -111,7 +111,7 @@
 				  </div>
 			      
 				  <div class="row">
-				     <div class="input-field col s6">
+				     <div class="input-field col s12">
 				       <i class="material-icons prefix">account_circle</i>
 				       <form:input path="username" id="username-accademico" type="text" cssClass="validate"/>
 				       <label for="username-accademico">Username</label>
@@ -120,7 +120,7 @@
 				  </div>
 				  
 			      <div class="row">
-			        <div class="input-field col s6">
+			        <div class="input-field col s12">
 			          <i class="material-icons prefix">mail</i>
 			          <form:input path="email" id="email_accademico" type="email" cssClass="validate"/>
 			          <label for="email_accademico">Email</label>
@@ -129,7 +129,7 @@
 			      </div>
 			      
 			      <div class="row">
-			        <div class="input-field col s6">
+			        <div class="input-field col s12">
 			          <i class="material-icons prefix">lock</i>
 			          <form:input path="password" id="password_accademico" type="password" cssClass="validate"/>
 			          <label for="password_accademico">Password</label>
@@ -138,7 +138,7 @@
 			      </div>
 			      
 			      <div class="row">
-			        <div class="input-field col s6">
+			        <div class="input-field col s12">
 			          <i class="material-icons prefix">lock_outline</i>
 			          <form:input path="confermaPassword" id="confirm_password_accademico" type="password" cssClass="validate"/>
 			          <label for="confirm_password_accademico">Conferma password</label>

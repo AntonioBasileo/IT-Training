@@ -10,5 +10,7 @@ public interface DomandaTirocinioRepository extends JpaRepository<DomandaTirocin
 	
 	List<DomandaTirocinio> findAllByStudenteUsername(String username);
 	
+	List<DomandaTirocinio> findAllByStudenteUsernameAndStatus(String username, int status);
+	
 	List<DomandaTirocinio> findAll();
 }

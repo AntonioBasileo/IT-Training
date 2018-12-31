@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.unisa.di.ittraining.utente.EmailEsistenteException;
+import it.unisa.di.ittraining.utente.EmailNonValidaException;
 import it.unisa.di.ittraining.utente.NomeNonValidoException;
 
 @Service
@@ -51,6 +53,16 @@ public class AziendaService {
 		      return nome;
 		    }
 		  }
+	}
+	
+	public String validaEmailAziendale(String email) throws EmailNonValidaException, EmailEsistenteException {
+		if(email == null) throw new EmailNonValidaException();
+		
+		if(!email.matches(TutorAziendale.EMAIL_PATTERN_AZIENDALE)) throw new EmailNonValidaException("Il formato dell'email del tutor non rispetta il formato indicato");
+		
+		if(repTutor.existsByEmail(email)) throw new EmailEsistenteException("Email utilizzata già da un altro tutor aziendale");
+		
+		return email;
 	}
 	
 	public String validaTelefono(String telefono) throws TelefonoNonValidoException {

@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import it.unisa.di.ittraining.azienda.TutorAziendale;
+import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteria;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
@@ -32,6 +34,9 @@ public class Registro {
 	
 	@ManyToOne
 	private TutorAccademico tutorAccademico;
+	
+	@OneToOne
+	private DomandaTirocinio domanda;
 	
 	private LocalDate data;
 	private LocalDateTime inizio;
