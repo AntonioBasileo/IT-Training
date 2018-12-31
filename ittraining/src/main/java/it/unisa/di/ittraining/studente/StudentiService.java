@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudenteRepository;
+import it.unisa.di.ittraining.utente.EmailEsistenteException;
+import it.unisa.di.ittraining.utente.EmailNonValidaException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 
@@ -47,5 +49,15 @@ public class StudentiService {
 		      }
 		    }
 		  }
+	  
+	  public String validaEmailStudente(String email) throws EmailNonValidaException, EmailEsistenteException {
+		  if(email == null) throw new EmailNonValidaException("Il campo email non può essere nullo");
+		  
+		  if(!email.matches(Studente.EMAIL_PATTERN_STUDENTE)) throw new EmailNonValidaException();
+		  
+		  if(studenteRepository.existsByEmail(email)) throw new EmailEsistenteException("L'email è già utilizzata da un altro studente");
+		  
+		  return email;
+	  }
 	  
 }

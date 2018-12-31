@@ -23,6 +23,9 @@ public class Studente extends Utente {
 	/** Espressione regolare che definisce il formato del campo matricola. */
     public static final String MATRICOLA_PATTERN = "^[0-9]{10}$";
 	  
+	/** Espressione regolare che definisce il formato del campo email per gli studenti. */
+	public static final String EMAIL_PATTERN_STUDENTE = "[A-z0-9\\.\\+_-]+@studenti.unisa.it";
+	  
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
 	private List<DomandaTirocinio> domandeTirocinio;
 	

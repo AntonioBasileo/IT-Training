@@ -8,5 +8,7 @@ public interface TutorAziendaleRepository extends JpaRepository<TutorAziendale, 
 	
 	TutorAziendale findByUsernameAndPassword(String username, String password);
 	
+	boolean existsByEmail(String email);
+	
 	TutorAziendale findByUsername(String username);
 }

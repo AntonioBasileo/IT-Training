@@ -49,35 +49,20 @@ public class UtenteService {
 	  
 	  
 	  public String validaNome(String nome) throws NomeNonValidoException {
-	    if (nome == null) {
-	      throw new NomeNonValidoException();
-	    } else {
-	      nome = nome.trim();
-	      
-	      if (nome.length() < Utente.MIN_LUNGHEZZA_NOME
-	          || nome.length() > Utente.MAX_LUNGHEZZA_NOME) {
-	        throw new NomeNonValidoException();
-	      } else {
-	        return nome;
-	      }
-	    }
+		  if(nome == null) throw new NomeNonValidoException();
+		  
+		  if(!nome.matches(Utente.NOME_COGNOME_PATTERN)) throw new NomeNonValidoException("Il campo nome non rispetta il formato indicato");
+		  
+		  return nome;
 	  }
 	  
 	  
 	  public String validaCognome(String cognome) throws CognomeNonValidoException {
-	    if (cognome == null) {
-	      throw new CognomeNonValidoException();
-	      
-	    } else {
-	      cognome = cognome.trim();
-	      
-	      if (cognome.length() < Utente.MIN_LUNGHEZZA_NOME
-	          || cognome.length() > Utente.MAX_LUNGHEZZA_NOME) {
-	        throw new CognomeNonValidoException();
-	      } else {
-	        return cognome;
-	      }
-	    }
+	    if (cognome == null) throw new CognomeNonValidoException();
+	    
+	    if(!cognome.matches(Utente.NOME_COGNOME_PATTERN)) throw new CognomeNonValidoException("Il cognome non rispetta il formato indicato");
+	    
+	    return cognome;
 	  }
 	
 
@@ -137,16 +122,6 @@ public class UtenteService {
 			
 		return username;
 			
-	}
-	
-	public String validaEmail(String email) throws EmailEsistenteException, EmailNonValidaException {
-		if(email ==  null) throw new EmailNonValidaException("Il campo email è nullo.");
-		
-		if(utenteRepository.existsByEmail(email)) throw new EmailEsistenteException("Email già in uso.");
-		
-		if(!email.matches(Utente.EMAIL_PATTERN)) throw new EmailNonValidaException("Il campo email non rispetta il formato stabilito.");
-		
-		return email;
 	}
 	
 	public boolean validaPasswords(String password, String confirmPassword) throws PasswordNonValidaException, PasswordNonCorrispondentiException {

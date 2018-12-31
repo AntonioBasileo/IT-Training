@@ -20,6 +20,9 @@ public abstract class Utente {
 	protected String email = "";
 	protected String password = "";
 	protected String sesso;
+	
+	/** Espressione regolare che definisce il formato del campo username. */
+	public static final String NOME_COGNOME_PATTERN = "^[a-zA-Z]{2,}(\\s[a-zA-Z]*?)*$";
 
 	/** Espressione regolare che definisce il formato del campo username. */
 	public static final String USERNAME_PATTERN = "^[a-zA-Z0-9]{6,24}$";
@@ -29,29 +32,12 @@ public abstract class Utente {
 
 	/** Costante che definisce il formato del campo telefono*/
 	public static final String TELEFONO_PATTERN = "^[0-9]{2,4}[0-9]{4,7}$";
-	  
-	/** Costante che definisce la minima lunghezza dei campi nome e cognome. */
-	public static final int MIN_LUNGHEZZA_NOME = 2;
-	  
-	/** Costante che definisce la massima lunghezza dei campi nome e cognome. */
-	public static final int MAX_LUNGHEZZA_NOME = 255;
 	
 	/** Costante che rappresenta il genere maschile per l'utente. */
 	public static final String SESSO_MASCHILE = "M";
 	  
 	/** Costante che rappresenta il genere femminile per l'utente. */
 	public static final String SESSO_FEMMINILE = "F";
-	  
-	/** Espressione regolare che definisce il formato del campo email. */
-	public static final String EMAIL_PATTERN = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/"
-	                                           + "=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f"
-	                                           + "\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x"
-	                                           + "0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-"
-	                                           + "9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25["
-	                                           + "0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2"
-	                                           + "[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\"
-	                                           + "x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]"
-	                                           + "|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 	  
 	
 	public Utente() {

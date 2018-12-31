@@ -89,13 +89,13 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		}
 		  
 		  try {
-			  utentiService.validaEmail(form.getEmail());
+			  studentiService.validaEmailStudente(form.getEmail());
 		} catch (EmailEsistenteException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("email", "formRegistrazioneEsistente.email.emailEsistente");
+			errors.rejectValue("email", "formRegistrazioneEsistente.email.studente.emailEsistente");
 		} catch (EmailNonValidaException e) {
 			// TODO Auto-generated catch block
-			errors.rejectValue("email", "formRegistrazione.email.nonValida");
+			errors.rejectValue("email", "formRegistrazione.email.studente.nonValida");
 		}
 		  
 		  try {

@@ -21,6 +21,9 @@ public class TutorAziendale extends Utente {
 	
 	@OneToOne
 	private Azienda azienda;
+	
+	/** Espressione regolare che definisce il formato del campo email per impiegati di segreteria e tutor accademici. */
+	public static final String EMAIL_PATTERN_AZIENDALE = "[A-z0-9\\.\\+_-]+@[A-z0-9\\._-]+\\.[A-z]{2,6}";
 
 	public TutorAziendale() {
 		

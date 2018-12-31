@@ -14,6 +14,9 @@ public class TutorAccademico extends Utente {
 	
 	@OneToMany
 	private List<DomandaTirocinio> domande;
+	  
+	/** Espressione regolare che definisce il formato del campo email per impiegati di segreteria e tutor accademici. */
+	public static final String EMAIL_PATTERN_ACCADEMICO = "[A-z0-9\\.\\+_-]+@unisa.it";
 	
 	@OneToMany
 	private List<Registro> registri;
