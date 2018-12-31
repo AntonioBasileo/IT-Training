@@ -26,4 +26,28 @@ public class TutorAziendale extends Utente {
 		
 	}
 
+	public List<Registro> getRegistri() {
+		return registri;
+	}
+
+	public void setRegistri(List<Registro> registri) {
+		this.registri = registri;
+	}
+
+	public List<ProgettoFormativo> getProgetti() {
+		return progetti;
+	}
+
+	public void setProgetti(List<ProgettoFormativo> progetti) {
+		this.progetti = progetti;
+	}
+
+	public Azienda getAzienda() {
+		return azienda;
+	}
+
+	public void setAzienda(Azienda azienda) {
+		this.azienda = azienda;
+	}
+
 }

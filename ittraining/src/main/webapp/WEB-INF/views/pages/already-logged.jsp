@@ -3,7 +3,6 @@
 
 <!DOCTYPE html>
 <html>
-<head>
 	<head>
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="resources/images/logo.png" />
@@ -25,7 +24,6 @@
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	</head>
-</head>
 <body>
 	<div class="row"></div>
 	<div class="row"></div>

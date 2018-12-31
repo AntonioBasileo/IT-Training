@@ -16,6 +16,7 @@ public abstract class Utente {
 	protected String nome;
 	protected String cognome;
 	protected LocalDate dataDiNascita;
+	private String telefono;
 	protected String email = "";
 	protected String password = "";
 	protected String sesso;
@@ -25,6 +26,9 @@ public abstract class Utente {
 	  
 	/** Espressione regolare che definisce il formato del campo password. */
 	public static final String PASSWORD_PATTERN = "^[\\S]{6,24}$";
+
+	/** Costante che definisce il formato del campo telefono*/
+	public static final String TELEFONO_PATTERN = "^[0-9]{2,4}[0-9]{4,7}$";
 	  
 	/** Costante che definisce la minima lunghezza dei campi nome e cognome. */
 	public static final int MIN_LUNGHEZZA_NOME = 2;
@@ -108,6 +112,14 @@ public abstract class Utente {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 	
 }

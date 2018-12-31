@@ -44,12 +44,11 @@
           <div class="input-field col s4">
             <i class="material-icons prefix">cake</i>
             <form:input
-              path="giornoNascita" id="iscrizione-giornoDiNascita" />  
+              path="giornoNascita" id="iscrizione-giornoDiNascita" /> 
+              <label for="iscrizione-giornoDiNascita">Giorno</label> 
           </div>
           <div class="input-field col s5">
             <form:select path="meseNascita" id="iscrizione-meseDiNascita">
-              <form:option value="" disabled="true" selected="selected">
-              </form:option>
               <form:option value="1">
                 Gennaio
               </form:option>
@@ -91,13 +90,22 @@
           <div class="input-field col s3">
             <form:input
                         path="annoNascita"
-                        id="iscrizione-annoDiNascita" /> 
+                        id="iscrizione-annoDiNascita" />
+                        <label for="iscrizione-annoDiNascita">Anno</label> 
           </div>
           
           <div class="input-field col s6">
             <form:errors path="giornoNascita" cssClass="helper-text red-text chip" />
           </div>
-        </div>
+        </div>  
+        		<div class="row">
+				     <div class="input-field col s6">
+				       <i class="material-icons prefix">phone</i>
+				       <form:input path="telefono" id="telefono-studente" type="text" cssClass="validate"/>
+				       <label for="telefono-studente">Telefono</label>
+				       <form:errors path="telefono" cssClass="helper-text red-text chip" />
+				     </div>
+				  </div>
 			      
 			      <div class="row">
 			        <div class="input-field col s6">
@@ -143,9 +151,11 @@
 			        </div>
 			      </div>
 			      
-				  <button class="btn waves-effect waves-light" type="submit" name="action_studente">Registrati
-				    <i class="material-icons right">send</i>
-				  </button>
+			      <div class="row right">
+					  <button class="btn waves-effect waves-light" type="submit" name="action_segreteria">Registrati
+					    <i class="material-icons right">send</i>
+					  </button>
+				  </div>
 			    </form:form>
 		  	</div>
 </html>

@@ -15,3 +15,9 @@ $(document).ready(function(){
 $(document).ready(function(){
   $('select').formSelect();
 }); 
+
+
+//modals
+$(document).ready(function(){
+  $('.modal').modal();
+});

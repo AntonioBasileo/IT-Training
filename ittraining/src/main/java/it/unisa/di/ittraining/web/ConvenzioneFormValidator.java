@@ -8,21 +8,15 @@ import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
 import it.unisa.di.ittraining.azienda.TelefonoNonValidoException;
 import it.unisa.di.ittraining.utente.NomeNonValidoException;
-import it.unisa.di.ittraining.utente.UtenteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AggiungiEnteFormValidator implements Validator {
-	  
-	  @Autowired
-	  private UtenteService utenteService;
+public class ConvenzioneFormValidator implements Validator {
 	  
 	  @Autowired
 	  private AziendaService aziendaService;
-	  
-	  
 
 	  
 	  /**
@@ -30,15 +24,15 @@ public class AggiungiEnteFormValidator implements Validator {
 	   */
 	  @Override
 	  public boolean supports(Class<?> clazz) {
-	    return AggiungiEnteForm.class.isAssignableFrom(clazz);
+	    return ConvenzioneForm.class.isAssignableFrom(clazz);
 	  }
 	  
 	  @Override
 	  public void validate(Object target, Errors errors) {
-		  AggiungiEnteForm form = (AggiungiEnteForm) target;
+		  ConvenzioneForm form = (ConvenzioneForm) target;
 		  
 		  try {
-			utenteService.validaNome(form.getNome());
+			  aziendaService.validaNome(form.getNome());
 		} catch (NomeNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("nome", "formConvenzione.nome.nonValido");
