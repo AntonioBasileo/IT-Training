@@ -21,17 +21,8 @@ import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
-import it.unisa.di.ittraining.utente.CognomeNonValidoException;
-import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
-import it.unisa.di.ittraining.utente.EmailEsistenteException;
-import it.unisa.di.ittraining.utente.EmailNonValidaException;
-import it.unisa.di.ittraining.utente.NomeNonValidoException;
 import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
 import it.unisa.di.ittraining.utente.PasswordNonValidaException;
-import it.unisa.di.ittraining.utente.SessoNonValidoException;
-import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
-import it.unisa.di.ittraining.utente.UsernameEsistenteException;
-import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 @Controller
@@ -47,7 +38,7 @@ public class RegistrazioneController {
 	private TutorAccademicoService tutorAccademicoService;
 
 	@Autowired
-	private AziendaService tutorAziendaleService;
+	private AziendaService aziendeService;
 	
 	@Autowired
 	private RegistrazioneStudenteFormValidator validatorStudente;
@@ -68,6 +59,9 @@ public class RegistrazioneController {
 	@RequestMapping(value = "/registrazione-studente-form", method = RequestMethod.GET)
 	public String showRegistrazioneStudenteForm(Model model) {
 		
+		if(utentiService.getUtenteAutenticato() != null)
+			return "not-available";
+		
 		if (!model.containsAttribute("registrazioneStudente")) {
 			model.addAttribute("registrazioneStudente", new RegistrazioneStudenteForm());
 			
@@ -78,6 +72,9 @@ public class RegistrazioneController {
 
 	@RequestMapping(value = "/registrazione-segreteria-form", method = RequestMethod.GET)
 	public String showRegistrazioneSegreteriaForm(Model model) {
+		
+		if(utentiService.getUtenteAutenticato() != null)
+			return "not-available";
 
 		if (!model.containsAttribute("registrazioneSegreteria")) {
 			model.addAttribute("registrazioneSegreteria", new RegistrazioneForm());
@@ -88,6 +85,9 @@ public class RegistrazioneController {
 
 	@RequestMapping(value = "/registrazione-accademico-form", method = RequestMethod.GET)
 	public String showRegistrazioneTutorAccademicoForm(Model model) {
+		
+		if(utentiService.getUtenteAutenticato() != null)
+			return "not-available";
 
 		if (!model.containsAttribute("registrazioneAccademico")) {
 			model.addAttribute("registrazioneAccademico", new RegistrazioneForm());
@@ -98,6 +98,9 @@ public class RegistrazioneController {
 
 	@RequestMapping(value = "/registrazione-aziendale-form", method = RequestMethod.GET)
 	public String showRegistrazioneTutorAziendaleForm(Model model) {
+		
+		if(utentiService.getUtenteAutenticato() != null)
+			return "not-available";
 
 		if (!model.containsAttribute("registrazioneAziendale")) {
 			model.addAttribute("registrazioneAziendale", new RegistrazioneAziendaleForm());
@@ -153,7 +156,7 @@ public class RegistrazioneController {
 
 	@RequestMapping(value = "/richiesta-registrazione-segreteria", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneSegreteria(HttpSession session, @ModelAttribute("registrazioneSegreteria") RegistrazioneForm registrazioneSegreteria, Model model,
-			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, UsernameNonValidoException, UsernameEsistenteException, EmailEsistenteException, EmailNonValidaException, NomeNonValidoException, CognomeNonValidoException, SessoNonValidoException, DataDiNascitaNonValidaException, TelefonoNonValidoException {
+			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
 		
 		validatorImpiegato.validate(registrazioneSegreteria, result);
 
@@ -188,9 +191,6 @@ public class RegistrazioneController {
 			segreteriaService.registraImpiegato(impiegato);
 			
 		}
-		
-		if(!model.containsAttribute("success"))
-	    	model.addAttribute("success", "success");
 		
 		return "redirect:/home";
 	}
@@ -233,9 +233,6 @@ public class RegistrazioneController {
 	    	
 	    }
 	    
-	    if(!model.containsAttribute("success"))
-	    	model.addAttribute("success", "success");
-	    
 	    return "redirect:/home";
 	}
 	
@@ -272,14 +269,15 @@ public class RegistrazioneController {
 	    	tutor.setPassword(registrazioneAziendale.getPassword());
 	    	tutor.setSesso(registrazioneAziendale.getSesso());
 	    	tutor.setTelefono(registrazioneAziendale.getTelefono());
-	    	tutor.setAzienda(tutorAziendaleService.getAziendaByNome(registrazioneAziendale.getNomeAzienda()));
+	    	tutor.setAzienda(aziendeService.getAziendaByNome(registrazioneAziendale.getNomeAzienda()));
+	    	
+	    	aziendeService.getAziendaByNome(registrazioneAziendale.getNomeAzienda()).setTutorAziendale(tutor);
+	    	
+	    	aziendeService.registraAzienda(aziendeService.getAziendaByNome(registrazioneAziendale.getNomeAzienda()));
 			
-	    	tutorAziendaleService.registraTutorAziendale(tutor);
+	    	aziendeService.registraTutorAziendale(tutor);
 	    	
 	    }
-	    
-	    if(!model.containsAttribute("success"))
-	    	model.addAttribute("success", "success");
 	    
 	    return "redirect:/home";
 	}

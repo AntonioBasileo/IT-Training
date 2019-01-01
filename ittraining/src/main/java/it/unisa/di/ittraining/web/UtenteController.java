@@ -9,8 +9,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import it.unisa.di.ittraining.studente.Studente;
+import it.unisa.di.ittraining.studente.StudentiService;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
 import it.unisa.di.ittraining.utente.PasswordErrataException;
 import it.unisa.di.ittraining.utente.UsernameNonEsistenteException;
 import it.unisa.di.ittraining.utente.UtenteService;
@@ -21,18 +26,18 @@ public class UtenteController {
 	@Autowired
 	private UtenteService utenteService;
 	
+	@Autowired
+	private TutorAccademicoService tutorService;
+	
+	@Autowired
+	private StudentiService studentiService;
+	
+	
 	@RequestMapping(value = "/login-form")
 	public String showLoginForm(HttpSession session, Model model) {
 		
 		if(!model.containsAttribute("loginForm"))
 			model.addAttribute("loginForm", new LoginForm());
-		
-		if(utenteService.getUtenteAutenticato() != null) {
-			if(!model.containsAttribute("nomeUtente"))
-				model.addAttribute("nomeUtente", utenteService.getUtenteAutenticato().getNome() + " " + utenteService.getUtenteAutenticato().getCognome());
-			
-			return "already-logged";
-		}
 		
 		
 		return "login";
@@ -81,6 +86,7 @@ public class UtenteController {
 	
 	 @RequestMapping(value = "/logout", method = RequestMethod.GET)
 	 public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
+		 
 	   if (utenteService.getUtenteAutenticato() != null) {
 		   
 	     session.setAttribute("username", null);
@@ -89,5 +95,32 @@ public class UtenteController {
 	   }
 	    
 	   return "redirect:/home";
+	 }
+	 
+	 @RequestMapping(value = "/lista-tutor", method = RequestMethod.GET)
+	 public String mostraElencoTutorAccademici(Model model) {
+		 
+		 if(!model.containsAttribute("tutor"))
+			 model.addAttribute("tutor", ((Studente)utenteService.getUtenteAutenticato()).getTutor());
+		 
+		 if(!model.containsAttribute("listaTutor"))
+			 model.addAttribute("listaTutor", tutorService.elencaTutorAccademici());
+		 
+		 return "/lista-tutor";
+	 }
+	 
+	 @RequestMapping(value = "/scegli-tutor", method = RequestMethod.GET)
+	 public String scegliTutorAccademico(@RequestParam String op) {
+		 
+		 TutorAccademico tutor = tutorService.findByUsername(op);
+		 Studente studente = (Studente)utenteService.getUtenteAutenticato();
+		 
+		 tutor.getStudenti().add(studente);
+		 studente.setTutor(tutor);
+		 
+		 studentiService.registraStudente(studente);
+		 tutorService.registraTutorAccademico(tutor);
+		 
+		 return "/lista-tutor";
 	 }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaRepository;
@@ -27,6 +28,7 @@ public class DomandaTirocinioService {
 	@Autowired
 	private UtenteService utentiService;
 	
+	
 	public List<DomandaTirocinio> elencaDomandeStudente(String username) {
 		
 		return domandeRep.findAllByStudenteUsername(username);
@@ -37,6 +39,16 @@ public class DomandaTirocinioService {
 		return domandeRep.findAllByStudenteUsernameAndStatus(username, status);
 	}
 	
+	public List<DomandaTirocinio> elencaDomandeAziendali(Azienda azienda) {
+		
+		return domandeRep.findAllByAzienda(azienda);
+	}
+	
+	public DomandaTirocinio getDomandaById(long id) {
+		System.out.println("STRONZO SONO QUI! " + id);
+		
+		return domandeRep.findById(id);
+	}
 	
 	@Transactional(rollbackFor = Exception.class)
 	public DomandaTirocinio registraDomanda(DomandaTirocinio domanda) {
@@ -88,7 +100,7 @@ public class DomandaTirocinioService {
 		
 		Studente studente = (Studente)utentiService.getUtenteAutenticato();
 		
-		int somma = cfu + studente.getCfu();
+		int somma = cfu + studente.getCfuTirocinio();
 		
 		if(somma > DomandaTirocinio.MAX_CFU ) throw new MassimoNumeroCfuCumulabiliException();
 		

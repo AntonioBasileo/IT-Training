@@ -63,7 +63,8 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	/**
 	 * Costante che rappresenta lo stato "accettata da parte del tutor aziendale" di una domanda di tirocinio.
 	 * Una domanda di tirocinio si trova in questo stato quando è stata gestita ed accettata 
-	 * dall'azienda che offre il progetto formativo ad essa associato.
+	 * dall'azienda che offre il progetto formativo ad essa associato ed è in attesa che il tutor accademico accetti
+	 * il progetto formativo.
 	 */
 	public static final int ACCETTATA_AZIENDA = 1;
 	  
@@ -72,21 +73,20 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	 * Una domanda di tirocinio si trova in questo stato quando è stata gestita e rifiutata 
 	 * dall'azienda che offre il progetto formativo ad essa associato.
 	 */
-	public static final int RIFIUTATA = 2;
-	  
+	public static final int RIFIUTATA_AZIENDA = 2;
+	
 	/**
-	 * Costante che rappresenta lo stato "attesa di accetazione da parte del tutor accademico" di una domanda di tirocinio.
-	 * Una domanda di tirocinio si trova in questo stato quando il tutor accademico deve ancora approvare il progetto formativo
-	 * associato alla domanda di tirocinio.
+	 * Una domanda si trova in questo stato quando il tutor accademico non ha approvato il progetto formativo 
+	 * associato alla domanda.
 	 */
-	public static final int IN_ATTESA_ACCADEMICO = 3;
+	public static final int PROGETTO_RIFIUTATO = 3;
 	  
 	/**
 	 * Costante che rappresenta lo stato "accettata" di una domanda di tirocinio.
 	 * Una domanda di tirocinio si trova in questo stato quando il tutor accademico ha approvato il progetto formativo
 	 * associato alla domanda di tirocinio. Da questo momento il tirocinio può avere inizio.
 	 */
-	public static final int ACCETTATA = 4;
+	public static final int APPROVATA = 4;
 	
 	  
 	/** Costante che definisce il numero massimo di CFU da poter associare ad una domanda. */

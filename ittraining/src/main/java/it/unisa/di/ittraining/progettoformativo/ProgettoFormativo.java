@@ -2,6 +2,8 @@ package it.unisa.di.ittraining.progettoformativo;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -18,6 +20,7 @@ public class ProgettoFormativo {
 	}
 	
 	 @Id
+	 @GeneratedValue(strategy = GenerationType.AUTO)
 	 private Long id;
 	 
 	 @ManyToOne
@@ -27,7 +30,9 @@ public class ProgettoFormativo {
 	 private DomandaTirocinio domanda;
 	 
 	 @ManyToOne
-	 private Azienda azieda;
+	 private Azienda azienda;
+	 
+	 private String descrizione;
 
 	public Long getId() {
 		return id;
@@ -52,5 +57,22 @@ public class ProgettoFormativo {
 	public void setDomanda(DomandaTirocinio domanda) {
 		this.domanda = domanda;
 	}
+
+	public Azienda getAzienda() {
+		return azienda;
+	}
+
+	public void setAzienda(Azienda azienda) {
+		this.azienda = azienda;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	
 	 
 }

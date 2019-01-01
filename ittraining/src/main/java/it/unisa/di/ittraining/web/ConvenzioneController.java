@@ -14,6 +14,7 @@ import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
 import it.unisa.di.ittraining.utente.NomeNonValidoException;
+import it.unisa.di.ittraining.utente.UtenteService;
 
 @Controller
 public class ConvenzioneController {
@@ -24,8 +25,15 @@ public class ConvenzioneController {
 	@Autowired
 	private AziendaService aziendaService;
 	
+	@Autowired
+	private UtenteService utentiService;
+	
 	@RequestMapping(value = "/lista-enti", method = RequestMethod.GET)
 	public String showListaEnti(Model model) {
+		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
+			return "not-available";
 		
 		if(!model.containsAttribute("listaAziende"))
 			model.addAttribute("listaAziende", aziendaService.elancaAziende());
@@ -37,6 +45,10 @@ public class ConvenzioneController {
 	@RequestMapping(value = "/convenzione", method = RequestMethod.GET)
 	public String mostraFormConvenzione(Model model) {
 		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("ImpiegatoSegreteria")))
+			return "not-available";
+		
 		if (!model.containsAttribute("convenzioneForm")) {
 			model.addAttribute("convenzioneForm", new ConvenzioneForm());
 		}
@@ -44,7 +56,7 @@ public class ConvenzioneController {
 		return "aggiungi-ente";
 	}
 
-	@RequestMapping("/aggiungi-ente")
+	@RequestMapping( value = "/aggiungi-ente", method = RequestMethod.POST)
 	public String aggiungiEnte(@ModelAttribute("convenzioneForm") ConvenzioneForm convenzioneForm, BindingResult result, RedirectAttributes redirectAttributes) 
 			throws IndirizzoNonValidoException, NomeNonValidoException, SedeNonValidaException {
 		

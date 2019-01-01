@@ -12,9 +12,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.unisa.di.ittraining.azienda.AziendaService;
+import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.studente.Studente;
@@ -35,11 +37,19 @@ public class DomandaTirocinioController {
 	@Autowired
 	private DomandaTirocinioFormValidator validator;
 
+	
 	@RequestMapping(value = "/compila-domanda-form", method = RequestMethod.GET)
 	public String showDomandaTirocinioForm(HttpServletRequest request, Model model) {
 		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
+			return "not-available";
+		
 		if(!model.containsAttribute("domandaForm"))
 			model.addAttribute("domandaForm", new DomandaTirocinioForm());
+		
+		if(request.getParameter("azienda") != null)
+			model.addAttribute("nomeAzienda", request.getParameter("azienda"));
 		
 		
 		return "compila-domanda";
@@ -47,6 +57,10 @@ public class DomandaTirocinioController {
 	
 	@RequestMapping(value = "/domande-studente", method = RequestMethod.GET)
 	public String elencaDomandeStudente(HttpSession session, Model model) {
+		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
+			return "not-available";
 		
 		if(!model.containsAttribute("listaDomandeStudente"))
 			model.addAttribute("listaDomandeStudente", domandeService.elencaDomandeStudente((String)session.getAttribute("username")));
@@ -106,5 +120,39 @@ public class DomandaTirocinioController {
 		
 		
 		return "redirect:/home";
+	}
+	
+	
+	@RequestMapping(value = "/rifiuta-domanda", method = RequestMethod.GET)
+	public String rifiutaDomanda(@RequestParam Long id) {
+		
+		DomandaTirocinio domanda = domandeService.getDomandaById(id);
+		domanda.setStatus(DomandaTirocinio.RIFIUTATA_AZIENDA);
+		
+		domandeService.registraDomanda(domanda);
+		
+		return "redirect:/lista-domande-aziendale";
+		
+	}
+	
+	
+	@RequestMapping(value = "/lista-domande-aziendale", method = RequestMethod.GET)
+	public String elencaDomandeAziendali(Model model) {
+		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
+			return "not-available";
+		
+		if(!model.containsAttribute("listaDomandeAzienda")) {
+			TutorAziendale tutor = (TutorAziendale)utentiService.getUtenteAutenticato();
+			
+			model.addAttribute("listaDomandeAzienda", domandeService.elencaDomandeAziendali(tutor.getAzienda()));
+			
+		}
+		
+		if(!model.containsAttribute("progettoForm"))
+			model.addAttribute("progettoForm", new ProgettoFormativoForm());
+		
+		return "lista-domande-aziendale";
 	}
 }
