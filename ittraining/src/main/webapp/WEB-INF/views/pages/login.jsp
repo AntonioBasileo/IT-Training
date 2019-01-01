@@ -22,6 +22,7 @@
 	    <!-- Compiled and minified JavaScript -->
 	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
+	    <script src="resources/js/initialize.js" type="text/javascript"></script>
 		
 	    
 	    <!--Import Google Icon Font-->
@@ -29,7 +30,10 @@
 </head>
 
 <body>
-	<jsp:include page="/WEB-INF/views/nav/redirect.jsp" />
+		<!-- Sidenav -->
+		<jsp:include page="/WEB-INF/views/nav/side-nav.jsp" />
+		
+		<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
 
 	<div class="container">
 	    <div class="row"></div>

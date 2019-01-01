@@ -8,7 +8,7 @@
 		
 		<meta charset="ISO-8859-1">
 		
-		<title>IT Training - Registrazione tutor accademico</title>
+		<title>Lista enti</title>
 		
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -30,19 +30,20 @@
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
+	<jsp:include page="/WEB-INF/views/nav/nav-studente.jsp" />
 		  
 	<div class="container">
 		
 	    <div class="row"></div>
 		<div class="row"></div>
 		<div class="row">
-			<h4 class="teal-text">Registrazione - Tutor Accademico</h4>
+			<h4 class="teal-text">Tutor accademici</h4>
 		</div>
 	    <div class="row"></div>
 		<div class="row"></div>
 		
-		<jsp:include page="/WEB-INF/views/forms/registrazione-tutor-accademico.jsp" />
+		<jsp:include page="/WEB-INF/views/lists/lista-tutor.jsp" />
 	</div>
+
 </body>
 </html>

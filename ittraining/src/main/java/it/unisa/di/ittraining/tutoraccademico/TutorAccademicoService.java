@@ -1,5 +1,7 @@
 package it.unisa.di.ittraining.tutoraccademico;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,16 @@ public class TutorAccademicoService {
 		rep.save(tutor);
 		
 		return tutor;
+	}
+	
+	public List<TutorAccademico> elencaTutorAccademici() {
+		
+		return rep.findAll();
+	}
+	
+	public TutorAccademico findByUsername(String username) {
+		
+		return rep.findByUsername(username);
 	}
 	
 	public String validaEmailAccademico(String email) throws EmailNonValidaException, EmailEsistenteException {

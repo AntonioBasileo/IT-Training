@@ -1,15 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="resources/images/logo.png" />
 		
 		<meta charset="ISO-8859-1">
 		
-		<title>Loggato</title>
+		<title>Errore</title>
 		
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -23,7 +22,7 @@
 	    
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	</head>
+</head>
 <body>
 	<div class="row"></div>
 	<div class="row"></div>
@@ -35,16 +34,15 @@
 			<div class="col s12">
 					<div class="card horizontal">
 						<div class="card-image">
-							<img src="resources/images/logged.svg">
+							<img src="resources/images/error.svg">
 						</div>
 							<div class="card-stacked">
 							<div class="card-content">
-								<p>Sei già loggato come <c:out value="${nomeUtente}"/>. Vuoi uscire oppure tornare alla home?</p>
+								<h5>Siamo spiacenti, la pagina non è disponibile</h5>
 							</div>
-						<div class="card-action">
-							<a href="/home">Home</a>
-							<a href="/logout">Logout</a>
-						</div>
+				        <div class="card-action">
+				          <a href="/home">Torna alla home</a>
+				        </div>
 					</div>
 				</div>
 			</div>

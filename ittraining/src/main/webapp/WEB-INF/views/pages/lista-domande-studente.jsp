@@ -31,7 +31,7 @@
 	    <div class="row"></div>
 		<div class="row"></div>
 		<div class="row">
-			<h4 class="teal-text">Lista delle domande di tirocnio inviate</h4>
+			<h4 class="teal-text">Lista delle domande di tirocinio inviate</h4>
 		</div>
 		
 		<jsp:include page="/WEB-INF/views/lists/lista-domande-studente.jsp" />
