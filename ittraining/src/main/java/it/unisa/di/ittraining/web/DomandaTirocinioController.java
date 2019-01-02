@@ -55,7 +55,7 @@ public class DomandaTirocinioController {
 		return "compila-domanda";
 	}
 	
-	@RequestMapping(value = "/domande-studente", method = RequestMethod.GET)
+	@RequestMapping(value = "/mostra-domande-studente", method = RequestMethod.GET)
 	public String elencaDomandeStudente(HttpSession session, Model model) {
 		
 
@@ -102,7 +102,7 @@ public class DomandaTirocinioController {
 	    domanda.setInizioTirocinio(inizio);
 	    domanda.setFineTirocinio(fine);
 	    domanda.setCfu(domandaForm.getCfu());
-	    domanda.setStatus(0);
+	    domanda.setStatus(DomandaTirocinio.IN_ATTESA);
 	    domanda.setStudente(studente);
 	    domanda.setAzienda(aziendeService.getAziendaByNome(domandaForm.getNomeAzienda()));
 	    
