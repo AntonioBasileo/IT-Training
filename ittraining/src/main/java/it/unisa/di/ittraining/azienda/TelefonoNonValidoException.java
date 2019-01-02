@@ -7,6 +7,7 @@ public class TelefonoNonValidoException extends Exception {
 	 */
 	private static final long serialVersionUID = 8132006585135938587L;
 	/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+	
 	  private static final String messaggioDefault = "Telefono non valido";
 	  
 	  /**

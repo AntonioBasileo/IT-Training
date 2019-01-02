@@ -30,7 +30,7 @@
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/nav/redirect.jsp" />
+	<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
 		  
 	<div class="container">
 		

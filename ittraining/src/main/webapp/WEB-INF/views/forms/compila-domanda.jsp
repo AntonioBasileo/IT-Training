@@ -2,7 +2,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -139,7 +138,7 @@
         <div class="row">
           <div class="input-field col s6">
             <i class="material-icons prefix">business_center</i>
-            <form:input path="nomeAzienda" id="azienda" />
+            <form:input path="nomeAzienda" id="azienda" value="${nomeAzienda}"/>
             <label for="nomeAzienda">Nome azienda</label>
             <form:errors path="nomeAzienda" cssClass="helper-text red-text chip" />
           </div>

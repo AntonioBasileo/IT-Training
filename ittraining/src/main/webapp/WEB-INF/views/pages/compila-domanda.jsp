@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +36,7 @@
 		<div class="row"></div>
 		<div class="row"></div>
 		<div class="row">
-			<h4 class="teal-text">Compila domanda di tirocinio <c:out value="${nomeStudente}"/></h4>
+			<h4 class="teal-text">Compila domanda di tirocinio</h4>
 		</div>
 		<div class="row"></div>
 		<div class="row"></div>

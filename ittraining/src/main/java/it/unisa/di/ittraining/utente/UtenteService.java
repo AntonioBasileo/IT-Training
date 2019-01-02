@@ -51,7 +51,7 @@ public class UtenteService {
 	  public String validaNome(String nome) throws NomeNonValidoException {
 		  if(nome == null) throw new NomeNonValidoException();
 		  
-		  if(!nome.matches(Utente.NOME_COGNOME_PATTERN)) throw new NomeNonValidoException("Il campo nome non rispetta il formato indicato");
+		  if(!nome.matches(Utente.NOME_PATTERN)) throw new NomeNonValidoException("Il campo nome non rispetta il formato indicato");
 		  
 		  return nome;
 	  }
@@ -60,7 +60,7 @@ public class UtenteService {
 	  public String validaCognome(String cognome) throws CognomeNonValidoException {
 	    if (cognome == null) throw new CognomeNonValidoException();
 	    
-	    if(!cognome.matches(Utente.NOME_COGNOME_PATTERN)) throw new CognomeNonValidoException("Il cognome non rispetta il formato indicato");
+	    if(!cognome.matches(Utente.COGNOME_PATTERN)) throw new CognomeNonValidoException("Il cognome non rispetta il formato indicato");
 	    
 	    return cognome;
 	  }

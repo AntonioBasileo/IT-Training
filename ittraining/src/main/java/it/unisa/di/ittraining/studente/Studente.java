@@ -5,8 +5,6 @@ import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.registrotirocinio.Registro;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -25,6 +23,9 @@ public class Studente extends Utente {
 	  
 	/** Espressione regolare che definisce il formato del campo email per gli studenti. */
 	public static final String EMAIL_PATTERN_STUDENTE = "[A-z0-9\\.\\+_-]+@studenti.unisa.it";
+	
+	/** Espressione regolare che indicare la media ponderata dello studente. */
+	public static final String MEDIA_PATTERN = "^[0-9]{2}(\\.[0-9}{1,}$";
 	  
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
 	private List<DomandaTirocinio> domandeTirocinio;
@@ -35,21 +36,16 @@ public class Studente extends Utente {
 	@OneToOne
 	private TutorAccademico tutor;
 	
-	public Studente() {
-		this.domandeTirocinio = new ArrayList<DomandaTirocinio>();
-	}
+	private float mediaPonderata;
 	
-	public Studente(String nome, String cognome, String matricola, LocalDate dataDiNascita) {
-		this.nome = nome;
-		this.cognome = cognome;
-		this.matricola = matricola;
-		this.dataDiNascita = dataDiNascita;
+	public Studente() {
+		
 	}
 	
 	public void setMatricola(String matricola) {
 		this.matricola = matricola;
 	}
-	
+
 	public String getMatricola() {
 		return matricola;
 	}
@@ -79,15 +75,32 @@ public class Studente extends Utente {
 	    }
 	  }
 	
-	public int getCfu() {
+	public int getCfuTirocinio() {
 		int somma = 0;
 		
 		for(DomandaTirocinio t: domandeTirocinio) {
-			
-			 somma += t.getCfu();
+			if(t.getStatus() == DomandaTirocinio.APPROVATA)
+				somma += t.getCfu();
 		}
 		
 		return somma;
 	}
+
+	public TutorAccademico getTutor() {
+		return tutor;
+	}
+
+	public void setTutor(TutorAccademico tutor) {
+		this.tutor = tutor;
+	}
+
+	public float getMediaPonderata() {
+		return mediaPonderata;
+	}
+
+	public void setMediaPonderata(float mediaPonderata) {
+		this.mediaPonderata = mediaPonderata;
+	}
+	
 	
 }

@@ -1,6 +1,5 @@
 package it.unisa.di.ittraining.azienda;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +12,7 @@ import it.unisa.di.ittraining.progettoformativo.ProgettoFormativo;
 
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Azienda {
@@ -23,13 +23,13 @@ public class Azienda {
 	private String indirizzo;
 	private String telefono;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "azienda")
-	private List<TutorAziendale> tutorAziendali;
+	@OneToOne(cascade = CascadeType.ALL)
+	private TutorAziendale tutor;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "azienda")
 	private List<DomandaTirocinio> domande;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "azienda")
 	private List<ProgettoFormativo> progetti;
 
 	  
@@ -56,15 +56,15 @@ public class Azienda {
 	public static final String TELEFONO_PATTERN = "^[0-9]{2,4}[0-9]{4,7}$";
 
 	public Azienda() {
-		this.progetti = new ArrayList<ProgettoFormativo>();
+		
 	}
 	
-	public List<TutorAziendale> getTutorAziendali() {
-		return tutorAziendali;
+	public TutorAziendale getTutorAziendale() {
+		return tutor;
 	}
 
-	public void setTutorAziendali(List<TutorAziendale> tutorAziendali) {
-		this.tutorAziendali = tutorAziendali;
+	public void setTutorAziendale(TutorAziendale tutor) {
+		this.tutor = tutor;
 	}
 
 	public String getNome() {

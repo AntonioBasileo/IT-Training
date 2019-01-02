@@ -7,6 +7,7 @@ public class SedeNonValidaException extends Exception {
 	 */
 	private static final long serialVersionUID = 2709762615869225003L;
 	/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+	
 	  private static final String messaggioDefault = "Sede non valida";
 	  
 	  /**
