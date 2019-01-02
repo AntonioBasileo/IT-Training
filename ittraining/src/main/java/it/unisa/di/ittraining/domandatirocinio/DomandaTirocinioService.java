@@ -28,6 +28,19 @@ public class DomandaTirocinioService {
 	@Autowired
 	private UtenteService utentiService;
 	
+	public void cancellaDomanda(DomandaTirocinio domanda) {
+		domandeRep.delete(domanda);
+	}
+	
+	public boolean existsByStudenteAndAzienda(Studente studente, Azienda azienda) {
+		List<DomandaTirocinio> domande = domandeRep.findAllByAzienda(azienda);
+		for(DomandaTirocinio d: domande) {
+			if(d.getStudente().equals(studente)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public List<DomandaTirocinio> elencaDomandeStudente(String username) {
 		
