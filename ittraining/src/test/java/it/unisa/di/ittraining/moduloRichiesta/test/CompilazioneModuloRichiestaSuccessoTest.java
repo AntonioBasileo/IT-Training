@@ -17,7 +17,12 @@ import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.studente.Studente;
+import it.unisa.di.ittraining.studente.StudentiService;
 
+/*
+ * Classe di test per {@link elaboraDomandaTirocinio in DomandaTirocinioController}
+ * @author Alessia
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class CompilazioneModuloRichiestaSuccessoTest {
@@ -27,9 +32,12 @@ public class CompilazioneModuloRichiestaSuccessoTest {
 	private Studente studente;
 	@Autowired
 	private DomandaTirocinioService domandaTirocinioService;
+	@Autowired
+	private StudentiService studenteService;
 	
 	@Before
 	public void setUp() {
+		
 		domandaTirocinio = new DomandaTirocinio();
 		azienda = new Azienda();
 		azienda.setNome("Informatica Center");
@@ -44,27 +52,28 @@ public class CompilazioneModuloRichiestaSuccessoTest {
 		studente.setUsername("laura");
 		studente.setMediaPonderata(28);
 		studente.setTelefono("3404050333");
+		studenteService.registraStudente(studente);
 		domandaTirocinio.setInizioTirocinio(LocalDate.of(2019, Month.FEBRUARY, 2));
 		domandaTirocinio.setFineTirocinio(LocalDate.of(2019, Month.MARCH, 20));
 		domandaTirocinio.setCfu(6);
 		domandaTirocinio.setAzienda(azienda);
 		domandaTirocinio.setStudente(studente);
+		domandaTirocinio.setData(LocalDate.now());
+		domandaTirocinio.setOreTotali(150);
 		domandaTirocinioService.registraDomanda(domandaTirocinio);
 	}
 	
 	@Test
-	public void testRegistraDomanda() {
-		boolean flag = false;
-		if(domandaTirocinioService.existsByStudenteAndAzienda(studente, azienda)) {
-			flag = true;
-		}
+	public void testRegistraDomanda(){
+		System.out.println(domandaTirocinio.getId());
+		boolean flag = domandaTirocinioService.existsById(domandaTirocinio.getId());
 		assertTrue(flag);
 	}
 	
 	@After
 	public void tearDown() {
-		if(domandaTirocinioService.existsByStudenteAndAzienda(studente, azienda)) {
-			domandaTirocinioService.cancellaDomanda(domandaTirocinio);
-		}
+		System.out.println(domandaTirocinio.getId());
+		domandaTirocinioService.cancellaDomanda(domandaTirocinio);
+		studenteService.cancellaStudente(studente);
 	}
 }

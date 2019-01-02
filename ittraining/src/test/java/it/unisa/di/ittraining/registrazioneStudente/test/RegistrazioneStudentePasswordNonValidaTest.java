@@ -18,7 +18,7 @@ import it.unisa.di.ittraining.utente.PasswordNonValidaException;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 /*
- * Classe di test per {@link RegistrazioneStudenteFormValidator}
+ * Classe di test per {@link elaboraRichiestaIscrizioneStudente in RegistrazioneController}
  * @author Alessia
  */
 @RunWith(SpringJUnit4ClassRunner.class)

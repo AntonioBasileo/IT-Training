@@ -16,6 +16,10 @@ import it.unisa.di.ittraining.domandatirocinio.DataNonValidaException;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 
+/*
+ * Classe di test per {@link elaboraDomandaTirocinio in DomandaTirocinioController}
+ * @author Alessia
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class CompilazioneModuloRichiestaDataInizioNonValidaTest {

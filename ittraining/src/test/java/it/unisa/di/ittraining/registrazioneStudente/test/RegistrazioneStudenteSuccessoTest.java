@@ -17,7 +17,7 @@ import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
 
 /*
- * Classe di test per {@link RegistrazioneStudenteFormValidator}
+ * Classe di test per {@link elaboraRichiestaIscrizioneStudente in RegistrazioneController}
  * @author Alessia
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,14 +51,11 @@ public class RegistrazioneStudenteSuccessoTest {
 	@Test
 	public void testRegistraStudente() {
 		boolean flag = studenteService.existsByMatricola(studente.getMatricola());
-		System.out.println(flag);
 		assertTrue(flag);
 	}
 	
 	@After
 	public void tearDown()throws NullPointerException{
-		if(studenteService.existsByMatricola(studente.getMatricola())) {
-			studenteService.cancellaStudente(studente);
-		}
+		studenteService.cancellaStudente(studente);
 	}
 }

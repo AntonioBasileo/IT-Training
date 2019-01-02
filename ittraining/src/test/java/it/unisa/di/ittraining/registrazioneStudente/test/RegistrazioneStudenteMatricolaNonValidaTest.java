@@ -18,7 +18,7 @@ import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
 
 /*
- * Classe di test per {@link RegistrazioneStudenteFormValidator}
+ * Classe di test per {@link elaboraRichiestaIscrizioneStudente in RegistrazioneController}
  * @author Alessia
  */
 @RunWith(SpringJUnit4ClassRunner.class)
