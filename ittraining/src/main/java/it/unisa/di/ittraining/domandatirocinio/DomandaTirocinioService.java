@@ -32,14 +32,8 @@ public class DomandaTirocinioService {
 		domandeRep.delete(domanda);
 	}
 	
-	public boolean existsByStudenteAndAzienda(Studente studente, Azienda azienda) {
-		List<DomandaTirocinio> domande = domandeRep.findAllByAzienda(azienda);
-		for(DomandaTirocinio d: domande) {
-			if(d.getStudente().equals(studente)) {
-				return true;
-			}
-		}
-		return false;
+	public boolean existsById(Long id) {
+		return domandeRep.existsById(id);
 	}
 	
 	public List<DomandaTirocinio> elencaDomandeStudente(String username) {

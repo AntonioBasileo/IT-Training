@@ -17,7 +17,7 @@ import it.unisa.di.ittraining.utente.UtenteService;
 import junit.framework.TestCase;
 
 /*
- * Classe di test per {@link RegistrazioneStudenteFormValidator}
+ * Classe di test per {@link elaboraRichiestaIscrizioneStudente in RegistrazioneController}
  * @author Alessia
  */
 @RunWith(SpringJUnit4ClassRunner.class)
