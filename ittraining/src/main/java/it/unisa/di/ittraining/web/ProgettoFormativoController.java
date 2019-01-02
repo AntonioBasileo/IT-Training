@@ -48,7 +48,7 @@ public class ProgettoFormativoController {
 		domandeService.registraDomanda(domanda);
 		
 		
-		return "redirect:/mostra-domande-accademico";
+		return "redirect:/mostra-domande-aziendale";
 	}
 	
 	@RequestMapping(value = "/approva-progetto", method = RequestMethod.GET)
