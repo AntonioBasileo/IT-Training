@@ -105,8 +105,8 @@ public class UtenteController {
 				return "not-available";
 			
 		 
-		 if(!model.containsAttribute("tutor"))
-			 model.addAttribute("tutor", ((Studente)utenteService.getUtenteAutenticato()).getTutor());
+		 if(!model.containsAttribute("studente"))
+			 model.addAttribute("studente", ((Studente)utenteService.getUtenteAutenticato()));
 		 
 		 if(!model.containsAttribute("listaTutor"))
 			 model.addAttribute("listaTutor", tutorService.elencaTutorAccademici());

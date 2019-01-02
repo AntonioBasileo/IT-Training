@@ -103,7 +103,7 @@
 		          <div class="input-field col s12">
 		            <i class="material-icons prefix">business_center</i>
 		            <form:input path="nomeAzienda" id="azienda" />
-		            <label for="nomeAienda">Nome azienda</label>
+		            <label for="nomeAzienda">Nome azienda</label>
 		            <form:errors path="nomeAzienda" cssClass="helper-text red-text chip" />
 		          </div>
 		         </div> 

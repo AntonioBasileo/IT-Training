@@ -39,8 +39,6 @@
 		<div class="row">
 			<h4 class="teal-text">Tutor accademici</h4>
 		</div>
-	    <div class="row"></div>
-		<div class="row"></div>
 		
 		<jsp:include page="/WEB-INF/views/lists/lista-tutor.jsp" />
 	</div>

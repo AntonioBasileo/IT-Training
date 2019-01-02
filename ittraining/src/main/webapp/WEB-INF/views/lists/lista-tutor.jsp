@@ -10,7 +10,31 @@
 
 	  
 	<c:choose>
-		<c:when test="${empty utente.tutor}">
+		<c:when test="${studente.isNotThereDomandaAccettata()}">
+			<div class="row">
+				<div class="col s12">
+						<div class="card horizontal">
+							<div class="card-image">
+								<img src="resources/images/choose.svg">
+							</div>
+								<div class="card-stacked">
+								<div class="card-content">
+									<h5 class="teal-text">Spiacenti</h5>
+									<p>Non è presente alcuna domanda di tirocinio approva da un'azienda. Compilane una se ancora non l'hai fatto</p>
+								</div>
+					        <div class="card-action">
+					          <a href="/home">Torna alla home</a>
+					        </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:when>
+		
+		
+		<c:when test="${empty studente.tutor}">
+		    <div class="row"></div>
+			<div class="row"></div>
 		  <ul class="collection">
 		  	<c:forEach items="${listaTutor}" var="lista" varStatus="loop">
 			    <li class="collection-item avatar">
@@ -35,7 +59,10 @@
 		  </ul>
 		</c:when>
 		
-		<c:when test="${not empty utente.tutor}">
+		
+		<c:when test="${not empty studente.tutor}">
+		    <div class="row"></div>
+			<div class="row"></div>
 			<div class="row">
 				<div class="col s12">
 						<div class="card horizontal">
@@ -44,7 +71,7 @@
 							</div>
 								<div class="card-stacked">
 								<div class="card-content">
-									<h5>Hai scelto il tuo tutor accademico</h5>
+									<h5 class="teal-text">Hai scelto il tuo tutor accademico</h5>
 								</div>
 					        <div class="card-action">
 					          <a href="/home">Torna alla home</a>

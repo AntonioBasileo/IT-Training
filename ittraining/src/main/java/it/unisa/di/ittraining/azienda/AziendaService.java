@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
 import it.unisa.di.ittraining.utente.EmailNonValidaException;
-import it.unisa.di.ittraining.utente.NomeNonValidoException;
 
 @Service
 public class AziendaService {
@@ -40,27 +39,44 @@ public class AziendaService {
 		return azienda;
 	}
 	
-	public String validaNome(String nome) throws NomeNonValidoException {
-		  if (nome == null) {
-		    throw new NomeNonValidoException();
-		  } else {
-		    nome = nome.trim();
-		      
-		    if (nome.length() < Azienda.MIN_LUNGHEZZA_NOME
-		        || nome.length() > Azienda.MAX_LUNGHEZZA_NOME) {
-		      throw new NomeNonValidoException();
-		    } else {
-		      return nome;
-		    }
-		  }
+	public String validaNome(String nome) throws AziendaNonValidaException, AziendaEsistenteException {
+		if(nome == null) throw new AziendaNonValidaException("Il campo azienda non può essere nullo");
+		
+		if(nome.length() > Azienda.MAX_LUNGHEZZA_NOME || nome.length() < Azienda.MIN_LUNGHEZZA_NOME) throw new AziendaNonValidaException();
+		
+		if(repAzienda.existsByNome(nome)) throw new AziendaEsistenteException("L'azienda indicata è già esistente");
+		
+		return nome;
 	}
 	
-	public String validaEmailAziendale(String email) throws EmailNonValidaException, EmailEsistenteException {
+	public String validaNomeForTutor(String nome) throws AziendaNonValidaException, AziendaNonEsistenteException {
+		if(nome == null) throw new AziendaNonValidaException("Il campo azienda non può essere nullo");
+		
+		if(nome.length() > Azienda.MAX_LUNGHEZZA_NOME || nome.length() < Azienda.MIN_LUNGHEZZA_NOME) throw new AziendaNonValidaException();
+		
+		if(!repAzienda.existsByNome(nome)) throw new AziendaNonEsistenteException("L'azienda indicata non è esistente");
+		
+		return nome;
+	}
+	
+	public String validaEmailAziendale(String nomeAzienda, String email) throws EmailNonValidaException, EmailEsistenteException {
 		if(email == null) throw new EmailNonValidaException();
 		
-		if(!email.matches(TutorAziendale.EMAIL_PATTERN_AZIENDALE)) throw new EmailNonValidaException("Il formato dell'email del tutor non rispetta il formato indicato");
+		if(!email.matches(Azienda.EMAIL_PATTERN_AZIENDALE)) throw new EmailNonValidaException("Il formato dell'email dell'azienda non rispetta il formato indicato");
 		
-		if(repTutor.existsByEmail(email)) throw new EmailEsistenteException("Email utilizzata già da un altro tutor aziendale");
+		if(repTutor.existsByEmail(email)) throw new EmailEsistenteException("Email utilizzata già da un altro ente");
+		
+		return email;
+	}
+	
+	public String validaEmailTutor(String nomeAzienda, String email) throws EmailNonValidaException, EmailEsistenteException, EmailNonAssociataException {
+		if(email == null) throw new EmailNonValidaException();
+		
+		if(!email.matches(Azienda.EMAIL_PATTERN_AZIENDALE)) throw new EmailNonValidaException("Il formato dell'email dell'azienda non rispetta il formato indicato");
+		
+		if(repTutor.existsByEmail(email)) throw new EmailEsistenteException("Email utilizzata già da un altro ente");
+		
+		if(!repAzienda.existsByNomeAndEmail(nomeAzienda, email)) throw new EmailNonAssociataException("Email utilizzata già da un altro ente aziendale");
 		
 		return email;
 	}
