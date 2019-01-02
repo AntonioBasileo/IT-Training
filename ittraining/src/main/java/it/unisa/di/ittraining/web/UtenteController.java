@@ -99,6 +99,11 @@ public class UtenteController {
 	 
 	 @RequestMapping(value = "/lista-tutor", method = RequestMethod.GET)
 	 public String mostraElencoTutorAccademici(Model model) {
+			
+
+			if(utenteService.getUtenteAutenticato() == null || !(utenteService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
+				return "not-available";
+			
 		 
 		 if(!model.containsAttribute("tutor"))
 			 model.addAttribute("tutor", ((Studente)utenteService.getUtenteAutenticato()).getTutor());
@@ -111,6 +116,10 @@ public class UtenteController {
 	 
 	 @RequestMapping(value = "/scegli-tutor", method = RequestMethod.GET)
 	 public String scegliTutorAccademico(@RequestParam String op) {
+			
+
+			if(utenteService.getUtenteAutenticato() == null || !(utenteService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
+				return "not-available";
 		 
 		 TutorAccademico tutor = tutorService.findByUsername(op);
 		 Studente studente = (Studente)utenteService.getUtenteAutenticato();

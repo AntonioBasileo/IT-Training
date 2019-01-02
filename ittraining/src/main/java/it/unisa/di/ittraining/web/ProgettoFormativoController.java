@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
@@ -26,7 +27,7 @@ public class ProgettoFormativoController {
 	private DomandaTirocinioService domandeService;
 	
 	@RequestMapping(value = "/inserisci-progetto", method = RequestMethod.POST)
-	public String inserisciProgetto(@ModelAttribute("progettoForm") ProgettoFormativoForm progettoForm) {
+	public String inserisciProgetto(@ModelAttribute("progettoFormAccetta") ProgettoFormativoForm progettoForm) {
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
 			return "not-available";
@@ -47,6 +48,38 @@ public class ProgettoFormativoController {
 		domandeService.registraDomanda(domanda);
 		
 		
-		return "redirect:/lista-domande-aziendale";
+		return "redirect:/mostra-domande-accademico";
+	}
+	
+	@RequestMapping(value = "/approva-progetto", method = RequestMethod.GET)
+	public String approvaProgetto(@RequestParam Long id) {
+		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAccademico")))
+			return "not-available";
+		
+		
+		DomandaTirocinio domanda = domandeService.getDomandaById(id);
+		
+		domanda.setStatus(DomandaTirocinio.APPROVATA);
+		domandeService.registraDomanda(domanda);
+		
+		return "redirect:/mostra-domande-accademico";
+	}
+	
+	@RequestMapping(value = "/rifiuta-progetto", method = RequestMethod.GET)
+	public String rifiutaProgetto(@RequestParam Long id) {
+		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAccademico")))
+			return "not-available";
+		
+		
+		DomandaTirocinio domanda = domandeService.getDomandaById(id);
+		
+		domanda.setStatus(DomandaTirocinio.PROGETTO_RIFIUTATO);
+		domandeService.registraDomanda(domanda);
+		
+		return "redirect:/mostra-domande-accademico";
 	}
 }

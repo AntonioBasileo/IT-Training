@@ -18,6 +18,11 @@
 		<!-- Compiled and minified CSS -->
 	    <link rel="stylesheet" href="resources/css/materialize.min.css">
 	    <link rel="stylesheet" href="resources/css/materialize.css">
+	
+	    <!-- Compiled and minified JavaScript -->
+	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
+	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
+	    <script src="resources/js/initialize.js"></script>
 	    
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

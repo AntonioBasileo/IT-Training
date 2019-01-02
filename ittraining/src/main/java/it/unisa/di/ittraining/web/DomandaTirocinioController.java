@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.unisa.di.ittraining.azienda.AziendaService;
@@ -20,6 +19,7 @@ import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.studente.Studente;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 @Controller
@@ -123,20 +123,7 @@ public class DomandaTirocinioController {
 	}
 	
 	
-	@RequestMapping(value = "/rifiuta-domanda", method = RequestMethod.GET)
-	public String rifiutaDomanda(@RequestParam Long id) {
-		
-		DomandaTirocinio domanda = domandeService.getDomandaById(id);
-		domanda.setStatus(DomandaTirocinio.RIFIUTATA_AZIENDA);
-		
-		domandeService.registraDomanda(domanda);
-		
-		return "redirect:/lista-domande-aziendale";
-		
-	}
-	
-	
-	@RequestMapping(value = "/lista-domande-aziendale", method = RequestMethod.GET)
+	@RequestMapping(value = "/mostra-domande-aziendale", method = RequestMethod.GET)
 	public String elencaDomandeAziendali(Model model) {
 		
 
@@ -150,9 +137,46 @@ public class DomandaTirocinioController {
 			
 		}
 		
-		if(!model.containsAttribute("progettoForm"))
-			model.addAttribute("progettoForm", new ProgettoFormativoForm());
+		if(!model.containsAttribute("progettoFormAccetta"))
+			model.addAttribute("progettoFormAccetta", new ProgettoFormativoForm());
+		
+		if(!model.containsAttribute("progettoFormRifiuta"))
+			model.addAttribute("progettoFormRifiuta", new ProgettoFormativoForm());
 		
 		return "lista-domande-aziendale";
+	}
+	
+	
+	@RequestMapping(value = "/rifiuta-domanda", method = RequestMethod.POST)
+	public String rifiutaDomanda(@ModelAttribute("progettoFormRifiuta") ProgettoFormativoForm form, Model model, BindingResult result) {
+		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
+			return "not-available";
+		
+		DomandaTirocinio domanda = domandeService.getDomandaById(form.getIdDomanda());
+		domanda.setStatus(DomandaTirocinio.RIFIUTATA_AZIENDA);
+		
+		domandeService.registraDomanda(domanda);
+		
+		return "redirect:/mostra-domande-aziendale";
+		
+	}
+	
+	@RequestMapping(value = "/mostra-domande-accademico", method = RequestMethod.GET)
+	public String mostraDomandeAccademico(Model model) {
+		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAccademico")))
+			return "not-available";
+		
+		if(!model.containsAttribute("listaDomandeAccademico")) {
+			TutorAccademico tutor = (TutorAccademico)utentiService.getUtenteAutenticato();
+			
+			model.addAttribute("listaDomandeAccademico", tutor.getAllDomande());
+			
+		}
+		
+		return "lista-domande-accademico";	
 	}
 }
