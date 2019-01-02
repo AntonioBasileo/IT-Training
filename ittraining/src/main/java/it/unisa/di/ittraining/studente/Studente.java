@@ -102,5 +102,15 @@ public class Studente extends Utente {
 		this.mediaPonderata = mediaPonderata;
 	}
 	
+	public boolean isNotThereDomandaAccettata() {
+		for(DomandaTirocinio d: domandeTirocinio) {
+			
+			if(d.getStatus()  == DomandaTirocinio.ACCETTATA_AZIENDA)
+				return false;
+		}
+		
+		return true;
+	}
+	
 	
 }
