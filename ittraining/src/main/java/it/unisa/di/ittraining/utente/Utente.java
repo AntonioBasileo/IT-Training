@@ -22,10 +22,17 @@ public abstract class Utente {
 	protected String sesso;
 	
 	/** Espressione regolare che definisce il formato del campo nome. */
-	public static final String NOME_PATTERN = "^[a-zA-Z]{3,}(\\s[a-zA-Z]*?)*$";
+	public static final String NOME_PATTERN = "^[a-zA-Z]{3,}(\\s[a-zA-Z]{3,}?)*$";
 
 	/** Espressione regolare che definisce il formato del campo cognome. */
-	public static final String COGNOME_PATTERN = "^([a-zA-Z]\\')?[a-zA-Z]{3,}(\\s[a-zA-Z]*?)*$";
+	public static final String COGNOME_PATTERN = "^([a-zA-Z]\\')?[a-zA-Z]{3,}(\\s[a-zA-Z]{3,}?)*$";
+
+	  
+	/** Costante che definisce la minima lunghezza del campo nome. */
+	public static final int MIN_LUNGHEZZA_NOME = 3;
+	  
+	/** Costante che definisce la massima lunghezza del campo nome. */
+	public static final int MAX_LUNGHEZZA_NOME = 100;
 
 	/** Espressione regolare che definisce il formato del campo username. */
 	public static final String USERNAME_PATTERN = "^[a-zA-Z0-9]{6,24}$";

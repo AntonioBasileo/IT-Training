@@ -48,8 +48,12 @@ public class UtenteService {
 	
 	  
 	  
-	  public String validaNome(String nome) throws NomeNonValidoException {
+	  public String validaNome(String nome) throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
 		  if(nome == null) throw new NomeNonValidoException();
+		  
+		  if(nome.length() > Utente.MAX_LUNGHEZZA_NOME) throw new NomeCognomeTroppoLungoException();
+		  
+		  if(nome.length() < Utente.MIN_LUNGHEZZA_NOME) throw new NomeCognomeTroppoCortoException();
 		  
 		  if(!nome.matches(Utente.NOME_PATTERN)) throw new NomeNonValidoException("Il campo nome non rispetta il formato indicato");
 		  
@@ -57,8 +61,12 @@ public class UtenteService {
 	  }
 	  
 	  
-	  public String validaCognome(String cognome) throws CognomeNonValidoException {
+	  public String validaCognome(String cognome) throws CognomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
 	    if (cognome == null) throw new CognomeNonValidoException();
+		  
+		  if(cognome.length() > Utente.MAX_LUNGHEZZA_NOME) throw new NomeCognomeTroppoLungoException();
+		  
+		  if(cognome.length() < Utente.MIN_LUNGHEZZA_NOME) throw new NomeCognomeTroppoCortoException();
 	    
 	    if(!cognome.matches(Utente.COGNOME_PATTERN)) throw new CognomeNonValidoException("Il cognome non rispetta il formato indicato");
 	    
