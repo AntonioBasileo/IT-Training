@@ -6,6 +6,9 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+	
+
+	  
 	<c:choose>
 		<c:when test="${empty utente.tutor}">
 		  <ul class="collection">
@@ -15,7 +18,18 @@
 			      <p><span class="teal-text">Nome:</span> <c:out value="${lista.nome}"/></p>
 			      <p><span class="teal-text">Cognome:</span> <c:out value="${lista.cognome}"/></p>
 			      <p>Tutor accademico del Dipartimento di Informatica</p>
-			      <a href="/scegli-tutor?op=${lista.username}" class="secondary-content"><i class="material-icons left">supervisor_account</i>Scegli</a>
+			      <a href="#modal${lista.username}" class="secondary-content modal-trigger"><i class="material-icons left">supervisor_account</i>Scegli</a>
+			      
+			      	  <!-- Modal Structure -->
+					  <div id="modal${lista.username}" class="modal">
+					    <div class="modal-content">
+					      <h5 class="teal-text">Scegli tutor</h5>
+					      <p>Sei sicuro di voler scegliere 	questo tutor?</p>
+					    </div>
+					    <div class="modal-footer">
+					      <a href="/scegli-tutor?op=${lista.username}" class="waves-effect waves-light btn-small"><i class="material-icons left">check</i>Sì, sono sicuro</a>
+					    </div>
+					  </div>
 			    </li>
 			</c:forEach>
 		  </ul>

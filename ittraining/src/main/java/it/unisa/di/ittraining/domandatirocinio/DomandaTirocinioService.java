@@ -45,7 +45,6 @@ public class DomandaTirocinioService {
 	}
 	
 	public DomandaTirocinio getDomandaById(long id) {
-		System.out.println("STRONZO SONO QUI! " + id);
 		
 		return domandeRep.findById(id);
 	}

@@ -8,7 +8,7 @@
 		
 		<meta charset="ISO-8859-1">
 		
-		<title>Lista domande</title>
+		<title>Domande</title>
 		
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -30,18 +30,19 @@
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/nav/nav-aziendale.jsp" />
-
+	<jsp:include page="/WEB-INF/views/nav/nav-accademico.jsp" />
+		  
 	<div class="container">
-	
+		
 	    <div class="row"></div>
 		<div class="row"></div>
 		<div class="row">
-			<h4 class="teal-text">Lista delle domande di tirocinio ricevute</h4>
+			<h4 class="teal-text">Lista domande di tirocinio ricevute</h4>
 		</div>
-	
-		<jsp:include page="/WEB-INF/views/lists/lista-domande-aziendale.jsp" />
-	
+	    <div class="row"></div>
+		<div class="row"></div>
+		
+		<jsp:include page="/WEB-INF/views/lists/lista-domande-accademico.jsp" />
 	</div>
 
 </body>

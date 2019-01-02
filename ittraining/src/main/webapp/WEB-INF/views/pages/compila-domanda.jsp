@@ -36,7 +36,7 @@
 		<div class="row"></div>
 		<div class="row"></div>
 		<div class="row">
-			<h4 class="teal-text">Compila domanda di tirocinio <c:out value="${nomeStudente}"/></h4>
+			<h4 class="teal-text">Compila domanda di tirocinio</h4>
 		</div>
 		<div class="row"></div>
 		<div class="row"></div>

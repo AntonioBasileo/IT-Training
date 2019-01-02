@@ -1,5 +1,6 @@
 package it.unisa.di.ittraining.tutoraccademico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -51,6 +52,15 @@ public class TutorAccademico extends Utente {
 
 	public void setStudenti(List<Studente> studenti) {
 		this.studenti = studenti;
+	}
+	
+	public List<DomandaTirocinio> getAllDomande() {
+		List<DomandaTirocinio> newList = new ArrayList<>();
+		
+		for(Studente s: studenti) 
+			newList.addAll(s.getDomandeTirocinio());
+		
+		return newList;
 	}
 	
 	

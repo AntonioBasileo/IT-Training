@@ -41,6 +41,7 @@ public class Registro {
 	private LocalDate data;
 	private LocalDateTime inizio;
 	private LocalDateTime fine;
+	private int numero_ore;
 	private String descrizione;
 	
 	public Long getId() {
@@ -113,6 +114,22 @@ public class Registro {
 
 	public void setTutorAccademico(TutorAccademico tutorAccademico) {
 		this.tutorAccademico = tutorAccademico;
+	}
+
+	public DomandaTirocinio getDomanda() {
+		return domanda;
+	}
+
+	public void setDomanda(DomandaTirocinio domanda) {
+		this.domanda = domanda;
+	}
+
+	public int getNumero_ore() {
+		return numero_ore;
+	}
+
+	public void setNumero_ore(int numero_ore) {
+		this.numero_ore = numero_ore;
 	}
 	
 }
