@@ -86,7 +86,7 @@ public class DomandaTirocinioService {
 	public String validaNomeAzienda(String azienda) throws AziendaNonValidaException, AziendaNonEsistenteException {
 		if(azienda == null) throw new AziendaNonValidaException("Il campo azienda non può essere nullo");
 		
-		if(azienda.length() > 255 || azienda.length() < 2) throw new AziendaNonValidaException();
+		if(azienda.length() > Azienda.MAX_LUNGHEZZA_NOME || azienda.length() < Azienda.MIN_LUNGHEZZA_NOME) throw new AziendaNonValidaException();
 		
 		if(!rep.existsByNome(azienda)) throw new AziendaNonEsistenteException("L'azienda indicata non esiste");
 		

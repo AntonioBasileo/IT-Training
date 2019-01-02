@@ -77,6 +77,7 @@ public class ConvenzioneController {
 		azienda.setIndirizzo(convenzioneForm.getIndirizzo());
 		azienda.setSede(convenzioneForm.getSede());
 		azienda.setTelefono(convenzioneForm.getTelefono());
+		azienda.setEmail(convenzioneForm.getEmail());
 		
 		aziendaService.registraAzienda(azienda);
 		

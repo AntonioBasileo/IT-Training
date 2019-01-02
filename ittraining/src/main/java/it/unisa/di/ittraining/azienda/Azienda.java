@@ -22,6 +22,7 @@ public class Azienda {
 	private String sede;
 	private String indirizzo;
 	private String telefono;
+	private String email;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private TutorAziendale tutor;
@@ -54,6 +55,9 @@ public class Azienda {
 	
 	/** Costante che definisce il formato del campo telefono*/
 	public static final String TELEFONO_PATTERN = "^[0-9]{2,4}[0-9]{4,7}$";
+	
+	/** Espressione regolare che definisce il formato del campo email aziendale. */
+	public static final String EMAIL_PATTERN_AZIENDALE = "[A-z0-9\\.\\+_-]+@[A-z0-9\\._-]+\\.[A-z]{2,6}";
 
 	public Azienda() {
 		
@@ -105,6 +109,30 @@ public class Azienda {
 
 	public void setDomande(List<DomandaTirocinio> domande) {
 		this.domande = domande;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public TutorAziendale getTutor() {
+		return tutor;
+	}
+
+	public void setTutor(TutorAziendale tutor) {
+		this.tutor = tutor;
+	}
+
+	public List<ProgettoFormativo> getProgetti() {
+		return progetti;
+	}
+
+	public void setProgetti(List<ProgettoFormativo> progetti) {
+		this.progetti = progetti;
 	}
 
 }

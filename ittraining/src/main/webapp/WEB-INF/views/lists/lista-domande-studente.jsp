@@ -24,6 +24,30 @@
 			      	<c:when test="${lista.status == 1 }">
 			      		<div class="row"></div>
 			      		<p class="amber waves-effect waves-light btn-small"><i class="material-icons right">check</i>Accettata dall'azienda</p>
+			      		
+			      		<div class="row"></div>
+			      		
+			      		<div class="row">
+			      			<a href="/lista-tutor" class="green accent-3 waves-effect waves-light btn-small"><i class="material-icons right">check</i>Adesso puoi scegliere un tutor accademico</a>
+			      		</div>
+			      		
+			      		<div class="row"></div>
+			      		
+			      		  <div class="row">
+				      		  <!-- Modal Trigger -->
+							  <a class="waves-effect waves-light btn-small modal-trigger" href="#modal${lista.id}">Visualizza progetto Formativo</a>
+						  </div>
+						
+						  <!-- Modal Structure -->
+						  <div id="modal${lista.id}" class="modal">
+						    <div class="modal-content">
+						      <h5 class="teal-text">Progetto formativo</h5>
+						      <p><c:out value="${lista.progettoFormativo.getDescrizione()}"/></p>
+						    </div>
+						    <div class="modal-footer">
+						      <a class="modal-close waves-effect waves-light btn-flat">Indietro</a>
+						    </div>
+						  </div>
 			      	</c:when>
 			      	
 			      	
@@ -59,7 +83,7 @@
 			      	
 			      	<c:when test="${lista.status == 4 }">
 			      		<div class="row"></div>
-			      		<p class="green accent-3 waves-effect waves-light btn-small"><i class="material-icons right">check</i>Approvata</p>
+			      		<p class="green accent-3 waves-effect waves-light btn-small"><i class="material-icons right">done_all</i>Approvata</p>
 			      		
 			      		<div class="row"></div>
 			      		

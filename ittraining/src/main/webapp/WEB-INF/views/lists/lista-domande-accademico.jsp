@@ -79,7 +79,7 @@
 			      	
 			      	<c:when test="${lista.status == 4 }">
 			      		<div class="row"></div>
-			      		<p class="green accent-3 waves-effect waves-light btn-small"><i class="material-icons right">check</i>Approvata</p>
+			      		<p class="green accent-3 waves-effect waves-light btn-small"><i class="material-icons right">done_all</i>Approvata</p>
 			      		
 			      		<div class="row"></div>
 			      		

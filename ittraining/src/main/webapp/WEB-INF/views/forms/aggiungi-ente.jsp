@@ -21,11 +21,11 @@
 	          <form:errors path="nome" cssClass="helper-text red-text chip" />
 	        </div>
 	        <div class="input-field col s6">
-	          <i class="material-icons prefix">home</i>
-	          <form:input path="sede" id="sede" type="tel" class="validate"/>
-	          <label for="sede">Sede</label>
-	          <form:errors path="sede" cssClass="helper-text red-text chip" />
-	        </div>
+	          <i class="material-icons prefix">mail</i>
+	          <form:input path="email" id="email" type="text" class="validate"/>
+	          <label for="email">Email aziendale</label>
+	          <form:errors path="email" cssClass="helper-text red-text chip" />
+	       </div>
 	      </div>
 	      <div class="row"></div>
 		  <div class="row"></div>
@@ -47,9 +47,22 @@
 	      </div>
 	      <div class="row"></div>
 		  <div class="row"></div>
-		  <button class="btn waves-effect waves-light" type="submit" name="action">Aggiungi
-			<i class="material-icons right">archive</i>
-		  </button>
+	      <div class="row"></div>
+		  <div class="row"></div>
+	      <div class="row">
+	        <div class="input-field col s6">
+	          <i class="material-icons prefix">home</i>
+	          <form:input path="sede" id="sede" type="tel" class="validate"/>
+	          <label for="sede">Sede</label>
+	          <form:errors path="sede" cssClass="helper-text red-text chip" />
+	        </div>
+	      </div>
+	      <div class="row"></div>
+		  <div class="row right">
+			  <button class="btn waves-effect waves-light" type="submit" name="action">Aggiungi
+				<i class="material-icons right">archive</i>
+			  </button>
+		  </div>
 	    </form:form>
 	  </div>
 

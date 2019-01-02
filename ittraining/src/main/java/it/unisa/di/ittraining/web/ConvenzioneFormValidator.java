@@ -3,11 +3,14 @@ package it.unisa.di.ittraining.web;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
+import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
 import it.unisa.di.ittraining.azienda.TelefonoNonValidoException;
-import it.unisa.di.ittraining.utente.NomeNonValidoException;
+import it.unisa.di.ittraining.utente.EmailEsistenteException;
+import it.unisa.di.ittraining.utente.EmailNonValidaException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,9 +36,12 @@ public class ConvenzioneFormValidator implements Validator {
 		  
 		  try {
 			  aziendaService.validaNome(form.getNome());
-		} catch (NomeNonValidoException e) {
+		} catch (AziendaNonValidaException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("nome", "formConvenzione.nome.nonValido");
+		} catch (AziendaEsistenteException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("nome", "formConvenzione.nome.esistente");
 		}
 		  
 		 try {
@@ -57,7 +63,17 @@ public class ConvenzioneFormValidator implements Validator {
 		} catch (TelefonoNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("telefono", "formConvenzione.telefono.nonValido");
-		} 			  
+		}
+		 
+		 try {
+			aziendaService.validaEmailAziendale(form.getNome(), form.getEmail());
+		} catch (EmailNonValidaException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("email", "formConvenzione.email.nonValida");
+		} catch (EmailEsistenteException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("email", "formConvenzione.email.esistente");
+		}
 		 
 	  }
 }
