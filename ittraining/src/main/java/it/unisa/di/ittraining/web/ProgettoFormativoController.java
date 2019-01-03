@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.progettoformativo.ProgettoFormativo;
@@ -33,20 +32,11 @@ public class ProgettoFormativoController {
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
 			return "not-available";
 		
-		DomandaTirocinio domanda = domandeService.getDomandaById(progettoForm.getIdDomanda());
+		
 		ProgettoFormativo progetto = new ProgettoFormativo();
-		
-		
-		progetto.setTutorAziendale((TutorAziendale)utentiService.getUtenteAutenticato());
 		progetto.setDescrizione(progettoForm.getDescrizione());
-		progetto.setAzienda(((TutorAziendale)utentiService.getUtenteAutenticato()).getAzienda());
 		
-		progettiService.inserisciProgetto(progetto);
-		
-		domanda.setStatus(DomandaTirocinio.ACCETTATA_AZIENDA);
-		domanda.setProgettoFormativo(progetto);
-		
-		domandeService.registraDomanda(domanda);
+		progettiService.inserisciProgetto(progetto, progettoForm.getIdDomanda());
 		
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.domanda.accettata");
 		
@@ -60,11 +50,8 @@ public class ProgettoFormativoController {
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAccademico")))
 			return "not-available";
 		
-		
-		DomandaTirocinio domanda = domandeService.getDomandaById(id);
-		
-		domanda.setStatus(DomandaTirocinio.APPROVATA);
-		domandeService.registraDomanda(domanda);
+
+		domandeService.aggiornaStatoDomanda(id, DomandaTirocinio.APPROVATA);
 		
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.progettoFormativo.approvato");
 		
@@ -79,10 +66,7 @@ public class ProgettoFormativoController {
 			return "not-available";
 		
 		
-		DomandaTirocinio domanda = domandeService.getDomandaById(id);
-		
-		domanda.setStatus(DomandaTirocinio.PROGETTO_RIFIUTATO);
-		domandeService.registraDomanda(domanda);
+		domandeService.aggiornaStatoDomanda(id, DomandaTirocinio.PROGETTO_RIFIUTATO);
 		
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.progettoFormativo.rifiutato");
 		

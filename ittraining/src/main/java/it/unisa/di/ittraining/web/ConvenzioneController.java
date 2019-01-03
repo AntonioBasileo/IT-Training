@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.unisa.di.ittraining.azienda.Azienda;
+import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
+import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
+import it.unisa.di.ittraining.azienda.TelefonoNonValidoException;
+import it.unisa.di.ittraining.utente.EmailEsistenteException;
+import it.unisa.di.ittraining.utente.EmailNonValidaException;
 import it.unisa.di.ittraining.utente.NomeNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteService;
 
@@ -58,7 +63,8 @@ public class ConvenzioneController {
 
 	@RequestMapping( value = "/aggiungi-ente", method = RequestMethod.POST)
 	public String aggiungiEnte(@ModelAttribute("convenzioneForm") ConvenzioneForm convenzioneForm, Model model, BindingResult result, RedirectAttributes redirectAttributes) 
-			throws IndirizzoNonValidoException, NomeNonValidoException, SedeNonValidaException {
+			throws IndirizzoNonValidoException, NomeNonValidoException, SedeNonValidaException, AziendaNonValidaException, AziendaEsistenteException,
+			EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException {
 		
 		validator.validate(convenzioneForm, result);
 		

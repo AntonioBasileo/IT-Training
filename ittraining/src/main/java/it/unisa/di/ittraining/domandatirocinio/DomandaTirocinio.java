@@ -1,6 +1,7 @@
 package it.unisa.di.ittraining.domandatirocinio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,14 +18,9 @@ import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.progettoformativo.ProgettoFormativo;
 import it.unisa.di.ittraining.registrotirocinio.Registro;
 import it.unisa.di.ittraining.studente.Studente;
-import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 
 @Entity
 public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
-	
-	public DomandaTirocinio() {
-		
-	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,9 +28,6 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 
 	@ManyToOne
 	private Studente studente;
-
-	@ManyToOne
-	private TutorAccademico tutorAccademico;
 	
 	@ManyToOne
 	private Azienda azienda;
@@ -51,6 +44,10 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	private int status;
 	private int cfu;
 	private int oreTotali;
+	
+	public DomandaTirocinio() {
+		this.registri = new ArrayList<>();
+	}
 	
 	/**
 	 * Costante che rappresenta lo stato "in attesa" di una domanda di tirocinio.
@@ -99,20 +96,12 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	public int compareTo(DomandaTirocinio domanda) {
 	    
 	  if (getData().isBefore(domanda.getData())) {
-	    return -1;
-	  } else if (getData().isAfter(domanda.getData())) {
 	    return 1;
+	  } else if (getData().isAfter(domanda.getData())) {
+	    return -1;
 	  } else {
 	    return 0;
 	  }
-	}
-	
-	public TutorAccademico getTutorAccademico() {
-		return tutorAccademico;
-	}
-
-	public void setTutorAccademico(TutorAccademico tutorAccademico) {
-		this.tutorAccademico = tutorAccademico;
 	}
 
 	public Long getId() {
@@ -193,6 +182,14 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 
 	public void setOreTotali(int oreTotali) {
 		this.oreTotali = oreTotali;
+	}
+
+	public List<Registro> getRegistri() {
+		return registri;
+	}
+
+	public void setRegistri(List<Registro> registri) {
+		this.registri = registri;
 	}
 	
 	

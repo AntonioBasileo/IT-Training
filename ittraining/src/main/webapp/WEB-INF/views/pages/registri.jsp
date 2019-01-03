@@ -35,8 +35,9 @@
 	<div class="container">
 			<div class="row"></div>
 			<div class="row"></div>
-			<div class="row"></div>
-			<div class="row"></div>
+			<div class="row">
+				<h4 class="teal-text">I tuoi registri</h4>
+			</div>
 			
 			<jsp:include page="/WEB-INF/views/forms/registri.jsp" />
 	</div>	

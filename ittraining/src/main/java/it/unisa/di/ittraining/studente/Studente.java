@@ -85,7 +85,18 @@ public class Studente extends Utente {
 		
 		return somma;
 	}
-
+	
+	public int getCfuInAttesa() {
+		int somma = 0;
+		
+		for(DomandaTirocinio t: domandeTirocinio) {
+			if(t.getStatus() == DomandaTirocinio.IN_ATTESA)
+				somma += t.getCfu();
+			
+		}
+		
+		return somma;
+	}
 	public TutorAccademico getTutor() {
 		return tutor;
 	}

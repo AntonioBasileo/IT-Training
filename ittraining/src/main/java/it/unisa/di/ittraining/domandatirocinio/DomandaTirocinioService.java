@@ -33,10 +33,6 @@ public class DomandaTirocinioService {
 		domandeRep.delete(domanda);
 	}
 	
-	public boolean existsById(Long id) {
-		return domandeRep.existsById(id);
-	}
-	
 	public List<DomandaTirocinio> elencaDomandeStudente(String username) {
 		
 		return domandeRep.findAllByStudenteUsername(username);
@@ -52,16 +48,19 @@ public class DomandaTirocinioService {
 		return domandeRep.findAllByAzienda(azienda);
 	}
 	
-	public DomandaTirocinio getDomandaById(long id) {
-		
-		return domandeRep.findById(id);
-	}
-	
 	@Transactional(rollbackFor = Exception.class)
 	public DomandaTirocinio registraDomanda(DomandaTirocinio domanda) {
 		domandeRep.save(domanda);
 		
 		return domanda;
+	}
+	
+	public DomandaTirocinio aggiornaStatoDomanda(long id, int status) {
+		
+		DomandaTirocinio domanda = domandeRep.findById(id);
+		domanda.setStatus(status);
+		
+		return domandeRep.save(domanda);
 	}
 
 	public LocalDate validaDataInizio(LocalDate inizio) throws DataDiNascitaNonValidaException {
@@ -107,9 +106,11 @@ public class DomandaTirocinioService {
 		
 		Studente studente = (Studente)utentiService.getUtenteAutenticato();
 		
-		int somma = cfu + studente.getCfuTirocinio();
+		int somma_approvate = cfu + studente.getCfuTirocinio();
 		
-		if(somma > DomandaTirocinio.MAX_CFU ) throw new MassimoNumeroCfuCumulabiliException();
+		int somma_in_attesa = cfu + studente.getCfuInAttesa();
+		
+		if(somma_approvate > DomandaTirocinio.MAX_CFU || somma_in_attesa > DomandaTirocinio.MAX_CFU) throw new MassimoNumeroCfuCumulabiliException();
 		
 		return cfu;
 	}

@@ -9,6 +9,29 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+	<c:if test="${empty listaDomandeAzienda}">
+	
+	
+			<div class="row">
+				<div class="col s12">
+						<div class="card horizontal">
+							<div class="card-image">
+								<img src="resources/images/choose.svg">
+							</div>
+								<div class="card-stacked">
+								<div class="card-content">
+									<h5 class="teal-text">Spiacenti</h5>
+									<p>Non è presente ancora alcuna domanda</p>
+								</div>
+					        <div class="card-action">
+					          <a href="/home">Torna alla home</a>
+					        </div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+	</c:if>
 
 	<spring:message var="notifica" code="${testoNotifica}"/> 
 	

@@ -24,8 +24,8 @@ public class RegistriController {
 	@RequestMapping(value = "/registro-form", method = RequestMethod.GET)
 	public String showRegistri(HttpSession session, Model model) {
 		
-		if(!model.containsAttribute("listaDomandeAccettate"))
-				model.addAttribute("listaDomandeAccettate", domandeService.elencaDomandeStudenteStatus((String)session.getAttribute("username"), DomandaTirocinio.IN_ATTESA));
+		if(!model.containsAttribute("listaDomandeApprovate"))
+				model.addAttribute("listaDomandeApprovate", domandeService.elencaDomandeStudenteStatus((String)session.getAttribute("username"), DomandaTirocinio.APPROVATA));
 		
 		return "registri";
 	}

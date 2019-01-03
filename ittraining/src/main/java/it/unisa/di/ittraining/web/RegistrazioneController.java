@@ -13,16 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
+import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaService;
+import it.unisa.di.ittraining.azienda.EmailNonAssociataException;
+import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
+import it.unisa.di.ittraining.azienda.SedeNonValidaException;
+import it.unisa.di.ittraining.azienda.TelefonoNonValidoException;
 import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteria;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaService;
+import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
+import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
+import it.unisa.di.ittraining.utente.CognomeNonValidoException;
+import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
+import it.unisa.di.ittraining.utente.EmailEsistenteException;
+import it.unisa.di.ittraining.utente.EmailNonValidaException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoCortoException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoLungoException;
+import it.unisa.di.ittraining.utente.NomeNonValidoException;
 import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
 import it.unisa.di.ittraining.utente.PasswordNonValidaException;
+import it.unisa.di.ittraining.utente.SessoNonValidoException;
+import it.unisa.di.ittraining.utente.UsernameEsistenteException;
+import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 @Controller
@@ -114,7 +132,9 @@ public class RegistrazioneController {
 
 	@RequestMapping(value = "/richiesta-registrazione-studente", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneStudente(@ModelAttribute("registrazioneStudente") RegistrazioneStudenteForm registrazioneStudente, Model model, BindingResult result, 
-			RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
+			RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, NomeNonValidoException, NomeCognomeTroppoLungoException,
+	NomeCognomeTroppoCortoException, CognomeNonValidoException, DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException,
+	EmailEsistenteException, SessoNonValidoException, it.unisa.di.ittraining.utente.TelefonoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException {
 		
 		validatorStudente.validate(registrazioneStudente, result);
 		
@@ -163,7 +183,9 @@ public class RegistrazioneController {
 
 	@RequestMapping(value = "/richiesta-registrazione-segreteria", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneSegreteria(HttpSession session, @ModelAttribute("registrazioneSegreteria") RegistrazioneForm registrazioneSegreteria, Model model,
-			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
+			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, NomeNonValidoException,
+	NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, DataDiNascitaNonValidaException,
+	UsernameNonValidoException, UsernameEsistenteException, SessoNonValidoException, it.unisa.di.ittraining.utente.TelefonoNonValidoException {
 		
 		validatorImpiegato.validate(registrazioneSegreteria, result);
 
@@ -209,7 +231,9 @@ public class RegistrazioneController {
 
 	@RequestMapping(value = "/richiesta-registrazione-accademico", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneTutorAccademico(HttpSession session, @ModelAttribute("registrazioneAccademico") RegistrazioneForm registrazioneAccademico, Model model, 
-			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
+			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, NomeNonValidoException,
+	NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException,
+	it.unisa.di.ittraining.utente.TelefonoNonValidoException, DataDiNascitaNonValidaException, SessoNonValidoException, UsernameNonValidoException, UsernameEsistenteException {
 		
 		validatorAccademico.validate(registrazioneAccademico, result);
 		
@@ -255,7 +279,11 @@ public class RegistrazioneController {
 	
 	@RequestMapping(value = "/richiesta-registrazione-aziendale", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneTutorAziendale(HttpSession session, @ModelAttribute("registrazioneAziendale") RegistrazioneAziendaleForm registrazioneAziendale, Model model,
-			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
+			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, AziendaNonValidaException,
+	AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException, EmailEsistenteException,
+	TelefonoNonValidoException, NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
+	EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException, DataDiNascitaNonValidaException, SessoNonValidoException,
+	it.unisa.di.ittraining.utente.TelefonoNonValidoException {
 		
 		validatorAziendale.validate(registrazioneAziendale, result);
 		
@@ -289,13 +317,8 @@ public class RegistrazioneController {
 	    	tutor.setPassword(registrazioneAziendale.getPassword());
 	    	tutor.setSesso(registrazioneAziendale.getSesso());
 	    	tutor.setTelefono(registrazioneAziendale.getTelefono());
-	    	tutor.setAzienda(aziendeService.getAziendaByNome(registrazioneAziendale.getNomeAzienda()));
-	    	
-	    	aziendeService.getAziendaByNome(registrazioneAziendale.getNomeAzienda()).setTutorAziendale(tutor);
-	    	
-	    	aziendeService.registraAzienda(aziendeService.getAziendaByNome(registrazioneAziendale.getNomeAzienda()));
 			
-	    	aziendeService.registraTutorAziendale(tutor);
+	    	aziendeService.registraTutorAziendale(tutor, registrazioneAziendale.getNomeAzienda());
 	    	
 	    }
 	      
