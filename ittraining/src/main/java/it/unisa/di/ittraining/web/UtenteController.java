@@ -12,12 +12,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
+import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
+import it.unisa.di.ittraining.utente.CognomeNonValidoException;
+import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
+import it.unisa.di.ittraining.utente.EmailEsistenteException;
+import it.unisa.di.ittraining.utente.EmailNonValidaException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoCortoException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoLungoException;
+import it.unisa.di.ittraining.utente.NomeNonValidoException;
 import it.unisa.di.ittraining.utente.PasswordErrataException;
+import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
+import it.unisa.di.ittraining.utente.PasswordNonValidaException;
+import it.unisa.di.ittraining.utente.SessoNonValidoException;
+import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
+import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonEsistenteException;
+import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 @Controller
@@ -55,6 +70,8 @@ public class UtenteController {
 			utenteService.login(loginForm.getUsername(), loginForm.getPassword());
 			
 			session.setAttribute("username", loginForm.getUsername());
+		      
+			redirectAttributes.addFlashAttribute("testoNotifica", "toast.login.valido");
 		} catch (UsernameNonEsistenteException e) {
 			// TODO Auto-generated catch block
 			result.rejectValue("password", "formLogin.username.nonValido");
@@ -64,6 +81,9 @@ public class UtenteController {
 	                             result);
 			
 			redirectAttributes.addFlashAttribute("loginForm", loginForm);
+			
+		      if(!model.containsAttribute("testoNotifica"))
+		    	  model.addAttribute("testoNotifica", "toast.login.nonValido");
 			
 			return "login";
 			
@@ -76,6 +96,9 @@ public class UtenteController {
 	                             result);
 			
 			redirectAttributes.addFlashAttribute("loginForm", loginForm);
+			
+		      if(!model.containsAttribute("testoNotifica"))
+		    	  model.addAttribute("testoNotifica", "toast.login.nonValido");
 			
 			return "login";
 		}
@@ -115,7 +138,9 @@ public class UtenteController {
 	 }
 	 
 	 @RequestMapping(value = "/scegli-tutor", method = RequestMethod.GET)
-	 public String scegliTutorAccademico(@RequestParam String op) {
+	 public String scegliTutorAccademico(@RequestParam String op) throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
+	 EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException, DataDiNascitaNonValidaException, PasswordNonValidaException, PasswordNonCorrispondentiException,
+	 SessoNonValidoException, UsernameNonValidoException, UsernameEsistenteException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException {
 			
 
 			if(utenteService.getUtenteAutenticato() == null || !(utenteService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))

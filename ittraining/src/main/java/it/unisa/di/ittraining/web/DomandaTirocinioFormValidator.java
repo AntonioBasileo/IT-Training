@@ -14,7 +14,7 @@ import it.unisa.di.ittraining.domandatirocinio.DataFinePrecedenteDataInizioExcep
 import it.unisa.di.ittraining.domandatirocinio.DataNonValidaException;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.domandatirocinio.MassimoNumeroCfuCumulabiliException;
-import it.unisa.di.ittraining.domandatirocinio.NumeroCfuNonValido;
+import it.unisa.di.ittraining.domandatirocinio.NumeroCfuNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 
 @Component
@@ -108,7 +108,7 @@ public class DomandaTirocinioFormValidator implements Validator {
 			
 			// TODO Auto-generated catch block
 			errors.rejectValue("cfu", "formDomanda.cfu.eccesso");
-		} catch (NumeroCfuNonValido e) {
+		} catch (NumeroCfuNonValidoException e) {
 			
 			// TODO Auto-generated catch block
 			errors.rejectValue("cfu", "formDomanda.cfu.nonValido");

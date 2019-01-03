@@ -20,7 +20,7 @@
 								<div class="card-stacked">
 								<div class="card-content">
 									<h5 class="teal-text">Spiacenti</h5>
-									<p>Non è presente alcuna domanda di tirocinio approva da un'azienda. Compilane una se ancora non l'hai fatto</p>
+									<p>Non è presente alcuna domanda di tirocinio approvata da un'azienda. Compilane una se ancora non l'hai fatto</p>
 								</div>
 					        <div class="card-action">
 					          <a href="/home">Torna alla home</a>
@@ -71,7 +71,8 @@
 							</div>
 								<div class="card-stacked">
 								<div class="card-content">
-									<h5 class="teal-text">Hai scelto il tuo tutor accademico</h5>
+									<h5 class="teal-text">Avviso</h5>
+									<p>Hai scelto il tuo tutor accademico</p>
 								</div>
 					        <div class="card-action">
 					          <a href="/home">Torna alla home</a>

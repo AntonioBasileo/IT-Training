@@ -1,11 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+	<c:if test="${empty listaDomandeAccademico}">
+	
+	
+			<div class="row">
+				<div class="col s12">
+						<div class="card horizontal">
+							<div class="card-image">
+								<img src="resources/images/choose.svg">
+							</div>
+								<div class="card-stacked">
+								<div class="card-content">
+									<h5 class="teal-text">Spiacenti</h5>
+									<p>Non è presente ancora alcuna domanda</p>
+								</div>
+					        <div class="card-action">
+					          <a href="/home">Torna alla home</a>
+					        </div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+	</c:if>
+
+	<spring:message var="notifica" code="${testoNotifica}"/> 
+	
+	<input id="toast" type="hidden" value="${notifica}"/>
 		  <ul class="collection">
 		  	<c:forEach items="${listaDomandeAccademico}" var="lista" varStatus="loop">
 			    <li class="collection-item avatar">

@@ -35,41 +35,11 @@
 	<div class="container">
 			<div class="row"></div>
 			<div class="row"></div>
-			<div class="row"></div>
-			<div class="row"></div>
+			<div class="row">
+				<h4 class="teal-text">I tuoi registri</h4>
+			</div>
 			
-			<c:if test="${not empty listaDomandeAccettate}">
-				<ul class="collapsible">
-				  <c:forEach items="${listaDomandeAccettate}" var="lista" varStatus="loop">
-				  	  <li>  
-					      <div class="collapsible-header">
-						      <i class="material-icons">business_center</i>
-						      <p>Azienda ospitante: <c:out value="${lista.azienda.nome}"/></p>
-						      <span class="badge white-text waves-effect waves-light btn-small">Compila registro</span>
-					      </div>
-					    <div class="collapsible-body">
-					    	<p class="teal-text">Giorni di tirocinio:</p>
-					    	<div class=row>
-					    		<div class="row">
-					    			<div class="col s3">
-					    				<p>Giorno</p>
-					    				
-					    			</div>
-					    			<div class="col s3">
-					    				<p>Giorno</p>
-					    				
-					    			</div>
-					    			<div class="col s3">
-					    				<p>Giorno</p>
-					    				
-					    			</div>
-					    		</div>
-					    	</div>
-					    </div>
-					  </li>
-				  </c:forEach>
-				</ul>
-			</c:if>
+			<jsp:include page="/WEB-INF/views/forms/registri.jsp" />
 	</div>	
 </body>
 </html>

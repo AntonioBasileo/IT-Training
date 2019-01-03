@@ -6,6 +6,29 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+	<c:if test="${empty listaDomandeStudente}">
+	
+	
+			<div class="row">
+				<div class="col s12">
+						<div class="card horizontal">
+							<div class="card-image">
+								<img src="resources/images/choose.svg">
+							</div>
+								<div class="card-stacked">
+								<div class="card-content">
+									<h5 class="teal-text">Spiacenti</h5>
+									<p>Non hai effettuato ancora alcuna domanda</p>
+								</div>
+					        <div class="card-action">
+					          <a href="/home">Torna alla home</a>
+					        </div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+	</c:if>
 		  <ul class="collection">
 		  	<c:forEach items="${listaDomandeStudente}" var="lista" varStatus="loop">
 			    <li class="collection-item avatar">
@@ -45,7 +68,7 @@
 						      <p><c:out value="${lista.progettoFormativo.getDescrizione()}"/></p>
 						    </div>
 						    <div class="modal-footer">
-						      <a class="modal-close waves-effect waves-light btn-flat">Indietro</a>
+						      <a class="modal-close waves-effect waves-light btn-flat">Ok</a>
 						    </div>
 						  </div>
 			      	</c:when>

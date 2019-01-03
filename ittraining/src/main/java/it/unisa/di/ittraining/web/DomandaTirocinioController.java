@@ -1,6 +1,8 @@
 package it.unisa.di.ittraining.web;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,19 +16,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import it.unisa.di.ittraining.azienda.AziendaService;
+import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
+import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.TutorAziendale;
+import it.unisa.di.ittraining.domandatirocinio.DataFinePrecedenteDataInizioException;
+import it.unisa.di.ittraining.domandatirocinio.DataNonValidaException;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
+import it.unisa.di.ittraining.domandatirocinio.MassimoNumeroCfuCumulabiliException;
+import it.unisa.di.ittraining.domandatirocinio.NumeroCfuNonValidoException;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
+import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 @Controller
 public class DomandaTirocinioController {
-	
-	@Autowired
-	private AziendaService aziendeService;
 	
 	@Autowired
 	private UtenteService utentiService;
@@ -62,15 +67,23 @@ public class DomandaTirocinioController {
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
 			return "not-available";
 		
-		if(!model.containsAttribute("listaDomandeStudente"))
-			model.addAttribute("listaDomandeStudente", domandeService.elencaDomandeStudente((String)session.getAttribute("username")));
+		if(!model.containsAttribute("listaDomandeStudente")) {
+			List<DomandaTirocinio> domande = domandeService.elencaDomandeStudente((String)session.getAttribute("username"));
+			
+			Collections.sort(domande);
+			
+			model.addAttribute("listaDomandeStudente", domande);
+			
+		}
 		
 		return "lista-domande-studente";
 	}
 	
 	
 	@RequestMapping(value = "/compila-domanda", method = RequestMethod.POST)
-	public String elaboraDomandaTirocinio(@ModelAttribute("domandaForm") DomandaTirocinioForm domandaForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+	public String elaboraDomandaTirocinio(@ModelAttribute("domandaForm") DomandaTirocinioForm domandaForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) throws AziendaNonValidaException,
+	AziendaNonEsistenteException,
+	DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
 		
 		validator.validate(domandaForm, result);
 		
@@ -79,6 +92,9 @@ public class DomandaTirocinioController {
 	          .addFlashAttribute("org.springframework.validation.BindingResult.domandaForm",
 	                             result);
 	      redirectAttributes.addFlashAttribute("domandaForm", domandaForm);
+	      
+	      if(!model.containsAttribute("testoNotifica"))
+	    	  model.addAttribute("testoNotifica", "toast.compildomanda.nonValida");
 	      
 	      return "compila-domanda";
 			
@@ -104,20 +120,11 @@ public class DomandaTirocinioController {
 	    domanda.setCfu(domandaForm.getCfu());
 	    domanda.setStatus(DomandaTirocinio.IN_ATTESA);
 	    domanda.setStudente(studente);
-	    domanda.setAzienda(aziendeService.getAziendaByNome(domandaForm.getNomeAzienda()));
-	    
-	    if(domandaForm.getCfu() == 6)
-	    	domanda.setOreTotali(150);
-	    
-	    else if(domandaForm.getCfu() == 12)
-	    	domanda.setOreTotali(300);
-	    
-	    else if(domandaForm.getCfu() == 18)
-	    	domanda.setOreTotali(450);
 	    
 	    
-	    domandeService.registraDomanda(domanda);
-		
+	    domandeService.registraDomanda(domanda, domandaForm.getNomeAzienda());
+	    
+	    redirectAttributes.addFlashAttribute("testoNotifica", "toast.compiladomanda.valida");
 		
 		return "redirect:/home";
 	}
@@ -132,8 +139,11 @@ public class DomandaTirocinioController {
 		
 		if(!model.containsAttribute("listaDomandeAzienda")) {
 			TutorAziendale tutor = (TutorAziendale)utentiService.getUtenteAutenticato();
+			List<DomandaTirocinio> domande = domandeService.elencaDomandeAziendali(tutor.getAzienda());
 			
-			model.addAttribute("listaDomandeAzienda", domandeService.elencaDomandeAziendali(tutor.getAzienda()));
+			Collections.sort(domande);
+			
+			model.addAttribute("listaDomandeAzienda", domande);
 			
 		}
 		
@@ -148,16 +158,16 @@ public class DomandaTirocinioController {
 	
 	
 	@RequestMapping(value = "/rifiuta-domanda", method = RequestMethod.POST)
-	public String rifiutaDomanda(@ModelAttribute("progettoFormRifiuta") ProgettoFormativoForm form, Model model, BindingResult result) {
+	public String rifiutaDomanda(@ModelAttribute("progettoFormRifiuta") ProgettoFormativoForm form, BindingResult result, RedirectAttributes redirectAttributes) {
 		
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
 			return "not-available";
 		
-		DomandaTirocinio domanda = domandeService.getDomandaById(form.getIdDomanda());
-		domanda.setStatus(DomandaTirocinio.RIFIUTATA_AZIENDA);
 		
-		domandeService.registraDomanda(domanda);
+		domandeService.aggiornaStatoDomanda(form.getIdDomanda(), DomandaTirocinio.RIFIUTATA_AZIENDA);
+		
+		redirectAttributes.addFlashAttribute("testoNotifica", "toast.domanda.rifiutata");
 		
 		return "redirect:/mostra-domande-aziendale";
 		
@@ -172,6 +182,7 @@ public class DomandaTirocinioController {
 		
 		if(!model.containsAttribute("listaDomandeAccademico")) {
 			TutorAccademico tutor = (TutorAccademico)utentiService.getUtenteAutenticato();
+			Collections.sort(tutor.getAllDomande());
 			
 			model.addAttribute("listaDomandeAccademico", tutor.getAllDomande());
 			

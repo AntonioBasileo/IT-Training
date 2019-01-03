@@ -28,14 +28,6 @@ public class DomandaTirocinioService {
 	@Autowired
 	private UtenteService utentiService;
 	
-	public void cancellaDomanda(DomandaTirocinio domanda) {
-		domandeRep.delete(domanda);
-	}
-	
-	public boolean existsById(Long id) {
-		return domandeRep.existsById(id);
-	}
-	
 	public List<DomandaTirocinio> elencaDomandeStudente(String username) {
 		
 		return domandeRep.findAllByStudenteUsername(username);
@@ -51,16 +43,35 @@ public class DomandaTirocinioService {
 		return domandeRep.findAllByAzienda(azienda);
 	}
 	
-	public DomandaTirocinio getDomandaById(long id) {
-		
-		return domandeRep.findById(id);
-	}
-	
 	@Transactional(rollbackFor = Exception.class)
-	public DomandaTirocinio registraDomanda(DomandaTirocinio domanda) {
+	public DomandaTirocinio registraDomanda(DomandaTirocinio domanda, String nomeAzienda) throws AziendaNonValidaException, AziendaNonEsistenteException,
+	DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
+		
+		domanda.setAzienda(rep.findByNome(validaNomeAzienda(nomeAzienda)));
+		domanda.setInizioTirocinio(validaDataInizio(domanda.getInizioTirocinio()));
+		domanda.setFineTirocinio(validaDataFine(domanda.getInizioTirocinio(), domanda.getFineTirocinio()));
+		domanda.setCfu(validaNumeroCfu(domanda.getCfu()));
+		
+	    if(domanda.getCfu() == 6)
+	    	domanda.setOreTotali(150);
+	    
+	    else if(domanda.getCfu() == 12)
+	    	domanda.setOreTotali(300);
+	    
+	    else if(domanda.getCfu() == 18)
+	    	domanda.setOreTotali(450);
+		
 		domandeRep.save(domanda);
 		
 		return domanda;
+	}
+	
+	public DomandaTirocinio aggiornaStatoDomanda(long id, int status) {
+		
+		DomandaTirocinio domanda = domandeRep.findById(id);
+		domanda.setStatus(status);
+		
+		return domandeRep.save(domanda);
 	}
 
 	public LocalDate validaDataInizio(LocalDate inizio) throws DataDiNascitaNonValidaException {
@@ -100,15 +111,19 @@ public class DomandaTirocinioService {
 		return azienda;
 	}
 	
-	public int validaNumeroCfu(int cfu) throws MassimoNumeroCfuCumulabiliException, NumeroCfuNonValido {
+	public int validaNumeroCfu(int cfu) throws MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
 		
-		if(cfu == 0) throw new NumeroCfuNonValido();
+		if(cfu == 0) throw new NumeroCfuNonValidoException();
 		
 		Studente studente = (Studente)utentiService.getUtenteAutenticato();
 		
-		int somma = cfu + studente.getCfuTirocinio();
+		int somma_approvate = cfu + studente.getCfuTirocinio();
 		
-		if(somma > DomandaTirocinio.MAX_CFU ) throw new MassimoNumeroCfuCumulabiliException();
+		int somma_in_attesa = cfu + studente.getCfuInAttesa();
+		
+		if(somma_approvate > DomandaTirocinio.MAX_CFU || somma_in_attesa > DomandaTirocinio.MAX_CFU) throw new MassimoNumeroCfuCumulabiliException();
+		
+		if(cfu < DomandaTirocinio.MIN_CFU) throw new NumeroCfuNonValidoException();
 		
 		return cfu;
 	}

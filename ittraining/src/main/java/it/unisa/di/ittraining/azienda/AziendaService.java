@@ -6,8 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.unisa.di.ittraining.utente.CognomeNonValidoException;
+import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
 import it.unisa.di.ittraining.utente.EmailNonValidaException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoCortoException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoLungoException;
+import it.unisa.di.ittraining.utente.NomeNonValidoException;
+import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
+import it.unisa.di.ittraining.utente.PasswordNonValidaException;
+import it.unisa.di.ittraining.utente.SessoNonValidoException;
+import it.unisa.di.ittraining.utente.UsernameEsistenteException;
+import it.unisa.di.ittraining.utente.UsernameNonValidoException;
+import it.unisa.di.ittraining.utente.UtenteService;
 
 @Service
 public class AziendaService {
@@ -18,21 +29,48 @@ public class AziendaService {
 	@Autowired
 	private AziendaRepository repAzienda;
 	
+	@Autowired
+	private UtenteService utentiService;
+	
 	public List<Azienda> elancaAziende() {
 		
 		return repAzienda.findAll();
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public TutorAziendale registraTutorAziendale(TutorAziendale tutor) {
+	public TutorAziendale registraTutorAziendale(TutorAziendale tutor, String nomeAzienda) throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
+	CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException,
+	PasswordNonValidaException, PasswordNonCorrispondentiException, DataDiNascitaNonValidaException, AziendaNonValidaException,
+	AziendaEsistenteException, SessoNonValidoException, it.unisa.di.ittraining.utente.TelefonoNonValidoException {
+		
+		tutor.setNome(utentiService.validaNome(tutor.getNome()));
+		tutor.setCognome(utentiService.validaCognome(tutor.getCognome()));
+		tutor.setEmail(validaEmailTutor(tutor.getEmail(), tutor.getAzienda().getNome()));
+		tutor.setUsername(utentiService.validaUsername(tutor.getUsername()));
+		tutor.setDataDiNascita(utentiService.validaDataDiNascita(tutor.getDataDiNascita()));
+		tutor.setPassword(utentiService.validaPassword(tutor.getPassword()));
+		tutor.setAzienda(repAzienda.findByNome(validaNome(nomeAzienda)));
+		tutor.setSesso(utentiService.validaSesso(tutor.getSesso()));
+		tutor.setTelefono(utentiService.validaTelefono(tutor.getTelefono()));
+		
+		Azienda azienda = repAzienda.findByNome(nomeAzienda);
+		azienda.setTutor(tutor);
 				
+		repAzienda.save(azienda);
 		repTutor.save(tutor);
 				
 		return tutor;
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public Azienda registraAzienda(Azienda azienda) {
+	public Azienda registraAzienda(Azienda azienda) throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException,
+	EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException {
+		
+		azienda.setNome(validaNome(azienda.getNome()));
+		azienda.setSede(validaSede(azienda.getSede()));
+		azienda.setIndirizzo(validaIndirizzo(azienda.getIndirizzo()));
+		azienda.setEmail(validaEmailAziendale(azienda.getNome(), azienda.getEmail()));
+		azienda.setTelefono(validaTelefono(azienda.getTelefono()));
 		
 		repAzienda.save(azienda);
 		
@@ -103,11 +141,6 @@ public class AziendaService {
 		if(sede.length() < Azienda.MIN_LUNGHEZZA_SEDE || sede.length() > Azienda.MAX_LUNGHEZZA_SEDE) throw new SedeNonValidaException("Il campo sede non è valido.");
 		
 		return sede;
-	}
-	
-	public Azienda getAziendaByNome(String nome) {
-		
-		return repAzienda.findByNome(nome);
 	}
 	
 }

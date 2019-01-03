@@ -24,12 +24,15 @@
 	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
 	    <script src="resources/js/initialize.js"></script>
+	    <script src="resources/js/toast.js"></script>
 		
 	    
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+	
+	<input type="hidden" onload="mostraToast(${testoNotifica})"/>
 	<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
 		  
 	<div class="container">

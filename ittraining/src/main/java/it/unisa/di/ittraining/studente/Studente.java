@@ -5,6 +5,7 @@ import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.registrotirocinio.Registro;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,10 +37,9 @@ public class Studente extends Utente {
 	@OneToOne
 	private TutorAccademico tutor;
 	
-	private float mediaPonderata;
-	
 	public Studente() {
-		
+		this.domandeTirocinio = new ArrayList<>();
+		this.registri = new ArrayList<>();
 	}
 	
 	public void setMatricola(String matricola) {
@@ -67,13 +67,13 @@ public class Studente extends Utente {
 	}
 	
 	public void addDomandaTirocinio(DomandaTirocinio domandaTirocinio) {
-	    if (!domandeTirocinio.contains(domandaTirocinio)) {
-	    	
-	      domandeTirocinio.add(domandaTirocinio);
-	      
-	      domandaTirocinio.setStudente(this);
-	    }
-	  }
+		    if (!domandeTirocinio.contains(domandaTirocinio)) {
+		    	
+		      domandeTirocinio.add(domandaTirocinio);
+		      
+		      domandaTirocinio.setStudente(this);
+		    }
+	}
 	
 	public int getCfuTirocinio() {
 		int somma = 0;
@@ -85,21 +85,24 @@ public class Studente extends Utente {
 		
 		return somma;
 	}
-
+	
+	public int getCfuInAttesa() {
+		int somma = 0;
+		
+		for(DomandaTirocinio t: domandeTirocinio) {
+			if(t.getStatus() == DomandaTirocinio.IN_ATTESA)
+				somma += t.getCfu();
+			
+		}
+		
+		return somma;
+	}
 	public TutorAccademico getTutor() {
 		return tutor;
 	}
 
 	public void setTutor(TutorAccademico tutor) {
 		this.tutor = tutor;
-	}
-
-	public float getMediaPonderata() {
-		return mediaPonderata;
-	}
-
-	public void setMediaPonderata(float mediaPonderata) {
-		this.mediaPonderata = mediaPonderata;
 	}
 	
 	public boolean isNotThereDomandaAccettata() {

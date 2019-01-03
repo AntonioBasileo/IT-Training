@@ -13,7 +13,7 @@ import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.registrotirocinio.RegistroService;
 
 @Controller
-public class RegistroController {
+public class RegistriController {
 
 	@Autowired
 	private RegistroService registriService;
@@ -24,8 +24,8 @@ public class RegistroController {
 	@RequestMapping(value = "/registro-form", method = RequestMethod.GET)
 	public String showRegistri(HttpSession session, Model model) {
 		
-		if(!model.containsAttribute("listaDomandeAccettate"))
-				model.addAttribute("listaDomandeAccettate", domandeService.elencaDomandeStudenteStatus((String)session.getAttribute("username"), DomandaTirocinio.IN_ATTESA));
+		if(!model.containsAttribute("listaDomandeApprovate"))
+				model.addAttribute("listaDomandeApprovate", domandeService.elencaDomandeStudenteStatus((String)session.getAttribute("username"), DomandaTirocinio.APPROVATA));
 		
 		return "registri";
 	}

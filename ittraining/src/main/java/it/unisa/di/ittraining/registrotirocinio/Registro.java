@@ -12,7 +12,6 @@ import javax.persistence.OneToOne;
 
 import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
-import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteria;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 
@@ -25,9 +24,6 @@ public class Registro {
 
 	@ManyToOne
 	private Studente studente;
-	
-	@ManyToOne
-	private ImpiegatoSegreteria impiegato;
 	
 	@ManyToOne
 	private TutorAziendale tutorAziendale;
@@ -43,6 +39,7 @@ public class Registro {
 	private LocalDateTime fine;
 	private int numero_ore;
 	private String descrizione;
+	
 	
 	public Long getId() {
 		return id;
@@ -90,14 +87,6 @@ public class Registro {
 	
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
-	}
-
-	public ImpiegatoSegreteria getImpiegato() {
-		return impiegato;
-	}
-
-	public void setImpiegato(ImpiegatoSegreteria impiegato) {
-		this.impiegato = impiegato;
 	}
 
 	public TutorAziendale getTutorAziendale() {

@@ -6,8 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.unisa.di.ittraining.utente.CognomeNonValidoException;
+import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
 import it.unisa.di.ittraining.utente.EmailNonValidaException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoCortoException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoLungoException;
+import it.unisa.di.ittraining.utente.NomeNonValidoException;
+import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
+import it.unisa.di.ittraining.utente.PasswordNonValidaException;
+import it.unisa.di.ittraining.utente.SessoNonValidoException;
+import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
+import it.unisa.di.ittraining.utente.UsernameEsistenteException;
+import it.unisa.di.ittraining.utente.UsernameNonValidoException;
+import it.unisa.di.ittraining.utente.UtenteService;
 
 @Service
 public class TutorAccademicoService {
@@ -15,8 +27,22 @@ public class TutorAccademicoService {
 	@Autowired
 	private TutorAccademicoRepository rep;
 	
+	@Autowired
+	private UtenteService utentiService;
+	
 	@Transactional(rollbackFor = Exception.class)
-	public TutorAccademico registraTutorAccademico(TutorAccademico tutor) {
+	public TutorAccademico registraTutorAccademico(TutorAccademico tutor) throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
+	CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException, DataDiNascitaNonValidaException, PasswordNonValidaException,
+	PasswordNonCorrispondentiException, SessoNonValidoException, UsernameNonValidoException, UsernameEsistenteException {
+		
+		tutor.setNome(utentiService.validaNome(tutor.getNome()));
+		tutor.setCognome(utentiService.validaCognome(tutor.getCognome()));
+		tutor.setEmail(validaEmailAccademico(tutor.getEmail()));
+		tutor.setTelefono(utentiService.validaTelefono(tutor.getTelefono()));
+		tutor.setDataDiNascita(utentiService.validaDataDiNascita(tutor.getDataDiNascita()));
+		tutor.setPassword(utentiService.validaPassword(tutor.getPassword()));
+		tutor.setSesso(utentiService.validaSesso(tutor.getSesso()));
+		tutor.setUsername(utentiService.validaUsername(tutor.getUsername()));
 		
 		rep.save(tutor);
 		
