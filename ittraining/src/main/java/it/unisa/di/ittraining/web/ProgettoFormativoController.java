@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
@@ -27,7 +28,7 @@ public class ProgettoFormativoController {
 	private DomandaTirocinioService domandeService;
 	
 	@RequestMapping(value = "/inserisci-progetto", method = RequestMethod.POST)
-	public String inserisciProgetto(@ModelAttribute("progettoFormAccetta") ProgettoFormativoForm progettoForm) {
+	public String inserisciProgetto(@ModelAttribute("progettoFormAccetta") ProgettoFormativoForm progettoForm, RedirectAttributes redirectAttributes) {
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
 			return "not-available";
@@ -47,12 +48,13 @@ public class ProgettoFormativoController {
 		
 		domandeService.registraDomanda(domanda);
 		
+		redirectAttributes.addFlashAttribute("testoNotifica", "toast.domanda.accettata");
 		
 		return "redirect:/mostra-domande-aziendale";
 	}
 	
 	@RequestMapping(value = "/approva-progetto", method = RequestMethod.GET)
-	public String approvaProgetto(@RequestParam Long id) {
+	public String approvaProgetto(@RequestParam Long id, RedirectAttributes redirectAttributes) {
 		
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAccademico")))
@@ -64,11 +66,13 @@ public class ProgettoFormativoController {
 		domanda.setStatus(DomandaTirocinio.APPROVATA);
 		domandeService.registraDomanda(domanda);
 		
+		redirectAttributes.addFlashAttribute("testoNotifica", "toast.progettoFormativo.approvato");
+		
 		return "redirect:/mostra-domande-accademico";
 	}
 	
 	@RequestMapping(value = "/rifiuta-progetto", method = RequestMethod.GET)
-	public String rifiutaProgetto(@RequestParam Long id) {
+	public String rifiutaProgetto(@RequestParam Long id, RedirectAttributes redirectAttributes) {
 		
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAccademico")))
@@ -79,6 +83,8 @@ public class ProgettoFormativoController {
 		
 		domanda.setStatus(DomandaTirocinio.PROGETTO_RIFIUTATO);
 		domandeService.registraDomanda(domanda);
+		
+		redirectAttributes.addFlashAttribute("testoNotifica", "toast.progettoFormativo.rifiutato");
 		
 		return "redirect:/mostra-domande-accademico";
 	}

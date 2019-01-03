@@ -1,5 +1,6 @@
 package it.unisa.di.ittraining.azienda;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -60,7 +61,8 @@ public class Azienda {
 	public static final String EMAIL_PATTERN_AZIENDALE = "[A-z0-9\\.\\+_-]+@[A-z0-9\\._-]+\\.[A-z]{2,6}";
 
 	public Azienda() {
-		
+		this.domande = new ArrayList<>();
+		this.progetti = new ArrayList<>();
 	}
 	
 	public TutorAziendale getTutorAziendale() {

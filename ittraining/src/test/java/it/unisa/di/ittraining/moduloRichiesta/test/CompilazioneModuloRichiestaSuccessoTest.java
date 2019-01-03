@@ -5,19 +5,27 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 import java.time.Month;
 
+import javax.transaction.Transactional;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.unisa.di.ittraining.azienda.Azienda;
+import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
+import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioRepository;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
+import it.unisa.di.ittraining.registrotirocinio.Registro;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
 
 /*
  * Classe di test per {@link elaboraDomandaTirocinio in DomandaTirocinioController}
@@ -25,15 +33,25 @@ import it.unisa.di.ittraining.studente.StudentiService;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@Transactional
+@Rollback
 public class CompilazioneModuloRichiestaSuccessoTest {
 
 	private DomandaTirocinio domandaTirocinio;
 	private Azienda azienda;
 	private Studente studente;
+	
 	@Autowired
 	private DomandaTirocinioService domandaTirocinioService;
+	
 	@Autowired
 	private StudentiService studenteService;
+	
+	@Autowired
+	private AziendaService aziendeService;
+	
+	@Autowired
+	private DomandaTirocinioRepository domandeRep;
 	
 	@Before
 	public void setUp() {
@@ -41,6 +59,8 @@ public class CompilazioneModuloRichiestaSuccessoTest {
 		domandaTirocinio = new DomandaTirocinio();
 		azienda = new Azienda();
 		azienda.setNome("Informatica Center");
+		aziendeService.registraAzienda(azienda);
+		
 		studente = new Studente();
 		studente.setNome("Laura");
 		studente.setCognome("Oliva");
@@ -53,6 +73,7 @@ public class CompilazioneModuloRichiestaSuccessoTest {
 		studente.setMediaPonderata(28);
 		studente.setTelefono("3404050333");
 		studenteService.registraStudente(studente);
+		
 		domandaTirocinio.setInizioTirocinio(LocalDate.of(2019, Month.FEBRUARY, 2));
 		domandaTirocinio.setFineTirocinio(LocalDate.of(2019, Month.MARCH, 20));
 		domandaTirocinio.setCfu(6);
@@ -60,6 +81,7 @@ public class CompilazioneModuloRichiestaSuccessoTest {
 		domandaTirocinio.setStudente(studente);
 		domandaTirocinio.setData(LocalDate.now());
 		domandaTirocinio.setOreTotali(150);
+		
 		domandaTirocinioService.registraDomanda(domandaTirocinio);
 	}
 	
@@ -73,7 +95,7 @@ public class CompilazioneModuloRichiestaSuccessoTest {
 	@After
 	public void tearDown() {
 		System.out.println(domandaTirocinio.getId());
-		domandaTirocinioService.cancellaDomanda(domandaTirocinio);
+		domandeRep.delete(domandaTirocinio);
 		studenteService.cancellaStudente(studente);
 	}
 }

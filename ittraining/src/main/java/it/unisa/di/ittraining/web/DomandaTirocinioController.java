@@ -80,6 +80,9 @@ public class DomandaTirocinioController {
 	                             result);
 	      redirectAttributes.addFlashAttribute("domandaForm", domandaForm);
 	      
+	      if(!model.containsAttribute("testoNotifica"))
+	    	  model.addAttribute("testoNotifica", "toast.compildomanda.nonValida");
+	      
 	      return "compila-domanda";
 			
 		}
@@ -117,7 +120,8 @@ public class DomandaTirocinioController {
 	    
 	    
 	    domandeService.registraDomanda(domanda);
-		
+	    
+	    redirectAttributes.addFlashAttribute("testoNotifica", "toast.compiladomanda.valida");
 		
 		return "redirect:/home";
 	}
@@ -148,7 +152,7 @@ public class DomandaTirocinioController {
 	
 	
 	@RequestMapping(value = "/rifiuta-domanda", method = RequestMethod.POST)
-	public String rifiutaDomanda(@ModelAttribute("progettoFormRifiuta") ProgettoFormativoForm form, Model model, BindingResult result) {
+	public String rifiutaDomanda(@ModelAttribute("progettoFormRifiuta") ProgettoFormativoForm form, BindingResult result, RedirectAttributes redirectAttributes) {
 		
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
@@ -158,6 +162,8 @@ public class DomandaTirocinioController {
 		domanda.setStatus(DomandaTirocinio.RIFIUTATA_AZIENDA);
 		
 		domandeService.registraDomanda(domanda);
+		
+		redirectAttributes.addFlashAttribute("testoNotifica", "toast.domanda.rifiutata");
 		
 		return "redirect:/mostra-domande-aziendale";
 		

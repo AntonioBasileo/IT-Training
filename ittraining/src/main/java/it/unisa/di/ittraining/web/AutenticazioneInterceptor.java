@@ -54,7 +54,6 @@ public class AutenticazioneInterceptor implements HandlerInterceptor {
 		  
 	    // Fornisci ad ogni vista delegata un form per il login e l'oggetto utente che rappresenta
 	    // l'utente autenticato
-	    //request.setAttribute("loginForm", new LoginForm());
 		
 		request.setAttribute("utente", utenteService.getUtenteAutenticato());
 	  }

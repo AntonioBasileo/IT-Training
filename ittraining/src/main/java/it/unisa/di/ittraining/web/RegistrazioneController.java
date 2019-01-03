@@ -120,10 +120,15 @@ public class RegistrazioneController {
 		
 
 	    if (result.hasErrors()) {
+		      
+		  redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
+		  
 	      redirectAttributes
 	          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneStudente",
 	                             result);
-	      redirectAttributes.addFlashAttribute("registrazioneStudente", registrazioneStudente);
+	      
+	      if(!model.containsAttribute("testoNotifica"))
+	    	  model.addAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 	      
 	      return "registrazione-studente";
 	    }
@@ -150,6 +155,8 @@ public class RegistrazioneController {
 			studentiService.registraStudente(studente);
 	    	
 	    }
+	      
+	    redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaValida");
 	    
 		return "redirect:/home";	
 	}
@@ -166,6 +173,9 @@ public class RegistrazioneController {
 	          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneSegreteria",
 	                             result);
 	      redirectAttributes.addFlashAttribute("registrazioneSegreteria", registrazioneSegreteria);
+	      
+	      if(!model.containsAttribute("testoNotifica"))
+	    	  model.addAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 	      
 	      return "registrazione-segreteria";
 	    }
@@ -191,6 +201,8 @@ public class RegistrazioneController {
 			segreteriaService.registraImpiegato(impiegato);
 			
 		}
+	      
+	    redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaValida");
 		
 		return "redirect:/home";
 	}
@@ -207,6 +219,9 @@ public class RegistrazioneController {
 		          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneAccademico",
 		                             result);
 		      redirectAttributes.addFlashAttribute("registrazioneAccademico", registrazioneAccademico);
+		      
+		      if(!model.containsAttribute("testoNotifica"))
+		    	  model.addAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 		      
 		      return "registrazione-tutor-accademico";
 		}
@@ -232,6 +247,8 @@ public class RegistrazioneController {
 	    	tutorAccademicoService.registraTutorAccademico(tutor);
 	    	
 	    }
+	      
+	    redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaValida");
 	    
 	    return "redirect:/home";
 	}
@@ -248,6 +265,9 @@ public class RegistrazioneController {
 		          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneAziendale",
 		                             result);
 		      redirectAttributes.addFlashAttribute("registrazioneAziendale", registrazioneAziendale);
+		      
+		      if(!model.containsAttribute("testoNotifica"))
+		    	  model.addAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 		      
 		      return "registrazione-tutor-aziendale";
 		}
@@ -278,6 +298,8 @@ public class RegistrazioneController {
 	    	aziendeService.registraTutorAziendale(tutor);
 	    	
 	    }
+	      
+	    redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaValida");
 	    
 	    return "redirect:/home";
 	}

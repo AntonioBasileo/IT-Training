@@ -55,6 +55,8 @@ public class UtenteController {
 			utenteService.login(loginForm.getUsername(), loginForm.getPassword());
 			
 			session.setAttribute("username", loginForm.getUsername());
+		      
+			redirectAttributes.addFlashAttribute("testoNotifica", "toast.login.valido");
 		} catch (UsernameNonEsistenteException e) {
 			// TODO Auto-generated catch block
 			result.rejectValue("password", "formLogin.username.nonValido");
@@ -64,6 +66,9 @@ public class UtenteController {
 	                             result);
 			
 			redirectAttributes.addFlashAttribute("loginForm", loginForm);
+			
+		      if(!model.containsAttribute("testoNotifica"))
+		    	  model.addAttribute("testoNotifica", "toast.login.nonValido");
 			
 			return "login";
 			
@@ -76,6 +81,9 @@ public class UtenteController {
 	                             result);
 			
 			redirectAttributes.addFlashAttribute("loginForm", loginForm);
+			
+		      if(!model.containsAttribute("testoNotifica"))
+		    	  model.addAttribute("testoNotifica", "toast.login.nonValido");
 			
 			return "login";
 		}

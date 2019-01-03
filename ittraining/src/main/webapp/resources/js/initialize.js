@@ -25,6 +25,4 @@ $(document).ready(function(){
 //modals
 $(document).ready(function(){
   $('.modal').modal();
-  
-  console.log("ciao");
 });

@@ -45,7 +45,7 @@
 						      <p><c:out value="${lista.progettoFormativo.getDescrizione()}"/></p>
 						    </div>
 						    <div class="modal-footer">
-						      <a class="modal-close waves-effect waves-light btn-flat">Indietro</a>
+						      <a class="modal-close waves-effect waves-light btn-flat">Ok</a>
 						    </div>
 						  </div>
 			      	</c:when>

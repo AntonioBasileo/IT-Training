@@ -29,6 +29,7 @@ public class DomandaTirocinioService {
 	private UtenteService utentiService;
 	
 	public void cancellaDomanda(DomandaTirocinio domanda) {
+		
 		domandeRep.delete(domanda);
 	}
 	

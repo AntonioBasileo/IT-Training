@@ -24,6 +24,7 @@
 	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
 	    <script src="resources/js/initialize.js"></script>
+	    <script src="resources/js/toast.js"></script>
 		
 	    
 	    <!--Import Google Icon Font-->

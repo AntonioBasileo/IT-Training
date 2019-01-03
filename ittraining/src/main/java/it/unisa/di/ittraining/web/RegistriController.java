@@ -13,7 +13,7 @@ import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.registrotirocinio.RegistroService;
 
 @Controller
-public class RegistroController {
+public class RegistriController {
 
 	@Autowired
 	private RegistroService registriService;

@@ -57,7 +57,7 @@ public class ConvenzioneController {
 	}
 
 	@RequestMapping( value = "/aggiungi-ente", method = RequestMethod.POST)
-	public String aggiungiEnte(@ModelAttribute("convenzioneForm") ConvenzioneForm convenzioneForm, BindingResult result, RedirectAttributes redirectAttributes) 
+	public String aggiungiEnte(@ModelAttribute("convenzioneForm") ConvenzioneForm convenzioneForm, Model model, BindingResult result, RedirectAttributes redirectAttributes) 
 			throws IndirizzoNonValidoException, NomeNonValidoException, SedeNonValidaException {
 		
 		validator.validate(convenzioneForm, result);
@@ -67,6 +67,10 @@ public class ConvenzioneController {
 		          .addFlashAttribute("org.springframework.validation.BindingResult.convenzioneForm",
 		                             result);
 		      redirectAttributes.addFlashAttribute("convenzioneForm", convenzioneForm);
+		      
+				
+		      if(!model.containsAttribute("testoNotifica"))
+		    	  model.addAttribute("testoNotifica", "toast.convenzione.nonValida");
 		      
 		      return "aggiungi-ente";
 		 }
@@ -80,6 +84,8 @@ public class ConvenzioneController {
 		azienda.setEmail(convenzioneForm.getEmail());
 		
 		aziendaService.registraAzienda(azienda);
+		
+		redirectAttributes.addFlashAttribute("testoNotifica", "toast.convenzione.valida");
 		
 		return "redirect:/home";
 	}

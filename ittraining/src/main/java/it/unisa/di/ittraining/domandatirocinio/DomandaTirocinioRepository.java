@@ -19,4 +19,6 @@ public interface DomandaTirocinioRepository extends JpaRepository<DomandaTirocin
 	DomandaTirocinio findById(long id);
 	
 	List<DomandaTirocinio> findAll();
+	
+	void delete(DomandaTirocinio domanda);
 }
