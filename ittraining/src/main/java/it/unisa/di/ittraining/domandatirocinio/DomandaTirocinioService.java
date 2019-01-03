@@ -47,10 +47,13 @@ public class DomandaTirocinioService {
 	public DomandaTirocinio registraDomanda(DomandaTirocinio domanda, String nomeAzienda) throws AziendaNonValidaException, AziendaNonEsistenteException,
 	DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
 		
+		Studente studente = (Studente)utentiService.getUtenteAutenticato();
+		
 		domanda.setAzienda(rep.findByNome(validaNomeAzienda(nomeAzienda)));
 		domanda.setInizioTirocinio(validaDataInizio(domanda.getInizioTirocinio()));
 		domanda.setFineTirocinio(validaDataFine(domanda.getInizioTirocinio(), domanda.getFineTirocinio()));
 		domanda.setCfu(validaNumeroCfu(domanda.getCfu()));
+		domanda.setStudente(studente);
 		
 	    if(domanda.getCfu() == 6)
 	    	domanda.setOreTotali(150);

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.unisa.di.ittraining.studente.Studente;
+import it.unisa.di.ittraining.studente.StudenteRepository;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
@@ -30,6 +32,9 @@ public class TutorAccademicoService {
 	@Autowired
 	private UtenteService utentiService;
 	
+	@Autowired
+	private StudenteRepository studenteRep;
+	
 	@Transactional(rollbackFor = Exception.class)
 	public TutorAccademico registraTutorAccademico(TutorAccademico tutor) throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
 	CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException, DataDiNascitaNonValidaException, PasswordNonValidaException,
@@ -47,6 +52,19 @@ public class TutorAccademicoService {
 		rep.save(tutor);
 		
 		return tutor;
+	}
+	
+	public void associaTutorAccademico(String op) {
+		
+		TutorAccademico tutor = rep.findByUsername(op);
+		Studente studente = (Studente)utentiService.getUtenteAutenticato();	
+		
+		studente.setTutor(tutor);
+		tutor.getStudenti().add(studente);
+		
+		studenteRep.save(studente);
+		rep.save(tutor);
+		
 	}
 	
 	public List<TutorAccademico> elencaTutorAccademici() {
