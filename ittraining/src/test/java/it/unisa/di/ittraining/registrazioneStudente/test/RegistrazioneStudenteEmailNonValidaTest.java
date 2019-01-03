@@ -1,9 +1,9 @@
 package it.unisa.di.ittraining.registrazioneStudente.test;
 
-import static org.junit.Assert.assertFalse;
-
 import java.time.LocalDate;
 import java.time.Month;
+
+import javax.transaction.Transactional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,11 +11,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
 import it.unisa.di.ittraining.utente.EmailNonValidaException;
+import junit.framework.TestCase;
 
 /*
  * Classe di test per {@link elaboraRichiestaIscrizioneStudente in RegistrazioneController}
@@ -23,7 +25,9 @@ import it.unisa.di.ittraining.utente.EmailNonValidaException;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class RegistrazioneStudenteEmailNonValidaTest {
+@Transactional
+@Rollback
+public class RegistrazioneStudenteEmailNonValidaTest extends TestCase{
 	
 	private Studente studente;
 	@Autowired

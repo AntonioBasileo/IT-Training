@@ -1,4 +1,4 @@
-package it.unisa.di.ittraining.registrazioneStudente.test;
+package it.unisa.di.ittraining.autenticazioneTutorAccademico.test;
 
 import javax.transaction.Transactional;
 
@@ -11,46 +11,42 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import it.unisa.di.ittraining.studente.Studente;
-import it.unisa.di.ittraining.utente.NomeNonValidoException;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.utente.UtenteService;
 import junit.framework.TestCase;
 
-/*
- * Classe di test per {@link elaboraRichiestaIscrizioneStudente in RegistrazioneController}
- * @author Alessia
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @Transactional
 @Rollback
-public class RegistrazioneStudenteNomeNonValidoTest extends TestCase{
+public class AutenticazioneTutorAccademicoUsernameNonValidoTest extends TestCase {
+
+	private TutorAccademico tutor;
 	
-	private Studente studente;
 	@Autowired
-	private UtenteService u;
+	private UtenteService utenteService;
 	
 	@Before
 	public void setUp() {
-		//studente di test
-		studente = new Studente();
-		studente.setNome("Bu");
-		studente.setUsername("Anto");
+		tutor = new TutorAccademico();
+		tutor.setUsername("Bla");
 	}
 	
 	@Test
-	public void testValidaNome() throws NomeNonValidoException {
+	public void testLogin(){
 		boolean flag = true;
 		try {
-			u.validaNome(studente.getNome());
-		}catch(Exception e){
+			utenteService.login(tutor.getUsername(), tutor.getPassword());
+		}catch(Exception e) {
 			flag = false;
 		}
 		assertFalse(flag);
 	}
 	
 	@After
-	public void tearDown(){
+	public void tearDown() {
+		
 	}
+	
 	
 }

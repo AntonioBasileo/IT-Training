@@ -15,6 +15,14 @@ public class TutorAccademicoService {
 	@Autowired
 	private TutorAccademicoRepository rep;
 	
+	public void cancellaTutorAccademico(TutorAccademico tutor) {
+		rep.delete(tutor);
+	}
+	
+	public boolean existsByEmail(String email) {
+		return rep.existsByEmail(email);
+	}
+	
 	@Transactional(rollbackFor = Exception.class)
 	public TutorAccademico registraTutorAccademico(TutorAccademico tutor) {
 		

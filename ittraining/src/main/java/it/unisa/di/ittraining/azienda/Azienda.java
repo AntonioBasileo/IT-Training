@@ -35,20 +35,20 @@ public class Azienda {
 
 	  
 	/** Costante che definisce la minima lunghezza del campo nome. */
-	public static final int MIN_LUNGHEZZA_NOME = 2;
+	public static final int MIN_LUNGHEZZA_NOME = 3;
 	  
 	/** Costante che definisce la massima lunghezza del campo nome. */
 	public static final int MAX_LUNGHEZZA_NOME = 255;
 	
 	  
-	/** Costante che definisce la minima lunghezza del campo nome. */
-	public static final int MIN_LUNGHEZZA_SEDE = 2;
+	/** Costante che definisce la minima lunghezza del campo sede. */
+	public static final int MIN_LUNGHEZZA_SEDE = 3;
 		  
-	/** Costante che definisce la massima lunghezza del campo nome. */
+	/** Costante che definisce la massima lunghezza del campo sede. */
 	public static final int MAX_LUNGHEZZA_SEDE = 35;
 	  
 	/** Costante che definisce la minima lunghezza del campo indirizzo. */
-	public static final int MIN_LUNGHEZZA_INDIRIZZO = 2;
+	public static final int MIN_LUNGHEZZA_INDIRIZZO = 8;
 	  
     /** Costante che definisce la massima lunghezza del campo indirizzo. */
 	public static final int MAX_LUNGHEZZA_INDIRIZZO = 255;

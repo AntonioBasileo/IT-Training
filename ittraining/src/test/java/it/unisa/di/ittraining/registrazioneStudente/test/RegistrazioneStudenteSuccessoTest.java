@@ -1,9 +1,9 @@
 package it.unisa.di.ittraining.registrazioneStudente.test;
 
-import static org.junit.Assert.assertTrue;
-
 import java.time.LocalDate;
 import java.time.Month;
+
+import javax.transaction.Transactional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,10 +11,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
+import junit.framework.TestCase;
 
 /*
  * Classe di test per {@link elaboraRichiestaIscrizioneStudente in RegistrazioneController}
@@ -22,7 +24,9 @@ import it.unisa.di.ittraining.studente.StudentiService;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class RegistrazioneStudenteSuccessoTest {
+@Transactional
+@Rollback
+public class RegistrazioneStudenteSuccessoTest extends TestCase{
 
 	private Studente studente;
 	@Autowired
@@ -44,8 +48,6 @@ public class RegistrazioneStudenteSuccessoTest {
 		studente.setTelefono("3404050333");
 				
 		studenteService.registraStudente(studente);
-		
-		System.out.println(studente.getNome());
 	}
 	
 	@Test

@@ -17,4 +17,13 @@ public class ProgettoFormativoService {
 		
 		return progetto;
 	}
+	
+	public void cancellaProgettoFormativo(ProgettoFormativo progettoFormativo) {
+		progettoRep.delete(progettoFormativo);
+	}
+	
+	public boolean existsById(Long id) {
+		return progettoRep.existsById(id);
+	}
+	
 }

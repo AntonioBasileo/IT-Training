@@ -13,6 +13,14 @@ public class ImpiegatoSegreteriaService {
 	@Autowired
 	private ImpiegatoSegreteriaRepository rep;
 	
+	public void cancellaImpiegatoSegreteria(ImpiegatoSegreteria impiegatoSegreteria) {
+		rep.delete(impiegatoSegreteria);
+	}
+	
+	public boolean existsByEmail(String email) {
+		return rep.existsByEmail(email);
+	}
+	
 	@Transactional(rollbackFor = Exception.class)
 	public ImpiegatoSegreteria registraImpiegato(ImpiegatoSegreteria impiegato) {
 		    

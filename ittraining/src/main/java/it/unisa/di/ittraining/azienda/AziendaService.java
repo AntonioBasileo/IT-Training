@@ -18,6 +18,22 @@ public class AziendaService {
 	@Autowired
 	private AziendaRepository repAzienda;
 	
+	public boolean existsByNome(String nome) {
+		return repAzienda.existsByNome(nome);
+	}
+	
+	public void cancellaAzienda(Azienda azienda) {
+		repAzienda.delete(azienda);
+	}
+	
+	public void cancellaTutorAziendale(TutorAziendale tutorAziendale) {
+		repTutor.delete(tutorAziendale);
+	}
+	
+	public boolean exixstsByEmail(String email) {
+		return repTutor.existsByEmail(email);
+	}
+	
 	public List<Azienda> elancaAziende() {
 		
 		return repAzienda.findAll();

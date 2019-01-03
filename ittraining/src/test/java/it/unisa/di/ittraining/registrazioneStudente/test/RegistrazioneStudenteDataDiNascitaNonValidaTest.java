@@ -4,11 +4,14 @@ package it.unisa.di.ittraining.registrazioneStudente.test;
 import java.time.LocalDate;
 import java.time.Month;
 
+import javax.transaction.Transactional;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.unisa.di.ittraining.studente.Studente;
@@ -22,6 +25,8 @@ import junit.framework.TestCase;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@Transactional
+@Rollback
 public class RegistrazioneStudenteDataDiNascitaNonValidaTest extends TestCase {
 
 	private Studente studente;

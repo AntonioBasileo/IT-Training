@@ -18,7 +18,7 @@ public class ProgettoFormativo {
 	public ProgettoFormativo() {
 		
 	}
-	
+		
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.AUTO)
 	 private Long id;

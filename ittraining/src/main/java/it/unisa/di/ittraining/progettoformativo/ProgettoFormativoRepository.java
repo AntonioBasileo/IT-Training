@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProgettoFormativoRepository extends JpaRepository<ProgettoFormativo, String> {
 
+	boolean existsById(Long id);
 }

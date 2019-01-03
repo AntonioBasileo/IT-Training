@@ -1,9 +1,9 @@
 package it.unisa.di.ittraining.moduloRichiesta.test;
 
-import static org.junit.Assert.assertTrue;
-
 import java.time.LocalDate;
 import java.time.Month;
+
+import javax.transaction.Transactional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.unisa.di.ittraining.azienda.Azienda;
@@ -18,6 +19,7 @@ import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
+import junit.framework.TestCase;
 
 /*
  * Classe di test per {@link elaboraDomandaTirocinio in DomandaTirocinioController}
@@ -25,7 +27,9 @@ import it.unisa.di.ittraining.studente.StudentiService;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class CompilazioneModuloRichiestaSuccessoTest {
+@Transactional
+@Rollback
+public class CompilazioneModuloRichiestaSuccessoTest extends TestCase {
 
 	private DomandaTirocinio domandaTirocinio;
 	private Azienda azienda;
@@ -72,7 +76,6 @@ public class CompilazioneModuloRichiestaSuccessoTest {
 	
 	@After
 	public void tearDown() {
-		System.out.println(domandaTirocinio.getId());
 		domandaTirocinioService.cancellaDomanda(domandaTirocinio);
 		studenteService.cancellaStudente(studente);
 	}
