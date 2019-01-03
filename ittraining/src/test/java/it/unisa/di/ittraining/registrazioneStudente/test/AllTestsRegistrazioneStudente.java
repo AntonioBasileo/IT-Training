@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({RegistrazioneStudenteNomeNonValidoTest.class, RegistrazioneStudenteDataDiNascitaNonValidaTest.class,
 	RegistrazioneStudenteEmailNonValidaTest.class, RegistrazioneStudenteMatricolaNonValidaTest.class, 
-	RegistrazioneStudentePasswordNonValidaTest.class, RegistrazioneStudenteSuccessoTest.class})
+	RegistrazioneStudentePasswordNonValidaTest.class})
 
 public class AllTestsRegistrazioneStudente {
 
