@@ -27,12 +27,15 @@ public class ProgettoFormativoService {
 		
 		DomandaTirocinio domanda = domandeRep.findById(id);
 		domanda.setStatus(DomandaTirocinio.ACCETTATA_AZIENDA);
-		domanda.setProgettoFormativo(progetto);
 		
 		progetto.setTutorAziendale((TutorAziendale)utentiService.getUtenteAutenticato());
 		progetto.setAzienda(((TutorAziendale)utentiService.getUtenteAutenticato()).getAzienda());
 		
 		progettoRep.save(progetto);
+
+		domanda.setProgettoFormativo(progetto);
+		
+		domandeRep.save(domanda);
 		
 		return progetto;
 	}

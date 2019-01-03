@@ -45,11 +45,11 @@ public class AziendaService {
 		
 		tutor.setNome(utentiService.validaNome(tutor.getNome()));
 		tutor.setCognome(utentiService.validaCognome(tutor.getCognome()));
-		tutor.setEmail(validaEmailTutor(tutor.getEmail(), tutor.getAzienda().getNome()));
+		tutor.setEmail(validaEmailTutor(nomeAzienda, tutor.getEmail()));
 		tutor.setUsername(utentiService.validaUsername(tutor.getUsername()));
 		tutor.setDataDiNascita(utentiService.validaDataDiNascita(tutor.getDataDiNascita()));
 		tutor.setPassword(utentiService.validaPassword(tutor.getPassword()));
-		tutor.setAzienda(repAzienda.findByNome(validaNome(nomeAzienda)));
+		tutor.setAzienda(repAzienda.findByNome(nomeAzienda));
 		tutor.setSesso(utentiService.validaSesso(tutor.getSesso()));
 		tutor.setTelefono(utentiService.validaTelefono(tutor.getTelefono()));
 		

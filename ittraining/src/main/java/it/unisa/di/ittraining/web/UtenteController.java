@@ -146,15 +146,9 @@ public class UtenteController {
 			if(utenteService.getUtenteAutenticato() == null || !(utenteService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
 				return "not-available";
 		 
-		 TutorAccademico tutor = tutorService.findByUsername(op);
-		 Studente studente = (Studente)utenteService.getUtenteAutenticato();
 		 
-		 tutor.getStudenti().add(studente);
-		 studente.setTutor(tutor);
+		tutorService.associaTutorAccademico(op);
 		 
-		 studentiService.registraStudente(studente);
-		 tutorService.registraTutorAccademico(tutor);
-		 
-		 return "/lista-tutor";
+		 return "redirect:/lista-tutor";
 	 }
 }
