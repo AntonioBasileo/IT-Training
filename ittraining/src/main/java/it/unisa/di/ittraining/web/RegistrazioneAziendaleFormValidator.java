@@ -11,11 +11,13 @@ import org.springframework.validation.Validator;
 import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaService;
-import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
+import it.unisa.di.ittraining.azienda.EmailNonAssociataException;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
 import it.unisa.di.ittraining.utente.EmailNonValidaException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoCortoException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoLungoException;
 import it.unisa.di.ittraining.utente.NomeNonValidoException;
 import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
 import it.unisa.di.ittraining.utente.PasswordNonValidaException;
@@ -30,9 +32,6 @@ public class RegistrazioneAziendaleFormValidator implements Validator {
 
 	  @Autowired
 	  private UtenteService utentiService;
-	  
-	  @Autowired
-	  private DomandaTirocinioService domandeService;
 	  
 	  @Autowired
 	  private AziendaService aziendeService;
@@ -55,6 +54,12 @@ public class RegistrazioneAziendaleFormValidator implements Validator {
 		} catch (NomeNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("nome", "formRegistrazione.nome.nonValido");
+		} catch (NomeCognomeTroppoLungoException e) {
+			errors.rejectValue("nome", "formRegistrazione.nome.lungo");
+			e.printStackTrace();
+		} catch (NomeCognomeTroppoCortoException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("nome", "formRegistrazione.nome.corto");
 		}
 		  
 		  try {
@@ -62,6 +67,12 @@ public class RegistrazioneAziendaleFormValidator implements Validator {
 		} catch (CognomeNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("cognome", "formRegistrazione.cognome.nonValido");
+		} catch (NomeCognomeTroppoLungoException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("cognome", "formRegistrazione.cognome.lungo");
+		} catch (NomeCognomeTroppoCortoException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("cognome", "formRegistrazione.cognome.corto");
 		}
 		  
 		  try {
@@ -82,16 +93,6 @@ public class RegistrazioneAziendaleFormValidator implements Validator {
 		}
 		  
 		  try {
-			  aziendeService.validaEmailAziendale(form.getEmail());
-		} catch (EmailEsistenteException e) {
-			// TODO Auto-generated catch block
-			errors.rejectValue("email", "formRegistrazioneEsistente.email.aziendale.emailEsistente");
-		} catch (EmailNonValidaException e) {
-			// TODO Auto-generated catch block
-			errors.rejectValue("email", "formRegistrazione.email.aziendale.nonValida");
-		}
-		  
-		  try {
 			  utentiService.validaPasswords(form.getPassword(), form.getConfermaPassword());
 		} catch (PasswordNonValidaException e) {
 			// TODO Auto-generated catch block
@@ -109,16 +110,26 @@ public class RegistrazioneAziendaleFormValidator implements Validator {
 		}
 		  
 		  try {
-			  
-			  domandeService.validaNomeAzienda(form.getNomeAzienda());
-		} catch (AziendaNonValidaException e) {
-			
+			aziendeService.validaNomeForTutor(form.getNomeAzienda());
+		} catch (AziendaNonValidaException e1) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("nomeAzienda", "formConvenzione.nome.nonValido");
 		} catch (AziendaNonEsistenteException e) {
-			
 			// TODO Auto-generated catch block
 			errors.rejectValue("nomeAzienda", "formConvenzione.nome.nonEsistente");
+		}
+		  
+		  try {
+			aziendeService.validaEmailTutor(form.getNomeAzienda(), form.getEmail());
+		} catch (EmailNonValidaException e1) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("email", "formConvenzione.email.nonValida");
+		} catch (EmailEsistenteException e1) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("email", "formConvenzione.email.esistente");
+		} catch (EmailNonAssociataException e1) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("email", "formConvenzione.email.nonAssociata");
 		}
 		  
 		  try {
@@ -137,4 +148,6 @@ public class RegistrazioneAziendaleFormValidator implements Validator {
 		    	errors.rejectValue("giornoNascita", "formRegistrazione.data.nonValida");
 		    } 
 	  }
+	  
+	  
 }

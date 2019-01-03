@@ -13,6 +13,8 @@ import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
 import it.unisa.di.ittraining.utente.EmailNonValidaException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoCortoException;
+import it.unisa.di.ittraining.utente.NomeCognomeTroppoLungoException;
 import it.unisa.di.ittraining.utente.NomeNonValidoException;
 import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
 import it.unisa.di.ittraining.utente.PasswordNonValidaException;
@@ -49,6 +51,12 @@ public class RegistrazioneImpiegatoFormValidator implements Validator {
 		} catch (NomeNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("nome", "formRegistrazione.nome.nonValido");
+		} catch (NomeCognomeTroppoLungoException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("nome", "formRegistrazione.nome.lungo");
+		} catch (NomeCognomeTroppoCortoException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("nome", "formRegistrazione.nome.corto");
 		}
 		  
 		  try {
@@ -56,6 +64,12 @@ public class RegistrazioneImpiegatoFormValidator implements Validator {
 		} catch (CognomeNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("cognome", "formRegistrazione.cognome.nonValido");
+		} catch (NomeCognomeTroppoLungoException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("cognome", "fformRegistrazione.cognome.lungo");
+		} catch (NomeCognomeTroppoCortoException e) {
+			// TODO Auto-generated catch block
+			errors.rejectValue("cognome", "formRegistrazione.cognome.corto");
 		}
 		  
 		  try {

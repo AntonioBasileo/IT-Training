@@ -26,6 +26,14 @@ public class StudentiService {
 		  
 	  }
 	  
+	  public void cancellaStudente(Studente studente) {
+		  studenteRepository.delete(studente);
+	  }
+	  
+	  public boolean existsByMatricola(String matricola) {
+		  return studenteRepository.existsByMatricola(matricola);
+	  }
+	  
 	  
 	  public String validaMatricolaStudente(String matricolaStudente)
 		         throws MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException {

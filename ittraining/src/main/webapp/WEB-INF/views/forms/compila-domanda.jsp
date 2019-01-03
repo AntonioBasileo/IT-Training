@@ -67,7 +67,7 @@
                         <label for="annoInizio">Anno</label>
           </div>
           
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <form:errors path="giornoInizio" cssClass="helper-text red-text chip" />
           </div>
         </div>
@@ -130,23 +130,29 @@
                         <label for="annoFine">Anno</label>
           </div>
           
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <form:errors path="giornoFine" cssClass="helper-text red-text chip" />
           </div>
         </div>  
         
         <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <i class="material-icons prefix">business_center</i>
             <form:input path="nomeAzienda" id="azienda" value="${nomeAzienda}"/>
             <label for="nomeAzienda">Nome azienda</label>
+            <form:errors path="nomeAzienda" cssClass="helper-text red-text chip" />
+          </div>
+         </div>  
+        
+        <div class="row">
+          <div class="input-field col s12">
             <form:errors path="nomeAzienda" cssClass="helper-text red-text chip" />
           </div>
          </div>
         
         <div class="row">
         	<p class="teal-text">CFU tirocinio:</p>
-        	<div class="input-fiel col s3">
+        	<div class="input-fiel col s6">
         		<form:select path="cfu" id="cfu"  selected="selected">
         			<form:option value="6">
         				6
