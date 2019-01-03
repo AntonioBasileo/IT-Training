@@ -88,6 +88,10 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	  
 	/** Costante che definisce il numero massimo di CFU da poter associare ad una domanda. */
 	public static final int MAX_CFU = 18;
+
+	  
+	/** Costante che definisce il numero massimo di CFU da poter associare ad una domanda. */
+	public static final int MIN_CFU = 2;
 	  
 	/**
 	 * Definisce l'ordine di comparazione tra le domande di tirocinio in base al campo data.

@@ -1,6 +1,6 @@
 package it.unisa.di.ittraining.domandatirocinio;
 
-public class NumeroCfuNonValido extends Exception {
+public class NumeroCfuNonValidoException extends Exception {
 	
 	/**
 	 * 
@@ -9,11 +9,11 @@ public class NumeroCfuNonValido extends Exception {
 	
 	private static final String messagiodefault = "Il numero di CFU non è valido";
 	
-	public NumeroCfuNonValido() {
+	public NumeroCfuNonValidoException() {
 		super(messagiodefault);
 	}
 	
-	public NumeroCfuNonValido(String messaggio) {
+	public NumeroCfuNonValidoException(String messaggio) {
 		super(messaggio);
 	}
 }
