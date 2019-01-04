@@ -53,12 +53,12 @@ public class RegistrazioneStudenteTest {
 		studente.setSesso("F");
 		studente.setEmail("laura@studenti.unisa.it");
 		studente.setPassword("ab12cd34ef");
-		studente.setUsername("laura");
+		studente.setUsername("laura1997");
 		studente.setTelefono("3404050333");
 		
 		
-		
 		when(studentiService.registraStudente(studente)).thenReturn(studente);
+		
 		
 		
 		
@@ -128,7 +128,7 @@ public class RegistrazioneStudenteTest {
 		studente.setSesso("F");
 		studente.setEmail("laura@studenti.unisa.it");
 		studente.setPassword("ab12cd34ef");
-		studente.setUsername("laura");
+		studente.setUsername("laura1997");
 		studente.setTelefono("3404050333");
 		
 		
@@ -163,7 +163,7 @@ public class RegistrazioneStudenteTest {
 		studente.setSesso("F");
 		studente.setEmail("laura@gmail.com");
 		studente.setPassword("ab12cd34ef");
-		studente.setUsername("laura");
+		studente.setUsername("laura1997");
 		studente.setTelefono("3404050333");
 		
 		
@@ -198,11 +198,10 @@ public class RegistrazioneStudenteTest {
 		studente.setSesso("F");
 		studente.setEmail("laura@studenti.unisa.it");
 		studente.setPassword("ab12cd34ef");
-		studente.setUsername("laura");
-		
+		studente.setUsername("laura1997");
 		studente.setTelefono("3404050333");
 		
-		
+	
 		
 		when(studentiService.registraStudente(studente)).thenReturn(studente);
 		
@@ -234,7 +233,7 @@ public class RegistrazioneStudenteTest {
 		studente.setSesso("F");
 		studente.setEmail("laura@studenti.unisa.it");
 		studente.setPassword("abcd");
-		studente.setUsername("laura");
+		studente.setUsername("laura1997");
 		studente.setTelefono("3404050333");
 		
 		
