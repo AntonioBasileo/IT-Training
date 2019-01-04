@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
+import it.unisa.di.ittraining.utente.UtenteRepository;
 import it.unisa.di.ittraining.utente.UtenteService;
 import junit.framework.TestCase;
 
@@ -27,6 +28,7 @@ public class RegistrazioneStudenteDataDiNascitaNonValidaTest extends TestCase {
 	private Studente studente;
 	@Autowired
 	private UtenteService u;
+	
 	
 	@Before
 	public void setUp() {
