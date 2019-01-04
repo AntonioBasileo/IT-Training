@@ -27,6 +27,7 @@ import it.unisa.di.ittraining.utente.SessoNonValidoException;
 import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
 import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
+import it.unisa.di.ittraining.utente.UtenteService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegistrazioneTutorAccademicoTest {
@@ -34,6 +35,9 @@ public class RegistrazioneTutorAccademicoTest {
 	
 	@InjectMocks
 	private TutorAccademicoService tutorAccademicoService;
+	
+	@Mock
+	private UtenteService utentiService;
 	
 	@Mock
 	private TutorAccademicoRepository tutorAccademicoRepository;

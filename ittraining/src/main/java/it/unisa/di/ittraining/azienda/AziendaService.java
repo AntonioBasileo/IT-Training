@@ -102,7 +102,7 @@ public class AziendaService {
 		
 		if(!email.matches(Azienda.EMAIL_PATTERN_AZIENDALE)) throw new EmailNonValidaException("Il formato dell'email dell'azienda non rispetta il formato indicato");
 		
-		if(repTutor.existsByEmail(email)) throw new EmailEsistenteException("Email utilizzata già da un altro ente");
+		if(repAzienda.existsByEmail(email)) throw new EmailEsistenteException("Email utilizzata già da un altro ente");
 		
 		return email;
 	}
@@ -112,9 +112,9 @@ public class AziendaService {
 		
 		if(!email.matches(Azienda.EMAIL_PATTERN_AZIENDALE)) throw new EmailNonValidaException("Il formato dell'email dell'azienda non rispetta il formato indicato");
 		
-		if(repTutor.existsByEmail(email)) throw new EmailEsistenteException("Email utilizzata già da un altro ente");
+		if(repTutor.existsByEmail(email)) throw new EmailEsistenteException("Email utilizzata già da un altro tutor aziendale");
 		
-		if(!repAzienda.existsByNomeAndEmail(nomeAzienda, email)) throw new EmailNonAssociataException("Email utilizzata già da un altro ente aziendale");
+		if(!repAzienda.existsByNomeAndEmail(nomeAzienda, email)) throw new EmailNonAssociataException("L'email non è associata ad alcuna azienda");
 		
 		return email;
 	}

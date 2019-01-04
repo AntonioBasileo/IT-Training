@@ -15,8 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 import it.unisa.di.ittraining.studente.Studente;
-import it.unisa.di.ittraining.studente.StudentiService;
-import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
@@ -43,9 +41,6 @@ public class UtenteController {
 	
 	@Autowired
 	private TutorAccademicoService tutorService;
-	
-	@Autowired
-	private StudentiService studentiService;
 	
 	
 	@RequestMapping(value = "/login-form")
