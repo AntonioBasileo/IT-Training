@@ -1,24 +1,23 @@
 package it.unisa.di.ittraining.domandaTirocinio.test;
 
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.time.Month;
 
-import javax.transaction.Transactional;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.test.annotation.Rollback;
 
 import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaRepository;
-import it.unisa.di.ittraining.azienda.AziendaService;
+import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DataFinePrecedenteDataInizioException;
 import it.unisa.di.ittraining.domandatirocinio.DataNonValidaException;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
@@ -28,13 +27,14 @@ import it.unisa.di.ittraining.domandatirocinio.MassimoNumeroCfuCumulabiliExcepti
 import it.unisa.di.ittraining.domandatirocinio.NumeroCfuNonValidoException;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudenteRepository;
+import it.unisa.di.ittraining.utente.AutenticazioneHolder;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 
-@Transactional
-@Rollback
-@RunWith(MockitoJUnitRunner.class)
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(AutenticazioneHolder.class)
 public class CompilazioneDomandaTirocinioTest {
 
 	@InjectMocks
@@ -52,41 +52,45 @@ public class CompilazioneDomandaTirocinioTest {
 	@Mock
 	private StudenteRepository studenteRepository;
 	
+	@org.junit.Before
+	public void inizializzaMock() {
+	  PowerMockito.mockStatic(AutenticazioneHolder.class);
+	}
+	
 	@Test
 	public void registraDomanda() throws AziendaNonValidaException, AziendaNonEsistenteException, DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
 		
-		Azienda azienda= new Azienda();
-		azienda.setNome("theorem");
-		azienda.setSede("Fisciano");
-		azienda.setEmail("gianfilibertaoliva@gmail.com");
-		azienda.setIndirizzo("via Rossi 12");
-		azienda.setTelefono("0981234567");
+		TutorAziendale tutor = new TutorAziendale();
+		tutor.setNome("marco");
+		tutor.setCognome("verdi");
+		tutor.setDataDiNascita(LocalDate.of(1980, Month.APRIL, 1));
+		tutor.setSesso("M");
+		tutor.setEmail("marco@gmail.com");
 		
-		aziendaRepository.save(azienda);
+		Azienda azienda = new Azienda();
+		azienda.setNome("Grafica SRL");
+		azienda.setTelefono("3333333333");
+		azienda.setSede("Avellino");
+		azienda.setIndirizzo("Via Roma 45");
+		azienda.setEmail(tutor.getEmail());
+		azienda.setTutor(tutor);
 		
 		Studente studente = new Studente();
-		studente.setNome("Laura");
-		studente.setCognome("Oliva");
-		studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
-		studente.setMatricola("0512100000");
-		studente.setSesso("F");
-		studente.setEmail("laura@studenti.unisa.it");
-		studente.setPassword("ab12cd34ef");
-		studente.setUsername("laura1997");
-		studente.setTelefono("3404050333");
 		
-		studenteRepository.save(studente);
 		
 		DomandaTirocinio domandaTirocinio= new DomandaTirocinio();
-		domandaTirocinio.setAzienda(azienda);
 		domandaTirocinio.setCfu(6);
 		domandaTirocinio.setInizioTirocinio(LocalDate.of(2019, Month.FEBRUARY, 12));
 		domandaTirocinio.setFineTirocinio(LocalDate.of(2019, Month.MARCH, 20));
+		domandaTirocinio.setAzienda(azienda);
+		
+		studente.getDomandeTirocinio().add(domandaTirocinio);
 		domandaTirocinio.setStudente(studente);
 		
-		
-		when(aziendaRepository.save(azienda)).thenReturn(azienda);
-		when(studenteRepository.save(studente)).thenReturn(studente);
+		when(AutenticazioneHolder.getUtente()).thenReturn(studente.getUsername());
+		when(utenteService.getUtenteAutenticato()).thenReturn(studente);
+		when(aziendaRepository.existsByNome(azienda.getNome())).thenReturn(true);
+		when(aziendaRepository.findByNome(domandaTirocinioService.validaNomeAzienda(azienda.getNome()))).thenReturn(azienda);
 		when(domandaTirocinioService.registraDomanda(domandaTirocinio, azienda.getNome())).thenReturn(domandaTirocinio);
 		
 		
@@ -94,7 +98,7 @@ public class CompilazioneDomandaTirocinioTest {
 		
 		try {
 			domandaTirocinioService.registraDomanda(domandaTirocinio, azienda.getNome());
-		} catch (AziendaNonValidaException | AziendaNonEsistenteException | DataDiNascitaNonValidaException
+		} catch (AziendaNonValidaException | AziendaNonEsistenteException
 				| DataNonValidaException | DataFinePrecedenteDataInizioException | MassimoNumeroCfuCumulabiliException
 				| NumeroCfuNonValidoException e) {
 			// TODO Auto-generated catch block
@@ -102,5 +106,33 @@ public class CompilazioneDomandaTirocinioTest {
 		}
 	}
 	
+	@Test(expected = DataNonValidaException.class)
+	public void validaDataPrecedenteAdOggi() throws DataNonValidaException {
+		LocalDate data = LocalDate.of(2018, Month.APRIL, 23);
+		
+		when(domandaTirocinioService.validaDataInizio(data)).thenReturn(data);
+		
+		try {
+			domandaTirocinioService.validaDataInizio(data);
+		} catch (DataNonValidaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test(expected = DataFinePrecedenteDataInizioException.class)
+	public void validaDataFine() throws DataNonValidaException, DataFinePrecedenteDataInizioException {
+		LocalDate data_inizio = LocalDate.now();
+		LocalDate data_fine = LocalDate.of(2019, 1, 1);
+		
+		when(domandaTirocinioService.validaDataFine(data_inizio, data_fine)).thenReturn(data_fine);
+		
+		try {
+			domandaTirocinioService.validaDataFine(data_inizio, data_fine);
+		} catch (DataNonValidaException | DataFinePrecedenteDataInizioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

@@ -46,13 +46,14 @@ public class DomandaTirocinioService {
 	@Transactional(rollbackFor = Exception.class)
 	public DomandaTirocinio registraDomanda(DomandaTirocinio domanda, String nomeAzienda) throws AziendaNonValidaException, AziendaNonEsistenteException,
 	DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
-		
-		
+
+		Studente studente = (Studente)utentiService.getUtenteAutenticato();
 		
 		domanda.setAzienda(rep.findByNome(validaNomeAzienda(nomeAzienda)));
 		domanda.setInizioTirocinio(validaDataInizio(domanda.getInizioTirocinio()));
 		domanda.setFineTirocinio(validaDataFine(domanda.getInizioTirocinio(), domanda.getFineTirocinio()));
 		domanda.setCfu(validaNumeroCfu(domanda.getCfu()));
+	    domanda.setStudente(studente);
 		
 		
 	    if(domanda.getCfu() == 6)
@@ -77,12 +78,12 @@ public class DomandaTirocinioService {
 		return domandeRep.save(domanda);
 	}
 
-	public LocalDate validaDataInizio(LocalDate inizio) throws DataDiNascitaNonValidaException {
-		if(inizio == null) throw new DataDiNascitaNonValidaException("Il campo Data inizio non può essere nullo");
+	public LocalDate validaDataInizio(LocalDate inizio) throws DataNonValidaException {
+		if(inizio == null) throw new DataNonValidaException("Il campo Data inizio non può essere nullo");
 		
 		LocalDate oggi = LocalDate.now();
 		
-		if(inizio.isBefore(oggi)) throw new DataDiNascitaNonValidaException("La data di inizio non può essere precedente ad oggi");
+		if(inizio.isBefore(oggi)) throw new DataNonValidaException("La data di inizio non può essere precedente ad oggi");
 		
 		return inizio;
 	}
@@ -124,7 +125,8 @@ public class DomandaTirocinioService {
 		
 		int somma_in_attesa = cfu + studente.getCfuInAttesa();
 		
-		if(somma_approvate > DomandaTirocinio.MAX_CFU || somma_in_attesa > DomandaTirocinio.MAX_CFU) throw new MassimoNumeroCfuCumulabiliException();
+		if(somma_approvate > DomandaTirocinio.MAX_CFU || somma_in_attesa > DomandaTirocinio.MAX_CFU || (somma_approvate + somma_in_attesa + cfu) > DomandaTirocinio.MAX_CFU) 
+			throw new MassimoNumeroCfuCumulabiliException();
 		
 		if(cfu < DomandaTirocinio.MIN_CFU) throw new NumeroCfuNonValidoException();
 		
