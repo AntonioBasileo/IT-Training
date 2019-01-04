@@ -38,7 +38,7 @@
 	      <artifactId>spring-boot-starter-test</artifactId>
 	      <scope>test</scope>
 	    </dependency>
-    
+
 	    <!-- Spring DevTools -->
 	    <dependency>
 	      <groupId>org.springframework.boot</groupId>
@@ -51,15 +51,15 @@
 	      <groupId>org.hibernate</groupId>
 	      <artifactId>hibernate-java8</artifactId>
 	    </dependency>
-	
-			
+
+
 	    <!-- MySQL -->
 	    <dependency>
 	      <groupId>mysql</groupId>
 	      <artifactId>mysql-connector-java</artifactId>
 	      <scope>runtime</scope>
 	    </dependency>
-	    
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -67,12 +67,6 @@
 		</dependency>
 
 	    <!-- Servlet, JSP & Jasper -->
-		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>javax.servlet-api</artifactId>
-		    <version>4.0.1</version>
-		    <scope>provided</scope>
-		</dependency>
 	    <dependency>
 		    <groupId>javax.servlet.jsp</groupId>
 		    <artifactId>javax.servlet.jsp-api</artifactId>
@@ -91,9 +85,7 @@
 	      <artifactId>jstl</artifactId>
 	      <version>1.2</version>
 	    </dependency>
-		
- 
-			
+
 	</dependencies>
 
 	<build>

@@ -12,6 +12,8 @@ public interface AziendaRepository extends JpaRepository<Azienda, String> {
 	
 	Azienda findByNome(String nome);
 	
+	boolean existsByEmail(String email);
+	
 	boolean existsByNomeAndEmail(String nome, String email);
 	
 	boolean existsByNome(String nome);

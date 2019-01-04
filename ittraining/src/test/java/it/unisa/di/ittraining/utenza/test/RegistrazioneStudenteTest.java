@@ -2,7 +2,7 @@ package it.unisa.di.ittraining.utenza.test;
 
 
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -13,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import it.unisa.di.ittraining.azienda.TelefonoNonValidoException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 import it.unisa.di.ittraining.studente.Studente;
@@ -26,12 +25,13 @@ import it.unisa.di.ittraining.utente.EmailNonValidaException;
 import it.unisa.di.ittraining.utente.NomeCognomeTroppoCortoException;
 import it.unisa.di.ittraining.utente.NomeCognomeTroppoLungoException;
 import it.unisa.di.ittraining.utente.NomeNonValidoException;
-import it.unisa.di.ittraining.utente.PasswordErrataException;
 import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
 import it.unisa.di.ittraining.utente.PasswordNonValidaException;
 import it.unisa.di.ittraining.utente.SessoNonValidoException;
 import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
+import it.unisa.di.ittraining.utente.Utente;
+import it.unisa.di.ittraining.utente.UtenteService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegistrazioneStudenteTest {
@@ -40,7 +40,14 @@ public class RegistrazioneStudenteTest {
 	private StudentiService studentiService;
 	
 	@Mock
-	private StudenteRepository studenteRepository;
+	private UtenteService utenteService;
+	
+	@Mock
+	private StudenteRepository studentiRepository;
+	
+	@Mock
+	private Utente utente;
+	
 	
 	@Test
 	public void registraStudenteSuccesso() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException, it.unisa.di.ittraining.utente.TelefonoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException {
@@ -76,78 +83,6 @@ public class RegistrazioneStudenteTest {
 			
 		
 		
-		
-	}
-	
-	
-	
-	
-	@Test(expected =  NomeCognomeTroppoCortoException.class)
-	public void registraStudenteNomeTroppoCorto() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException, it.unisa.di.ittraining.utente.TelefonoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException {
-		
-		Studente studente = new Studente();
-		studente.setNome("La");
-		studente.setCognome("Oliva");
-		studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
-		studente.setMatricola("0512100000");
-		studente.setSesso("F");
-		studente.setEmail("laura@studenti.unisa.it");
-		studente.setPassword("ab12cd34ef");
-		studente.setUsername("laura");
-		studente.setTelefono("3404050333");
-		
-		
-		
-		when(studentiService.registraStudente(studente)).thenReturn(studente);
-		
-	
-	
-			try {
-				studentiService.registraStudente(studente);
-			} catch (NomeNonValidoException | NomeCognomeTroppoLungoException | NomeCognomeTroppoCortoException
-					| CognomeNonValidoException | DataDiNascitaNonValidaException | UsernameNonValidoException
-					| UsernameEsistenteException | EmailNonValidaException | EmailEsistenteException
-					| SessoNonValidoException | it.unisa.di.ittraining.utente.TelefonoNonValidoException
-					| MatricolaStudenteNonValidaException | MatricolaStudenteEsistenteException
-					| PasswordNonValidaException | PasswordNonCorrispondentiException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		
-	}
-	
-	@Test(expected =  DataDiNascitaNonValidaException.class)
-	public void registraStudenteDataDiNascitaNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException, it.unisa.di.ittraining.utente.TelefonoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException {
-		
-		Studente studente = new Studente();
-		studente.setNome("Laura");
-		studente.setCognome("Oliva");
-		studente.setDataDiNascita(LocalDate.of(2009, Month.JUNE, 29));
-		studente.setMatricola("0512100000");
-		studente.setSesso("F");
-		studente.setEmail("laura@studenti.unisa.it");
-		studente.setPassword("ab12cd34ef");
-		studente.setUsername("laura1997");
-		studente.setTelefono("3404050333");
-		
-		
-		
-		when(studentiService.registraStudente(studente)).thenReturn(studente);
-		
-		
-			try {
-				studentiService.registraStudente(studente);
-			} catch (NomeNonValidoException | NomeCognomeTroppoLungoException | NomeCognomeTroppoCortoException
-					| CognomeNonValidoException | DataDiNascitaNonValidaException | UsernameNonValidoException
-					| UsernameEsistenteException | EmailNonValidaException | EmailEsistenteException
-					| SessoNonValidoException | it.unisa.di.ittraining.utente.TelefonoNonValidoException
-					| MatricolaStudenteNonValidaException | MatricolaStudenteEsistenteException
-					| PasswordNonValidaException | PasswordNonCorrispondentiException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 		
 	}
 	
@@ -188,7 +123,10 @@ public class RegistrazioneStudenteTest {
 	
 	
 	@Test(expected =  MatricolaStudenteNonValidaException.class)
-	public void registraStudenteMatricolaNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException, it.unisa.di.ittraining.utente.TelefonoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException {
+	public void registraStudenteMatricolaNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
+	DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException,
+	it.unisa.di.ittraining.utente.TelefonoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, PasswordNonValidaException,
+	PasswordNonCorrispondentiException {
 		
 		Studente studente = new Studente();
 		studente.setNome("Laura");
@@ -217,46 +155,7 @@ public class RegistrazioneStudenteTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		
 	}
-	
-	
-	@Test(expected =  PasswordNonValidaException.class)
-	public void registraStudentePasswordNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException, it.unisa.di.ittraining.utente.TelefonoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException {
-		
-		Studente studente = new Studente();
-		studente.setNome("Laura");
-		studente.setCognome("Oliva");
-		studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
-		studente.setMatricola("0512100000");
-		studente.setSesso("F");
-		studente.setEmail("laura@studenti.unisa.it");
-		studente.setPassword("abcd");
-		studente.setUsername("laura1997");
-		studente.setTelefono("3404050333");
-		
-		
-		
-		when(studentiService.registraStudente(studente)).thenReturn(studente);
-		
-		
-	
-			try {
-				studentiService.registraStudente(studente);
-			} catch (NomeNonValidoException | NomeCognomeTroppoLungoException | NomeCognomeTroppoCortoException
-					| CognomeNonValidoException | DataDiNascitaNonValidaException | UsernameNonValidoException
-					| UsernameEsistenteException | EmailNonValidaException | EmailEsistenteException
-					| SessoNonValidoException | it.unisa.di.ittraining.utente.TelefonoNonValidoException
-					| MatricolaStudenteNonValidaException | MatricolaStudenteEsistenteException
-					| PasswordNonValidaException | PasswordNonCorrispondentiException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-	}
-	
-	
-	
 	
 }
