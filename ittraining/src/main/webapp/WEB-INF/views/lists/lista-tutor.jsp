@@ -10,27 +10,6 @@
 
 	  
 	<c:choose>
-		<c:when test="${studente.isNotThereDomandaAccettata()}">
-			<div class="row">
-				<div class="col s12">
-						<div class="card horizontal">
-							<div class="card-image">
-								<img src="resources/images/choose.svg">
-							</div>
-								<div class="card-stacked">
-								<div class="card-content">
-									<h5 class="teal-text">Spiacenti</h5>
-									<p>Non è presente alcuna domanda di tirocinio approvata da un'azienda. Compilane una se ancora non l'hai fatto</p>
-								</div>
-					        <div class="card-action">
-					          <a href="/home">Torna alla home</a>
-					        </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</c:when>
-		
 		
 		<c:when test="${empty studente.tutor}">
 		    <div class="row"></div>
