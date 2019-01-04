@@ -6,6 +6,7 @@ import org.springframework.validation.Validator;
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaService;
+import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
 import it.unisa.di.ittraining.azienda.TelefonoNonValidoException;
@@ -70,7 +71,7 @@ public class ConvenzioneFormValidator implements Validator {
 		} catch (EmailNonValidaException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("email", "formConvenzione.email.nonValida");
-		} catch (EmailEsistenteException e) {
+		} catch (EmailAziendaEsistenteException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("email", "formConvenzione.email.esistente");
 		}

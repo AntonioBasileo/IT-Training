@@ -13,6 +13,7 @@ import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaService;
+import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
 import it.unisa.di.ittraining.azienda.TelefonoNonValidoException;
@@ -64,7 +65,7 @@ public class ConvenzioneController {
 	@RequestMapping( value = "/aggiungi-ente", method = RequestMethod.POST)
 	public String aggiungiEnte(@ModelAttribute("convenzioneForm") ConvenzioneForm convenzioneForm, Model model, BindingResult result, RedirectAttributes redirectAttributes) 
 			throws IndirizzoNonValidoException, NomeNonValidoException, SedeNonValidaException, AziendaNonValidaException, AziendaEsistenteException,
-			EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException {
+			EmailNonValidaException, TelefonoNonValidoException, EmailAziendaEsistenteException {
 		
 		validator.validate(convenzioneForm, result);
 		

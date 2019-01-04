@@ -16,6 +16,7 @@ import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaRepository;
 import it.unisa.di.ittraining.azienda.AziendaService;
+import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.EmailNonAssociataException;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
@@ -56,7 +57,7 @@ public class RegistrazioneTutorAziendaleTest {
 	public void registratutorAziendaleSuccesso() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
 	CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException,
 PasswordNonValidaException, PasswordNonCorrispondentiException, DataDiNascitaNonValidaException, AziendaNonValidaException, AziendaEsistenteException, SessoNonValidoException,
-TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException {
+TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException, EmailAziendaEsistenteException {
 		
 		TutorAziendale tutorAziendale = new TutorAziendale();
 		tutorAziendale.setNome("Lina");
@@ -84,7 +85,7 @@ TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException,
 		
 		try {
 			aziendeService.registraAzienda(azienda);
-		} catch(AziendaNonValidaException | AziendaEsistenteException | SedeNonValidaException | IndirizzoNonValidoException | EmailNonValidaException | EmailEsistenteException e) {
+		} catch(AziendaNonValidaException | AziendaEsistenteException | SedeNonValidaException | IndirizzoNonValidoException | EmailNonValidaException | EmailAziendaEsistenteException e) {
 			System.out.println("sono qui");
 			e.printStackTrace();
 		}
@@ -112,7 +113,7 @@ TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException,
 	
 	
 	@Test(expected = EmailNonAssociataException.class)
-	public void registratutorAziendaleEmailNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException, DataDiNascitaNonValidaException, AziendaNonValidaException, AziendaEsistenteException, SessoNonValidoException, TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException {
+	public void registratutorAziendaleEmailNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException, DataDiNascitaNonValidaException, AziendaNonValidaException, AziendaEsistenteException, SessoNonValidoException, TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException, EmailAziendaEsistenteException {
 		
 		TutorAziendale tutorAziendale = new TutorAziendale();
 		tutorAziendale.setNome("Lina");

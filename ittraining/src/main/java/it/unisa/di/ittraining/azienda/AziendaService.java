@@ -64,7 +64,7 @@ public class AziendaService {
 	
 	@Transactional(rollbackFor = Exception.class)
 	public Azienda registraAzienda(Azienda azienda) throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException,
-	EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException {
+	EmailNonValidaException,TelefonoNonValidoException, EmailAziendaEsistenteException {
 		
 		azienda.setNome(validaNome(azienda.getNome()));
 		azienda.setSede(validaSede(azienda.getSede()));
@@ -97,12 +97,12 @@ public class AziendaService {
 		return nome;
 	}
 	
-	public String validaEmailAziendale(String nomeAzienda, String email) throws EmailNonValidaException, EmailEsistenteException {
+	public String validaEmailAziendale(String nomeAzienda, String email) throws EmailNonValidaException,EmailAziendaEsistenteException {
 		if(email == null) throw new EmailNonValidaException();
 		
 		if(!email.matches(Azienda.EMAIL_PATTERN_AZIENDALE)) throw new EmailNonValidaException("Il formato dell'email dell'azienda non rispetta il formato indicato");
 		
-		if(repAzienda.existsByEmail(email)) throw new EmailEsistenteException("Email utilizzata già da un altro ente");
+		if(repAzienda.existsByEmail(email)) throw new EmailAziendaEsistenteException("Email utilizzata già da un altro ente");
 		
 		return email;
 	}
