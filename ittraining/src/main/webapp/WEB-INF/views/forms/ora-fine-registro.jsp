@@ -39,6 +39,7 @@
 		        			<form:option value="0">00</form:option>
 		        		
 		        		</form:select>
+
 		        	</div>
 		        	
 		        	<div class="input-field col s3">
@@ -108,5 +109,10 @@
 		        		</form:select>
 		        	</div>
 		        
-		        </div>  
+		        </div>
+		        	<div class="row">
+		        		<div class="input-field col s12">
+		            		<form:errors path="oraFine" cssClass="helper-text red-text chip" />
+		            	</div>
+		            </div>  
 </html>

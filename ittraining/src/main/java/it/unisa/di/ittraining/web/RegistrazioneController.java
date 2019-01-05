@@ -140,12 +140,12 @@ public class RegistrazioneController {
 		
 
 	    if (result.hasErrors()) {
-		      
-		  redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 		  
 	      redirectAttributes
 	          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneStudente",
 	                             result);
+	      
+	      redirectAttributes.addFlashAttribute("registrazioneStudente", registrazioneStudente);
 	      
 	      if(!model.containsAttribute("testoNotifica"))
 	    	  model.addAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
@@ -194,6 +194,7 @@ public class RegistrazioneController {
 	      redirectAttributes
 	          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneSegreteria",
 	                             result);
+	      
 	      redirectAttributes.addFlashAttribute("registrazioneSegreteria", registrazioneSegreteria);
 	      
 	      if(!model.containsAttribute("testoNotifica"))

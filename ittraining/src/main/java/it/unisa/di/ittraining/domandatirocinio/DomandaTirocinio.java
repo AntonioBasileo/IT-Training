@@ -196,5 +196,12 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 		this.registri = registri;
 	}
 	
-	
+	public float getNumeroOre() {
+		float somma = 0;
+		
+		for(Registro r: registri) 
+			somma += r.getNumero_minuti();
+			
+		return somma;
+	}
 }

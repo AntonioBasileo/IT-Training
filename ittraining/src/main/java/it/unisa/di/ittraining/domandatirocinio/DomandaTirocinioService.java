@@ -85,22 +85,22 @@ public class DomandaTirocinioService {
 		
 		if(inizio.isBefore(oggi)) throw new DataNonValidaException("La data di inizio non può essere precedente ad oggi");
 		
+		
 		return inizio;
 	}
 	
 	public LocalDate validaDataFine(LocalDate inizio, LocalDate fine) throws DataNonValidaException, DataFinePrecedenteDataInizioException {
 		if(fine == null || inizio == null) throw new DataNonValidaException("Il campo Data fine oppure Data inizio non può essere nullo");
 		
-		if(fine.isBefore(inizio)) throw new DataFinePrecedenteDataInizioException();
-			
 		long distanza_anni = ChronoUnit.YEARS.between(inizio, fine);
 		
 		long distanza_mesi = ChronoUnit.MONTHS.between(inizio, fine);
 		
 		long distanza_giorni = ChronoUnit.DAYS.between(inizio, fine);
 		
-		if(distanza_anni >=1 && distanza_mesi > 0 && distanza_giorni > 0) throw new DataNonValidaException("Il tirocinio può durare massimo un anno");
+		if(fine.isBefore(inizio)) throw new DataFinePrecedenteDataInizioException();
 		
+		if((distanza_anni >=1 && distanza_mesi >= 1 && distanza_giorni >= 1)) throw new DataNonValidaException("Il tirocinio può durare massimo un anno");
 		
 		return fine;
 	}

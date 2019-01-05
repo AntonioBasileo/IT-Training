@@ -82,7 +82,8 @@ public class DomandaTirocinioController {
 	@RequestMapping(value = "/compila-domanda", method = RequestMethod.POST)
 	public String elaboraDomandaTirocinio(@ModelAttribute("domandaForm") DomandaTirocinioForm domandaForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) throws AziendaNonValidaException,
 	AziendaNonEsistenteException,
-	DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
+	DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException,
+	NumeroCfuNonValidoException {
 		
 		validator.validate(domandaForm, result);
 		
@@ -156,10 +157,6 @@ public class DomandaTirocinioController {
 	
 	@RequestMapping(value = "/rifiuta-domanda", method = RequestMethod.POST)
 	public String rifiutaDomanda(@ModelAttribute("progettoFormRifiuta") ProgettoFormativoForm form, BindingResult result, RedirectAttributes redirectAttributes) {
-		
-
-		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
-			return "not-available";
 		
 		
 		domandeService.aggiornaStatoDomanda(form.getIdDomanda(), DomandaTirocinio.RIFIUTATA_AZIENDA);
