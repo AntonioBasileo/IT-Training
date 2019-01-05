@@ -102,7 +102,7 @@ TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException,
 					| EmailNonAssociataException | UsernameNonValidoException | UsernameEsistenteException
 					| PasswordNonValidaException | PasswordNonCorrispondentiException | DataDiNascitaNonValidaException
 					| AziendaNonValidaException | AziendaEsistenteException | SessoNonValidoException
-					| TelefonoNonValidoException e) {
+					| it.unisa.di.ittraining.azienda.TelefonoNonValidoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -146,7 +146,7 @@ TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException,
 					| EmailNonAssociataException | UsernameNonValidoException | UsernameEsistenteException
 					| PasswordNonValidaException | PasswordNonCorrispondentiException | DataDiNascitaNonValidaException
 					| AziendaNonValidaException | AziendaEsistenteException | SessoNonValidoException
-					| TelefonoNonValidoException e) {
+					| it.unisa.di.ittraining.azienda.TelefonoNonValidoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
