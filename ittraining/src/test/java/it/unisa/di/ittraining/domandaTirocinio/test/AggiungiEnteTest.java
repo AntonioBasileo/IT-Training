@@ -18,9 +18,7 @@ import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
 import it.unisa.di.ittraining.azienda.TelefonoNonValidoException;
-import it.unisa.di.ittraining.utente.EmailEsistenteException;
 import it.unisa.di.ittraining.utente.EmailNonValidaException;
-import it.unisa.di.ittraining.utente.NomeCognomeTroppoCortoException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AggiungiEnteTest {
@@ -67,8 +65,9 @@ public class AggiungiEnteTest {
 	
 	
 	
-	@Test(expected=AziendaNonValidaException.class)
-	public void registraAziendaNomeTroppoCorto() throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException, EmailAziendaEsistenteException, TelefonoNonValidoException {
+	@Test(expected = AziendaNonValidaException.class)
+	public void registraAziendaNomeTroppoCorto() throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException,
+	EmailAziendaEsistenteException, TelefonoNonValidoException {
 		
 		
 		
@@ -98,8 +97,9 @@ public class AggiungiEnteTest {
 		
 	}
 	
-	@Test(expected=SedeNonValidaException.class)
-	public void registraAziendaSedeNonValida() throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException, EmailAziendaEsistenteException, TelefonoNonValidoException {
+	@Test(expected = SedeNonValidaException.class)
+	public void registraAziendaSedeNonValida() throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException,
+	EmailAziendaEsistenteException, TelefonoNonValidoException {
 		
 		
 		
@@ -130,8 +130,9 @@ public class AggiungiEnteTest {
 	}
 	
 	
-	@Test(expected=IndirizzoNonValidoException.class)
-	public void registraAziendaIndirizzoNonValido() throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException, EmailAziendaEsistenteException, TelefonoNonValidoException {
+	@Test(expected = IndirizzoNonValidoException.class)
+	public void registraAziendaIndirizzoNonValido() throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException,
+	EmailAziendaEsistenteException, TelefonoNonValidoException {
 		
 		
 		
@@ -163,32 +164,6 @@ public class AggiungiEnteTest {
 	
 	
 	
-	@Test(expected=EmailAziendaEsistenteException.class)
-	public void registraAziendaEmailEsistente() throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException {
-		
-				
-		Azienda azienda = new Azienda();
-		
-		azienda.setNome("theorem");
-		azienda.setSede("Fisciano");
-		azienda.setEmail("gianfilibertaoliva@gmail.com");
-		azienda.setIndirizzo("via Rossi 12");
-		azienda.setTelefono("0981234567");
-		
-			
-		when(aziendaRepository.existsByEmail(azienda.getEmail())).thenReturn(true);
-		
-		
-		
-		try {
-			aziendaService.registraAzienda(azienda);
-		} catch (AziendaNonValidaException | AziendaEsistenteException | SedeNonValidaException
-				| IndirizzoNonValidoException | EmailNonValidaException | EmailAziendaEsistenteException
-				| TelefonoNonValidoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+
 	
 }

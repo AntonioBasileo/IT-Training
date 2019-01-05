@@ -25,7 +25,6 @@ import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.domandatirocinio.MassimoNumeroCfuCumulabiliException;
 import it.unisa.di.ittraining.domandatirocinio.NumeroCfuNonValidoException;
-import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.UtenteService;
@@ -101,7 +100,8 @@ public class DomandaTirocinioController {
 		}
 		
 		DomandaTirocinio domanda = new DomandaTirocinio();
-		Studente studente = (Studente)utentiService.getUtenteAutenticato();
+		
+		
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form
 	    LocalDate inizio = LocalDate.of(domandaForm.getAnnoInizio(),
 	    		domandaForm.getMeseInizio(),
@@ -118,7 +118,6 @@ public class DomandaTirocinioController {
 	    domanda.setFineTirocinio(fine);
 	    domanda.setCfu(domandaForm.getCfu());
 	    domanda.setStatus(DomandaTirocinio.IN_ATTESA);
-	    domanda.setStudente(studente);
 	    
 	    domandeService.registraDomanda(domanda, domandaForm.getNomeAzienda());
 	    

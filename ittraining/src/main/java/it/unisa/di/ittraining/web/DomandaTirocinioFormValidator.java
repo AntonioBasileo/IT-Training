@@ -15,7 +15,6 @@ import it.unisa.di.ittraining.domandatirocinio.DataNonValidaException;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.domandatirocinio.MassimoNumeroCfuCumulabiliException;
 import it.unisa.di.ittraining.domandatirocinio.NumeroCfuNonValidoException;
-import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 
 @Component
 public class DomandaTirocinioFormValidator implements Validator {
@@ -40,7 +39,7 @@ public class DomandaTirocinioFormValidator implements Validator {
 		    if (form.getAnnoInizio() == null
 		        || form.getMeseInizio() == null
 		        || form.getGiornoInizio() == null) {
-		      throw new DataDiNascitaNonValidaException();
+		      throw new DataNonValidaException();
 		    }
 		      
 		    LocalDate data = LocalDate.of(form.getAnnoInizio(),
@@ -48,7 +47,7 @@ public class DomandaTirocinioFormValidator implements Validator {
 		                                  form.getGiornoInizio());
 		      
 		      domandeService.validaDataInizio(data);
-		  } catch (DataDiNascitaNonValidaException e) {
+		  } catch (DataNonValidaException e) {
 			  
 		    errors.rejectValue("giornoInizio", "formDomanda.datainizio.nonValida");
 		  } catch(DateTimeException e) {

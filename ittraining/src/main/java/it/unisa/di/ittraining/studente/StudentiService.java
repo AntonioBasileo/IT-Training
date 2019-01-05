@@ -24,7 +24,6 @@ import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.Utente;
 import it.unisa.di.ittraining.utente.UtenteRepository;
-import it.unisa.di.ittraining.utente.UtenteService;
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 
@@ -35,25 +34,36 @@ public class StudentiService {
 	  private StudenteRepository studenteRepository;
 	  
 	  @Autowired
-	  private UtenteService utentiService;
-	  
-	  @Autowired
 	  private UtenteRepository utenteRep;
+
+	  
+	  
+	  /** 
+	   * Costante che rappresenta la minima distanza in anni dalla data corrente 
+	   * per la data di nascita.
+	   */
+	  public static final int MIN_DISTANZA_ANNO_NASCITA = 17;
+		 
+		/** 
+		* Costante che rappresenta la massima distanza in anni dalla data corrente 
+		* per la data di nascita.
+		*/
+	  public static final int MAX_DISTANZA_ANNO_NASCITA = 130;
 	  
 	  @Transactional(rollbackFor = Exception.class)
 	  public Studente registraStudente(Studente studente) throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
 	  DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException, TelefonoNonValidoException,
 	  MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException {
 		  
-		  	studente.setNome(utentiService.validaNome(studente.getNome()));
-		  	studente.setCognome(utentiService.validaCognome(studente.getCognome()));
-		  	studente.setDataDiNascita(utentiService.validaDataDiNascita(studente.getDataDiNascita()));
-		  	studente.setUsername(utentiService.validaUsername(studente.getUsername()));
+		  	studente.setNome(validaNome(studente.getNome()));
+		  	studente.setCognome(validaCognome(studente.getCognome()));
+		  	studente.setDataDiNascita(validaDataDiNascita(studente.getDataDiNascita()));
+		  	studente.setUsername(validaUsername(studente.getUsername()));
 		  	studente.setEmail(validaEmailStudente(studente.getEmail()));
-		  	studente.setSesso(utentiService.validaSesso(studente.getSesso()));
-		  	studente.setTelefono(utentiService.validaTelefono(studente.getTelefono()));
+		  	studente.setSesso(validaSesso(studente.getSesso()));
+		  	studente.setTelefono(validaTelefono(studente.getTelefono()));
 		  	studente.setMatricola(validaMatricolaStudente(studente.getMatricola()));
-		  	studente.setPassword(utentiService.validaPassword(studente.getPassword()));
+		  	studente.setPassword(validaPassword(studente.getPassword()));
 		    
 		    studente = studenteRepository.save(studente);
 		    
@@ -94,15 +104,6 @@ public class StudentiService {
 		  
 		  return email;
 	  }
-	  
-	  
-	  /*PROVA PER IL TEST*/
-	  
-/*
-	 public static final int MIN_DISTANZA_ANNO_NASCITA = 17;
-	 
-
-	 public static final int MAX_DISTANZA_ANNO_NASCITA = 130;
 	
 	  
 	  
@@ -160,8 +161,6 @@ public class StudentiService {
 	      LocalDate oggi = LocalDate.now();
 	      long distanza = ChronoUnit.YEARS.between(dataDiNascita, oggi);
 	      
-	      System.out.println("SCEMO! La distanza è: " + distanza);
-	      
 	      if (distanza < MIN_DISTANZA_ANNO_NASCITA || distanza > MAX_DISTANZA_ANNO_NASCITA) {
 	        throw new DataDiNascitaNonValidaException();
 	      } else {
@@ -208,6 +207,6 @@ public class StudentiService {
 		if(!password.matches(Utente.PASSWORD_PATTERN)) throw new PasswordNonValidaException("STUDENTE SERVICE - Non rispecchia il formato");
 		
 		return password;
-	}*/
+	}
 	  
 }

@@ -158,29 +158,6 @@
 		        
 		        <jsp:include page="/WEB-INF/views/forms/ora-inizio-registro.jsp" />
 		        <jsp:include page="/WEB-INF/views/forms/ora-fine-registro.jsp" />
-		       
-		        
-		        <div class="row">
-		        	<p class="teal-text">Numero ore:</p>
-		        
-		        	<div class="input-field col s6">
-		        	
-		        		<form:select path="numero_ore" class="icons" id="numero_ore">
-		        		
-		        			<form:option value="1">1</form:option>
-		        			<form:option value="2">2</form:option>
-		        			<form:option value="3">3</form:option>
-		        			<form:option value="4">4</form:option>
-		        			<form:option value="5">5</form:option>
-		        			<form:option value="6">6</form:option>
-		        			<form:option value="7">7</form:option>
-		        			<form:option value="8">8</form:option>
-		        		
-		        		</form:select>
-		        	
-		        	</div>
-		        
-		        </div>
 		        
 		          <div class="row right">
 					  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
