@@ -54,7 +54,7 @@ public class RegistrazioneTutorAziendaleTest {
 	
 	
 	@Test
-	public void registratutorAziendaleSuccesso() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
+	public void registraTutorAziendaleSuccesso() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
 	CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException,
 PasswordNonValidaException, PasswordNonCorrispondentiException, DataDiNascitaNonValidaException, AziendaNonValidaException, AziendaEsistenteException, SessoNonValidoException,
 TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException, EmailAziendaEsistenteException {

@@ -19,7 +19,6 @@ import it.unisa.di.ittraining.utente.SessoNonValidoException;
 import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
 import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
-import it.unisa.di.ittraining.utente.UtenteService;
 import it.unisa.di.ittraining.web.RegistrazioneStudenteForm;
 
 import java.time.DateTimeException;
@@ -30,9 +29,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RegistrazioneStudenteFormValidator implements Validator {
-	  
-	  @Autowired
-	  private UtenteService utentiService;
+
 
 	  @Autowired
 	  private StudentiService studentiService;
@@ -50,7 +47,7 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		  RegistrazioneStudenteForm form = (RegistrazioneStudenteForm) target;
 		  
 		  try {
-			  utentiService.validaNome(form.getNome());
+			  studentiService.validaNome(form.getNome());
 		} catch (NomeNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("nome", "formRegistrazione.nome.nonValido");
@@ -63,7 +60,7 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		}
 		  
 		  try {
-			  utentiService.validaCognome(form.getCognome());
+			  studentiService.validaCognome(form.getCognome());
 		} catch (CognomeNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("cognome", "formRegistrazione.cognome.nonValido");
@@ -76,7 +73,7 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		}
 		  
 		  try {
-			utentiService.validaTelefono(form.getTelefono());
+			  studentiService.validaTelefono(form.getTelefono());
 		} catch (TelefonoNonValidoException e1) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("telefono", "formRegistrazione.telefono.nonValido");
@@ -93,7 +90,7 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		}
 		  
 		  try {
-			  utentiService.validaUsername(form.getUsername());
+			  studentiService.validaUsername(form.getUsername());
 		} catch (UsernameNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("username", "formRegistrazione.username.nonValido");
@@ -113,7 +110,7 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		}
 		  
 		  try {
-			  utentiService.validaPasswords(form.getPassword(), form.getConfermaPassword());
+			  studentiService.validaPasswords(form.getPassword(), form.getConfermaPassword());
 		} catch (PasswordNonValidaException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("password", "formRegistrazione.password.passwordsNonValide");
@@ -123,7 +120,7 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		}
 		  
 		  try {
-			  utentiService.validaSesso(form.getSesso());
+			  studentiService.validaSesso(form.getSesso());
 		} catch (SessoNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("sesso", "formRegistrazione.sesso.nonValido");
@@ -140,7 +137,7 @@ public class RegistrazioneStudenteFormValidator implements Validator {
 		                                    form.getMeseNascita(), 
 		                                    form.getGiornoNascita());
 		      
-		      utentiService.validaDataDiNascita(data);
+		      studentiService.validaDataDiNascita(data);
 		    } catch (DataDiNascitaNonValidaException | DateTimeException e) {
 		      errors.rejectValue("giornoNascita", "formRegistrazione.data.nonValida");
 		    } 
