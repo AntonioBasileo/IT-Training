@@ -22,13 +22,9 @@ import it.unisa.di.ittraining.utente.SessoNonValidoException;
 import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
 import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
-import it.unisa.di.ittraining.utente.UtenteService;
 
 @Component
 public class RegistrazioneAccademicoFormValidator implements Validator {
-	  
-	  @Autowired
-	  private UtenteService utentiService;
 	  
 	  @Autowired
 	  private TutorAccademicoService tutorService;
@@ -47,7 +43,7 @@ public class RegistrazioneAccademicoFormValidator implements Validator {
 		  RegistrazioneForm form = (RegistrazioneForm) target;
 		  
 		  try {
-			  utentiService.validaNome(form.getNome());
+			  tutorService.validaNome(form.getNome());
 		} catch (NomeNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("nome", "formRegistrazione.nome.nonValido");
@@ -60,7 +56,7 @@ public class RegistrazioneAccademicoFormValidator implements Validator {
 		}
 		  
 		  try {
-			  utentiService.validaCognome(form.getCognome());
+			  tutorService.validaCognome(form.getCognome());
 		} catch (CognomeNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("cognome", "formRegistrazione.cognome.nonValido");
@@ -73,14 +69,14 @@ public class RegistrazioneAccademicoFormValidator implements Validator {
 		}
 		  
 		  try {
-			utentiService.validaTelefono(form.getTelefono());
+			  tutorService.validaTelefono(form.getTelefono());
 		} catch (TelefonoNonValidoException e1) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("telefono", "formRegistrazione.telefono.nonValido");
 		}
 		  
 		  try {
-			  utentiService.validaUsername(form.getUsername());
+			  tutorService.validaUsername(form.getUsername());
 		} catch (UsernameNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("username", "formRegistrazione.username.nonValido");
@@ -100,7 +96,7 @@ public class RegistrazioneAccademicoFormValidator implements Validator {
 		}
 		  
 		  try {
-			  utentiService.validaPasswords(form.getPassword(), form.getConfermaPassword());
+			  tutorService.validaPasswords(form.getPassword(), form.getConfermaPassword());
 		} catch (PasswordNonValidaException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("password", "formRegistrazione.password.passwordsNonValide");
@@ -110,7 +106,7 @@ public class RegistrazioneAccademicoFormValidator implements Validator {
 		}
 		  
 		  try {
-			  utentiService.validaSesso(form.getSesso());
+			  tutorService.validaSesso(form.getSesso());
 		} catch (SessoNonValidoException e) {
 			// TODO Auto-generated catch block
 			errors.rejectValue("sesso", "formRegistrazione.sesso.nonValido");
@@ -127,7 +123,7 @@ public class RegistrazioneAccademicoFormValidator implements Validator {
 		                                    form.getMeseNascita(), 
 		                                    form.getGiornoNascita());
 		      
-		      utentiService.validaDataDiNascita(data);
+		      tutorService.validaDataDiNascita(data);
 		    } catch (DataDiNascitaNonValidaException | DateTimeException e) {
 		    	errors.rejectValue("giornoNascita", "formRegistrazione.data.nonValida");
 		    } 

@@ -76,6 +76,7 @@ public class CompilazioneDomandaTirocinioTest {
 		azienda.setTutor(tutor);
 		
 		Studente studente = new Studente();
+		studente.setUsername("Filibertapacc");
 		
 		
 		DomandaTirocinio domandaTirocinio= new DomandaTirocinio();

@@ -27,7 +27,7 @@ import it.unisa.di.ittraining.utente.SessoNonValidoException;
 import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
 import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
-import it.unisa.di.ittraining.utente.UtenteService;
+import it.unisa.di.ittraining.utente.UtenteRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegistrazioneTutorAccademicoTest {
@@ -37,14 +37,16 @@ public class RegistrazioneTutorAccademicoTest {
 	private TutorAccademicoService tutorAccademicoService;
 	
 	@Mock
-	private UtenteService utentiService;
+	private TutorAccademicoRepository tutorAccademicoRepository;
 	
 	@Mock
-	private TutorAccademicoRepository tutorAccademicoRepository;
+	private UtenteRepository utenteRep;
 	
 	
 	@Test
-	public void registraTutorAccademicoSuccesso() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException, DataDiNascitaNonValidaException, PasswordNonValidaException, PasswordNonCorrispondentiException, SessoNonValidoException, UsernameNonValidoException, UsernameEsistenteException {
+	public void registraTutorAccademicoSuccesso() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
+	EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException, DataDiNascitaNonValidaException, PasswordNonValidaException, PasswordNonCorrispondentiException,
+	SessoNonValidoException, UsernameNonValidoException, UsernameEsistenteException {
 		
 		TutorAccademico tutorAccademico = new TutorAccademico();
 		tutorAccademico.setNome("Franco");
@@ -77,8 +79,10 @@ public class RegistrazioneTutorAccademicoTest {
 	
 	
 	
-	@Test(expected=EmailNonValidaException.class)
-	public void registraTutorAccademicoEmailNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException, DataDiNascitaNonValidaException, PasswordNonValidaException, PasswordNonCorrispondentiException, SessoNonValidoException, UsernameNonValidoException, UsernameEsistenteException {
+	@Test(expected = EmailNonValidaException.class)
+	public void registraTutorAccademicoEmailNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
+	EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException, DataDiNascitaNonValidaException, PasswordNonValidaException, PasswordNonCorrispondentiException,
+	SessoNonValidoException, UsernameNonValidoException, UsernameEsistenteException {
 		
 		TutorAccademico tutorAccademico = new TutorAccademico();
 		tutorAccademico.setNome("Franco");
@@ -110,7 +114,38 @@ public class RegistrazioneTutorAccademicoTest {
 	}
 	
 	
-	
-
+	@Test(expected = EmailEsistenteException.class)
+	public void registraTutorAccademicoEmailEsistente() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
+	EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException, DataDiNascitaNonValidaException, PasswordNonValidaException, PasswordNonCorrispondentiException,
+	SessoNonValidoException, UsernameNonValidoException, UsernameEsistenteException {
+		
+		TutorAccademico tutorAccademico = new TutorAccademico();
+		tutorAccademico.setNome("Franco");
+		tutorAccademico.setCognome("Rossi");
+		tutorAccademico.setDataDiNascita(LocalDate.of(1960, Month.AUGUST, 30));
+		tutorAccademico.setTelefono("1234567890");
+		tutorAccademico.setEmail("franco@unisa.it");
+		tutorAccademico.setUsername("francoR");
+		tutorAccademico.setPassword("franco123");
+		tutorAccademico.setSesso("M");
+		
+		
+		when(tutorAccademicoRepository.existsByEmail(tutorAccademico.getEmail())).thenReturn(true);
+		when(tutorAccademicoService.registraTutorAccademico(tutorAccademico)).thenReturn(tutorAccademico);
+		
+		
+		
+			try {
+				tutorAccademicoService.registraTutorAccademico(tutorAccademico);
+			} catch (NomeNonValidoException | NomeCognomeTroppoLungoException | NomeCognomeTroppoCortoException
+					| CognomeNonValidoException | EmailNonValidaException | EmailEsistenteException
+					| TelefonoNonValidoException | DataDiNascitaNonValidaException | PasswordNonValidaException
+					| PasswordNonCorrispondentiException | SessoNonValidoException | UsernameNonValidoException
+					| UsernameEsistenteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	}
 	
 }
