@@ -66,44 +66,24 @@ public class Studente extends Utente {
 		this.registri = registri;
 	}
 	
-	public void addDomandaTirocinio(DomandaTirocinio domandaTirocinio) {
-		    if (!domandeTirocinio.contains(domandaTirocinio)) {
-		    	
-		      domandeTirocinio.add(domandaTirocinio);
-		      
-		      domandaTirocinio.setStudente(this);
-		    }
-	}
-	
-	public int getCfuTirocinio() {
-		int somma = 0;
-		
-		for(DomandaTirocinio t: domandeTirocinio) {
-			if(t.getStatus() == DomandaTirocinio.APPROVATA)
-				somma += t.getCfu();
-		}
-		
-		return somma;
-	}
-	
-	public int getCfuInAttesa() {
-		int somma = 0;
-		
-		for(DomandaTirocinio t: domandeTirocinio) {
-			if(t.getStatus() == DomandaTirocinio.IN_ATTESA)
-				somma += t.getCfu();
-			
-		}
-		
-		return somma;
-	}
-	
 	public TutorAccademico getTutor() {
 		return tutor;
 	}
 
 	public void setTutor(TutorAccademico tutor) {
 		this.tutor = tutor;
+	}
+	
+	public int getCfuDomande() {
+		int somma = 0;
+		
+		for(DomandaTirocinio d: domandeTirocinio) {
+			if(d.getStatus() == DomandaTirocinio.IN_ATTESA || d.getStatus() == DomandaTirocinio.APPROVATA || d.getStatus() == DomandaTirocinio.ACCETTATA_AZIENDA)
+				somma += d.getCfu();
+			
+		}
+		
+		return somma;
 	}
 	
 }

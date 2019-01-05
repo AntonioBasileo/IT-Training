@@ -156,7 +156,7 @@
 					
 			        <c:when test="${lista.getNumeroOre() gt 9000}">
 			          <div class="row right">
-						  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto numero di ore stabilito</p>
+						  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
 					  </div>
 					</c:when>
 			    </c:choose>
