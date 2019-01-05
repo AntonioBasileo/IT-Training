@@ -34,6 +34,9 @@
 	
 	<input type="hidden" onload="mostraToast(${testoNotifica})"/>
 	<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
+	
+	<!-- Sidenav -->
+	<jsp:include page="/WEB-INF/views/nav/side-nav.jsp" />
 		  
 	<div class="container">
 		
