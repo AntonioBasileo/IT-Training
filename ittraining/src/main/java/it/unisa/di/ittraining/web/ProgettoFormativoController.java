@@ -28,9 +28,6 @@ public class ProgettoFormativoController {
 	
 	@RequestMapping(value = "/inserisci-progetto", method = RequestMethod.POST)
 	public String inserisciProgetto(@ModelAttribute("progettoFormAccetta") ProgettoFormativoForm progettoForm, RedirectAttributes redirectAttributes) {
-
-		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
-			return "not-available";
 		
 		
 		ProgettoFormativo progetto = new ProgettoFormativo();

@@ -66,6 +66,8 @@
 						    <div class="modal-content">
 						      <h5 class="teal-text">Progetto formativo</h5>
 						      <p><c:out value="${lista.progettoFormativo.getDescrizione()}"/></p>
+						      <div class="row"></div>
+						      <p class="teal-text">Vuoi approvare questo progetto formativo?</p>
 						    </div>
 						    <div class="modal-footer">
 						      <a href="/approva-progetto?id=${lista.id}" class="waves-effect waves-light btn-small">Approva</a>
