@@ -34,26 +34,8 @@ public class DomandaTirocinioFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		
 		DomandaTirocinioForm form = (DomandaTirocinioForm) target;
+		
 
-		try {
-		    if (form.getAnnoInizio() == null
-		        || form.getMeseInizio() == null
-		        || form.getGiornoInizio() == null) {
-		      throw new DataNonValidaException();
-		    }
-		      
-		    LocalDate data = LocalDate.of(form.getAnnoInizio(),
-		                                  form.getMeseInizio(), 
-		                                  form.getGiornoInizio());
-		      
-		      domandeService.validaDataInizio(data);
-		  } catch (DataNonValidaException e) {
-			  
-		    errors.rejectValue("giornoInizio", "formDomanda.datainizio.nonValida");
-		  } catch(DateTimeException e) {
-			  
-			  errors.rejectValue("giornoInizio", "formDomanda.datainizio.nonValida");
-		  }
 		
 		try {
 		    if (form.getAnnoFine() == null
@@ -86,6 +68,27 @@ public class DomandaTirocinioFormValidator implements Validator {
 		  } catch(DateTimeException e) {
 			  
 			errors.rejectValue("giornoFine", "formDomanda.datafine.nonValida");
+		  }
+		
+
+		try {
+		    if (form.getAnnoInizio() == null
+		        || form.getMeseInizio() == null
+		        || form.getGiornoInizio() == null) {
+		      throw new DataNonValidaException();
+		    }
+		      
+		    LocalDate data_inizio = LocalDate.of(form.getAnnoInizio(),
+		                                  form.getMeseInizio(), 
+		                                  form.getGiornoInizio());
+		      
+		      domandeService.validaDataInizio(data_inizio);
+		  } catch (DataNonValidaException e) {
+			  
+		    errors.rejectValue("giornoInizio", "formDomanda.datainizio.nonValida");
+		  } catch(DateTimeException e) {
+			  
+			  errors.rejectValue("giornoInizio", "formDomanda.datainizio.nonValida");
 		  }
 		
 		try {

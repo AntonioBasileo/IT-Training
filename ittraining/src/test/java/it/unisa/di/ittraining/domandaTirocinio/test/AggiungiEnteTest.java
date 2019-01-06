@@ -163,6 +163,39 @@ public class AggiungiEnteTest {
 	}
 	
 	
+	@Test(expected = EmailAziendaEsistenteException.class)
+	public void registraAziendaEmailEsistente() throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException,
+	EmailAziendaEsistenteException, TelefonoNonValidoException {
+		
+		
+		
+		Azienda azienda = new Azienda();
+		
+		azienda.setNome("theorem");
+		azienda.setSede("Fisciano");
+		azienda.setEmail("gianfilibertaoliva@gmail.com");
+		azienda.setIndirizzo("Via Roma 74");
+		azienda.setTelefono("0981234567");
+		
+		
+		
+		
+		when(aziendaRepository.existsByEmail(azienda.getEmail())).thenReturn(true);
+		
+		
+		
+		try {
+			aziendaService.registraAzienda(azienda);
+		} catch (AziendaNonValidaException | AziendaEsistenteException | SedeNonValidaException
+				| IndirizzoNonValidoException | EmailNonValidaException | EmailAziendaEsistenteException
+				| TelefonoNonValidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	
 
 	

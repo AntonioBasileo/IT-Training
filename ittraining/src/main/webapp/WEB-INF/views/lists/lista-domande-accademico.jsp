@@ -43,6 +43,8 @@
 			      <p><span class="teal-text">Data inizio: </span> <c:out value="${lista.inizioTirocinio.getDayOfMonth()}"/>-<c:out value="${lista.inizioTirocinio.getMonthValue()}"/>-<c:out value="${lista.inizioTirocinio.getYear()}"/></p>
 			      <p><span class="teal-text">Data fine: </span> <c:out value="${lista.fineTirocinio.getDayOfMonth()}"/>-<c:out value="${lista.fineTirocinio.getMonthValue()}"/>-<c:out value="${lista.fineTirocinio.getYear()}"/></p>
 			      <p><span class="teal-text">Studente: </span> <c:out value="${lista.studente.nome}"/> <c:out value="${lista.studente.cognome}"/></p>
+			      <p><span class="teal-text">Numero CFU: </span> <c:out value="${lista.cfu }"/></p>
+			      <p><span class="teal-text">Numero ore: </span> <c:out value="${lista.oreTotali }"/></p>
 			      <c:choose>
 			      
 			      
@@ -66,6 +68,8 @@
 						    <div class="modal-content">
 						      <h5 class="teal-text">Progetto formativo</h5>
 						      <p><c:out value="${lista.progettoFormativo.getDescrizione()}"/></p>
+						      <div class="row"></div>
+						      <p class="teal-text">Vuoi approvare questo progetto formativo?</p>
 						    </div>
 						    <div class="modal-footer">
 						      <a href="/approva-progetto?id=${lista.id}" class="waves-effect waves-light btn-small">Approva</a>

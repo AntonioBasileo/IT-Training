@@ -13,15 +13,15 @@
 		        	<div class="input-field col s3">
 		        		<form:select path="oraInizio" class="icons" id="oraInizio">
 		        		
-		        			<form:option value="1">1</form:option>
-		        			<form:option value="2">2</form:option>
-		        			<form:option value="3">3</form:option>
-		        			<form:option value="4">4</form:option>
-		        			<form:option value="5">5</form:option>
-		        			<form:option value="6">6</form:option>
-		        			<form:option value="7">7</form:option>
-		        			<form:option value="8">8</form:option>
-		        			<form:option value="9">9</form:option>
+		        			<form:option value="1">01</form:option>
+		        			<form:option value="2">02</form:option>
+		        			<form:option value="3">03</form:option>
+		        			<form:option value="4">04</form:option>
+		        			<form:option value="5">05</form:option>
+		        			<form:option value="6">06</form:option>
+		        			<form:option value="7">07</form:option>
+		        			<form:option value="8">08</form:option>
+		        			<form:option value="9">09</form:option>
 		        			<form:option value="10">10</form:option>
 		        			<form:option value="11">11</form:option>
 		        			<form:option value="12">12</form:option>
@@ -39,6 +39,7 @@
 		        			<form:option value="0">00</form:option>
 		        		
 		        		</form:select>
+		            
 		        	</div>
 		        	
 		        	<div class="input-field col s3">
@@ -109,4 +110,9 @@
 		        	</div>
 		        
 		        </div>
+		        	<div class="row">
+		        		<div class="input-field col s12">
+		            		<form:errors path="oraInizio" cssClass="helper-text red-text chip" />
+		            	</div>
+		            </div>
 </html>

@@ -1,7 +1,7 @@
 package it.unisa.di.ittraining.registrotirocinio;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,11 +35,17 @@ public class Registro {
 	private DomandaTirocinio domanda;
 	
 	private LocalDate data;
-	private LocalDateTime inizio;
-	private LocalDateTime fine;
-	private int numero_ore;
+	private LocalTime inizio;
+	private LocalTime fine;
+	private float numero_minuti;
 	private String descrizione;
+	private int status;
 	
+	public static final int IN_ATTESA = 0;
+	
+	public static final int IN_COMPILAZIONE = 1;
+	
+	public static final int APPROVATO = 2;
 	
 	public Long getId() {
 		return id;
@@ -65,19 +71,19 @@ public class Registro {
 		this.data = data;
 	}
 	
-	public LocalDateTime getInizio() {
+	public LocalTime getInizio() {
 		return inizio;
 	}
 	
-	public void setInizio(LocalDateTime inizio) {
+	public void setInizio(LocalTime inizio) {
 		this.inizio = inizio;
 	}
 	
-	public LocalDateTime getFine() {
+	public LocalTime getFine() {
 		return fine;
 	}
 	
-	public void setFine(LocalDateTime fine) {
+	public void setFine(LocalTime fine) {
 		this.fine = fine;
 	}
 	
@@ -113,12 +119,21 @@ public class Registro {
 		this.domanda = domanda;
 	}
 
-	public int getNumero_ore() {
-		return numero_ore;
+	public float getNumero_minuti() {
+		return numero_minuti;
 	}
 
-	public void setNumero_ore(int numero_ore) {
-		this.numero_ore = numero_ore;
+	public void setNumero_minuti(long numero_minuti) {
+		this.numero_minuti = numero_minuti;
 	}
+
+	public float getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
 	
 }

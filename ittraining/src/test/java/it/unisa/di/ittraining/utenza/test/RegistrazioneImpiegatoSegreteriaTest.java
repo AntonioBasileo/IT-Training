@@ -74,7 +74,7 @@ public class RegistrazioneImpiegatoSegreteriaTest {
 	}
 	
 	@Test(expected = EmailNonValidaException.class)
-	public void registrazioneImpiegatoSegreteriaUsernameNonValido() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
+	public void registrazioneImpiegatoSegreteriaEmailNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
 	DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException, TelefonoNonValidoException,
 	PasswordNonValidaException, PasswordNonCorrispondentiException {
 		

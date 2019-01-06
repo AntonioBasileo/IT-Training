@@ -107,7 +107,22 @@ public class RegistroForm {
 		this.minutoFine = minutoFine;
 	}
 	
-	
+	public Long getId_domanda() {
+		return id_domanda;
+	}
+
+	public void setId_domanda(Long id_domanda) {
+		this.id_domanda = id_domanda;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
 	private Integer giornoInizio;
 	private Integer meseInizio;
 	private Integer annoInizio;
@@ -121,5 +136,7 @@ public class RegistroForm {
 	private Integer minutoInizio;
 	private Integer oraFine;
 	private Integer minutoFine;
+	private Long id_domanda;
+	private String descrizione;
 	
 }

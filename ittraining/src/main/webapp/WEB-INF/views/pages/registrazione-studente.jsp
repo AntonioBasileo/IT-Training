@@ -32,7 +32,11 @@
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+	<input type="hidden" onload="mostraToast(${testoNotifica})"/>
 	<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
+	
+	<!-- Sidenav -->
+	<jsp:include page="/WEB-INF/views/nav/side-nav.jsp" />
 		  
 	<div class="container">
 		
