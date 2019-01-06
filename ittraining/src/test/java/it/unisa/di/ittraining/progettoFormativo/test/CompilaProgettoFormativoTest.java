@@ -106,6 +106,8 @@ public class CompilaProgettoFormativoTest {
 		domanda.setAzienda(azienda);
 		domanda.setStudente(studente);
 		
+		progetto.setDomanda(domanda);
+		
 		when(AutenticazioneHolder.getUtente()).thenReturn(tutor.getUsername());
 		when(studenteService.registraStudente(studente)).thenReturn(studente);
 		when(domandeRep.save(domanda)).thenReturn(domanda);

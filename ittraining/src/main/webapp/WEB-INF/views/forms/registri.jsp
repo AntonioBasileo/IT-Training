@@ -21,6 +21,14 @@
 	      	<div class=" row">
 	      		 <p>numero di CFU: <c:out value="${lista.cfu}"/></p>
 	      	</div>
+	      	
+	      	<div class=" row">
+	      		 <p>Data inizio: <c:out value="${lista.inizioTirocinio.getDayOfMonth()}"/>/<c:out value="${lista.inizioTirocinio.getMonthValue()}"/>/<c:out value="${lista.inizioTirocinio.getYear()}"/></p>
+	      	</div>
+	      	
+	      	<div class=" row">
+	      		 <p>Data fine: <c:out value="${lista.fineTirocinio.getDayOfMonth()}"/>/<c:out value="${lista.fineTirocinio.getMonthValue()}"/>/<c:out value="${lista.fineTirocinio.getYear()}"/></p>
+	      	</div>
 	    </div>
 	      
 	      <table>
@@ -52,28 +60,24 @@
 		    		<form:input path="id_domanda" type="hidden" value="${lista.id}"/>
 				      <div class="row">
 				        <div class="input-field col s3">
-				          <i class="material-icons prefix">event_note</i>
-				          <form:input path="giornoInizio" id="giornoInizio" type="text" class="validate" value="${lista.inizioTirocinio.getDayOfMonth()}" />
-				          <label for="giornoInizio">Data inizio</label>
+				          <form:input path="giornoInizio" id="giornoInizio" type="hidden" class="validate" value="${lista.inizioTirocinio.getDayOfMonth()}" />
 				        </div>
 				        <div class="input-field col s3">
-				          <form:input path="meseInizio" id="meseInizio" type="tel" class="validate" value="${lista.inizioTirocinio.getMonthValue()}" />
+				          <form:input path="meseInizio" id="meseInizio" type="hidden" class="validate" value="${lista.inizioTirocinio.getMonthValue()}" />
 				        </div>
 				        <div class="input-field col s3">
-				          <form:input path="annoInizio" id="annoInizio" type="tel" class="validate" value="${lista.inizioTirocinio.getYear()}" />
+				          <form:input path="annoInizio" id="annoInizio" type="hidden" class="validate" value="${lista.inizioTirocinio.getYear()}" />
 				        </div>
 				      </div>
 				      <div class="row">
 				        <div class="input-field col s3">
-				          <i class="material-icons prefix">event_note</i>
-				          <form:input path="giornoFine" id="giornoFine" type="text" class="validate" value="${lista.fineTirocinio.getDayOfMonth()}"/>
-				          <label for="giornoFine">Data fine</label>
+				          <form:input path="giornoFine" id="giornoFine" type="hidden" class="validate" value="${lista.fineTirocinio.getDayOfMonth()}"/>
 				        </div>
 				        <div class="input-field col s3">
-				          <form:input path="meseFine" id="meseFine" type="tel" class="validate" value="${lista.fineTirocinio.getMonthValue()}"/>
+				          <form:input path="meseFine" id="meseFine" type="hidden" class="validate" value="${lista.fineTirocinio.getMonthValue()}"/>
 				        </div>
 				        <div class="input-field col s3">
-				          <form:input path="annoFine" id="annoFine" type="tel" class="validate" value="${lista.fineTirocinio.getYear()}"/>
+				          <form:input path="annoFine" id="annoFine" type="hidden" class="validate" value="${lista.fineTirocinio.getYear()}"/>
 				        </div>
 				      </div>		
 				      
@@ -145,21 +149,59 @@
 							          <label for="textarea1">Inserisci descrizione attività svolte</label>
 					    			</div>
 				
-				<c:choose>	
-			        <c:when test="${lista.getNumeroOre() lt 9000}">
-			          <div class="row right">
-						  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
-						    <i class="material-icons right">send</i>
-						  </button>
-					  </div>
-					</c:when>	
-					
-			        <c:when test="${lista.getNumeroOre() gt 9000}">
-			          <div class="row right">
-						  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto numero di ore stabilito</p>
-					  </div>
-					</c:when>
-			    </c:choose>
+				<c:if test="${lista.cfu == 6}">
+					<c:choose>	
+				        <c:when test="${lista.getNumeroOre() lt 9000}">
+				          <div class="row right">
+							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
+							    <i class="material-icons right">send</i>
+							  </button>
+						  </div>
+						</c:when>	
+						
+				        <c:when test="${lista.getNumeroOre() >= 9000}">
+				          <div class="row right">
+							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
+						  </div>
+						</c:when>
+				    </c:choose>
+			    </c:if>
+			    
+			    <c:if test="${lista.cfu == 12}">
+					<c:choose>	
+				        <c:when test="${lista.getNumeroOre() lt 18000}">
+				          <div class="row right">
+							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
+							    <i class="material-icons right">send</i>
+							  </button>
+						  </div>
+						</c:when>	
+						
+				        <c:when test="${lista.getNumeroOre() >= 18000}">
+				          <div class="row right">
+							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
+						  </div>
+						</c:when>
+				    </c:choose>
+			    </c:if>
+			    
+			    <c:if test="${lista.cfu == 18}">
+					<c:choose>	
+				        <c:when test="${lista.getNumeroOre() lt 27000}">
+				          <div class="row right">
+							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
+							    <i class="material-icons right">send</i>
+							  </button>
+						  </div>
+						</c:when>	
+						
+				        <c:when test="${lista.getNumeroOre() >= 27000}">
+				          <div class="row right">
+							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
+						  </div>
+						</c:when>
+				    </c:choose>
+			    </c:if>
 		    </form:form>
 		  </div>
 		  </div>

@@ -121,11 +121,7 @@ public class DomandaTirocinioService {
 		
 		Studente studente = (Studente)utentiService.getUtenteAutenticato();
 		
-		int somma_approvate = studente.getCfuTirocinio();
-		
-		int somma_in_attesa = studente.getCfuInAttesa();
-		
-		if(somma_approvate >= DomandaTirocinio.MAX_CFU || somma_in_attesa >= DomandaTirocinio.MAX_CFU || (somma_approvate + somma_in_attesa) >= DomandaTirocinio.MAX_CFU) 
+		if((studente.getCfuDomande() + cfu) > DomandaTirocinio.MAX_CFU) 
 			throw new MassimoNumeroCfuCumulabiliException();
 		
 		if(cfu < DomandaTirocinio.MIN_CFU) throw new NumeroCfuNonValidoException();
