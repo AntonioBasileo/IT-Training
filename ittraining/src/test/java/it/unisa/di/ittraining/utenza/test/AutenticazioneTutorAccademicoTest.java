@@ -80,7 +80,7 @@ public class AutenticazioneTutorAccademicoTest {
 	}
 	
 	@Test
-	public void autenticazioneTutorAccademicoConSuccesso() throws UsernameNonEsistenteException, PasswordErrataException {
+	public void autenticazioneTutorAccademicoConSuccesso() {
 		
 		TutorAccademico tutor = new TutorAccademico();
 		tutor.setUsername("giancarlo");
@@ -92,6 +92,11 @@ public class AutenticazioneTutorAccademicoTest {
 		when(impiegatiRep.findByUsernameAndPassword(tutor.getUsername(), tutor.getPassword())).thenReturn(null);
 		when(accademicoRep.findByUsernameAndPassword(tutor.getUsername(), tutor.getPassword())).thenReturn(tutor);
 		
-		utentiService.login(tutor.getUsername(), tutor.getPassword());
+		try {
+			utentiService.login(tutor.getUsername(), tutor.getPassword());
+		} catch (UsernameNonEsistenteException | PasswordErrataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
