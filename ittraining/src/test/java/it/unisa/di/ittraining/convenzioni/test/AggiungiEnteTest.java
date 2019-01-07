@@ -1,4 +1,4 @@
-package it.unisa.di.ittraining.domandaTirocinio.test;
+package it.unisa.di.ittraining.convenzioni.test;
 
 
 import static org.mockito.Mockito.when;
@@ -31,7 +31,8 @@ public class AggiungiEnteTest {
 	
 	
 	@Test
-	public void registraAzienda() throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException, EmailAziendaEsistenteException, TelefonoNonValidoException {
+	public void registraAzienda() throws AziendaNonValidaException, AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException,
+	EmailAziendaEsistenteException, TelefonoNonValidoException {
 		
 		
 		
@@ -181,6 +182,7 @@ public class AggiungiEnteTest {
 		
 		
 		when(aziendaRepository.existsByEmail(azienda.getEmail())).thenReturn(true);
+		when(aziendaService.registraAzienda(azienda)).thenReturn(azienda);
 		
 		
 		

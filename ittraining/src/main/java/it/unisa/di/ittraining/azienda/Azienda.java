@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 
 import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
-import it.unisa.di.ittraining.progettoformativo.ProgettoFormativo;
 
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -25,14 +24,11 @@ public class Azienda {
 	private String telefono;
 	private String email;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "azienda")
 	private TutorAziendale tutor;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "azienda")
 	private List<DomandaTirocinio> domande;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "azienda")
-	private List<ProgettoFormativo> progetti;
 
 	  
 	/** Costante che definisce la minima lunghezza del campo nome. */
@@ -62,7 +58,6 @@ public class Azienda {
 
 	public Azienda() {
 		this.domande = new ArrayList<>();
-		this.progetti = new ArrayList<>();
 	}
 	
 	public TutorAziendale getTutorAziendale() {
@@ -70,7 +65,11 @@ public class Azienda {
 	}
 
 	public void setTutorAziendale(TutorAziendale tutor) {
-		this.tutor = tutor;
+		if(this.tutor != tutor) {
+			this.tutor = tutor;
+			tutor.setAzienda(this);
+		}
+		
 	}
 
 	public String getNome() {
@@ -109,8 +108,11 @@ public class Azienda {
 		return domande;
 	}
 
-	public void setDomande(List<DomandaTirocinio> domande) {
-		this.domande = domande;
+	public void addDomanda(DomandaTirocinio domanda) {
+		if(!domande.contains(domanda)) {
+			domande.add(domanda);
+			domanda.setAzienda(this);
+		}
 	}
 
 	public String getEmail() {
@@ -120,21 +122,4 @@ public class Azienda {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public TutorAziendale getTutor() {
-		return tutor;
-	}
-
-	public void setTutor(TutorAziendale tutor) {
-		this.tutor = tutor;
-	}
-
-	public List<ProgettoFormativo> getProgetti() {
-		return progetti;
-	}
-
-	public void setProgetti(List<ProgettoFormativo> progetti) {
-		this.progetti = progetti;
-	}
-
 }

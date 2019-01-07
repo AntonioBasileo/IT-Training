@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
+import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaRepository;
 import it.unisa.di.ittraining.azienda.AziendaService;
@@ -35,6 +36,7 @@ import it.unisa.di.ittraining.utente.SessoNonValidoException;
 import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
 import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
+import it.unisa.di.ittraining.utente.UtenteRepository;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -52,25 +54,28 @@ public class RegistrazioneTutorAziendaleTest {
 	@Mock
 	private AziendaRepository aziendeRep;
 	
+	@Mock
+	private UtenteRepository utenteRep;
+	
 	
 	@Test
 	public void registraTutorAziendaleSuccesso() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
 	CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException,
-PasswordNonValidaException, PasswordNonCorrispondentiException, DataDiNascitaNonValidaException, AziendaNonValidaException, AziendaEsistenteException, SessoNonValidoException,
-TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException, EmailAziendaEsistenteException {
+	PasswordNonValidaException, PasswordNonCorrispondentiException, DataDiNascitaNonValidaException, AziendaNonValidaException, AziendaEsistenteException, SessoNonValidoException,
+	TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException, EmailAziendaEsistenteException,
+	AziendaNonEsistenteException {
 		
 		TutorAziendale tutorAziendale = new TutorAziendale();
+		tutorAziendale.setUsername("giancarlodasantommaso");
 		tutorAziendale.setNome("Lina");
 		tutorAziendale.setCognome("Neri");
 		tutorAziendale.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
 		tutorAziendale.setTelefono("0987654321");
 		tutorAziendale.setEmail("gianfilibertaoliva@gmail.com");
-		tutorAziendale.setUsername("LinaN");
 		tutorAziendale.setPassword("lina123");
 		tutorAziendale.setSesso("F");
 		
 		Azienda azienda = new Azienda();
-		
 		azienda.setNome("theorem");
 		azienda.setSede("Fisciano");
 		azienda.setEmail("gianfilibertaoliva@gmail.com");
@@ -78,9 +83,10 @@ TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException,
 		azienda.setTelefono("0981234567");
 		
 		tutorAziendale.setAzienda(azienda);
-		azienda.setTutor(tutorAziendale);
 		
-	
+		when(utenteRep.existsByUsername(tutorAziendale.getUsername())).thenReturn(false);
+		when(aziendeRep.existsByNomeAndEmail(azienda.getNome(), azienda.getEmail())).thenReturn(true);
+		when(aziendeRep.findByNome(azienda.getNome())).thenReturn(azienda);
 		when(aziendeService.registraAzienda(azienda)).thenReturn(azienda);
 		
 		try {
@@ -105,6 +111,9 @@ TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException,
 					| it.unisa.di.ittraining.azienda.TelefonoNonValidoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (AziendaNonEsistenteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		
@@ -113,7 +122,10 @@ TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException,
 	
 	
 	@Test(expected = EmailNonAssociataException.class)
-	public void registratutorAziendaleEmailNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException, DataDiNascitaNonValidaException, AziendaNonValidaException, AziendaEsistenteException, SessoNonValidoException, TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException, EmailAziendaEsistenteException {
+	public void registratutorAziendaleEmailNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
+	EmailNonValidaException, EmailEsistenteException, EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException, PasswordNonValidaException,
+	PasswordNonCorrispondentiException, DataDiNascitaNonValidaException, AziendaNonValidaException, AziendaEsistenteException, SessoNonValidoException, TelefonoNonValidoException,
+	SedeNonValidaException, IndirizzoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException, EmailAziendaEsistenteException, AziendaNonEsistenteException {
 		
 		TutorAziendale tutorAziendale = new TutorAziendale();
 		tutorAziendale.setNome("Lina");
@@ -121,7 +133,7 @@ TelefonoNonValidoException, SedeNonValidaException, IndirizzoNonValidoException,
 		tutorAziendale.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
 		tutorAziendale.setTelefono("0987654321");
 		tutorAziendale.setEmail("linaNeri@gmail.com");
-		tutorAziendale.setUsername("LinaN");
+		tutorAziendale.setUsername("LinaNeri");
 		tutorAziendale.setPassword("lina123");
 		tutorAziendale.setSesso("F");
 		

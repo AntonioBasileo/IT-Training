@@ -28,21 +28,6 @@ public class DomandaTirocinioService {
 	@Autowired
 	private UtenteService utentiService;
 	
-	public List<DomandaTirocinio> elencaDomandeStudente(String username) {
-		
-		return domandeRep.findAllByStudenteUsername(username);
-	}
-	
-	public List<DomandaTirocinio> elencaDomandeStudenteStatus(String username, int status) {
-		
-		return domandeRep.findAllByStudenteUsernameAndStatus(username, status);
-	}
-	
-	public List<DomandaTirocinio> elencaDomandeAziendali(Azienda azienda) {
-		
-		return domandeRep.findAllByAzienda(azienda);
-	}
-	
 	@Transactional(rollbackFor = Exception.class)
 	public DomandaTirocinio registraDomanda(DomandaTirocinio domanda, String nomeAzienda) throws AziendaNonValidaException, AziendaNonEsistenteException,
 	DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
@@ -76,6 +61,30 @@ public class DomandaTirocinioService {
 		domanda.setStatus(status);
 		
 		return domandeRep.save(domanda);
+	}
+	
+	public List<DomandaTirocinio> elencaDomandeStudente(String username) {
+		
+		return domandeRep.findAllByStudenteUsername(username);
+	}
+	
+	public List<DomandaTirocinio> elencaDomandeStudenteStatus(String username, int status) {
+		
+		return domandeRep.findAllByStudenteUsernameAndStatus(username, status);
+	}
+	
+	public List<DomandaTirocinio> elencaDomandeAziendali(Azienda azienda) {
+		
+		return domandeRep.findAllByAzienda(azienda);
+	}
+	
+	public DomandaTirocinio getDomandaById(long id) {
+		return domandeRep.findById(id);
+	}
+	
+	public List<DomandaTirocinio> getAll() {
+		
+		return domandeRep.findAll();
 	}
 
 	public LocalDate validaDataInizio(LocalDate inizio) throws DataNonValidaException {

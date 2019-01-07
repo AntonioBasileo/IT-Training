@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
 		
 		<meta charset="ISO-8859-1">
 		
-		<title>IT Training - Registrazione segreteria</title>
+		<title>IT Training - Registrazione tutor aziendale</title>
 		
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -24,23 +24,28 @@
 	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
 	    <script src="resources/js/initialize.js"></script>
-	    <script src="resources/js/toast.js"></script>
 		
 	    
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/nav/nav-studente.jsp" />
-
+	<!-- Sidenav -->
+	<jsp:include page="/WEB-INF/views/nav/side-nav.jsp" />
+	
+	<jsp:include page="/WEB-INF/views/nav/nav-segreteria.jsp" />
+		  
 	<div class="container">
-			<div class="row"></div>
-			<div class="row"></div>
-			<div class="row">
-				<h4 class="teal-text">I tuoi registri</h4>
-			</div>
-			
-			<jsp:include page="/WEB-INF/views/forms/registri.jsp" />
-	</div>	
+		
+	    <div class="row"></div>
+		<div class="row"></div>
+		<div class="row">
+			<h4 class="teal-text">Lista domande effettuate dagli studenti</h4>
+		</div>
+	    <div class="row"></div>
+		<div class="row"></div>
+		
+		<jsp:include page="/WEB-INF/views/lists/lista-domande-segreteria.jsp" />
+		</div>
 </body>
 </html>

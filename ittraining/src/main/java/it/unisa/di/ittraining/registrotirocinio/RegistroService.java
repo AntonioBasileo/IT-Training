@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioRepository;
-import it.unisa.di.ittraining.studente.Studente;
-import it.unisa.di.ittraining.utente.UtenteService;
 
 @Service
 public class RegistroService {
@@ -23,9 +21,6 @@ public class RegistroService {
 	@Autowired
 	private DomandaTirocinioRepository domandeRep;
 	
-	@Autowired
-	private UtenteService utentiService;
-	
 	
 	@Transactional(rollbackFor = Exception.class)
 	public Registro registraTirocinio(Registro registro, long id) throws DataRegistroSuccessivaFineException, DataRegistroPrecedenteInizioException,
@@ -33,9 +28,6 @@ public class RegistroService {
 		DomandaTirocinio domanda = domandeRep.findById(id);
 		
 		registro.setDomanda(domanda);
-		registro.setStudente((Studente)utentiService.getUtenteAutenticato());
-		registro.setTutorAccademico(((Studente)utentiService.getUtenteAutenticato()).getTutor());
-		registro.setTutorAziendale(domanda.getAzienda().getTutor());
 		
 		registro.setData(validaDataRegistro(registro.getData(), domanda.getInizioTirocinio(), domanda.getFineTirocinio()));
 		registro.setInizio(validaOrarioInizio(registro.getInizio(), registro.getFine()));

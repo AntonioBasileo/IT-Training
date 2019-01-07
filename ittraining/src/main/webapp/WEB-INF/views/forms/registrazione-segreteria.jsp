@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
-<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -9,6 +8,11 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+		<!-- Definizione messaggi -->
+		<spring:message var="notifica" code="${testoNotifica}"/> 
+	
+		<input id="toast" type="hidden" value="${notifica}"/>
+		
 			  <!-- Registrazione Segreteria -->
 			  <div class="row">
 			    <form:form cssClass="col s12" action ="/richiesta-registrazione-segreteria" method = "POST" modelAttribute = "registrazioneSegreteria">
