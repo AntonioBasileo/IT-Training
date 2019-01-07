@@ -98,7 +98,7 @@ public class RegistriController {
 	      if(!model.containsAttribute("testoNotifica"))
 	    	  model.addAttribute("testoNotifica", "toast.registro.nonValido");
 	      
-	      return "registri";
+	      return "compila-registro";
 	    }
 	    
 	    Registro registro = new Registro();
