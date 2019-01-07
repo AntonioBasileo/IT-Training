@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
+import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.EmailNonAssociataException;
@@ -284,7 +285,7 @@ public class RegistrazioneController {
 	AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException, EmailEsistenteException,
 	TelefonoNonValidoException, NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
 	EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException, DataDiNascitaNonValidaException, SessoNonValidoException,
-	it.unisa.di.ittraining.utente.TelefonoNonValidoException {
+	it.unisa.di.ittraining.utente.TelefonoNonValidoException, AziendaNonEsistenteException {
 		
 		validatorAziendale.validate(registrazioneAziendale, result);
 		

@@ -2,7 +2,6 @@ package it.unisa.di.ittraining.studente;
 
 import it.unisa.di.ittraining.utente.Utente;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
-import it.unisa.di.ittraining.registrotirocinio.Registro;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 
 import java.util.ArrayList;
@@ -30,16 +29,12 @@ public class Studente extends Utente {
 	  
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
 	private List<DomandaTirocinio> domandeTirocinio;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "studente")
-	private List<Registro> registri;
 
 	@OneToOne
 	private TutorAccademico tutor;
 	
 	public Studente() {
 		this.domandeTirocinio = new ArrayList<>();
-		this.registri = new ArrayList<>();
 	}
 	
 	public void setMatricola(String matricola) {
@@ -53,17 +48,12 @@ public class Studente extends Utente {
 	public List<DomandaTirocinio> getDomandeTirocinio() {
 		return domandeTirocinio;
 	}
-
-	public void setDomandeTirocinio(List<DomandaTirocinio> domandeTirocinio) {
-		this.domandeTirocinio = domandeTirocinio;
-	}
-
-	public List<Registro> getRegistri() {
-		return registri;
-	}
-
-	public void setRegistri(List<Registro> registri) {
-		this.registri = registri;
+	  
+	public void addDomandaTirocinio(DomandaTirocinio domandaTirocinio) {
+		    if (!domandeTirocinio.contains(domandaTirocinio)) {
+		      domandeTirocinio.add(domandaTirocinio);
+		      domandaTirocinio.setStudente(this);
+		    }
 	}
 	
 	public TutorAccademico getTutor() {
@@ -71,7 +61,11 @@ public class Studente extends Utente {
 	}
 
 	public void setTutor(TutorAccademico tutor) {
-		this.tutor = tutor;
+		if(this.tutor != tutor) {
+			this.tutor = tutor;
+			tutor.addStudente(this);
+		}
+		
 	}
 	
 	public int getCfuDomande() {

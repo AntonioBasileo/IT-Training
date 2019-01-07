@@ -184,4 +184,20 @@ public class DomandaTirocinioController {
 		
 		return "lista-domande-accademico";	
 	}
+	
+	@RequestMapping(value = "/domande-segreteria", method = RequestMethod.GET)
+	public String mostraDomandeSegreteria(Model model) {
+		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("ImpiegatoSegreteria")))
+			return "not-available";
+		
+		if(!model.containsAttribute("listaDomandeSegreteria")) {
+			
+			model.addAttribute("listaDomandeSegreteria", domandeService.getAll());
+			
+		}
+		
+		return "lista-domande-segreteria";	
+	}
 }

@@ -82,10 +82,8 @@ public class TutorAccademicoService {
 		Studente studente = (Studente)utentiService.getUtenteAutenticato();	
 		
 		studente.setTutor(tutor);
-		tutor.getStudenti().add(studente);
 		
 		studenteRep.save(studente);
-		rep.save(tutor);
 		
 	}
 	

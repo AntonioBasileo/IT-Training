@@ -7,13 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
-import it.unisa.di.ittraining.studente.Studente;
-import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 
 @Entity
 public class Registro {
@@ -21,15 +17,6 @@ public class Registro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@ManyToOne
-	private Studente studente;
-	
-	@ManyToOne
-	private TutorAziendale tutorAziendale;
-	
-	@ManyToOne
-	private TutorAccademico tutorAccademico;
 	
 	@OneToOne
 	private DomandaTirocinio domanda;
@@ -53,14 +40,6 @@ public class Registro {
 	
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	public Studente getStudente() {
-		return studente;
-	}
-	
-	public void setStudente(Studente studente) {
-		this.studente = studente;
 	}
 	
 	public LocalDate getData() {
@@ -95,28 +74,15 @@ public class Registro {
 		this.descrizione = descrizione;
 	}
 
-	public TutorAziendale getTutorAziendale() {
-		return tutorAziendale;
-	}
-
-	public void setTutorAziendale(TutorAziendale tutorAziendale) {
-		this.tutorAziendale = tutorAziendale;
-	}
-
-	public TutorAccademico getTutorAccademico() {
-		return tutorAccademico;
-	}
-
-	public void setTutorAccademico(TutorAccademico tutorAccademico) {
-		this.tutorAccademico = tutorAccademico;
-	}
-
 	public DomandaTirocinio getDomanda() {
 		return domanda;
 	}
 
 	public void setDomanda(DomandaTirocinio domanda) {
-		this.domanda = domanda;
+		if(this.domanda != domanda) {
+			this.domanda = domanda;
+			domanda.addRegistro(this);
+		}
 	}
 
 	public float getNumero_minuti() {

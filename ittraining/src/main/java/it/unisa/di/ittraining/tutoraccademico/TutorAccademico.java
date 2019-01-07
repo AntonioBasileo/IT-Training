@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
-import it.unisa.di.ittraining.registrotirocinio.Registro;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.utente.Utente;
 
@@ -18,29 +17,21 @@ public class TutorAccademico extends Utente {
 	public static final String EMAIL_PATTERN_ACCADEMICO = "[A-z0-9\\.\\+_-]+@unisa.it";
 	
 	@OneToMany
-	private List<Registro> registri;
-	
-	@OneToMany
 	private List<Studente> studenti;
 	
 	public TutorAccademico() {
-		
-	}
-
-	public List<Registro> getRegistri() {
-		return registri;
-	}
-
-	public void setRegistri(List<Registro> registri) {
-		this.registri = registri;
+		this.studenti = new ArrayList<>();
 	}
 
 	public List<Studente> getStudenti() {
 		return studenti;
 	}
 
-	public void setStudenti(List<Studente> studenti) {
-		this.studenti = studenti;
+	public void addStudente(Studente studente) {
+		if(!studenti.contains(studente)) {
+			studenti.add(studente);
+			studente.setTutor(this);
+		}
 	}
 	
 	public List<DomandaTirocinio> getAllDomande() {

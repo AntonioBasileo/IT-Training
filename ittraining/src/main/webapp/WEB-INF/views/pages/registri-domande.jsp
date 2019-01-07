@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,7 @@
 		
 		<meta charset="ISO-8859-1">
 		
-		<title>IT Training - Registrazione segreteria</title>
+		<title>IT Training - Registri</title>
 		
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -31,23 +30,16 @@
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	
-	<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
-	
-	<!-- Sidenav -->
-	<jsp:include page="/WEB-INF/views/nav/side-nav.jsp" />
-		  
+	<jsp:include page="/WEB-INF/views/nav/nav-studente.jsp" />
+
 	<div class="container">
-		
-	    <div class="row"></div>
-		<div class="row"></div>
-		<div class="row">
-			<h4 class="teal-text">Registrazione - Segreteria</h4>
-		</div>
-	    <div class="row"></div>
-		<div class="row"></div>
-		
-		<jsp:include page="/WEB-INF/views/forms/registrazione-segreteria.jsp" />
-	</div>
+			<div class="row"></div>
+			<div class="row"></div>
+			<div class="row">
+				<h4 class="teal-text">Domande</h4>
+			</div>
+			
+			<jsp:include page="/WEB-INF/views/lists/lista-domande-registri.jsp" />
+	</div>	
 </body>
 </html>
