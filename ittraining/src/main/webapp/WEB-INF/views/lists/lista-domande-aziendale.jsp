@@ -39,7 +39,7 @@
 		  <ul class="collection">
 		  	<c:forEach items="${listaDomandeAzienda}" var="lista" varStatus="loop">
 			    <li class="collection-item avatar">
-			      <img src="resources/images/logo.png" alt="" class="circle">
+			      <i class="material-icons circle">folder</i>
 			      <p><span class="teal-text">Azienda ospitante: </span> <c:out value="${lista.azienda.nome}"/></p>
 			      <p><span class="teal-text">Data richiesta: </span> <c:out value="${lista.data.getDayOfMonth()}"/>-<c:out value="${lista.data.getMonthValue()}"/>-<c:out value="${lista.data.getYear()}"/></p>
 			      <p><span class="teal-text">Data inizio: </span> <c:out value="${lista.inizioTirocinio.getDayOfMonth()}"/>-<c:out value="${lista.inizioTirocinio.getMonthValue()}"/>-<c:out value="${lista.inizioTirocinio.getYear()}"/></p>

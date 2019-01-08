@@ -194,7 +194,7 @@
 						  </div>
 						</c:when>	
 						
-				        <c:when test="${domanda.getNumeroOre() >= 27000}">
+				        <c:when test="${domanda.getNumeroOre() gt 27000}">
 				          <div class="row right">
 							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
 						  </div>
