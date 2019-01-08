@@ -82,6 +82,11 @@ public class DomandaTirocinioService {
 		return domandeRep.findById(id);
 	}
 	
+	public List<DomandaTirocinio> getAllByStatus(int status) {
+		
+		return domandeRep.findAllByStatus(status);
+	}
+	
 	public List<DomandaTirocinio> getAll() {
 		
 		return domandeRep.findAll();

@@ -48,8 +48,6 @@ public class RegistroFormValidator implements Validator {
 			  LocalDate inizio = LocalDate.of(form.getAnnoInizio(), form.getMeseInizio(), form.getGiornoInizio());
 			  LocalDate fine = LocalDate.of(form.getAnnoFine(), form.getMeseFine(), form.getGiornoFine());
 			  
-			  System.out.println("ciao sono qui! " + data);
-			  
 			registriService.validaDataRegistro(data, inizio, fine);
 		} catch (DataRegistroSuccessivaFineException e) {
 			// TODO Auto-generated catch block

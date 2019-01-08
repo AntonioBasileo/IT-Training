@@ -43,8 +43,11 @@ public class UtenteController {
 	private TutorAccademicoService tutorService;
 	
 	
-	@RequestMapping(value = "/login-form")
+	@RequestMapping(value = "/login-form", method = RequestMethod.GET)
 	public String showLoginForm(HttpSession session, Model model) {
+		
+		if(utenteService.getUtenteAutenticato() != null)
+			return "not-available";
 		
 		if(!model.containsAttribute("loginForm"))
 			model.addAttribute("loginForm", new LoginForm());
