@@ -14,20 +14,19 @@
 	
 	<input id="toast" type="hidden" value="${notifica}"/>
 
-	<c:forEach items="${listaDomandeApprovate}" var="lista" varStatus="loop">
 		<div class="row card panel" style="padding: 20px;">
 	      <div class="row">
-	      	<h6 class="teal-text">Domanda presso <c:out value="${lista.azienda.getNome()}"/></h6>
+	      	<h6 class="teal-text">Domanda presso <c:out value="${domanda.azienda.getNome()}"/></h6>
 	      	<div class=" row">
-	      		 <p>numero di CFU: <c:out value="${lista.cfu}"/></p>
+	      		 <p>numero di CFU: <c:out value="${domanda.cfu}"/></p>
 	      	</div>
 	      	
 	      	<div class=" row">
-	      		 <p>Data inizio: <c:out value="${lista.inizioTirocinio.getDayOfMonth()}"/>/<c:out value="${lista.inizioTirocinio.getMonthValue()}"/>/<c:out value="${lista.inizioTirocinio.getYear()}"/></p>
+	      		 <p>Data inizio: <c:out value="${domanda.inizioTirocinio.getDayOfMonth()}"/>/<c:out value="${domanda.inizioTirocinio.getMonthValue()}"/>/<c:out value="${domanda.inizioTirocinio.getYear()}"/></p>
 	      	</div>
 	      	
 	      	<div class=" row">
-	      		 <p>Data fine: <c:out value="${lista.fineTirocinio.getDayOfMonth()}"/>/<c:out value="${lista.fineTirocinio.getMonthValue()}"/>/<c:out value="${lista.fineTirocinio.getYear()}"/></p>
+	      		 <p>Data fine: <c:out value="${domanda.fineTirocinio.getDayOfMonth()}"/>/<c:out value="${domanda.fineTirocinio.getMonthValue()}"/>/<c:out value="${domanda.fineTirocinio.getYear()}"/></p>
 	      	</div>
 	    </div>
 	      
@@ -43,7 +42,7 @@
 		
 		
         <tbody>
-        	<c:forEach items="${lista.getRegistri()}" var="registro" varStatus="loop">
+        	<c:forEach items="${domanda.getRegistri()}" var="registro" varStatus="loop">
 	          <tr>
 	            <td><c:out value="${registro.data.getDayOfMonth()}"/>/<c:out value="${registro.data.getMonthValue()}"/>/<c:out value="${registro.data.getYear()}"/></td>
 	            <td><c:out value="${registro.inizio}"/></td>
@@ -57,27 +56,27 @@
 	      <div class="row"></div>
           <div class="row">
 		    <form:form class="col s12" id="registroForm" action="/compila-registro" method="POST" modelAttribute="registroForm">
-		    		<form:input path="id_domanda" type="hidden" value="${lista.id}"/>
+		    		<form:input path="id_domanda" type="hidden" value="${domanda.id}"/>
 				      <div class="row">
 				        <div class="input-field col s3">
-				          <form:input path="giornoInizio" id="giornoInizio" type="hidden" class="validate" value="${lista.inizioTirocinio.getDayOfMonth()}" />
+				          <form:input path="giornoInizio" id="giornoInizio" type="hidden" class="validate" value="${domanda.inizioTirocinio.getDayOfMonth()}" />
 				        </div>
 				        <div class="input-field col s3">
-				          <form:input path="meseInizio" id="meseInizio" type="hidden" class="validate" value="${lista.inizioTirocinio.getMonthValue()}" />
+				          <form:input path="meseInizio" id="meseInizio" type="hidden" class="validate" value="${domanda.inizioTirocinio.getMonthValue()}" />
 				        </div>
 				        <div class="input-field col s3">
-				          <form:input path="annoInizio" id="annoInizio" type="hidden" class="validate" value="${lista.inizioTirocinio.getYear()}" />
+				          <form:input path="annoInizio" id="annoInizio" type="hidden" class="validate" value="${domanda.inizioTirocinio.getYear()}" />
 				        </div>
 				      </div>
 				      <div class="row">
 				        <div class="input-field col s3">
-				          <form:input path="giornoFine" id="giornoFine" type="hidden" class="validate" value="${lista.fineTirocinio.getDayOfMonth()}"/>
+				          <form:input path="giornoFine" id="giornoFine" type="hidden" class="validate" value="${domanda.fineTirocinio.getDayOfMonth()}"/>
 				        </div>
 				        <div class="input-field col s3">
-				          <form:input path="meseFine" id="meseFine" type="hidden" class="validate" value="${lista.fineTirocinio.getMonthValue()}"/>
+				          <form:input path="meseFine" id="meseFine" type="hidden" class="validate" value="${domanda.fineTirocinio.getMonthValue()}"/>
 				        </div>
 				        <div class="input-field col s3">
-				          <form:input path="annoFine" id="annoFine" type="hidden" class="validate" value="${lista.fineTirocinio.getYear()}"/>
+				          <form:input path="annoFine" id="annoFine" type="hidden" class="validate" value="${domanda.fineTirocinio.getYear()}"/>
 				        </div>
 				      </div>		
 				      
@@ -149,9 +148,9 @@
 							          <label for="textarea1">Inserisci descrizione attività svolte</label>
 					    			</div>
 				
-				<c:if test="${lista.cfu == 6}">
+				<c:if test="${domanda.cfu == 6}">
 					<c:choose>	
-				        <c:when test="${lista.getNumeroOre() lt 9000}">
+				        <c:when test="${domanda.getNumeroOre() lt 9000}">
 				          <div class="row right">
 							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
 							    <i class="material-icons right">send</i>
@@ -159,7 +158,7 @@
 						  </div>
 						</c:when>	
 						
-				        <c:when test="${lista.getNumeroOre() >= 9000}">
+				        <c:when test="${domanda.getNumeroOre() >= 9000}">
 				          <div class="row right">
 							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
 						  </div>
@@ -167,9 +166,9 @@
 				    </c:choose>
 			    </c:if>
 			    
-			    <c:if test="${lista.cfu == 12}">
+			    <c:if test="${domanda.cfu == 12}">
 					<c:choose>	
-				        <c:when test="${lista.getNumeroOre() lt 18000}">
+				        <c:when test="${domanda.getNumeroOre() lt 18000}">
 				          <div class="row right">
 							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
 							    <i class="material-icons right">send</i>
@@ -177,7 +176,7 @@
 						  </div>
 						</c:when>	
 						
-				        <c:when test="${lista.getNumeroOre() >= 18000}">
+				        <c:when test="${domanda.getNumeroOre() >= 18000}">
 				          <div class="row right">
 							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
 						  </div>
@@ -185,9 +184,9 @@
 				    </c:choose>
 			    </c:if>
 			    
-			    <c:if test="${lista.cfu == 18}">
+			    <c:if test="${domanda.cfu == 18}">
 					<c:choose>	
-				        <c:when test="${lista.getNumeroOre() lt 27000}">
+				        <c:when test="${domanda.getNumeroOre() lt 27000}">
 				          <div class="row right">
 							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
 							    <i class="material-icons right">send</i>
@@ -195,7 +194,7 @@
 						  </div>
 						</c:when>	
 						
-				        <c:when test="${lista.getNumeroOre() >= 27000}">
+				        <c:when test="${domanda.getNumeroOre() >= 27000}">
 				          <div class="row right">
 							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
 						  </div>
@@ -207,6 +206,5 @@
 		  </div>
 	      <div class="row"></div>
 	      <div class="row"></div>
-   </c:forEach>
       
 </html>

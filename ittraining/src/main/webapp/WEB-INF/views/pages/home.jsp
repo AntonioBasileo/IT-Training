@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
@@ -40,33 +41,33 @@
 	
 		<!-- Sidenav -->
 		<jsp:include page="/WEB-INF/views/nav/side-nav.jsp" />
-		 
-		 <%if(request.getAttribute("utente") == null) { %>
-		 
-			<!-- Navbar -->
-			<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
+		
+
+		<c:choose>
+			<c:when test="${empty utente}">
+				<!-- Navbar -->
+				<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
+			</c:when>
 			
-		<% } else if(request.getAttribute("utente").getClass().getSimpleName().equals("Studente")) { %>
-		
-			<!-- Navbar -->
-			<jsp:include page="/WEB-INF/views/nav/nav-studente.jsp" />
-			
-		<% } else if(request.getAttribute("utente").getClass().getSimpleName().equals("ImpiegatoSegreteria")) { %>
-		
-			<!-- Navbar -->
-			<jsp:include page="/WEB-INF/views/nav/nav-segreteria.jsp" />
-		
-		<% } else if(request.getAttribute("utente").getClass().getSimpleName().equals("TutorAccademico")) {   %>
-		
-			<!-- Navbar -->
-			<jsp:include page="/WEB-INF/views/nav/nav-accademico.jsp" />
-		
-		<% } else if(request.getAttribute("utente").getClass().getSimpleName().equals("TutorAziendale")) {  %>
-		
-			<!-- Navbar -->
-			<jsp:include page="/WEB-INF/views/nav/nav-aziendale.jsp" />
-		
-		<% } %>
+			<c:when test="${not empty utente}">
+				<c:if test="${utente.getClass().getSimpleName().equals('Studente')}">
+					<!-- Navbar -->
+					<jsp:include page="/WEB-INF/views/nav/nav-studente.jsp" />
+				</c:if>
+				<c:if test="${utente.getClass().getSimpleName().equals('TutorAccademico')}">
+					<!-- Navbar -->
+					<jsp:include page="/WEB-INF/views/nav/nav-accademico.jsp" />
+				</c:if>
+				<c:if test="${utente.getClass().getSimpleName().equals('TutorAziendale')}">
+					<!-- Navbar -->
+					<jsp:include page="/WEB-INF/views/nav/nav-aziendale.jsp" />
+				</c:if>
+				<c:if test="${utente.getClass().getSimpleName().equals('ImpiegatoSegreteria')}">
+					<!-- Navbar -->
+					<jsp:include page="/WEB-INF/views/nav/nav-segreteria.jsp" />
+				</c:if>
+			</c:when>
+		</c:choose>
 		
 		<!-- Container -->
 		<div class = "container">

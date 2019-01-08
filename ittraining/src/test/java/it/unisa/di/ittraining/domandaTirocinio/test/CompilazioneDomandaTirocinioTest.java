@@ -17,7 +17,6 @@ import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaRepository;
-import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.domandatirocinio.DataFinePrecedenteDataInizioException;
 import it.unisa.di.ittraining.domandatirocinio.DataNonValidaException;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
@@ -58,40 +57,39 @@ public class CompilazioneDomandaTirocinioTest {
 	}
 	
 	@Test
-	public void registraDomanda() throws AziendaNonValidaException, AziendaNonEsistenteException, DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
-		
-		TutorAziendale tutor = new TutorAziendale();
-		tutor.setNome("marco");
-		tutor.setCognome("verdi");
-		tutor.setDataDiNascita(LocalDate.of(1980, Month.APRIL, 1));
-		tutor.setSesso("M");
-		tutor.setEmail("marco@gmail.com");
+	public void registraDomanda() throws AziendaNonValidaException, AziendaNonEsistenteException, DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException,
+	MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
 		
 		Azienda azienda = new Azienda();
 		azienda.setNome("Grafica SRL");
 		azienda.setTelefono("3333333333");
 		azienda.setSede("Avellino");
 		azienda.setIndirizzo("Via Roma 45");
-		azienda.setEmail(tutor.getEmail());
-		azienda.setTutor(tutor);
 		
 		Studente studente = new Studente();
-		studente.setUsername("Filibertapacc");
-		
+		studente.setNome("Laura");
+		studente.setCognome("Oliva");
+		studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
+		studente.setMatricola("0512100000");
+		studente.setSesso("F");
+		studente.setEmail("laura@studenti.unisa.it");
+		studente.setPassword("ab12cd34ef");
+		studente.setUsername("laura1997");
+		studente.setTelefono("3404050333");
 		
 		DomandaTirocinio domandaTirocinio= new DomandaTirocinio();
+		domandaTirocinio.setId(111L);
 		domandaTirocinio.setCfu(6);
 		domandaTirocinio.setInizioTirocinio(LocalDate.of(2019, Month.FEBRUARY, 12));
 		domandaTirocinio.setFineTirocinio(LocalDate.of(2019, Month.MARCH, 20));
 		domandaTirocinio.setAzienda(azienda);
 		
-		studente.getDomandeTirocinio().add(domandaTirocinio);
-		domandaTirocinio.setStudente(studente);
+		studente.addDomandaTirocinio(domandaTirocinio);
 		
 		when(AutenticazioneHolder.getUtente()).thenReturn(studente.getUsername());
 		when(utenteService.getUtenteAutenticato()).thenReturn(studente);
 		when(aziendaRepository.existsByNome(azienda.getNome())).thenReturn(true);
-		when(aziendaRepository.findByNome(domandaTirocinioService.validaNomeAzienda(azienda.getNome()))).thenReturn(azienda);
+		when(aziendaRepository.findByNome(azienda.getNome())).thenReturn(azienda);
 		when(domandaTirocinioService.registraDomanda(domandaTirocinio, azienda.getNome())).thenReturn(domandaTirocinio);
 		
 		

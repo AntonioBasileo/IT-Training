@@ -56,7 +56,7 @@ public class AziendaService {
 	public TutorAziendale registraTutorAziendale(TutorAziendale tutor, String nomeAzienda) throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
 	CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, EmailNonAssociataException, UsernameNonValidoException, UsernameEsistenteException,
 	PasswordNonValidaException, PasswordNonCorrispondentiException, DataDiNascitaNonValidaException, AziendaNonValidaException,
-	AziendaEsistenteException, SessoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException {
+	AziendaEsistenteException, SessoNonValidoException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException, AziendaNonEsistenteException {
 		
 		tutor.setNome(validaNomeTutor(tutor.getNome()));
 		tutor.setCognome(validaCognome(tutor.getCognome()));
@@ -67,11 +67,7 @@ public class AziendaService {
 		tutor.setAzienda(repAzienda.findByNome(nomeAzienda));
 		tutor.setSesso(validaSesso(tutor.getSesso()));
 		tutor.setTelefono(validaTelefono(tutor.getTelefono()));
-		
-		Azienda azienda = repAzienda.findByNome(nomeAzienda);
-		azienda.setTutor(tutor);
-				
-		repAzienda.save(azienda);
+
 		repTutor.save(tutor);
 				
 		return tutor;
@@ -92,12 +88,24 @@ public class AziendaService {
 		return azienda;
 	}
 	
+	/*Gestione azienda*/
+	
 	public String validaNome(String nome) throws AziendaNonValidaException, AziendaEsistenteException {
 		if(nome == null) throw new AziendaNonValidaException("Il campo azienda non può essere nullo");
 		
 		if(nome.length() > Azienda.MAX_LUNGHEZZA_NOME || nome.length() < Azienda.MIN_LUNGHEZZA_NOME) throw new AziendaNonValidaException();
 		
 		if(repAzienda.existsByNome(nome)) throw new AziendaEsistenteException("L'azienda indicata è già esistente");
+		
+		return nome;
+	}
+	
+	public String validaNomeForTutor(String nome) throws AziendaNonValidaException, AziendaNonEsistenteException {
+		if(nome == null) throw new AziendaNonValidaException("Il campo azienda non può essere nullo");
+		
+		if(nome.length() > Azienda.MAX_LUNGHEZZA_NOME || nome.length() < Azienda.MIN_LUNGHEZZA_NOME) throw new AziendaNonValidaException();
+		
+		if(!repAzienda.existsByNome(nome)) throw new AziendaNonEsistenteException("L'azienda indicata non è esistente");
 		
 		return nome;
 	}
@@ -244,15 +252,5 @@ public class AziendaService {
 		if(!repAzienda.existsByNomeAndEmail(nomeAzienda, email)) throw new EmailNonAssociataException("L'email non è associata ad alcuna azienda");
 		
 		return email;
-	}
-	
-	public String validaNomeForTutor(String nome) throws AziendaNonValidaException, AziendaNonEsistenteException {
-		if(nome == null) throw new AziendaNonValidaException("Il campo azienda non può essere nullo");
-		
-		if(nome.length() > Azienda.MAX_LUNGHEZZA_NOME || nome.length() < Azienda.MIN_LUNGHEZZA_NOME) throw new AziendaNonValidaException();
-		
-		if(!repAzienda.existsByNome(nome)) throw new AziendaNonEsistenteException("L'azienda indicata non è esistente");
-		
-		return nome;
 	}
 }

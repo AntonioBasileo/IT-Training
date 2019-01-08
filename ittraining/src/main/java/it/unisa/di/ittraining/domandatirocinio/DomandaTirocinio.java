@@ -121,15 +121,21 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	}
 
 	public void setStudente(Studente studente) {
-		this.studente = studente;
+		    if (this.studente != studente) {
+		      this.studente = studente;
+		      studente.addDomandaTirocinio(this);
+		    }
 	}
 
 	public ProgettoFormativo getProgettoFormativo() {
 		return progettoFormativo;
 	}
 
-	public void setProgettoFormativo(ProgettoFormativo progettoFormativo) {
-		this.progettoFormativo = progettoFormativo;
+	public void addProgettoFormativo(ProgettoFormativo progettoFormativo) {
+		    if (this.progettoFormativo != progettoFormativo) {
+		      this.progettoFormativo = progettoFormativo;
+		      progettoFormativo.setDomanda(this);
+		    }
 	}
 
 	public Azienda getAzienda() {
@@ -137,7 +143,10 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	}
 
 	public void setAzienda(Azienda azienda) {
-		this.azienda = azienda;
+		if(this.azienda != azienda) {
+			this.azienda = azienda;
+			azienda.addDomanda(this);
+		}
 	}
 
 	public LocalDate getData() {
@@ -192,8 +201,11 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 		return registri;
 	}
 
-	public void setRegistri(List<Registro> registri) {
-		this.registri = registri;
+	public void addRegistro(Registro registro) {
+		if(!registri.contains(registro)) {
+			registri.add(registro);
+			registro.setDomanda(this);
+		}
 	}
 	
 	public float getNumeroOre() {

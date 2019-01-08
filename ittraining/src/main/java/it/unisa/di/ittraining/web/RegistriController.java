@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
@@ -44,7 +45,7 @@ public class RegistriController {
 	private UtenteService utentiService;
 	
 	
-	@RequestMapping(value = "/registro-form", method = RequestMethod.GET)
+	@RequestMapping(value = "/domande-registri", method = RequestMethod.GET)
 	public String showRegistri(HttpSession session, Model model) {
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
@@ -54,14 +55,25 @@ public class RegistriController {
 			List<DomandaTirocinio> domande = domandeService.elencaDomandeStudenteStatus((String)session.getAttribute("username"), DomandaTirocinio.APPROVATA);
 			
 			model.addAttribute("listaDomandeApprovate", domande);
+			model.addAttribute("utente", utentiService.getUtenteAutenticato());
 			
 			model.addAttribute("registroForm", new RegistroForm());
 		}
 			
 		
-		return "registri";
+		return "registri-domande";
 	}
 	
+	@RequestMapping(value = "/registro-form", method = RequestMethod.GET)
+	public String showRegistroForm(@RequestParam Long id, Model model) {
+		DomandaTirocinio domanda = domandeService.getDomandaById(id);
+		
+		model.addAttribute("domanda", domanda);
+		model.addAttribute("registroForm", new RegistroForm());
+		
+		return "compila-registro";
+		
+	}
 	
 	@RequestMapping(value = "/compila-registro", method = RequestMethod.POST)
 	public String compilaRegistro(@ModelAttribute("registroForm") RegistroForm registroForm, BindingResult result, Model model, RedirectAttributes redirectAttributes, HttpSession session)
@@ -86,7 +98,7 @@ public class RegistriController {
 	      if(!model.containsAttribute("testoNotifica"))
 	    	  model.addAttribute("testoNotifica", "toast.registro.nonValido");
 	      
-	      return "registri";
+	      return "compila-registro";
 	    }
 	    
 	    Registro registro = new Registro();
@@ -107,6 +119,6 @@ public class RegistriController {
 	    
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.valido");
 		
-		return "redirect:/registro-form";
+		return "redirect:/registro-form?id=" + registroForm.getId_domanda();
 	}
 }
