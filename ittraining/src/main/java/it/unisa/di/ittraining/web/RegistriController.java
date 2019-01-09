@@ -55,7 +55,6 @@ public class RegistriController {
 			List<DomandaTirocinio> domande = domandeService.elencaDomandeStudenteStatus((String)session.getAttribute("username"), DomandaTirocinio.APPROVATA);
 			
 			model.addAttribute("listaDomandeApprovate", domande);
-			model.addAttribute("utente", utentiService.getUtenteAutenticato());
 			
 			model.addAttribute("registroForm", new RegistroForm());
 		}
@@ -66,6 +65,10 @@ public class RegistriController {
 	
 	@RequestMapping(value = "/registro-form", method = RequestMethod.GET)
 	public String showRegistroForm(@RequestParam Long id, Model model) {
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
+			return "not-available";
+		
 		DomandaTirocinio domanda = domandeService.getDomandaById(id);
 		
 		model.addAttribute("domanda", domanda);
@@ -120,5 +123,22 @@ public class RegistriController {
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.valido");
 		
 		return "redirect:/registro-form?id=" + registroForm.getId_domanda();
+	}
+	
+	
+	@RequestMapping(value = "/registri-segreteria", method = RequestMethod.GET)
+	public String showRegistriSegreteria(HttpSession session, Model model) {
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("ImpiegatoSegreteria")))
+			return "not-available";
+		
+		if(!model.containsAttribute("listaDomandeRegistri")) {
+			List<DomandaTirocinio> domande = domandeService.getAllByStatus(DomandaTirocinio.APPROVATA);
+			
+			model.addAttribute("listaDomandeRegistri", domande);
+		}
+			
+		
+		return "registri-segreteria";
 	}
 }
