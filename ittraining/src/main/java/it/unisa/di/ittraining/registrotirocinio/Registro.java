@@ -13,87 +13,87 @@ import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 
 @Entity
 public class Registro {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@OneToOne
-	private DomandaTirocinio domanda;
-	
-	private LocalDate data;
-	private LocalTime inizio;
-	private LocalTime fine;
-	private float numero_minuti;
-	private String descrizione;
-	private int status;
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public LocalDate getData() {
-		return data;
-	}
-	
-	public void setData(LocalDate data) {
-		this.data = data;
-	}
-	
-	public LocalTime getInizio() {
-		return inizio;
-	}
-	
-	public void setInizio(LocalTime inizio) {
-		this.inizio = inizio;
-	}
-	
-	public LocalTime getFine() {
-		return fine;
-	}
-	
-	public void setFine(LocalTime fine) {
-		this.fine = fine;
-	}
-	
-	public String getDescrizione() {
-		return descrizione;
-	}
-	
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
 
-	public DomandaTirocinio getDomanda() {
-		return domanda;
-	}
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-	public void setDomanda(DomandaTirocinio domanda) {
-		if(this.domanda != domanda) {
-			this.domanda = domanda;
-			domanda.addRegistro(this);
-		}
-	}
+  @OneToOne
+  private DomandaTirocinio domanda;
 
-	public float getNumero_minuti() {
-		return numero_minuti;
-	}
+  private LocalDate data;
+  private LocalTime inizio;
+  private LocalTime fine;
+  private float numero_minuti;
+  private String descrizione;
+  private int status;
 
-	public void setNumero_minuti(long numero_minuti) {
-		this.numero_minuti = numero_minuti;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public float getStatus() {
-		return status;
-	}
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	
-	
+  public LocalDate getData() {
+    return data;
+  }
+
+  public void setData(LocalDate data) {
+    this.data = data;
+  }
+
+  public LocalTime getInizio() {
+    return inizio;
+  }
+
+  public void setInizio(LocalTime inizio) {
+    this.inizio = inizio;
+  }
+  
+  public LocalTime getFine() {
+    return fine;
+  }
+
+  public void setFine(LocalTime fine) {
+    this.fine = fine;
+  }
+
+  public String getDescrizione() {
+    return descrizione;
+  }
+
+  public void setDescrizione(String descrizione) {
+    this.descrizione = descrizione;
+  }
+
+  public DomandaTirocinio getDomanda() {
+    return domanda;
+  }
+
+  public void setDomanda(DomandaTirocinio domanda) {
+    if (this.domanda != domanda) {
+      this.domanda = domanda;
+      domanda.addRegistro(this);
+    }
+  }
+
+  public float getNumero_minuti() {
+    return numero_minuti;
+  }
+
+  public void setNumero_minuti(long numero_minuti) {
+    this.numero_minuti = numero_minuti;
+  }
+
+  public float getStatus() {
+    return status;
+  }
+
+  public void setStatus(int status) {
+    this.status = status;
+  }
+
+
 }
