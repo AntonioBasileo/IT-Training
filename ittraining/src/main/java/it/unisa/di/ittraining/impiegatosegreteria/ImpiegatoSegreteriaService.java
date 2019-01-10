@@ -216,24 +216,40 @@ public class ImpiegatoSegreteriaService {
 
   }
 
-public boolean validaPasswords(String password, String confirmPassword) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
+  public boolean validaPasswords(String password, String confirmPassword) throws PasswordNonValidaException,
+      PasswordNonCorrispondentiException {
 
-if(password == null || confirmPassword == null) throw new PasswordNonValidaException("Il campo password oppure il campo conferma password sono nulli");
+    if (password == null || confirmPassword == null) {
+      throw 
+        new
+          PasswordNonValidaException("Il campo password oppure il campo conferma password sono nulli");
+    }
 
-if(!password.matches(Utente.PASSWORD_PATTERN) || !confirmPassword.matches(Utente.PASSWORD_PATTERN)) throw new PasswordNonValidaException("Il campo password oppure il campo conferma password non rispettano il formato previsto");
+    if (!password.matches(Utente.PASSWORD_PATTERN)
+        || !confirmPassword.matches(Utente.PASSWORD_PATTERN)) {
+      throw
+        new
+          PasswordNonValidaException("Il campo password oppure il campo conferma password non rispettano il formato previsto");
+    }
 
-if(!password.equals(confirmPassword)) throw new PasswordNonCorrispondentiException("Le due password non corrispondono");
+    if (!password.equals(confirmPassword)) {
+      throw new PasswordNonCorrispondentiException("Le due password non corrispondono");
+    }
 
-return true;
-}
+    return true;
+  }
 
-public String validaPassword(String password) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
+  public String validaPassword(String password) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
 
-if(password == null) throw new PasswordNonValidaException("STUDENTE SERVICE - Il campo password non è valido");
+    if (password == null) {
+      throw new PasswordNonValidaException("STUDENTE SERVICE - Il campo password non è valido");
+    }
 
-if(!password.matches(Utente.PASSWORD_PATTERN)) throw new PasswordNonValidaException("STUDENTE SERVICE - Non rispecchia il formato");
+    if (!password.matches(Utente.PASSWORD_PATTERN)) {
+      throw new PasswordNonValidaException("STUDENTE SERVICE - Non rispecchia il formato");
+    }
 
-return password;
+    return password;
 
-}
+  }
 }
