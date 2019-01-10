@@ -127,6 +127,78 @@
 			      	</c:when>
 			      	
 			      	
+			      	<c:when test="${lista.status == 5 }">
+			      		<div class="row"></div>
+			      		<p class="green accent-3 waves-effect waves-light btn-small"><i class="material-icons right">done_all</i>Registro approvato dal </p>
+			      		
+			      		<div class="row"></div>
+			      		
+			      		  <div class="row">
+				      		  <!-- Modal Trigger -->
+							  <a class="waves-effect waves-light btn-small modal-trigger" href="#modal${lista.id}">Registro approvato dal tutor aziendale</a>
+						  </div>
+						
+						  <!-- Modal Structure -->
+						  <div id="modal${lista.id}" class="modal">
+						    <div class="modal-content">
+						      <h5 class="teal-text">Progetto formativo</h5>
+						      <p><c:out value="${lista.progettoFormativo.getDescrizione()}"/></p>
+						    </div>
+						    <div class="modal-footer">
+						      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+						    </div>
+						  </div>
+			      	</c:when>
+			      	
+			      	
+			      	<c:when test="${lista.status == 6 }">
+			      		<div class="row"></div>
+			      		<p class="green accent-3 waves-effect waves-light btn-small"><i class="material-icons right">done_all</i>Registro approvato dal tutor accademico</p>
+			      		
+			      		<div class="row"></div>
+			      		
+			      		  <div class="row">
+				      		  <!-- Modal Trigger -->
+							  <a class="waves-effect waves-light btn-small modal-trigger" href="#modal${lista.id}">Visualizza progetto Formativo</a>
+						  </div>
+						
+						  <!-- Modal Structure -->
+						  <div id="modal${lista.id}" class="modal">
+						    <div class="modal-content">
+						      <h5 class="teal-text">Progetto formativo</h5>
+						      <p><c:out value="${lista.progettoFormativo.getDescrizione()}"/></p>
+						    </div>
+						    <div class="modal-footer">
+						      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+						    </div>
+						  </div>
+			      	</c:when>
+			      	
+			      	
+			      	<c:when test="${lista.status == 7 }">
+			      		<div class="row"></div>
+			      		<p class="green accent-3 waves-effect waves-light btn-small"><i class="material-icons right">done_all</i>Terminato con successo</p>
+			      		
+			      		<div class="row"></div>
+			      		
+			      		  <div class="row">
+				      		  <!-- Modal Trigger -->
+							  <a class="waves-effect waves-light btn-small modal-trigger" href="#modal${lista.id}">Visualizza progetto Formativo</a>
+						  </div>
+						
+						  <!-- Modal Structure -->
+						  <div id="modal${lista.id}" class="modal">
+						    <div class="modal-content">
+						      <h5 class="teal-text">Progetto formativo</h5>
+						      <p><c:out value="${lista.progettoFormativo.getDescrizione()}"/></p>
+						    </div>
+						    <div class="modal-footer">
+						      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+						    </div>
+						  </div>
+			      	</c:when>
+			      	
+			      	
 			      </c:choose>
 			      
 			      
