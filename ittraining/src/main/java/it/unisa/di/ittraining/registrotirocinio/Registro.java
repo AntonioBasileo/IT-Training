@@ -1,15 +1,13 @@
 package it.unisa.di.ittraining.registrotirocinio;
 
+import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-
-import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 
 @Entity
 public class Registro {

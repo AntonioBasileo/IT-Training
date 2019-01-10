@@ -44,6 +44,10 @@ public class ImpiegatoSegreteriaService {
   */
   public static final int MAX_DISTANZA_ANNO_NASCITA = 130;
 
+  /** 
+  * Metodo che permette di validare lato server i campi inseriti dall'impiegato
+  * e inserire lo stesso nel Database.
+  */
   @Transactional(rollbackFor = Exception.class)
   public ImpiegatoSegreteria registraImpiegato(ImpiegatoSegreteria impiegato) 
       throws NomeNonValidoException, NomeCognomeTroppoLungoException, 
@@ -68,7 +72,10 @@ public class ImpiegatoSegreteriaService {
     return impiegato;
 
   }
-
+  
+  /** 
+  * Metodo che permette di validare il campo email.
+  */
   public String validaEmailImpiegato(String email) throws EmailNonValidaException, 
       EmailEsistenteException {
 
@@ -85,9 +92,11 @@ public class ImpiegatoSegreteriaService {
     }
 
     return email;
-}
+  }
 
-
+  /** 
+  * Metodo che permette di validare il campo nome.
+  */
   public String validaNome(String nome) throws NomeNonValidoException,
       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
 
@@ -111,6 +120,9 @@ public class ImpiegatoSegreteriaService {
   }
 
 
+  /** 
+  * Metodo che permette di validare il campo cognome.
+  */
   public String validaCognome(String cognome) throws CognomeNonValidoException,
       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
 
@@ -134,6 +146,9 @@ public class ImpiegatoSegreteriaService {
   }
 
 
+  /** 
+  * Metodo che permette di validare il campo sesso.
+  */
   public String validaSesso(String sesso) throws SessoNonValidoException {
 
     if (sesso == null) {
@@ -156,6 +171,9 @@ public class ImpiegatoSegreteriaService {
   }
 
 
+  /** 
+  * Metodo che permette di validare il campo data di nascita.
+  */
   public LocalDate validaDataDiNascita(LocalDate dataDiNascita) 
       throws DataDiNascitaNonValidaException {
 
@@ -177,7 +195,10 @@ public class ImpiegatoSegreteriaService {
       } 
     }
   }
-
+  
+  /** 
+  * Metodo che permette di validare il campo telefono.
+  */
   public String validaTelefono(String telefono) throws TelefonoNonValidoException {
 
     if (telefono == null) {
@@ -192,6 +213,9 @@ public class ImpiegatoSegreteriaService {
     
   }
 
+  /** 
+  * Metodo che permette di validare il campo username.
+  */
   public String validaUsername(String username) throws UsernameNonValidoException, 
       UsernameEsistenteException {
 
@@ -216,20 +240,25 @@ public class ImpiegatoSegreteriaService {
 
   }
 
-  public boolean validaPasswords(String password, String confirmPassword) throws PasswordNonValidaException,
+  /** 
+  * Metodo che permette di validare la corrispodenza tra i campi password
+  * e conferma password.
+  */
+  public boolean validaPasswords(String password, String confirmPassword)
+      throws PasswordNonValidaException,
       PasswordNonCorrispondentiException {
 
     if (password == null || confirmPassword == null) {
       throw 
         new
-          PasswordNonValidaException("Il campo password oppure il campo conferma password sono nulli");
+          PasswordNonValidaException("Il campo password oppure conferma password sono nulli");
     }
 
     if (!password.matches(Utente.PASSWORD_PATTERN)
         || !confirmPassword.matches(Utente.PASSWORD_PATTERN)) {
       throw
         new
-          PasswordNonValidaException("Il campo password oppure il campo conferma password non rispettano il formato previsto");
+          PasswordNonValidaException("I campi passwords non rispettano il formato previsto");
     }
 
     if (!password.equals(confirmPassword)) {
@@ -239,7 +268,11 @@ public class ImpiegatoSegreteriaService {
     return true;
   }
 
-  public String validaPassword(String password) throws PasswordNonValidaException, PasswordNonCorrispondentiException {
+  /** 
+  * Metodo che permette di validare il campo password.
+  */
+  public String validaPassword(String password) throws PasswordNonValidaException,
+      PasswordNonCorrispondentiException {
 
     if (password == null) {
       throw new PasswordNonValidaException("STUDENTE SERVICE - Il campo password non è valido");

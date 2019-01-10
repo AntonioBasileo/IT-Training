@@ -65,6 +65,11 @@ public class Azienda {
     return tutor;
   }
 
+  /**
+ * Metodo che permettere di instaurare una relazione bidirezionale a
+ * livello di Database tra il tutor e l'azienda alla quale
+ * appartiene.
+ */
   public void setTutorAziendale(TutorAziendale tutor) {
 
     if (this.tutor != tutor) {
@@ -110,6 +115,11 @@ public class Azienda {
     return domande;
   }
 
+  /**
+ * Metodo che permettere di instaurare una relazione bidirezionale a
+ * livello di Database tra l'azienda e le domande che vengono
+ * effettuatae verso di essere.
+ */
   public void addDomanda(DomandaTirocinio domanda) {
 
     if (!domande.contains(domanda)) {
