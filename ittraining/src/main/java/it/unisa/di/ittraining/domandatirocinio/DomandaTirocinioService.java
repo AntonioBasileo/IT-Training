@@ -1,5 +1,12 @@
 package it.unisa.di.ittraining.domandatirocinio;
 
+import it.unisa.di.ittraining.azienda.Azienda;
+import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
+import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
+import it.unisa.di.ittraining.azienda.AziendaRepository;
+import it.unisa.di.ittraining.studente.Studente;
+import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
+import it.unisa.di.ittraining.utente.UtenteService;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -9,47 +16,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.unisa.di.ittraining.azienda.Azienda;
-import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
-import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
-import it.unisa.di.ittraining.azienda.AziendaRepository;
-import it.unisa.di.ittraining.studente.Studente;
-import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
-import it.unisa.di.ittraining.utente.UtenteService;
-
 @Service
 public class DomandaTirocinioService {
-	
-	@Autowired
-	private AziendaRepository rep;
-	
-	@Autowired
-	private DomandaTirocinioRepository domandeRep;
-	
-	@Autowired
-	private UtenteService utentiService;
-	
-	@Transactional(rollbackFor = Exception.class)
-	public DomandaTirocinio registraDomanda(DomandaTirocinio domanda, String nomeAzienda) throws AziendaNonValidaException, AziendaNonEsistenteException,
-	DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
 
-		Studente studente = (Studente)utentiService.getUtenteAutenticato();
-		
-		domanda.setAzienda(rep.findByNome(validaNomeAzienda(nomeAzienda)));
-		domanda.setInizioTirocinio(validaDataInizio(domanda.getInizioTirocinio()));
-		domanda.setFineTirocinio(validaDataFine(domanda.getInizioTirocinio(), domanda.getFineTirocinio()));
-		domanda.setCfu(validaNumeroCfu(domanda.getCfu()));
-	    domanda.setStudente(studente);
-		
-		
-	    if(domanda.getCfu() == 6)
-	    	domanda.setOreTotali(150);
-	    
-	    else if(domanda.getCfu() == 12)
-	    	domanda.setOreTotali(300);
-	    
-	    else if(domanda.getCfu() == 18)
-	    	domanda.setOreTotali(450);
+  @Autowired
+  private AziendaRepository rep;
+
+  @Autowired
+  private DomandaTirocinioRepository domandeRep;
+
+  @Autowired
+  private UtenteService utentiService;
+
+  @Transactional(rollbackFor = Exception.class)
+  public DomandaTirocinio registraDomanda(DomandaTirocinio domanda, 
+      String nomeAzienda) throws AziendaNonValidaException, 
+      AziendaNonEsistenteException, DataDiNascitaNonValidaException, 
+      DataNonValidaException, DataFinePrecedenteDataInizioException, 
+      MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
+
+    Studente studente = (Studente)utentiService.getUtenteAutenticato();
+
+    domanda.setAzienda(rep.findByNome(validaNomeAzienda(nomeAzienda)));
+    domanda.setInizioTirocinio(validaDataInizio(domanda.getInizioTirocinio()));
+    domanda.setFineTirocinio(validaDataFine(domanda.getInizioTirocinio(), 
+        domanda.getFineTirocinio()));
+    domanda.setCfu(validaNumeroCfu(domanda.getCfu()));
+    domanda.setStudente(studente);
+
+    if (domanda.getCfu() == 6) {
+      domanda.setOreTotali(150);
+    } else if (domanda.getCfu() == 12) {
+      domanda.setOreTotali(300);
+    }else if (domanda.getCfu() == 18) {
+      domanda.setOreTotali(450);
+    }
 		
 		domandeRep.save(domanda);
 		
