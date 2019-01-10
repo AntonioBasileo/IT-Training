@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +32,11 @@
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+		<!-- Definizione messaggi -->
+		<spring:message var="notifica" code="${testoNotifica}"/> 
 	
-	<input type="hidden" onload="mostraToast(${testoNotifica})"/>
+		<input id="toast" type="hidden" value="${notifica}"/>
+		
 	<jsp:include page="/WEB-INF/views/nav/nav-home.jsp" />
 	
 	<!-- Sidenav -->

@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
-<%@ page trimDirectiveWhitespaces="true" %>
 <html>
-
-	<spring:message var="notifica" code="${testoNotifica}"/> 
-	
-	<input id="toast" type="hidden" value="${notifica}"/>
 
   <div class="row">
     <form:form class="col s12" action="/compila-domanda" method="POST" modelAttribute="domandaForm"> 

@@ -75,10 +75,9 @@ public class ConvenzioneController {
 		      redirectAttributes.addFlashAttribute("convenzioneForm", convenzioneForm);
 		      
 				
-		      if(!model.containsAttribute("testoNotifica"))
-		    	  model.addAttribute("testoNotifica", "toast.convenzione.nonValida");
+		      redirectAttributes.addFlashAttribute("testoNotifica", "toast.convenzione.nonValida");
 		      
-		      return "aggiungi-ente";
+		      return "redirect:/convenzione";
 		 }
 		
 		Azienda azienda = new Azienda();
