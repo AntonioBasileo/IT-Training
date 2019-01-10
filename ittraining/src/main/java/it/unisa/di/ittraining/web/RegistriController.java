@@ -44,6 +44,8 @@ public class RegistriController {
 	@Autowired
 	private UtenteService utentiService;
 	
+	private long id_domanda;
+	
 	
 	@RequestMapping(value = "/domande-registri", method = RequestMethod.GET)
 	public String showRegistri(HttpSession session, Model model) {
@@ -69,10 +71,19 @@ public class RegistriController {
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
 			return "not-available";
 		
-		DomandaTirocinio domanda = domandeService.getDomandaById(id);
+			id_domanda = id;
 		
-		model.addAttribute("domanda", domanda);
-		model.addAttribute("registroForm", new RegistroForm());
+			DomandaTirocinio domanda = domandeService.getDomandaById(id_domanda);
+		
+			model.addAttribute("domanda", domanda);
+			
+			if(!model.containsAttribute("registroForm")) {
+				
+
+				model.addAttribute("registroForm", new RegistroForm());
+				
+			}
+
 		
 		return "compila-registro";
 		
@@ -100,8 +111,10 @@ public class RegistriController {
 	      
 	      if(!model.containsAttribute("testoNotifica"))
 	    	  model.addAttribute("testoNotifica", "toast.registro.nonValido");
+			
 	      
-	      return "compila-registro";
+	      return "redirect:/registro-form?id=" + id_domanda;
+	      
 	    }
 	    
 	    Registro registro = new Registro();
@@ -126,10 +139,10 @@ public class RegistriController {
 	}
 	
 	
-	@RequestMapping(value = "/registri-segreteria", method = RequestMethod.GET)
+	@RequestMapping(value = "/registri-aziendale", method = RequestMethod.GET)
 	public String showRegistriSegreteria(HttpSession session, Model model) {
 
-		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("ImpiegatoSegreteria")))
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
 			return "not-available";
 		
 		if(!model.containsAttribute("listaDomandeRegistri")) {
@@ -139,6 +152,6 @@ public class RegistriController {
 		}
 			
 		
-		return "registri-segreteria";
+		return "registri-aziendale";
 	}
 }
