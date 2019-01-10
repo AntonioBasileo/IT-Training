@@ -148,10 +148,9 @@ public class RegistrazioneController {
 	      
 	      redirectAttributes.addFlashAttribute("registrazioneStudente", registrazioneStudente);
 	      
-	      if(!model.containsAttribute("testoNotifica"))
-	    	  model.addAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
+	      redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 	      
-	      return "registrazione-studente";
+	      return "redirect:/registrazione-studente-form";
 	    }
 		
 	    // Genera un oggetto LocalDate a partire dagli interi presenti nel form
@@ -198,10 +197,9 @@ public class RegistrazioneController {
 	      
 	      redirectAttributes.addFlashAttribute("registrazioneSegreteria", registrazioneSegreteria);
 	      
-	      if(!model.containsAttribute("testoNotifica"))
-	    	  model.addAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
+	      redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 	      
-	      return "registrazione-segreteria";
+	      return "redirect:/registrazione-segreteria-form";
 	    }
 	    
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form
@@ -232,7 +230,7 @@ public class RegistrazioneController {
 	}
 
 	@RequestMapping(value = "/richiesta-registrazione-accademico", method = RequestMethod.POST)
-	public String elaboraRichiestaIscrizioneTutorAccademico(HttpSession session, @ModelAttribute("registrazioneAccademico") RegistrazioneForm registrazioneAccademico, Model model, 
+	public String elaboraRichieicostaIscrizioneTutorAccademico(HttpSession session, @ModelAttribute("registrazioneAccademico") RegistrazioneForm registrazioneAccademico, Model model, 
 			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, NomeNonValidoException,
 	NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException,
 	it.unisa.di.ittraining.utente.TelefonoNonValidoException, DataDiNascitaNonValidaException, SessoNonValidoException, UsernameNonValidoException, UsernameEsistenteException {
@@ -246,10 +244,9 @@ public class RegistrazioneController {
 		                             result);
 		      redirectAttributes.addFlashAttribute("registrazioneAccademico", registrazioneAccademico);
 		      
-		      if(!model.containsAttribute("testoNotifica"))
-		    	  model.addAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
+		      redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 		      
-		      return "registrazione-tutor-accademico";
+		      return "redirect:/registrazione-accademico-form";
 		}
 		
 	    // Genera un oggetto LocalDate a partire dagli interi presenti nel form
@@ -294,12 +291,12 @@ public class RegistrazioneController {
 		      redirectAttributes
 		          .addFlashAttribute("org.springframework.validation.BindingResult.registrazioneAziendale",
 		                             result);
+		      
 		      redirectAttributes.addFlashAttribute("registrazioneAziendale", registrazioneAziendale);
 		      
-		      if(!model.containsAttribute("testoNotifica"))
-		    	  model.addAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
+		      redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 		      
-		      return "registrazione-tutor-aziendale";
+		      return "redirect:/registrazione-aziendale-form";
 		}
 		
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form

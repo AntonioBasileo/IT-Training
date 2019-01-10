@@ -5,11 +5,6 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
-
-		<!-- Definizione messaggi -->
-		<spring:message var="notifica" code="${testoNotifica}"/> 
-	
-		<input id="toast" type="hidden" value="${notifica}"/>
 			  
 			  <!-- Registrazione Studente -->
 			  <div class="row">

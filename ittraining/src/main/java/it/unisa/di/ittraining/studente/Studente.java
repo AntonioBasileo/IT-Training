@@ -72,7 +72,9 @@ public class Studente extends Utente {
 		int somma = 0;
 		
 		for(DomandaTirocinio d: domandeTirocinio) {
-			if(d.getStatus() == DomandaTirocinio.IN_ATTESA || d.getStatus() == DomandaTirocinio.APPROVATA || d.getStatus() == DomandaTirocinio.ACCETTATA_AZIENDA)
+			if(d.getStatus() == DomandaTirocinio.IN_ATTESA || d.getStatus() == DomandaTirocinio.APPROVATA || d.getStatus() == DomandaTirocinio.ACCETTATA_AZIENDA 
+					|| d.getStatus() == DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO || d.getStatus() == DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE || 
+					d.getStatus() == DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA)
 				somma += d.getCfu();
 			
 		}
