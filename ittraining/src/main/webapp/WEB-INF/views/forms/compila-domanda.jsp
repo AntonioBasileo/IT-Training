@@ -4,10 +4,6 @@
 
 <%@ page trimDirectiveWhitespaces="true" %>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title> 
-</head>
 
 	<spring:message var="notifica" code="${testoNotifica}"/> 
 	
