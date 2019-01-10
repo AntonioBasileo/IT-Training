@@ -18,7 +18,7 @@
 	      <div class="row">
 	      	<h6 class="teal-text">Domanda presso <c:out value="${domanda.azienda.getNome()}"/></h6>
 	      	<div class=" row">
-	      		 <p>numero di CFU: <c:out value="${domanda.cfu}"/></p>
+	      		 <p>Numero di CFU: <c:out value="${domanda.cfu}"/></p>
 	      	</div>
 	      	
 	      	<div class=" row">
@@ -148,9 +148,12 @@
 							          <label for="textarea1">Inserisci descrizione attività svolte</label>
 					    			</div>
 				
+	      		<div class="row"></div>
+	      		<div class="row"></div>
+				
 				<c:if test="${domanda.cfu == 6}">
 					<c:choose>	
-				        <c:when test="${domanda.getNumeroOre() lt 9000}">
+				        <c:when test="${domanda.getNumeroOre() < 9000}">
 				          <div class="row right">
 							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
 							    <i class="material-icons right">send</i>
@@ -168,7 +171,7 @@
 			    
 			    <c:if test="${domanda.cfu == 12}">
 					<c:choose>	
-				        <c:when test="${domanda.getNumeroOre() lt 18000}">
+				        <c:when test="${domanda.getNumeroOre() < 18000}">
 				          <div class="row right">
 							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
 							    <i class="material-icons right">send</i>
@@ -186,7 +189,7 @@
 			    
 			    <c:if test="${domanda.cfu == 18}">
 					<c:choose>	
-				        <c:when test="${domanda.getNumeroOre() lt 27000}">
+				        <c:when test="${domanda.getNumeroOre() < 27000}">
 				          <div class="row right">
 							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
 							    <i class="material-icons right">send</i>
@@ -194,7 +197,7 @@
 						  </div>
 						</c:when>	
 						
-				        <c:when test="${domanda.getNumeroOre() gt 27000}">
+				        <c:when test="${domanda.getNumeroOre() >= 27000}">
 				          <div class="row right">
 							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
 						  </div>
