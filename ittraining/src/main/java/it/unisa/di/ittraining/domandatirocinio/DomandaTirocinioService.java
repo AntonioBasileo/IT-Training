@@ -2,6 +2,7 @@ package it.unisa.di.ittraining.domandatirocinio;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,36 @@ public class DomandaTirocinioService {
 	public List<DomandaTirocinio> getAllByStatus(int status) {
 		
 		return domandeRep.findAllByStatus(status);
+	}
+	
+	public List<DomandaTirocinio> getAllRegistriAzienda() {
+		List<DomandaTirocinio> newList = new ArrayList<>();
+		
+		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.APPROVATA));
+		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE));
+		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
+		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
+		
+		return newList;
+	}
+	
+	public List<DomandaTirocinio> getAllRegistriAccademico() {
+		List<DomandaTirocinio> newList = new ArrayList<>();
+		
+		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE));
+		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
+		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
+		
+		return newList;
+	}
+	
+	public List<DomandaTirocinio> getAllRegistriSegreteria() {
+		List<DomandaTirocinio> newList = new ArrayList<>();
+		
+		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
+		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
+		
+		return newList;
 	}
 	
 	public List<DomandaTirocinio> getAll() {

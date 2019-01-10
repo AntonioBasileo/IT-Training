@@ -162,9 +162,28 @@
 						</c:when>	
 						
 				        <c:when test="${domanda.getNumeroOre() >= 9000}">
-				          <div class="row right">
-							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
-						  </div>
+				          <c:choose>
+				          	<c:when test="${lista.status == 4 }">
+						          <div class="row right">
+									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
+								  </div>
+							</c:when>
+				          	<c:when test="${lista.status == 5 }">
+						          <div class="row">
+									  <p class="teal-text">Registro approvato dal tutor aziendale</p>
+								  </div>
+							</c:when>
+				          	<c:when test="${lista.status == 6 }">
+						          <div class="row">
+									  <p class="teal-text">Registro approvato dal tutor accademico</p>
+								  </div>
+							</c:when>
+				          	<c:when test="${lista.status == 7 }">
+						          <div class="row">
+									  <p class="teal-text">Registro approvato definitivamente dalla segreteria</p>
+								  </div>
+							</c:when>
+						  </c:choose>
 						</c:when>
 				    </c:choose>
 			    </c:if>
@@ -180,9 +199,28 @@
 						</c:when>	
 						
 				        <c:when test="${domanda.getNumeroOre() >= 18000}">
-				          <div class="row right">
-							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
-						  </div>
+				          <c:choose>
+				          	<c:when test="${lista.status == 4 }">
+						          <div class="row right">
+									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
+								  </div>
+							</c:when>
+				          	<c:when test="${lista.status == 5 }">
+						          <div class="row">
+									  <p class="teal-text">Registro approvato dal tutor aziendale</p>
+								  </div>
+							</c:when>
+				          	<c:when test="${lista.status == 6 }">
+						          <div class="row">
+									  <p class="teal-text">Registro approvato dal tutor accademico</p>
+								  </div>
+							</c:when>
+				          	<c:when test="${lista.status == 7 }">
+						          <div class="row">
+									  <p class="teal-text">Registro approvato definitivamente dalla segreteria</p>
+								  </div>
+							</c:when>
+						  </c:choose>
 						</c:when>
 				    </c:choose>
 			    </c:if>
@@ -190,7 +228,7 @@
 			    <c:if test="${domanda.cfu == 18}">
 					<c:choose>	
 				        <c:when test="${domanda.getNumeroOre() < 27000}">
-				          <div class="row right">
+				          <div class="row">
 							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
 							    <i class="material-icons right">send</i>
 							  </button>
@@ -198,9 +236,28 @@
 						</c:when>	
 						
 				        <c:when test="${domanda.getNumeroOre() >= 27000}">
-				          <div class="row right">
-							  <p class="teal-text">Non è possibile effettuare una nuova compilazione, hai raggiunto il numero di ore stabilito</p>
-						  </div>
+				          <c:choose>
+				          	<c:when test="${lista.status == 4 }">
+						          <div class="row right">
+									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
+								  </div>
+							</c:when>
+				          	<c:when test="${lista.status == 5 }">
+						          <div class="row">
+									  <p class="teal-text">Registro approvato dal tutor aziendale</p>
+								  </div>
+							</c:when>
+				          	<c:when test="${lista.status == 6 }">
+						          <div class="row">
+									  <p class="teal-text">Registro approvato dal tutor accademico</p>
+								  </div>
+							</c:when>
+				          	<c:when test="${lista.status == 7 }">
+						          <div class="row">
+									  <p class="teal-text">Registro approvato definitivamente dalla segreteria</p>
+								  </div>
+							</c:when>
+						  </c:choose>
 						</c:when>
 				    </c:choose>
 			    </c:if>

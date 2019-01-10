@@ -7,7 +7,29 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+	<c:if test="${empty listaDomandeApprovate}">			
+			<div class="row">
+				<div class="col s12">
+						<div class="card horizontal">
+							<div class="card-image">
+								<img src="resources/images/choose.svg">
+							</div>
+								<div class="card-stacked">
+								<div class="card-content">
+									<h5 class="teal-text">Spiacenti</h5>
+									<p>Non è ancora possibile compilare un registro poichè non ci sono ancora domande di tirocinio approvate</p>
+								</div>
+					        <div class="card-action">
+					          <a href="/home">Torna alla home</a>
+					        </div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+	</c:if>
 
+	<c:if test="${not empty listaDomandeApprovate}">
 	<c:forEach items="${listaDomandeApprovate}" var="lista" varStatus="loop">
 			  <ul class="collection">
 			    <li class="collection-item avatar">
@@ -24,4 +46,5 @@
 		  </ul>
 	
 	</c:forEach>
+	</c:if>
 </html>

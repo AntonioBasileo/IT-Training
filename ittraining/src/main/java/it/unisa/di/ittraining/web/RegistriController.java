@@ -44,7 +44,7 @@ public class RegistriController {
 	@Autowired
 	private UtenteService utentiService;
 	
-	private long id_domanda;
+	private long id_domanda_compilazione;
 	
 	
 	@RequestMapping(value = "/domande-registri", method = RequestMethod.GET)
@@ -71,9 +71,9 @@ public class RegistriController {
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
 			return "not-available";
 		
-			id_domanda = id;
+			id_domanda_compilazione = id;
 		
-			DomandaTirocinio domanda = domandeService.getDomandaById(id_domanda);
+			DomandaTirocinio domanda = domandeService.getDomandaById(id_domanda_compilazione);
 		
 			model.addAttribute("domanda", domanda);
 			
@@ -113,7 +113,7 @@ public class RegistriController {
 	    	  model.addAttribute("testoNotifica", "toast.registro.nonValido");
 			
 	      
-	      return "redirect:/registro-form?id=" + id_domanda;
+	      return "redirect:/registro-form?id=" + id_domanda_compilazione;
 	      
 	    }
 	    
@@ -140,18 +140,92 @@ public class RegistriController {
 	
 	
 	@RequestMapping(value = "/registri-aziendale", method = RequestMethod.GET)
-	public String showRegistriSegreteria(HttpSession session, Model model) {
+	public String showRegistriAziendale(Model model) {
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
 			return "not-available";
 		
 		if(!model.containsAttribute("listaDomandeRegistri")) {
-			List<DomandaTirocinio> domande = domandeService.getAllByStatus(DomandaTirocinio.APPROVATA);
+			List<DomandaTirocinio> domande = domandeService.getAllRegistriAzienda();
 			
 			model.addAttribute("listaDomandeRegistri", domande);
 		}
 			
 		
 		return "registri-aziendale";
+	}
+	
+	
+	@RequestMapping(value = "/registri-accademico", method = RequestMethod.GET)
+	public String showRegistriAccademico(Model model) {
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAccademico")))
+			return "not-available";
+		
+		if(!model.containsAttribute("listaDomandeRegistri")) {
+			List<DomandaTirocinio> domande = domandeService.getAllRegistriAccademico();
+			
+			model.addAttribute("listaDomandeRegistri", domande);
+		}
+			
+		
+		return "registri-accademico";
+	}
+	
+	
+	@RequestMapping(value = "/registri-segreteria", method = RequestMethod.GET)
+	public String showRegistriSegreteria(Model model) {
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("ImpiegatoSegreteria")))
+			return "not-available";
+		
+		if(!model.containsAttribute("listaDomandeRegistri")) {
+			List<DomandaTirocinio> domande = domandeService.getAllRegistriSegreteria();
+			
+			model.addAttribute("listaDomandeRegistri", domande);
+		}
+			
+		
+		return "registri-segreteria";
+	}
+	
+	@RequestMapping(value = "/approva-registro", method = RequestMethod.GET)
+	public String approvaRegistro(@RequestParam Long id, RedirectAttributes redirectAttributes) {
+		
+		if(utentiService.getUtenteAutenticato() == null)
+			return "not-available";
+		
+		if(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")) {
+			
+			domandeService.aggiornaStatoDomanda(id, DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE);
+			
+			redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.approvato");
+			
+			return "redirect:/registri-aziendale";
+		}
+			
+		
+		if(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAccademico")) {
+			
+			domandeService.aggiornaStatoDomanda(id, DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO);
+		
+			redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.approvato");
+			
+			return "redirect:/registri-accademico";
+			
+		}
+		
+		if(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("ImpiegatoSegreteria")) {
+			
+			domandeService.aggiornaStatoDomanda(id, DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA);
+			
+			redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.approvato");
+			
+			return "redirect:/registri-segreteria";
+		}
+		
+		redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.warning");
+		
+		return "redirect:/home";
 	}
 }
