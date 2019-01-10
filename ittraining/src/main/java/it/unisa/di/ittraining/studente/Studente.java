@@ -15,11 +15,11 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Studente extends Utente {
-	//matricola dello studente
-	private String matricola;
-	  
-	/** Espressione regolare che definisce il formato del campo matricola. */
-    public static final String MATRICOLA_PATTERN = "^[0-9]{10}$";
+  //matricola dello studente 
+  private String matricola;
+
+  /** Espressione regolare che definisce il formato del campo matricola. */
+  public static final String MATRICOLA_PATTERN = "^[0-9]{10}$";
 	  
 	/** Espressione regolare che definisce il formato del campo email per gli studenti. */
 	public static final String EMAIL_PATTERN_STUDENTE = "[A-z0-9\\.\\+_-]+@studenti.unisa.it";
