@@ -28,12 +28,6 @@ public class Registro {
 	private String descrizione;
 	private int status;
 	
-	public static final int IN_ATTESA = 0;
-	
-	public static final int IN_COMPILAZIONE = 1;
-	
-	public static final int APPROVATO = 2;
-	
 	public Long getId() {
 		return id;
 	}

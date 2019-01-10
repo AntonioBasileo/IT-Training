@@ -84,6 +84,24 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 	 * associato alla domanda di tirocinio. Da questo momento il tirocinio può avere inizio.
 	 */
 	public static final int APPROVATA = 4;
+	  
+	/**
+	 * Costante che rappresenta lo stato di una domanda di tirocinio quando il registro è stato compilato ed approvato
+	 * dal tutor aziendale.
+	 */
+	public static final int REGISTRO_APPROVATO_AZIENDALE = 5;
+	  
+	/**
+	 * Costante che rappresenta lo stato di una domanda di tirocinio quando il registro è stato compilato ed approvato
+	 * dal tutor accademico.
+	 */
+	public static final int REGISTRO_APPROVATO_ACCADEMICO = 6;
+	  
+	/**
+	 * Costante che rappresenta lo stato di una domanda di tirocinio quando il registro è stato compilato ed approvato
+	 * dall'impiegato di segreteria.
+	 */
+	public static final int REGISTRO_APPROVATO_SEGRETERIA = 7;
 	
 	  
 	/** Costante che definisce il numero massimo di CFU da poter associare ad una domanda. */

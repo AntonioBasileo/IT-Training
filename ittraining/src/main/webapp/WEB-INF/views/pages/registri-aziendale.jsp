@@ -31,7 +31,8 @@
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/nav/nav-segreteria.jsp" />
+					<!-- Navbar -->
+					<jsp:include page="/WEB-INF/views/nav/nav-aziendale.jsp" />
 		  
 	<div class="container">
 		
@@ -43,7 +44,7 @@
 	    <div class="row"></div>
 		<div class="row"></div>
 		
-		<jsp:include page="/WEB-INF/views/lists/registri-segreteria.jsp" />
+		<jsp:include page="/WEB-INF/views/lists/registri-aziendale.jsp" />
 	</div>
 
 </body>
