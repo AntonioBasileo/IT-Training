@@ -35,24 +35,24 @@ import it.unisa.di.ittraining.utente.UtenteService;
 
 @Controller
 public class UtenteController {
-	
+
 	@Autowired
 	private UtenteService utenteService;
-	
+
 	@Autowired
 	private TutorAccademicoService tutorService;
-	
-	
+
+
 	@RequestMapping(value = "/login-form", method = RequestMethod.GET)
 	public String showLoginForm(HttpSession session, Model model) {
-		
+
 		if(utenteService.getUtenteAutenticato() != null)
 			return "not-available";
-		
+
 		if(!model.containsAttribute("loginForm"))
 			model.addAttribute("loginForm", new LoginForm());
-		
-		
+
+
 		return "login";
 	}
 
@@ -61,92 +61,92 @@ public class UtenteController {
              @ModelAttribute("loginForm") LoginForm loginForm,
              BindingResult result, Model model,
              RedirectAttributes redirectAttributes) {
-		
-		
+
+
 		try {
-			
+
 			utenteService.login(loginForm.getUsername(), loginForm.getPassword());
-			
+
 			session.setAttribute("username", loginForm.getUsername());
-		      
+
 			redirectAttributes.addFlashAttribute("testoNotifica", "toast.login.valido");
 		} catch (UsernameNonEsistenteException e) {
 			// TODO Auto-generated catch block
 			result.rejectValue("password", "formLogin.username.nonValido");
-			
+
 			redirectAttributes
 	          .addFlashAttribute("org.springframework.validation.BindingResult.loginForm",
 	                             result);
-			
+
 			redirectAttributes.addFlashAttribute("loginForm", loginForm);
-			
+
 		      if(!model.containsAttribute("testoNotifica"))
 		    	  model.addAttribute("testoNotifica", "toast.login.nonValido");
-			
+
 			return "login";
-			
+
 		} catch (PasswordErrataException e) {
 			// TODO Auto-generated catch block
 			result.rejectValue("password", "formLogin.password.nonValida");
-			
+
 			redirectAttributes
 	          .addFlashAttribute("org.springframework.validation.BindingResult.loginForm",
 	                             result);
-			
+
 			redirectAttributes.addFlashAttribute("loginForm", loginForm);
-			
+
 		      if(!model.containsAttribute("testoNotifica"))
 		    	  model.addAttribute("testoNotifica", "toast.login.nonValido");
-			
+
 			return "login";
 		}
-		
-		
+
+
 		return "redirect:/home";
 	}
-	
+
 	 @RequestMapping(value = "/logout", method = RequestMethod.GET)
 	 public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
-		 
+
 	   if (utenteService.getUtenteAutenticato() != null) {
-		   
+
 	     session.setAttribute("username", null);
-	     
+
 	     utenteService.logout();
 	   }
-	    
+
 	   return "redirect:/home";
 	 }
-	 
+
 	 @RequestMapping(value = "/lista-tutor", method = RequestMethod.GET)
 	 public String mostraElencoTutorAccademici(Model model) {
-			
+
 
 			if(utenteService.getUtenteAutenticato() == null || !(utenteService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
 				return "not-available";
-			
-		 
+
+
 		 if(!model.containsAttribute("studente"))
 			 model.addAttribute("studente", ((Studente)utenteService.getUtenteAutenticato()));
-		 
+
 		 if(!model.containsAttribute("listaTutor"))
 			 model.addAttribute("listaTutor", tutorService.elencaTutorAccademici());
-		 
+
 		 return "/lista-tutor";
 	 }
-	 
+
 	 @RequestMapping(value = "/scegli-tutor", method = RequestMethod.GET)
 	 public String scegliTutorAccademico(@RequestParam String op) throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
 	 EmailNonValidaException, EmailEsistenteException, TelefonoNonValidoException, DataDiNascitaNonValidaException, PasswordNonValidaException, PasswordNonCorrispondentiException,
 	 SessoNonValidoException, UsernameNonValidoException, UsernameEsistenteException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException {
-			
+
 
 			if(utenteService.getUtenteAutenticato() == null || !(utenteService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
 				return "not-available";
-		 
-		 
+
+
 		tutorService.associaTutorAccademico(op);
-		 
+
 		 return "redirect:/lista-tutor";
 	 }
 }
