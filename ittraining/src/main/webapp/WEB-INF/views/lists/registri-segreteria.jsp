@@ -12,8 +12,8 @@
 	<spring:message var="notifica" code="${testoNotifica}"/> 
 	
 	<input id="toast" type="hidden" value="${notifica}"/>
-
-		<c:if test="${empty listaDomandeRegistri}">			
+	
+	<c:if test="${empty listaDomandeRegistri}">			
 			<div class="row">
 				<div class="col s12">
 						<div class="card horizontal">
@@ -23,7 +23,7 @@
 								<div class="card-stacked">
 								<div class="card-content">
 									<h5 class="teal-text">Spiacenti</h5>
-									<p>Non è presente ancora alcun registro</p>
+									<p>Non è presente ancora alcun registro approvato dai tutor accademici</p>
 								</div>
 					        <div class="card-action">
 					          <a href="/home">Torna alla home</a>
@@ -34,7 +34,6 @@
 			</div>
 	
 	</c:if>
-
 
 	<c:if test="${not empty listaDomandeRegistri}">
 	<c:forEach items="${listaDomandeRegistri}" var="lista" varStatus="loop">
@@ -91,24 +90,14 @@
 						
 				        <c:when test="${lista.getNumeroOre() >= 9000}">
 				          <c:choose>
-				          	<c:when test="${lista.status == 4 }">
+				          	<c:when test="${lista.status == 6 }">
 						          <div class="row right">
 									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
 								  </div>
 							</c:when>
-				          	<c:when test="${lista.status == 5 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato</p>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 6 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato dal tutor accademico</p>
-								  </div>
-							</c:when>
 				          	<c:when test="${lista.status == 7 }">
 						          <div class="row">
-									  <p class="teal-text">Registro approvato definitivamente</p>
+									  <p class="teal-text">Registro approvato</p>
 								  </div>
 							</c:when>
 						  </c:choose>
@@ -126,19 +115,9 @@
 						
 				        <c:when test="${lista.getNumeroOre() >= 18000}">
 				          <c:choose>
-				          	<c:when test="${lista.status == 4 }">
-						          <div class="row right">
-									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 5 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato</p>
-								  </div>
-							</c:when>
 				          	<c:when test="${lista.status == 6 }">
 						          <div class="row">
-									  <p class="teal-text">Registro approvato</p>
+									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
 								  </div>
 							</c:when>
 				          	<c:when test="${lista.status == 7 }">
