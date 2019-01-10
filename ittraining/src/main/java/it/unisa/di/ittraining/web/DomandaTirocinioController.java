@@ -93,10 +93,9 @@ public class DomandaTirocinioController {
 	                             result);
 	      redirectAttributes.addFlashAttribute("domandaForm", domandaForm);
 	      
-	      if(!model.containsAttribute("testoNotifica"))
-	    	  model.addAttribute("testoNotifica", "toast.compildomanda.nonValida");
+	      redirectAttributes.addFlashAttribute("testoNotifica", "toast.compildomanda.nonValida");
 	      
-	      return "compila-domanda";
+	      return "redirect:/compila-domanda-form";
 			
 		}
 		

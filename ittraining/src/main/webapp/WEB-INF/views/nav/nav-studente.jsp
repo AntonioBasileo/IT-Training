@@ -2,10 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
 		  <nav>
 		    <div class="nav-wrapper">
 		      <ul id="nav-mobile" class="right">
@@ -14,7 +10,7 @@
 		        <li><a href="/lista-enti"><i class="material-icons left">business_center</i>Convenzioni</a></li>
 		        <li><a href="/compila-domanda-form"><i class="material-icons left">create</i>Compila domanda</a></li>
 		        <li><a href="/mostra-domande-studente"><i class="material-icons left">collections</i>Domande tirocinio</a></li>
-		        <li><a href="/domande-registri"><i class="material-icons left">event_note</i>Registri</a></li>
+		        <li><a href="/domande-registri"><i class="material-icons left">event_note</i>Compila registri</a></li>
 		        <li><a href="/home"><i class="material-icons left">home</i>IT Training</a></li>
 		      </ul>
 		    </div>

@@ -109,8 +109,7 @@ public class RegistriController {
 	      
 	      redirectAttributes.addFlashAttribute("registroForm", registroForm);
 	      
-	      if(!model.containsAttribute("testoNotifica"))
-	    	  model.addAttribute("testoNotifica", "toast.registro.nonValido");
+	      redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.nonValido");
 			
 	      
 	      return "redirect:/registro-form?id=" + id_domanda_compilazione;
