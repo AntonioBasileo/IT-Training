@@ -6,7 +6,7 @@
 <html>
  			  <!-- Registrazione Tutor Accademico -->
 			  <div class="row">
-			    <form:form cssClass="col s12" action ="/richiesta-registrazione-accademico" method = "POST" modelAttribute = "registrazioneAccademico">
+			    <form:form cssClass="col s12" action ="/registrazione/registrazione-accademico-form/richiesta-registrazione-accademico" method = "POST" modelAttribute = "registrazioneAccademico">
 			      <div class="row">
 			        <div class="input-field col s6">
 			          <i class="material-icons prefix">child_care</i>

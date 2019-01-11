@@ -8,7 +8,7 @@
 				<div class="col s12">
 						<div class="card horizontal">
 							<div class="card-image">
-								<img src="resources/images/choose.svg">
+								<img src="../resources/images/choose.svg">
 							</div>
 								<div class="card-stacked">
 								<div class="card-content">
@@ -37,7 +37,7 @@
 			      <p><span class="teal-text">Studente: </span> <c:out value="${lista.studente.nome}"/> <c:out value="${lista.studente.cognome}"/></p>
 			      <p><span class="teal-text">Numero CFU: </span> <c:out value="${lista.cfu }"/></p>
 			      <p><span class="teal-text">Numero ore: </span> <c:out value="${lista.oreTotali }"/></p>
-			      <a href="/registro-form?id=${lista.id}" class="secondary-content"><i class="material-icons left">business_center</i>Compila registro</a>
+			      <a href="/home/registro-form?id=${lista.id}" class="secondary-content"><i class="material-icons left">business_center</i>Compila registro</a>
 			    </li>
 		  </ul>
 	

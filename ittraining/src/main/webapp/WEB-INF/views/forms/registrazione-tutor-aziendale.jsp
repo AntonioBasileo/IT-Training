@@ -4,7 +4,7 @@
 <html>
 			<!-- Registrazione Tutor Aziendale -->
 			  <div class="row">
-			    <form:form cssClass="col s12" action ="/richiesta-registrazione-aziendale" method = "POST" modelAttribute = "registrazioneAziendale">
+			    <form:form cssClass="col s12" action ="/registrazione/registrazione-aziendale-form/richiesta-registrazione-aziendale" method = "POST" modelAttribute = "registrazioneAziendale">
 			      <div class="row">
 			        <div class="input-field col s6">
 			          <i class="material-icons prefix">child_care</i>

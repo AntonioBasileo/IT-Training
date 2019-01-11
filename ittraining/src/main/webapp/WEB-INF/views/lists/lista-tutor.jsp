@@ -13,9 +13,11 @@
 		  <ul class="collection">
 		  	<c:forEach items="${listaTutor}" var="lista" varStatus="loop">
 			    <li class="collection-item avatar">
-			      <img src="resources/images/logo.png" alt="" class="circle">
+			      <img src="../resources/images/logo.png" alt="" class="circle">
 			      <p><span class="teal-text">Nome:</span> <c:out value="${lista.nome}"/></p>
+			      <div class="row"></div>
 			      <p><span class="teal-text">Cognome:</span> <c:out value="${lista.cognome}"/></p>
+			      <div class="row"></div>
 			      <p>Tutor accademico del Dipartimento di Informatica</p>
 			      <a href="#modal${lista.username}" class="secondary-content modal-trigger"><i class="material-icons left">supervisor_account</i>Scegli</a>
 			      
@@ -26,7 +28,7 @@
 					      <p>Sei sicuro di voler scegliere 	questo tutor?</p>
 					    </div>
 					    <div class="modal-footer">
-					      <a href="/scegli-tutor?op=${lista.username}" class="waves-effect waves-light btn-small"><i class="material-icons left">check</i>Sì, sono sicuro</a>
+					      <a href="/home/lista-tutor/scegli-tutor?op=${lista.username}" class="waves-effect waves-light btn-small"><i class="material-icons left">check</i>Sì, sono sicuro</a>
 					    </div>
 					  </div>
 			    </li>
@@ -42,7 +44,7 @@
 				<div class="col s12">
 						<div class="card horizontal">
 							<div class="card-image">
-								<img src="resources/images/check-tutor.svg">
+								<img src="../resources/images/check-tutor.svg">
 							</div>
 								<div class="card-stacked">
 								<div class="card-content">

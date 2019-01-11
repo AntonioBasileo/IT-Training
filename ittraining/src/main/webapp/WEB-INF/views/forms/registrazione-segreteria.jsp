@@ -6,7 +6,7 @@
 		
 			  <!-- Registrazione Segreteria -->
 			  <div class="row">
-			    <form:form cssClass="col s12" action ="/richiesta-registrazione-segreteria" method = "POST" modelAttribute = "registrazioneSegreteria">
+			    <form:form cssClass="col s12" action ="/registrazione/registrazione-segreteria-form/richiesta-registrazione-segreteria" method = "POST" modelAttribute = "registrazioneSegreteria">
 			      <div class="row">
 			        <div class="input-field col s6">
 			          <i class="material-icons prefix">child_care</i>

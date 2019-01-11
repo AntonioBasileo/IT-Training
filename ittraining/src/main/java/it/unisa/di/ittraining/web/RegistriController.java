@@ -47,7 +47,7 @@ public class RegistriController {
 	private long id_domanda_compilazione;
 	
 	
-	@RequestMapping(value = "/domande-registri", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/domande-registri", method = RequestMethod.GET)
 	public String showRegistri(HttpSession session, Model model) {
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
@@ -65,7 +65,7 @@ public class RegistriController {
 		return "registri-domande";
 	}
 	
-	@RequestMapping(value = "/registro-form", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/registro-form", method = RequestMethod.GET)
 	public String showRegistroForm(@RequestParam Long id, Model model) {
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
@@ -89,7 +89,7 @@ public class RegistriController {
 		
 	}
 	
-	@RequestMapping(value = "/compila-registro", method = RequestMethod.POST)
+	@RequestMapping(value = "/home/registro-form/compila-registro", method = RequestMethod.POST)
 	public String compilaRegistro(@ModelAttribute("registroForm") RegistroForm registroForm, BindingResult result, Model model, RedirectAttributes redirectAttributes, HttpSession session)
 			throws DataRegistroSuccessivaFineException, DataRegistroPrecedenteInizioException, DataRegistroNonValidaException, OrarioNonValidoException, OrarioFinePrecedenteInizioException {
 		
@@ -112,7 +112,7 @@ public class RegistriController {
 	      redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.nonValido");
 			
 	      
-	      return "redirect:/registro-form?id=" + id_domanda_compilazione;
+	      return "redirect:/home/registro-form?id=" + id_domanda_compilazione;
 	      
 	    }
 	    
@@ -134,11 +134,11 @@ public class RegistriController {
 	    
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.valido");
 		
-		return "redirect:/registro-form?id=" + registroForm.getId_domanda();
+		return "redirect:/home/registro-form?id=" + registroForm.getId_domanda();
 	}
 	
 	
-	@RequestMapping(value = "/registri-aziendale", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/registri-aziendale", method = RequestMethod.GET)
 	public String showRegistriAziendale(Model model) {
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAziendale")))
@@ -155,7 +155,7 @@ public class RegistriController {
 	}
 	
 	
-	@RequestMapping(value = "/registri-accademico", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/registri-accademico", method = RequestMethod.GET)
 	public String showRegistriAccademico(Model model) {
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("TutorAccademico")))
@@ -172,7 +172,7 @@ public class RegistriController {
 	}
 	
 	
-	@RequestMapping(value = "/registri-segreteria", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/registri-segreteria", method = RequestMethod.GET)
 	public String showRegistriSegreteria(Model model) {
 
 		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("ImpiegatoSegreteria")))
@@ -200,7 +200,7 @@ public class RegistriController {
 			
 			redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.approvato");
 			
-			return "redirect:/registri-aziendale";
+			return "redirect:/home/registri-aziendale";
 		}
 			
 		
@@ -210,7 +210,7 @@ public class RegistriController {
 		
 			redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.approvato");
 			
-			return "redirect:/registri-accademico";
+			return "redirect:/home/registri-accademico";
 			
 		}
 		
@@ -220,7 +220,7 @@ public class RegistriController {
 			
 			redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.approvato");
 			
-			return "redirect:/registri-segreteria";
+			return "redirect:/home/registri-segreteria";
 		}
 		
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.warning");

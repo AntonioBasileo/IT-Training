@@ -8,7 +8,7 @@
 		
 		<meta charset="ISO-8859-1">
 		
-		<title>Lista enti</title>
+		<title>IT Training - Registrazione studente</title>
 		
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -17,13 +17,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       
 		<!-- Compiled and minified CSS -->
-	    <link rel="stylesheet" href="resources/css/materialize.min.css">
-	    <link rel="stylesheet" href="resources/css/materialize.css">
+	    <link rel="stylesheet" href="../resources/css/materialize.min.css">
+	    <link rel="stylesheet" href="../resources/css/materialize.css">
 	
 	    <!-- Compiled and minified JavaScript -->
-	    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
-	    <script src="resources/js/materialize.min.js" type="text/javascript"></script>
-	    <script src="resources/js/initialize.js"></script>
+	    <script src="../resources/js/jquery.min.js" type="text/javascript"></script>
+	    <script src="../resources/js/materialize.min.js" type="text/javascript"></script>
+	    <script src="../resources/js/initialize.js"></script>
+	    <script src="../resources/js/toast.js"></script>
 		
 	    
 	    <!--Import Google Icon Font-->

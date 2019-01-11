@@ -44,7 +44,7 @@ public class UtenteController {
   private TutorAccademicoService tutorService;
 
   
-  @RequestMapping(value = "/login-form", method = RequestMethod.GET)
+  @RequestMapping(value = "/home/login-form", method = RequestMethod.GET)
 
   public String showLoginForm(HttpSession session, Model model) {
 
@@ -125,7 +125,7 @@ public class UtenteController {
     return "redirect:/home";
   }
 
-  @RequestMapping(value = "/lista-tutor", method = RequestMethod.GET)
+  @RequestMapping(value = "/home/lista-tutor", method = RequestMethod.GET)
   
   public String mostraElencoTutorAccademici(Model model) {
 
@@ -151,7 +151,7 @@ public class UtenteController {
     return "/lista-tutor";
   }
 
-  @RequestMapping(value = "/scegli-tutor", method = RequestMethod.GET)
+  @RequestMapping(value = "/home/lista-tutor/scegli-tutor", method = RequestMethod.GET)
   
   public String scegliTutorAccademico(@RequestParam String op) throws NomeNonValidoException,
       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
@@ -173,6 +173,6 @@ public class UtenteController {
 
     tutorService.associaTutorAccademico(op);
 
-    return "redirect:/lista-tutor";
+    return "redirect:/home/lista-tutor";
   }
 }

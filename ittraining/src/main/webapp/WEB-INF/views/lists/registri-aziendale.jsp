@@ -14,7 +14,7 @@
 				<div class="col s12">
 						<div class="card horizontal">
 							<div class="card-image">
-								<img src="resources/images/choose.svg">
+								<img src="../resources/images/choose.svg">
 							</div>
 								<div class="card-stacked">
 								<div class="card-content">

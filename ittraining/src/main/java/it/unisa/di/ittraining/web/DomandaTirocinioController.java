@@ -42,7 +42,7 @@ public class DomandaTirocinioController {
 	private DomandaTirocinioFormValidator validator;
 
 	
-	@RequestMapping(value = "/compila-domanda-form", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/compila-domanda-form", method = RequestMethod.GET)
 	public String showDomandaTirocinioForm(HttpServletRequest request, Model model) {
 		
 
@@ -59,27 +59,8 @@ public class DomandaTirocinioController {
 		return "compila-domanda";
 	}
 	
-	@RequestMapping(value = "/mostra-domande-studente", method = RequestMethod.GET)
-	public String elencaDomandeStudente(HttpSession session, Model model) {
-		
-
-		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
-			return "not-available";
-		
-		if(!model.containsAttribute("listaDomandeStudente")) {
-			List<DomandaTirocinio> domande = domandeService.elencaDomandeStudente((String)session.getAttribute("username"));
-			
-			Collections.sort(domande);
-			
-			model.addAttribute("listaDomandeStudente", domande);
-			
-		}
-		
-		return "lista-domande-studente";
-	}
 	
-	
-	@RequestMapping(value = "/compila-domanda", method = RequestMethod.POST)
+	@RequestMapping(value = "/home/compila-domanda-form/compila-domanda", method = RequestMethod.POST)
 	public String elaboraDomandaTirocinio(@ModelAttribute("domandaForm") DomandaTirocinioForm domandaForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) throws AziendaNonValidaException,
 	AziendaNonEsistenteException,
 	DataDiNascitaNonValidaException, DataNonValidaException, DataFinePrecedenteDataInizioException, MassimoNumeroCfuCumulabiliException,
@@ -95,7 +76,7 @@ public class DomandaTirocinioController {
 	      
 	      redirectAttributes.addFlashAttribute("testoNotifica", "toast.compildomanda.nonValida");
 	      
-	      return "redirect:/compila-domanda-form";
+	      return "redirect:/home/compila-domanda-form";
 			
 		}
 		
@@ -126,8 +107,26 @@ public class DomandaTirocinioController {
 		return "redirect:/home";
 	}
 	
+	@RequestMapping(value = "/home/mostra-domande-studente", method = RequestMethod.GET)
+	public String elencaDomandeStudente(HttpSession session, Model model) {
+		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
+			return "not-available";
+		
+		if(!model.containsAttribute("listaDomandeStudente")) {
+			List<DomandaTirocinio> domande = domandeService.elencaDomandeStudente((String)session.getAttribute("username"));
+			
+			Collections.sort(domande);
+			
+			model.addAttribute("listaDomandeStudente", domande);
+			
+		}
+		
+		return "lista-domande-studente";
+	}
 	
-	@RequestMapping(value = "/mostra-domande-aziendale", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/mostra-domande-aziendale", method = RequestMethod.GET)
 	public String elencaDomandeAziendali(Model model) {
 		
 
@@ -154,7 +153,7 @@ public class DomandaTirocinioController {
 	}
 	
 	
-	@RequestMapping(value = "/rifiuta-domanda", method = RequestMethod.POST)
+	@RequestMapping(value = "/home/mostra-domande-aziendale/rifiuta-domanda", method = RequestMethod.POST)
 	public String rifiutaDomanda(@ModelAttribute("progettoFormRifiuta") ProgettoFormativoForm form, BindingResult result, RedirectAttributes redirectAttributes) {
 		
 		
@@ -162,11 +161,11 @@ public class DomandaTirocinioController {
 		
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.domanda.rifiutata");
 		
-		return "redirect:/mostra-domande-aziendale";
+		return "redirect:/home/mostra-domande-aziendale";
 		
 	}
 	
-	@RequestMapping(value = "/mostra-domande-accademico", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/mostra-domande-accademico", method = RequestMethod.GET)
 	public String mostraDomandeAccademico(Model model) {
 		
 
@@ -184,7 +183,7 @@ public class DomandaTirocinioController {
 		return "lista-domande-accademico";	
 	}
 	
-	@RequestMapping(value = "/domande-segreteria", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/mostra-domande-segreteria", method = RequestMethod.GET)
 	public String mostraDomandeSegreteria(Model model) {
 		
 

@@ -68,8 +68,8 @@
 						      <p class="teal-text">Vuoi approvare questo progetto formativo?</p>
 						    </div>
 						    <div class="modal-footer">
-						      <a href="/approva-progetto?id=${lista.id}" class="waves-effect waves-light btn-small">Approva</a>
-						      <a href="/rifiuta-progetto?id=${lista.id}" class="red waves-effect waves-light btn-small">Rifiuta</a>
+						      <a href="/home/mostra-domande-accademico/approva-progetto?id=${lista.id}" class="waves-effect waves-light btn-small">Approva</a>
+						      <a href="/home/mostra-domande-accademico/rifiuta-progetto?id=${lista.id}" class="red waves-effect waves-light btn-small">Rifiuta</a>
 						    </div>
 						  </div>
 			      	</c:when>
