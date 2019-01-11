@@ -2,8 +2,8 @@ package it.unisa.di.ittraining.registrotirocinio;
 
 public class DataRegistroSuccessivaFineException extends Exception {
 
- /**
-  * 
+  /**
+  * Numero seriale.
   */
   private static final long serialVersionUID = -3532538386832947940L;
 

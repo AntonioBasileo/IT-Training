@@ -146,6 +146,10 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
     return studente;
   }
 
+  /**
+* Permette di instaurare una relazione bidirezionale a livello di database
+* tra lo studente e la domanda.
+*/
   public void setStudente(Studente studente) {
     if (this.studente != studente) {
       this.studente = studente;
@@ -157,6 +161,10 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
     return progettoFormativo;
   }
 
+  /**
+* Permette di instaurare una relazione bidirezionale a livello di database
+* tra il progetto formativo e la domanda.
+*/
   public void addProgettoFormativo(ProgettoFormativo progettoFormativo) {
     if (this.progettoFormativo != progettoFormativo) {
       this.progettoFormativo = progettoFormativo;
@@ -168,6 +176,10 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
     return azienda;
   }
 
+  /**
+* Permette di instaurare una relazione bidirezionale a livello di database
+* tra l'azienda e la domanda.
+*/
   public void setAzienda(Azienda azienda) {
     if (this.azienda != azienda) {
       this.azienda = azienda;
@@ -227,6 +239,10 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
     return registri;
   }
 
+  /**
+* Permette di instaurare una relazione bidirezionale a livello di database
+* tra il registro e la domanda.
+*/
   public void addRegistro(Registro registro) {
     if (!registri.contains(registro)) {
       registri.add(registro);
@@ -234,6 +250,10 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
     }
   }
 
+  /**
+* Permette di risalire al numero di ore effettuate
+* durante il tirocinio.
+*/
   public float getNumeroOre() {
     float somma = 0;
 

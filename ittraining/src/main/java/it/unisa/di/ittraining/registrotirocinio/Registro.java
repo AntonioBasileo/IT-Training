@@ -22,7 +22,7 @@ public class Registro {
   private LocalDate data;
   private LocalTime inizio;
   private LocalTime fine;
-  private float numero_minuti;
+  private float numeroMinuti;
   private String descrizione;
   private int status;
 
@@ -70,6 +70,10 @@ public class Registro {
     return domanda;
   }
 
+  /**
+* Permette di instaurare una relazione bidirezionale a livello di database
+* tra il registro e la domanda.
+*/
   public void setDomanda(DomandaTirocinio domanda) {
     if (this.domanda != domanda) {
       this.domanda = domanda;
@@ -78,11 +82,11 @@ public class Registro {
   }
 
   public float getNumero_minuti() {
-    return numero_minuti;
+    return numeroMinuti;
   }
 
-  public void setNumero_minuti(long numero_minuti) {
-    this.numero_minuti = numero_minuti;
+  public void setNumero_minuti(long numeroMinuti) {
+    this.numeroMinuti = numeroMinuti;
   }
 
   public float getStatus() {

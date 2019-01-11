@@ -28,6 +28,10 @@ public class DomandaTirocinioService {
   @Autowired
   private UtenteService utentiService;
 
+  /**
+* Metodo che permette di validare i campi del modulo della domanda lato server
+* e di inserire la stessa all'interno del Database.
+*/
   @Transactional(rollbackFor = Exception.class)
   public DomandaTirocinio registraDomanda(DomandaTirocinio domanda,
       String nomeAzienda) throws AziendaNonValidaException,
@@ -52,129 +56,196 @@ public class DomandaTirocinioService {
       domanda.setOreTotali(450);
     }
 
+    domanda = domandeRep.save(domanda);
 
-		domanda = domandeRep.save(domanda);
+    return domanda;
+  }
 
-		return domanda;
-	}
+  /**
+* Permette di aggiornare lo stato della domanda con l'id indicato.
+*/
+  public DomandaTirocinio aggiornaStatoDomanda(long id, int status) {
 
-	public DomandaTirocinio aggiornaStatoDomanda(long id, int status) {
+    DomandaTirocinio domanda = domandeRep.findById(id);
+    domanda.setStatus(status);
 
-		DomandaTirocinio domanda = domandeRep.findById(id);
-		domanda.setStatus(status);
+    return domandeRep.save(domanda);
+  }
 
-		return domandeRep.save(domanda);
-	}
+  public List<DomandaTirocinio> elencaDomandeStudente(String username) {
 
-	public List<DomandaTirocinio> elencaDomandeStudente(String username) {
+    return domandeRep.findAllByStudenteUsername(username);
+  }
 
-		return domandeRep.findAllByStudenteUsername(username);
-	}
+  /**
+* Permette di risalire alle domande di tirocinio di un determinato utente con
+* un determinato status.
+*/
+  public List<DomandaTirocinio> elencaDomandeStudenteStatus(String username, int status) {
 
-	public List<DomandaTirocinio> elencaDomandeStudenteStatus(String username, int status) {
+ 
+    return domandeRep.findAllByStudenteUsernameAndStatus(username, status);
+  }
 
-		return domandeRep.findAllByStudenteUsernameAndStatus(username, status);
-	}
+  public List<DomandaTirocinio> elencaDomandeAziendali(Azienda azienda) {
 
-	public List<DomandaTirocinio> elencaDomandeAziendali(Azienda azienda) {
+    return domandeRep.findAllByAzienda(azienda);
+  }
 
-		return domandeRep.findAllByAzienda(azienda);
-	}
+  public DomandaTirocinio getDomandaById(long id) {
+    return domandeRep.findById(id);
+  }
 
-	public DomandaTirocinio getDomandaById(long id) {
-		return domandeRep.findById(id);
-	}
+  public List<DomandaTirocinio> getAllByStatus(int status) {
 
-	public List<DomandaTirocinio> getAllByStatus(int status) {
+    return domandeRep.findAllByStatus(status);
+  }
 
-		return domandeRep.findAllByStatus(status);
-	}
+  /**
+* Permette al tutor aziendale di visualizzare i registri
+* una volta che le domande sono definitivamente approvate.
+*/
+  public List<DomandaTirocinio> getAllRegistriAzienda() {
 
-	public List<DomandaTirocinio> getAllRegistriAzienda() {
-		List<DomandaTirocinio> newList = new ArrayList<>();
+    List<DomandaTirocinio> newList = new ArrayList<>();
 
-		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.APPROVATA));
-		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE));
-		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
-		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
+    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.APPROVATA));
+    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE));
+    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
+    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
 
-		return newList;
-	}
+    return newList;
+  }
 
-	public List<DomandaTirocinio> getAllRegistriAccademico() {
-		List<DomandaTirocinio> newList = new ArrayList<>();
+  /**
+* Permette al tutor accademico di visualizzare i registri
+* una volta che questi sono stati approvati dai tutor aziendali.
+*/
+  public List<DomandaTirocinio> getAllRegistriAccademico() {
 
-		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE));
-		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
-		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
+    List<DomandaTirocinio> newList = new ArrayList<>();
 
-		return newList;
-	}
+    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE));
+    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
+    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
 
-	public List<DomandaTirocinio> getAllRegistriSegreteria() {
-		List<DomandaTirocinio> newList = new ArrayList<>();
+    return newList;
+  }
 
-		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
-		newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
+  /**
+ * Permette all'impiegato di segreteria di visualizzare i registri
+ * una volta che questi sono stati approvati dai tutor accademici.
+ */
+  public List<DomandaTirocinio> getAllRegistriSegreteria() {
 
-		return newList;
-	}
+    List<DomandaTirocinio> newList = new ArrayList<>();
 
-	public List<DomandaTirocinio> getAll() {
+    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
+    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
 
-		return domandeRep.findAll();
-	}
+    return newList;
+  }
 
-	public LocalDate validaDataInizio(LocalDate inizio) throws DataNonValidaException {
-		if(inizio == null) throw new DataNonValidaException("Il campo Data inizio non può essere nullo");
+  public List<DomandaTirocinio> getAll() {
 
-		LocalDate oggi = LocalDate.now();
+    return domandeRep.findAll();
+  }
 
-		if(inizio.isBefore(oggi)) throw new DataNonValidaException("La data di inizio non può essere precedente ad oggi");
+  /**
+* Permette di validare la data di inizio del tirocinio
+* assicurandosi che non sia precedente ad oggi.
+*/
+  public LocalDate validaDataInizio(LocalDate inizio) throws DataNonValidaException {
+
+    if (inizio == null) {
+      throw new DataNonValidaException("Il campo Data inizio non può essere nullo");
+    }
+
+    LocalDate oggi = LocalDate.now();
+
+    if (inizio.isBefore(oggi)) {
+      throw new DataNonValidaException("La data di inizio non può essere precedente ad oggi");
+    }
 
 
-		return inizio;
-	}
+    return inizio;
+  }
 
-	public LocalDate validaDataFine(LocalDate inizio, LocalDate fine) throws DataNonValidaException, DataFinePrecedenteDataInizioException {
-		if(fine == null || inizio == null) throw new DataNonValidaException("Il campo Data fine oppure Data inizio non può essere nullo");
+  /**
+* Permette di validare la data di fine del tirocinio,
+* assicurandosi che non sia precedente a quella di inizio e che il periodo di tirocinio
+* duri massimo un anno.
+*/
+  public LocalDate validaDataFine(LocalDate inizio, LocalDate fine) throws DataNonValidaException,
+      DataFinePrecedenteDataInizioException {
 
-		long distanza_anni = ChronoUnit.YEARS.between(inizio, fine);
+    if (fine == null || inizio == null) {
+      throw 
+        new DataNonValidaException("Il campo Data fine oppure Data inizio non può essere nullo");
+    }
 
-		long distanza_mesi = ChronoUnit.MONTHS.between(inizio, fine);
+    long distanzaanni = ChronoUnit.YEARS.between(inizio, fine);
 
-		long distanza_giorni = ChronoUnit.DAYS.between(inizio, fine);
+    long distanzamesi = ChronoUnit.MONTHS.between(inizio, fine);
 
-		if(fine.isBefore(inizio)) throw new DataFinePrecedenteDataInizioException();
+    long distanzagiorni = ChronoUnit.DAYS.between(inizio, fine);
+ 
+    if (fine.isBefore(inizio)) {
+      throw new DataFinePrecedenteDataInizioException();
+    }
 
-		if((distanza_anni >=1 && distanza_mesi >= 1 && distanza_giorni >= 1)) throw new DataNonValidaException("Il tirocinio può durare massimo un anno");
+    if ((distanzaanni >= 1 && distanzamesi >= 1 && distanzagiorni >= 1)) {
+      throw new DataNonValidaException("Il tirocinio può durare massimo un anno");
+    }
 
-		return fine;
-	}
+    return fine;
+  }
 
-	public String validaNomeAzienda(String azienda) throws AziendaNonValidaException, AziendaNonEsistenteException {
-		if(azienda == null) throw new AziendaNonValidaException("Il campo azienda non può essere nullo");
+  /**
+* Permette di validare il nome dell'azienda verso la quale si vuole
+* svolgere il tirocinio, assicurandosi che esista.
+*/
+  public String validaNomeAzienda(String azienda) throws AziendaNonValidaException,
+      AziendaNonEsistenteException {
 
-		if(azienda.length() > Azienda.MAX_LUNGHEZZA_NOME || azienda.length() < Azienda.MIN_LUNGHEZZA_NOME) throw new AziendaNonValidaException();
+    if (azienda == null) {
+      throw new AziendaNonValidaException("Il campo azienda non può essere nullo");
+    }
 
-		if(!rep.existsByNome(azienda)) throw new AziendaNonEsistenteException("L'azienda indicata non esiste");
+    if (azienda.length() > Azienda.MAX_LUNGHEZZA_NOME 
+        || azienda.length() < Azienda.MIN_LUNGHEZZA_NOME) {
+      throw new AziendaNonValidaException();
+    }
 
-		return azienda;
-	}
+    if (!rep.existsByNome(azienda)) {
+      throw new AziendaNonEsistenteException("L'azienda indicata non esiste");
+    }
 
-	public int validaNumeroCfu(int cfu) throws MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
+    return azienda;
+  }
 
-		if(cfu == 0) throw new NumeroCfuNonValidoException();
+  /**
+* Permette di notificare allo studente se ha raggiunto il massimo numero di CFU 
+* cumulabili attraverso i tirocini. In caso contrario la richiesta sarà elaborata.
+*/
+  public int validaNumeroCfu(int cfu) throws MassimoNumeroCfuCumulabiliException,
+      NumeroCfuNonValidoException {
 
-		Studente studente = (Studente)utentiService.getUtenteAutenticato();
+    if (cfu == 0) {
+      throw new NumeroCfuNonValidoException();
+    }
 
-		if((studente.getCfuDomande() + cfu) > DomandaTirocinio.MAX_CFU)
-			throw new MassimoNumeroCfuCumulabiliException();
+    Studente studente = (Studente)utentiService.getUtenteAutenticato();
 
-		if(cfu < DomandaTirocinio.MIN_CFU) throw new NumeroCfuNonValidoException();
+    if ((studente.getCfuDomande() + cfu) > DomandaTirocinio.MAX_CFU) {
+      throw new MassimoNumeroCfuCumulabiliException();
+    }
 
-		return cfu;
-	}
+    if (cfu < DomandaTirocinio.MIN_CFU) {
+      throw new NumeroCfuNonValidoException();
+    }
 
+    return cfu;
+  }
 
 }

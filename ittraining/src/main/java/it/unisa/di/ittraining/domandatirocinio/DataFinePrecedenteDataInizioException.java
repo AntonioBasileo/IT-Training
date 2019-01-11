@@ -3,7 +3,7 @@ package it.unisa.di.ittraining.domandatirocinio;
 public class DataFinePrecedenteDataInizioException extends Exception {
 
   /**
- * 
+ * Numero seriale.
  */
   private static final long serialVersionUID = -431737826929044037L;
 

@@ -9,33 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProgettoFormativoService {
 
-<<<<<<< HEAD
-	@Autowired
-	private ProgettoFormativoRepository progettoRep;
-	
-	@Autowired
-	private DomandaTirocinioRepository domandeRep;
-	
-	@Transactional(rollbackFor = Exception.class)
-	public ProgettoFormativo inserisciProgetto(ProgettoFormativo progetto, long id) {
-		
-		DomandaTirocinio domanda = domandeRep.findById(id);
-		domanda.setStatus(DomandaTirocinio.ACCETTATA_AZIENDA);
-		
-		progetto.setDomanda(domanda);
-		
-		progetto = progettoRep.save(progetto);
-		
-		return progetto;
-	}
-	
-=======
   @Autowired
   private ProgettoFormativoRepository progettoRep;
-  
+
   @Autowired
   private DomandaTirocinioRepository domandeRep;
 
+  /**
+* Metodo che permette di inserire il progetto formativo, associato
+* alla domanda accettata dal tutor aziendale, all'interno del Database.
+*/
   @Transactional(rollbackFor = Exception.class)
   public ProgettoFormativo inserisciProgetto(ProgettoFormativo progetto, long id) {
 
@@ -44,9 +27,9 @@ public class ProgettoFormativoService {
 
     progetto.setDomanda(domanda);
 
-    progettoRep.save(progetto);
+    progetto = progettoRep.save(progetto);
 
     return progetto;
   }
->>>>>>> D'Agosto
+
 }
