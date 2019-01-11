@@ -35,6 +35,10 @@ public class ProgettoFormativo {
     return domanda;
   }
 
+  /**
+* Permette di instaurare una relazione bidirezionale a livello di database
+* tra il progetto formativo e la domanda.
+*/
   public void setDomanda(DomandaTirocinio domanda) {
     if (this.domanda != domanda) {
       this.domanda = domanda;

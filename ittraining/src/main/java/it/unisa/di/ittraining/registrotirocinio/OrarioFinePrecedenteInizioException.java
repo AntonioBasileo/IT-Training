@@ -2,8 +2,8 @@ package it.unisa.di.ittraining.registrotirocinio;
 
 public class OrarioFinePrecedenteInizioException extends Exception {
 
- /**
-  * 
+  /**
+  * Numero seriale.
   */
   private static final long serialVersionUID = 6022080967875916354L;
 

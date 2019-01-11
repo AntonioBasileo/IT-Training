@@ -1,14 +1,12 @@
 package it.unisa.di.ittraining.tutoraccademico;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.utente.Utente;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class TutorAccademico extends Utente {
@@ -28,6 +26,10 @@ public class TutorAccademico extends Utente {
     return studenti;
   }
 
+  /**
+* Permette di instaurare una relazione bidirezionale
+* tra il tutor accademico e gli studenti che lo hanno scelto.
+*/
   public void addStudente(Studente studente) {
     if (!studenti.contains(studente)) {
       studenti.add(studente);
@@ -35,6 +37,10 @@ public class TutorAccademico extends Utente {
     }
   }
 
+  /**
+* Permette di risalire a tutte le domande di tirocinio degli studenti
+* associati al tutor.
+*/
   public List<DomandaTirocinio> getAllDomande() {
     List<DomandaTirocinio> newList = new ArrayList<>();
 

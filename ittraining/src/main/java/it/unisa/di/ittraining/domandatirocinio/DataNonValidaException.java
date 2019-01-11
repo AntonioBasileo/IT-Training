@@ -3,7 +3,7 @@ package it.unisa.di.ittraining.domandatirocinio;
 public class DataNonValidaException extends Exception {
 
   /**
-* 
+* Numero seriale.
 */
   private static final long serialVersionUID = 8733121574959917081L;
 

@@ -2,8 +2,8 @@ package it.unisa.di.ittraining.registrotirocinio;
 
 public class OrarioNonValidoException extends Exception {
 
- /**
-  * 
+  /**
+  * Numero seriale.
   */
   private static final long serialVersionUID = -3492089797155005071L;
 

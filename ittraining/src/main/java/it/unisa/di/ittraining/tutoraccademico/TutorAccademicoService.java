@@ -1,13 +1,5 @@
 package it.unisa.di.ittraining.tutoraccademico;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudenteRepository;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
@@ -26,6 +18,12 @@ import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.Utente;
 import it.unisa.di.ittraining.utente.UtenteRepository;
 import it.unisa.di.ittraining.utente.UtenteService;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TutorAccademicoService {
@@ -57,6 +55,10 @@ public class TutorAccademicoService {
   public static final int MAX_DISTANZA_ANNO_NASCITA = 130;
 
 
+  /**
+* Permette di validare i campi della registrazione inseriti dal tutor accademico
+* lato server e di inserire lo stesso all'interno del Database.
+*/
   @Transactional(rollbackFor = Exception.class)
   public TutorAccademico registraTutorAccademico(TutorAccademico tutor)throws
       NomeNonValidoException,NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
@@ -79,6 +81,9 @@ public class TutorAccademicoService {
     return tutor;
   }
 
+  /**
+* Permette associare lo studente al tutor accademico scelto.
+*/
   public void associaTutorAccademico(String op) {
 
     TutorAccademico tutor = rep.findByUsername(op);
@@ -100,6 +105,9 @@ public class TutorAccademicoService {
     return rep.findByUsername(username);
   }
 
+  /**
+* Permette di validare l'email del tutor.
+*/
   public String validaEmailAccademico(String email) throws EmailNonValidaException,
       EmailEsistenteException {
     if (email == null) {
@@ -117,7 +125,9 @@ public class TutorAccademicoService {
     return email;
   }
 
-
+  /**
+* Permette di validare il nome del tutor.
+*/
   public String validaNome(String nome) throws NomeNonValidoException,
       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
     if (nome == null) {
@@ -139,7 +149,9 @@ public class TutorAccademicoService {
     return nome;
   }
 
-
+  /**
+* Permette di validare il cognome del tutor.
+*/
   public String validaCognome(String cognome) throws CognomeNonValidoException,
       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
     if (cognome == null) {
@@ -161,7 +173,9 @@ public class TutorAccademicoService {
     return cognome;
   }
 
-
+  /**
+* Permette di validare il sesso del tutor.
+*/
   public String validaSesso(String sesso) throws SessoNonValidoException {
     if (sesso == null) {
       throw new SessoNonValidoException();
@@ -178,7 +192,9 @@ public class TutorAccademicoService {
     }
   }
 
-
+  /**
+* Permette di validare la data di nascita del tutor.
+*/
   public LocalDate validaDataDiNascita(LocalDate dataDiNascita) 
       throws DataDiNascitaNonValidaException {
 
@@ -198,6 +214,9 @@ public class TutorAccademicoService {
     }
   }
 
+  /**
+* Permette di validare il telefono del tutor.
+*/
   public String validaTelefono(String telefono) throws TelefonoNonValidoException {
     if (telefono == null) {
       throw new TelefonoNonValidoException("Il campo telefono non può essere nullo");
@@ -210,6 +229,9 @@ public class TutorAccademicoService {
     return telefono;
   }
 
+  /**
+* Permette di validare lo username del tutor.
+*/
   public String validaUsername(String username) throws UsernameNonValidoException,
       UsernameEsistenteException {
     if (username == null) {
@@ -228,6 +250,10 @@ public class TutorAccademicoService {
 
   }
 
+  /**
+* Permette di verificare se il campo password e conferma password
+* hanno lo stesso valore.
+*/
   public boolean validaPasswords(String password, String confirmPassword) 
       throws PasswordNonValidaException, PasswordNonCorrispondentiException {
     if (password == null || confirmPassword == null) {
@@ -247,6 +273,9 @@ public class TutorAccademicoService {
     return true;
   }
 
+  /**
+* Permette di validare la password del tutor.
+*/
   public String validaPassword(String password)
       throws PasswordNonValidaException, PasswordNonCorrispondentiException {
     if (password == null) {

@@ -11,10 +11,14 @@ public class ProgettoFormativoService {
 
   @Autowired
   private ProgettoFormativoRepository progettoRep;
-  
+
   @Autowired
   private DomandaTirocinioRepository domandeRep;
 
+  /**
+* Metodo che permette di inserire il progetto formativo, associato
+* alla domanda accettata dal tutor aziendale, all'interno del Database.
+*/
   @Transactional(rollbackFor = Exception.class)
   public ProgettoFormativo inserisciProgetto(ProgettoFormativo progetto, long id) {
 
@@ -23,8 +27,9 @@ public class ProgettoFormativoService {
 
     progetto.setDomanda(domanda);
 
-    progettoRep.save(progetto);
+    progetto = progettoRep.save(progetto);
 
     return progetto;
   }
+
 }
