@@ -28,7 +28,7 @@ public class NotificheInterceptor implements HandlerInterceptor {
     RequestContextUtils.getInputFlashMap(request);
     
     if (RequestContextUtils.getInputFlashMap(request) != null) {
-    	
+
       testoNotifica = (String) RequestContextUtils.getInputFlashMap(request).get("testoNotifica");
       
     }
@@ -45,9 +45,9 @@ public class NotificheInterceptor implements HandlerInterceptor {
                          Object handler,
                          ModelAndView modelAndView)
          throws Exception {
-	  
+
     if (testoNotifica != null) {
-    	
+ 
       modelAndView.addObject("testoNotifica", testoNotifica);
     }
   }
@@ -61,7 +61,7 @@ public class NotificheInterceptor implements HandlerInterceptor {
                               Object handler,
                               Exception exception)
          throws Exception {
-	  
+
     testoNotifica = null;
   }
 
