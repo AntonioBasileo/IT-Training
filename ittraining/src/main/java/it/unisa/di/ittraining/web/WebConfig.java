@@ -49,6 +49,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	  
 	  /**
 	   * Mappa le richieste per le risorse statiche alla locazione appropriata.
+	   *
 	   */
 	  @Override
 	  public void addResourceHandlers(ResourceHandlerRegistry registry) {

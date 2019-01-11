@@ -8,14 +8,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AziendaRepository extends JpaRepository<Azienda, String> {
 
-	List<Azienda> findAll();
-	
-	Azienda findByNome(String nome);
-	
-	boolean existsByEmail(String email);
-	
-	boolean existsByNomeAndEmail(String nome, String email);
-	
-	boolean existsByNome(String nome);
-	
+  List<Azienda> findAll();
+
+  Azienda findByNome(String nome);
+
+  boolean existsByEmail(String email);
+
+  boolean existsByNomeAndEmail(String nome, String email);
+
+  boolean existsByNome(String nome);
+
 }

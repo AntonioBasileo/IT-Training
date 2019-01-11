@@ -2,8 +2,8 @@ package it.unisa.di.ittraining.registrotirocinio;
 
 public class DataRegistroNonValidaException extends Exception {
 
-/**
-   * 
+  /**
+   *Numero seriale.
   */
   private static final long serialVersionUID = -4540488759365969340L;
 

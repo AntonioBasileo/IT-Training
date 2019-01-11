@@ -75,7 +75,7 @@ public class RegistrazioneController {
 	private UtenteService utentiService;
 	
 	
-	@RequestMapping(value = "/registrazione-studente-form", method = RequestMethod.GET)
+	@RequestMapping(value = "/registrazione/registrazione-studente-form", method = RequestMethod.GET)
 	public String showRegistrazioneStudenteForm(Model model) {
 		
 		if(utentiService.getUtenteAutenticato() != null)
@@ -89,7 +89,7 @@ public class RegistrazioneController {
 		return "registrazione-studente";
 	}
 
-	@RequestMapping(value = "/registrazione-segreteria-form", method = RequestMethod.GET)
+	@RequestMapping(value = "/registrazione/registrazione-segreteria-form", method = RequestMethod.GET)
 	public String showRegistrazioneSegreteriaForm(Model model) {
 		
 		if(utentiService.getUtenteAutenticato() != null)
@@ -102,7 +102,7 @@ public class RegistrazioneController {
 		return "registrazione-segreteria";
 	}
 
-	@RequestMapping(value = "/registrazione-accademico-form", method = RequestMethod.GET)
+	@RequestMapping(value = "/registrazione/registrazione-accademico-form", method = RequestMethod.GET)
 	public String showRegistrazioneTutorAccademicoForm(Model model) {
 		
 		if(utentiService.getUtenteAutenticato() != null)
@@ -115,7 +115,7 @@ public class RegistrazioneController {
 		return "registrazione-tutor-accademico";
 	}
 
-	@RequestMapping(value = "/registrazione-aziendale-form", method = RequestMethod.GET)
+	@RequestMapping(value = "/registrazione/registrazione-aziendale-form", method = RequestMethod.GET)
 	public String showRegistrazioneTutorAziendaleForm(Model model) {
 		
 		if(utentiService.getUtenteAutenticato() != null)

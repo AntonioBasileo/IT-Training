@@ -50,6 +50,10 @@ public class StudentiService {
   */
   public static final int MAX_DISTANZA_ANNO_NASCITA = 130;
 
+  /**
+* Permette di validare i campi della registrazione dello studente lato server e
+* di inserire lo stesso all'interno del Database.
+*/
   @Transactional(rollbackFor = Exception.class)
   public Studente registraStudente(Studente studente) throws NomeNonValidoException,
       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
@@ -76,6 +80,9 @@ public class StudentiService {
   }
 
 
+  /**
+* Permette di validare la matricola dello studente.
+*/
   public String validaMatricolaStudente(String matricolaStudente)
       throws MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException {
     if (matricolaStudente == null) {
@@ -99,6 +106,9 @@ public class StudentiService {
     }
   }
 
+  /**
+* Permette di validare l'email dello studente.
+*/
   public String validaEmailStudente(String email) throws EmailNonValidaException,
       EmailEsistenteException {
     if (email == null) {
@@ -117,6 +127,9 @@ public class StudentiService {
   }
 
 
+  /**
+* Permette validare il nome dello studente.
+*/
   public String validaNome(String nome) throws NomeNonValidoException, 
       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
     if (nome == null) {
@@ -139,6 +152,9 @@ public class StudentiService {
   }
 
 
+  /**
+* Permette di validare il cognome dello studente.
+*/
   public String validaCognome(String cognome) throws CognomeNonValidoException, 
       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
     if (cognome == null) {
@@ -161,6 +177,9 @@ public class StudentiService {
   }
 
 
+  /**
+* Permette di validare il sesso dello studente.
+*/
   public String validaSesso(String sesso) throws SessoNonValidoException {
     if (sesso == null) {
       throw new SessoNonValidoException();
@@ -177,7 +196,9 @@ public class StudentiService {
     }
   }
 
-
+  /**
+* Permette di validare la data di nascita dello studente.
+*/
   public LocalDate validaDataDiNascita(LocalDate dataDiNascita) 
       throws DataDiNascitaNonValidaException {
 
@@ -197,6 +218,9 @@ public class StudentiService {
     }
   }
 
+  /**
+* Permette di validare il telefono dello studente.
+*/
   public String validaTelefono(String telefono) throws TelefonoNonValidoException {
     if (telefono == null) {
       throw new TelefonoNonValidoException("Il campo telefono non può essere nullo");
@@ -209,6 +233,9 @@ public class StudentiService {
     return telefono;
   }
 
+  /**
+* Permette di validare lo username dello studente.
+*/
   public String validaUsername(String username) throws UsernameNonValidoException,
       UsernameEsistenteException {
     if (username == null) {
@@ -229,6 +256,10 @@ public class StudentiService {
 
   }
 
+  /**
+* Permette di verificare se il campo password e conferma password
+* hanno lo stesso valore.
+*/
   public boolean validaPasswords(String password, String confirmPassword)
       throws PasswordNonValidaException,PasswordNonCorrispondentiException {
     if (password == null || confirmPassword == null) {
@@ -249,6 +280,9 @@ public class StudentiService {
     return true;
   }
 
+  /**
+* Permette di validare la password dello studente.
+*/
   public String validaPassword(String password) 
       throws PasswordNonValidaException, PasswordNonCorrispondentiException {
     if (password == null) {

@@ -7,10 +7,11 @@ package it.unisa.di.ittraining.utente;
 public class UsernameNonValidoException extends Exception {
   
   /**
-	 * 
-	 */
-	private static final long serialVersionUID = -9212475312919318118L;
-/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+  *Numero seriale. 
+  */
+  private static final long serialVersionUID = -9212475312919318118L;
+
+  /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
   private static final String messaggioDefault = "Username non valido";
   
   /**

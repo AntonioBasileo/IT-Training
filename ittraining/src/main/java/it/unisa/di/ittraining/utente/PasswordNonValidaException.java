@@ -7,10 +7,11 @@ package it.unisa.di.ittraining.utente;
 public class PasswordNonValidaException extends Exception {
   
   /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5272898150987237207L;
-/** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
+  * Numero seriale.
+  */
+  private static final long serialVersionUID = 5272898150987237207L;
+
+  /** Stringa che definisce il messaggio di default utilizzato nell'eccezione. */
   private static final String messaggioDefault = "Password non valido";
   
   /**

@@ -1,12 +1,10 @@
 package it.unisa.di.ittraining.studente;
 
-import it.unisa.di.ittraining.utente.Utente;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
-
+import it.unisa.di.ittraining.utente.Utente;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,7 +46,11 @@ public class Studente extends Utente {
   public List<DomandaTirocinio> getDomandeTirocinio() {
     return domandeTirocinio;
   }
-  
+
+  /**
+* Permette di instaurare una relazione bidirezionale a livello di database
+* tra la domanda e lo studente.
+*/
   public void addDomandaTirocinio(DomandaTirocinio domandaTirocinio) {
     if (!domandeTirocinio.contains(domandaTirocinio)) {
       domandeTirocinio.add(domandaTirocinio);
@@ -60,6 +62,10 @@ public class Studente extends Utente {
     return tutor;
   }
 
+  /**
+* Permette di instaurare una relazione bidirezionale a livello di database
+* tra il tutor accademico e lo studente.
+*/
   public void setTutor(TutorAccademico tutor) {
     if (this.tutor != tutor) {
       this.tutor = tutor;
@@ -68,6 +74,10 @@ public class Studente extends Utente {
 
   }
 
+  /**
+* Permette di risalire al numero di CFU cumulati dallo studente
+* quando viene elaborata la domanda di tirocinio.
+*/
   public int getCfuDomande() {
     int somma = 0;
 

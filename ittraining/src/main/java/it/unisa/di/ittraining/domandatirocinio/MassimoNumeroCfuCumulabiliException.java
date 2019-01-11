@@ -3,7 +3,7 @@ package it.unisa.di.ittraining.domandatirocinio;
 public class MassimoNumeroCfuCumulabiliException extends Exception {
 
   /**
- * 
+ * Numero seriale.
  */
   private static final long serialVersionUID = -8136209252974035746L;
 

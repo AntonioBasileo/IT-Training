@@ -2,8 +2,8 @@ package it.unisa.di.ittraining.registrotirocinio;
 
 public class MassimoNumeroOreException extends Exception {
 
- /**
-  * 
+  /**
+  * Numero seriale.
   */
   private static final long serialVersionUID = 2132378114841125342L;
 

@@ -1,9 +1,9 @@
 package it.unisa.di.ittraining;
 
+import it.unisa.di.ittraining.App;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import it.unisa.di.ittraining.App;
 
 public class ServletInitializer extends SpringBootServletInitializer {
 
