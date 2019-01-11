@@ -2,15 +2,6 @@ package it.unisa.di.ittraining.utenza.test;
 
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
-import java.time.Month;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
@@ -38,6 +29,17 @@ import it.unisa.di.ittraining.utente.UsernameEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 import it.unisa.di.ittraining.utente.UtenteRepository;
 import it.unisa.di.ittraining.utente.UtenteService;
+
+import java.time.LocalDate;
+import java.time.Month;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegistrazioneTutorAziendaleTest {

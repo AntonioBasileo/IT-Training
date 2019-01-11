@@ -133,76 +133,94 @@ studente)).thenReturn(studente);
 
   }
 
-	
-	
-@Test(expected =  MatricolaStudenteNonValidaException.class)
-public void registraStudenteMatricolaNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
-DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException,
-it.unisa.di.ittraining.utente.TelefonoNonValidoException, MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, PasswordNonValidaException,
-PasswordNonCorrispondentiException {
-	
-	Studente studente = new Studente();
-	studente.setNome("Laura");
-studente.setCognome("Oliva");
-studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
-studente.setMatricola("05121ababa");
-studente.setSesso("F");
-studente.setEmail("laura@studenti.unisa.it");
-studente.setPassword("ab12cd34ef");
-studente.setUsername("laura1997");
-studente.setTelefono("3404050333");
+
+  @Test(expected =  MatricolaStudenteNonValidaException.class)
+  public void registraStudenteMatricolaNonValida() 
+      throws NomeNonValidoException, NomeCognomeTroppoLungoException,
+      NomeCognomeTroppoCortoException, CognomeNonValidoException,
+      DataDiNascitaNonValidaException, UsernameNonValidoException, 
+      UsernameEsistenteException, EmailNonValidaException, 
+      EmailEsistenteException, SessoNonValidoException,
+      it.unisa.di.ittraining.utente.TelefonoNonValidoException, 
+      MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, 
+      PasswordNonValidaException,
+      PasswordNonCorrispondentiException {
+
+    Studente studente = new Studente();
+    studente.setNome("Laura");
+    studente.setCognome("Oliva");
+    studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
+    studente.setMatricola("05121ababa");
+    studente.setSesso("F");
+    studente.setEmail("laura@studenti.unisa.it");
+    studente.setPassword("ab12cd34ef");
+    studente.setUsername("laura1997");
+    studente.setTelefono("3404050333");
 
 
 
-when(studentiService.registraStudente(studente)).thenReturn(studente);
+    when(studentiService.registraStudente(
+studente)).thenReturn(studente);
 
 
-	try {
-		studentiService.registraStudente(studente);
-	} catch (NomeNonValidoException | NomeCognomeTroppoLungoException | NomeCognomeTroppoCortoException
-			| CognomeNonValidoException | DataDiNascitaNonValidaException | UsernameNonValidoException
-			| UsernameEsistenteException | EmailNonValidaException | EmailEsistenteException
-			| SessoNonValidoException | it.unisa.di.ittraining.utente.TelefonoNonValidoException
-			| MatricolaStudenteNonValidaException | MatricolaStudenteEsistenteException
-			| PasswordNonValidaException | PasswordNonCorrispondentiException e) {
-		// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-}
+    try {
+      studentiService.registraStudente(studente);
+    } catch (NomeNonValidoException | NomeCognomeTroppoLungoException
+      | NomeCognomeTroppoCortoException
+      | CognomeNonValidoException | DataDiNascitaNonValidaException
+      | UsernameNonValidoException
+      | UsernameEsistenteException | EmailNonValidaException | EmailEsistenteException
+      | SessoNonValidoException 
+      | it.unisa.di.ittraining.utente.TelefonoNonValidoException
+      | MatricolaStudenteNonValidaException | MatricolaStudenteEsistenteException
+      | PasswordNonValidaException | PasswordNonCorrispondentiException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
-@Test(expected = NomeCognomeTroppoCortoException.class)
-public void registrazioneStudenteNomeTroppoCorto() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
-DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException, TelefonoNonValidoException,
-MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException {
-	
-	Studente studente = new Studente();
-	studente.setNome("La");
-studente.setCognome("Oliva");
-studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
-studente.setMatricola("0512100321");
-studente.setSesso("F");
-studente.setEmail("laura@studenti.unisa.it");
-studente.setPassword("ab12cd34ef");
-studente.setUsername("laura1997");
-studente.setTelefono("3404050333");
+  }
+
+  @Test(expected = NomeCognomeTroppoCortoException.class)
+  public void registrazioneStudenteNomeTroppoCorto() 
+      throws NomeNonValidoException, NomeCognomeTroppoLungoException,
+      NomeCognomeTroppoCortoException, CognomeNonValidoException,
+      DataDiNascitaNonValidaException, UsernameNonValidoException, 
+      UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, 
+      SessoNonValidoException, TelefonoNonValidoException,
+      MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, 
+      PasswordNonValidaException, PasswordNonCorrispondentiException {
+
+    Studente studente = new Studente();
+    studente.setNome("La");
+    studente.setCognome("Oliva");
+    studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
+    studente.setMatricola("0512100321");
+    studente.setSesso("F");
+    studente.setEmail("laura@studenti.unisa.it");
+    studente.setPassword("ab12cd34ef");
+    studente.setUsername("laura1997");
+    studente.setTelefono("3404050333");
 
 
-when(studentiService.registraStudente(studente)).thenReturn(studente);
+    when(studentiService.registraStudente(
+studente)).thenReturn(studente);
 
-try {
-	studentiService.registraStudente(studente);
-} catch (NomeNonValidoException | NomeCognomeTroppoLungoException | NomeCognomeTroppoCortoException
-		| CognomeNonValidoException | DataDiNascitaNonValidaException | UsernameNonValidoException
-		| UsernameEsistenteException | EmailNonValidaException | EmailEsistenteException
-		| SessoNonValidoException | TelefonoNonValidoException | MatricolaStudenteNonValidaException
-		| MatricolaStudenteEsistenteException | PasswordNonValidaException
-		| PasswordNonCorrispondentiException e) {
-	// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-}
+    try {
+      studentiService.registraStudente(studente);
+    } catch (NomeNonValidoException | NomeCognomeTroppoLungoException 
+      | NomeCognomeTroppoCortoException
+      | CognomeNonValidoException | DataDiNascitaNonValidaException 
+      | UsernameNonValidoException
+      | UsernameEsistenteException | EmailNonValidaException | EmailEsistenteException
+      | SessoNonValidoException | TelefonoNonValidoException 
+      | MatricolaStudenteNonValidaException
+      | MatricolaStudenteEsistenteException | PasswordNonValidaException
+      | PasswordNonCorrispondentiException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+  }
 
   @Test(expected = NomeCognomeTroppoCortoException.class)
 public void registrazioneStudenteCognomeTroppoCorto() 
@@ -244,38 +262,47 @@ studente)).thenReturn(studente);
 
   }
 
-@Test(expected = DataDiNascitaNonValidaException.class)
-public void registrazioneStudenteDataNonValida() throws NomeNonValidoException, NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException,
-DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException, SessoNonValidoException, TelefonoNonValidoException,
-MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, PasswordNonValidaException, PasswordNonCorrispondentiException {
-	
-	Studente studente = new Studente();
-	studente.setNome("Laura");
-studente.setCognome("Oliva");
-studente.setDataDiNascita(LocalDate.of(2009, Month.JUNE, 29));
-studente.setMatricola("0512100321");
-studente.setSesso("F");
-studente.setEmail("laura@studenti.unisa.it");
-studente.setPassword("ab12cd34ef");
-studente.setUsername("laura1997");
-studente.setTelefono("3404050333");
+  @Test(expected = DataDiNascitaNonValidaException.class)
+  public void registrazioneStudenteDataNonValida() 
+      throws NomeNonValidoException, NomeCognomeTroppoLungoException, 
+      NomeCognomeTroppoCortoException, CognomeNonValidoException,
+      DataDiNascitaNonValidaException, UsernameNonValidoException,
+      UsernameEsistenteException, EmailNonValidaException, EmailEsistenteException,
+      SessoNonValidoException, TelefonoNonValidoException,
+      MatricolaStudenteNonValidaException, MatricolaStudenteEsistenteException, 
+      PasswordNonValidaException, PasswordNonCorrispondentiException {
+
+    Studente studente = new Studente();
+    studente.setNome("Laura");
+    studente.setCognome("Oliva");
+    studente.setDataDiNascita(LocalDate.of(2009, Month.JUNE, 29));
+    studente.setMatricola("0512100321");
+    studente.setSesso("F");
+    studente.setEmail("laura@studenti.unisa.it");
+    studente.setPassword("ab12cd34ef");
+    studente.setUsername("laura1997");
+    studente.setTelefono("3404050333");
 
 
-when(studentiService.registraStudente(studente)).thenReturn(studente);
+    when(studentiService.registraStudente(
+studente)).thenReturn(studente);
 
-try {
-	studentiService.registraStudente(studente);
-} catch (NomeNonValidoException | NomeCognomeTroppoLungoException | NomeCognomeTroppoCortoException
-		| CognomeNonValidoException | DataDiNascitaNonValidaException | UsernameNonValidoException
-		| UsernameEsistenteException | EmailNonValidaException | EmailEsistenteException
-		| SessoNonValidoException | TelefonoNonValidoException | MatricolaStudenteNonValidaException
-		| MatricolaStudenteEsistenteException | PasswordNonValidaException
-		| PasswordNonCorrispondentiException e) {
-	// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-}
+    try {
+      studentiService.registraStudente(studente);
+    } catch (NomeNonValidoException | NomeCognomeTroppoLungoException
+      | NomeCognomeTroppoCortoException
+      | CognomeNonValidoException | DataDiNascitaNonValidaException 
+      | UsernameNonValidoException
+      | UsernameEsistenteException | EmailNonValidaException | EmailEsistenteException
+      | SessoNonValidoException | TelefonoNonValidoException 
+      | MatricolaStudenteNonValidaException
+      | MatricolaStudenteEsistenteException | PasswordNonValidaException
+      | PasswordNonCorrispondentiException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+  }
 
   @Test(expected = SessoNonValidoException.class)
   public void registrazioneStudenteSessoNonValido() 
