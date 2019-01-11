@@ -35,7 +35,7 @@ public class RegistroService {
     registro.setInizio(validaOrarioInizio(registro.getInizio(), registro.getFine()));
     registro.setFine(validaOrarioFine(registro.getInizio(), registro.getFine()));
 
-    registriRep.save(registro);
+    registro = registriRep.save(registro);
 
     return registro;
   }

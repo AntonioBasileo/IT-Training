@@ -52,7 +52,7 @@ public class DomandaTirocinioService {
       domanda.setOreTotali(450);
     }
 		
-		domandeRep.save(domanda);
+		domanda = domandeRep.save(domanda);
 		
 		return domanda;
 	}

@@ -25,7 +25,7 @@ public class ProgettoFormativoService {
 		
 		progetto.setDomanda(domanda);
 		
-		progettoRep.save(progetto);
+		progetto = progettoRep.save(progetto);
 		
 		return progetto;
 	}

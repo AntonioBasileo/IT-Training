@@ -4,7 +4,9 @@
 
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
+
 <html>
+
 			  
 			  <!-- Registrazione Studente -->
 			  <div class="row">

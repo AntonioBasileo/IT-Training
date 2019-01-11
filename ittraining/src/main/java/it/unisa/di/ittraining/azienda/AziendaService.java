@@ -81,7 +81,7 @@ public class AziendaService {
     tutor.setSesso(validaSesso(tutor.getSesso()));
     tutor.setTelefono(validaTelefono(tutor.getTelefono()));
 
-    repTutor.save(tutor);
+    tutor = repTutor.save(tutor);
 
     return tutor;
   }
@@ -107,7 +107,7 @@ public class AziendaService {
     azienda.setEmail(validaEmailAziendale(azienda.getNome(), azienda.getEmail()));
     azienda.setTelefono(validaTelefono(azienda.getTelefono()));
 
-    repAzienda.save(azienda);
+    azienda = repAzienda.save(azienda);
 
     return azienda;
   }
