@@ -15,7 +15,7 @@
 				  <div class="row">
 				    <form:form class="col s12" method="POST" modelAttribute="loginForm" action="/login">
 		  				<div class ="container center">
-		  					<img class="hide-on-med-and-down" style="width: 200px; height: 200px" src="resources/images/logo.png">
+		  					<img class="hide-on-med-and-down" style="width: 200px; height: 200px" src="../resources/images/logo.png">
 				      		<div class="row">
 				      
 				        		<div class="input-field col s12">

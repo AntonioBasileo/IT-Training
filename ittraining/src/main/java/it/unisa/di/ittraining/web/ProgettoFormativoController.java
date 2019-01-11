@@ -26,7 +26,7 @@ public class ProgettoFormativoController {
 	@Autowired
 	private DomandaTirocinioService domandeService;
 	
-	@RequestMapping(value = "/inserisci-progetto", method = RequestMethod.POST)
+	@RequestMapping(value = "/home/mostra-domande-aziendale/inserisci-progetto", method = RequestMethod.POST)
 	public String inserisciProgetto(@ModelAttribute("progettoFormAccetta") ProgettoFormativoForm progettoForm, RedirectAttributes redirectAttributes) {
 		
 		
@@ -37,10 +37,10 @@ public class ProgettoFormativoController {
 		
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.domanda.accettata");
 		
-		return "redirect:/mostra-domande-aziendale";
+		return "redirect:/home/mostra-domande-aziendale";
 	}
 	
-	@RequestMapping(value = "/approva-progetto", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/mostra-domande-accademico/approva-progetto", method = RequestMethod.GET)
 	public String approvaProgetto(@RequestParam Long id, RedirectAttributes redirectAttributes) {
 		
 
@@ -52,10 +52,10 @@ public class ProgettoFormativoController {
 		
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.progettoFormativo.approvato");
 		
-		return "redirect:/mostra-domande-accademico";
+		return "redirect:/home/mostra-domande-accademico";
 	}
 	
-	@RequestMapping(value = "/rifiuta-progetto", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/mostra-domande-accademico/rifiuta-progetto", method = RequestMethod.GET)
 	public String rifiutaProgetto(@RequestParam Long id, RedirectAttributes redirectAttributes) {
 		
 
@@ -67,6 +67,6 @@ public class ProgettoFormativoController {
 		
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.progettoFormativo.rifiutato");
 		
-		return "redirect:/mostra-domande-accademico";
+		return "redirect:/home/mostra-domande-accademico";
 	}
 }

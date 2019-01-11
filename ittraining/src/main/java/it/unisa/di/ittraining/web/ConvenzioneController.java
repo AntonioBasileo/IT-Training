@@ -33,21 +33,7 @@ public class ConvenzioneController {
 	@Autowired
 	private UtenteService utentiService;
 	
-	@RequestMapping(value = "/lista-enti", method = RequestMethod.GET)
-	public String showListaEnti(Model model) {
-		
-
-		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
-			return "not-available";
-		
-		if(!model.containsAttribute("listaAziende"))
-			model.addAttribute("listaAziende", aziendaService.elancaAziende());
-		
-		
-		return "lista-enti";
-	}
-	
-	@RequestMapping(value = "/convenzione", method = RequestMethod.GET)
+	@RequestMapping(value = "/home/convenzione-form", method = RequestMethod.GET)
 	public String mostraFormConvenzione(Model model) {
 		
 
@@ -61,7 +47,7 @@ public class ConvenzioneController {
 		return "aggiungi-ente";
 	}
 
-	@RequestMapping( value = "/aggiungi-ente", method = RequestMethod.POST)
+	@RequestMapping( value = "/home/convenzione-form/aggiungi-ente", method = RequestMethod.POST)
 	public String aggiungiEnte(@ModelAttribute("convenzioneForm") ConvenzioneForm convenzioneForm, Model model, BindingResult result, RedirectAttributes redirectAttributes) 
 			throws IndirizzoNonValidoException, NomeNonValidoException, SedeNonValidaException, AziendaNonValidaException, AziendaEsistenteException,
 			EmailNonValidaException, TelefonoNonValidoException, EmailAziendaEsistenteException {
@@ -77,7 +63,7 @@ public class ConvenzioneController {
 				
 		      redirectAttributes.addFlashAttribute("testoNotifica", "toast.convenzione.nonValida");
 		      
-		      return "redirect:/convenzione";
+		      return "redirect:/home/convenzione-form";
 		 }
 		
 		Azienda azienda = new Azienda();
@@ -93,5 +79,19 @@ public class ConvenzioneController {
 		redirectAttributes.addFlashAttribute("testoNotifica", "toast.convenzione.valida");
 		
 		return "redirect:/home";
+	}
+	
+	@RequestMapping(value = "/home/lista-enti", method = RequestMethod.GET)
+	public String showListaEnti(Model model) {
+		
+
+		if(utentiService.getUtenteAutenticato() == null || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente")))
+			return "not-available";
+		
+		if(!model.containsAttribute("listaAziende"))
+			model.addAttribute("listaAziende", aziendaService.elancaAziende());
+		
+		
+		return "lista-enti";
 	}
 }

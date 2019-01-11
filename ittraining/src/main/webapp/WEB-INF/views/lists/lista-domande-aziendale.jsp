@@ -12,7 +12,7 @@
 				<div class="col s12">
 						<div class="card horizontal">
 							<div class="card-image">
-								<img src="resources/images/choose.svg">
+								<img src="../resources/images/choose.svg">
 							</div>
 								<div class="card-stacked">
 								<div class="card-content">
@@ -58,7 +58,7 @@
 						      <h5 class="teal-text">Progetto formativo</h5>
 						      <div class="row"></div>
 						      <div class="row">
-						      	 <form:form modelAttribute="progettoFormAccetta" method="POST" action="/inserisci-progetto">
+						      	 <form:form modelAttribute="progettoFormAccetta" method="POST" action="/home/mostra-domande-aziendale/inserisci-progetto">
 							      	<div class="input-field col s12">
 							          <form:textarea path="descrizione" id="textarea1" class="materialize-textarea"></form:textarea>
 							          <label for="textarea1">Inserisci il progetto formativo</label>
@@ -86,7 +86,7 @@
 						      <h5 class="teal-text">Rifiuta domanda</h5>
 						      <div class="row"><p>Sei sicuro di voler rifiutare la domanda?</p></div>
 						      <div class="row">
-						      	 <form:form modelAttribute="progettoFormRifiuta" method="POST" action="/rifiuta-domanda">
+						      	 <form:form modelAttribute="progettoFormRifiuta" method="POST" action="/home/mostra-domande-aziendale/rifiuta-domanda">
 							          <form:input path="descrizione" id="textarea1" type="hidden" value=""/>
 									  <form:input path="idDomanda" type="hidden" name="idDomanda" value="${lista.id}"/>
 							          <button class="red btn-small waves-effect waves-light" type="submit" name="action">Rifiuta
