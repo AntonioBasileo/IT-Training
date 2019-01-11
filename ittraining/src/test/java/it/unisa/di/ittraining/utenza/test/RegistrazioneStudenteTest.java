@@ -1,7 +1,5 @@
 package it.unisa.di.ittraining.utenza.test;
 
-
-
 import static org.mockito.Mockito.*;
 
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
