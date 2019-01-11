@@ -3,7 +3,7 @@
 <html>
 
   <div class="row">
-    <form:form class="col s12" action="/compila-domanda" method="POST" modelAttribute="domandaForm"> 
+    <form:form class="col s12" action="/home/compila-domanda-form/compila-domanda" method="POST" modelAttribute="domandaForm"> 
     	<!-- Data inizio -->    
       	<div class="row date-input">
           <div class="col s12">

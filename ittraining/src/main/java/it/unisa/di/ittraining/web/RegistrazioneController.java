@@ -131,7 +131,7 @@ public class RegistrazioneController {
 	
 	
 
-	@RequestMapping(value = "/richiesta-registrazione-studente", method = RequestMethod.POST)
+	@RequestMapping(value = "/registrazione/registrazione-studente-form/richiesta-registrazione-studente", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneStudente(@ModelAttribute("registrazioneStudente") RegistrazioneStudenteForm registrazioneStudente, Model model, BindingResult result, 
 			RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, NomeNonValidoException, NomeCognomeTroppoLungoException,
 	NomeCognomeTroppoCortoException, CognomeNonValidoException, DataDiNascitaNonValidaException, UsernameNonValidoException, UsernameEsistenteException, EmailNonValidaException,
@@ -150,7 +150,7 @@ public class RegistrazioneController {
 	      
 	      redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 	      
-	      return "redirect:/registrazione-studente-form";
+	      return "redirect:/registrazione/registrazione-studente-form";
 	    }
 		
 	    // Genera un oggetto LocalDate a partire dagli interi presenti nel form
@@ -181,7 +181,7 @@ public class RegistrazioneController {
 		return "redirect:/home";	
 	}
 
-	@RequestMapping(value = "/richiesta-registrazione-segreteria", method = RequestMethod.POST)
+	@RequestMapping(value = "/registrazione/registrazione-segreteria-form/richiesta-registrazione-segreteria", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneSegreteria(HttpSession session, @ModelAttribute("registrazioneSegreteria") RegistrazioneForm registrazioneSegreteria, Model model,
 			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, NomeNonValidoException,
 	NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException, DataDiNascitaNonValidaException,
@@ -199,7 +199,7 @@ public class RegistrazioneController {
 	      
 	      redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 	      
-	      return "redirect:/registrazione-segreteria-form";
+	      return "redirect:/registrazione/registrazione-segreteria-form";
 	    }
 	    
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form
@@ -229,7 +229,7 @@ public class RegistrazioneController {
 		return "redirect:/home";
 	}
 
-	@RequestMapping(value = "/richiesta-registrazione-accademico", method = RequestMethod.POST)
+	@RequestMapping(value = "/registrazione/registrazione-accademico-form/richiesta-registrazione-accademico", method = RequestMethod.POST)
 	public String elaboraRichieicostaIscrizioneTutorAccademico(HttpSession session, @ModelAttribute("registrazioneAccademico") RegistrazioneForm registrazioneAccademico, Model model, 
 			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, NomeNonValidoException,
 	NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException, CognomeNonValidoException, EmailNonValidaException, EmailEsistenteException,
@@ -246,7 +246,7 @@ public class RegistrazioneController {
 		      
 		      redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 		      
-		      return "redirect:/registrazione-accademico-form";
+		      return "redirect:/registrazione/registrazione-accademico-form";
 		}
 		
 	    // Genera un oggetto LocalDate a partire dagli interi presenti nel form
@@ -276,7 +276,7 @@ public class RegistrazioneController {
 	    return "redirect:/home";
 	}
 	
-	@RequestMapping(value = "/richiesta-registrazione-aziendale", method = RequestMethod.POST)
+	@RequestMapping(value = "/registrazione/registrazione-aziendale-form/richiesta-registrazione-aziendale", method = RequestMethod.POST)
 	public String elaboraRichiestaIscrizioneTutorAziendale(HttpSession session, @ModelAttribute("registrazioneAziendale") RegistrazioneAziendaleForm registrazioneAziendale, Model model,
 			BindingResult result, RedirectAttributes redirectAttributes) throws PasswordNonValidaException, PasswordNonCorrispondentiException, AziendaNonValidaException,
 	AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException, EmailEsistenteException,
@@ -296,7 +296,7 @@ public class RegistrazioneController {
 		      
 		      redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaNonValida");
 		      
-		      return "redirect:/registrazione-aziendale-form";
+		      return "redirect:/registrazione/registrazione-aziendale-form";
 		}
 		
 		// Genera un oggetto LocalDate a partire dagli interi presenti nel form

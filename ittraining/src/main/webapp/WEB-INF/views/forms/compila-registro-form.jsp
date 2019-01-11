@@ -47,7 +47,7 @@
 	      <div class="row"></div>
 	      <div class="row"></div>
           <div class="row">
-		    <form:form class="col s12" id="registroForm" action="/compila-registro" method="POST" modelAttribute="registroForm">
+		    <form:form class="col s12" id="registroForm" action="/home/registro-form/compila-registro" method="POST" modelAttribute="registroForm">
 		    		<form:input path="id_domanda" type="hidden" value="${domanda.id}"/>
 				      <div class="row">
 				        <div class="input-field col s3">
@@ -156,8 +156,8 @@
 				        <c:when test="${domanda.getNumeroOre() >= 9000}">
 				          <c:choose>
 				          	<c:when test="${lista.status == 4 }">
-						          <div class="row right">
-									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
+						          <div class="row">
+									  <p class="teal-text">Hai raggiunto il numero di ore previsto</p>
 								  </div>
 							</c:when>
 				          	<c:when test="${lista.status == 5 }">
@@ -193,8 +193,8 @@
 				        <c:when test="${domanda.getNumeroOre() >= 18000}">
 				          <c:choose>
 				          	<c:when test="${lista.status == 4 }">
-						          <div class="row right">
-									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
+						          <div class="row">
+									  <p class="teal-text">Hai raggiunto il numero di ore previsto</p>
 								  </div>
 							</c:when>
 				          	<c:when test="${lista.status == 5 }">
@@ -231,7 +231,7 @@
 				          <c:choose>
 				          	<c:when test="${lista.status == 4 }">
 						          <div class="row right">
-									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
+									  <p class="teal-text">Hai raggiunto il numero di ore previsto</p>
 								  </div>
 							</c:when>
 				          	<c:when test="${lista.status == 5 }">

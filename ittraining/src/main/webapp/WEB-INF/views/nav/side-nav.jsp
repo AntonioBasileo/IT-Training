@@ -6,7 +6,7 @@
 		    <li><div class="user-view">
 		      <div class="background">
 		      </div>
-		      <a><img class="circle" src="resources/images/logo.png"></a>
+		      <a><img class="circle" src="../resources/images/logo.png"></a>
 		    </div></li>
 		    <li><a href="/registrazione/registrazione-studente-form"><i class="material-icons">school</i>Studente</a></li>
 		    <li><a href="/registrazione/registrazione-segreteria-form"><i class="material-icons">account_balance</i>Segreteria</a></li>

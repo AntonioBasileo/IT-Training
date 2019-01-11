@@ -10,7 +10,7 @@
 			  
 			  <!-- Registrazione Studente -->
 			  <div class="row">
-			    <form:form cssClass="col s12" action ="/richiesta-registrazione-studente" method = "POST" modelAttribute = "registrazioneStudente">
+			    <form:form cssClass="col s12" action ="/registrazione/registrazione-studente-form/richiesta-registrazione-studente" method = "POST" modelAttribute = "registrazioneStudente">
 			      <div class="row">
 			        <div class="input-field col s6">
 			          <i class="material-icons prefix">child_care</i>
