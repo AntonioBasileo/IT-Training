@@ -5,8 +5,10 @@ import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.registrotirocinio.DataRegistroNonValidaException;
 import it.unisa.di.ittraining.registrotirocinio.DataRegistroPrecedenteInizioException;
 import it.unisa.di.ittraining.registrotirocinio.DataRegistroSuccessivaFineException;
+import it.unisa.di.ittraining.registrotirocinio.MassimoNumeroOreException;
 import it.unisa.di.ittraining.registrotirocinio.OrarioFinePrecedenteInizioException;
 import it.unisa.di.ittraining.registrotirocinio.OrarioNonValidoException;
+import it.unisa.di.ittraining.registrotirocinio.OrePrevisteSuperateException;
 import it.unisa.di.ittraining.registrotirocinio.Registro;
 import it.unisa.di.ittraining.registrotirocinio.RegistroService;
 import it.unisa.di.ittraining.utente.UtenteService;
@@ -99,7 +101,7 @@ public class RegistriController {
       BindingResult result, Model model, RedirectAttributes redirectAttributes, HttpSession session)
       throws DataRegistroSuccessivaFineException, DataRegistroPrecedenteInizioException, 
       DataRegistroNonValidaException, OrarioNonValidoException, 
-      OrarioFinePrecedenteInizioException {
+      OrarioFinePrecedenteInizioException, MassimoNumeroOreException, OrePrevisteSuperateException {
 
     if (!model.containsAttribute("listaDomandeApprovate")) {
       List<DomandaTirocinio> domande = 
@@ -108,6 +110,7 @@ public class RegistriController {
 
       model.addAttribute("listaDomandeApprovate", domande);
     }
+
     validator.validate(registroForm, result);
 
     if (result.hasErrors()) {
@@ -229,6 +232,7 @@ public class RegistriController {
       return "redirect:/home/registri-accademico";
 
     }
+
     if (utentiService.getUtenteAutenticato().getClass().getSimpleName()
         .equals("ImpiegatoSegreteria")) {
       domandeService.aggiornaStatoDomanda(id, DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA);
@@ -237,6 +241,7 @@ public class RegistriController {
 
       return "redirect:/home/registri-segreteria";
     }
+
     redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.warning");
 
     return "redirect:/home";

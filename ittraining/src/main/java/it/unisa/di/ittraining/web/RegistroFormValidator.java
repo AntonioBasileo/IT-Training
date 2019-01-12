@@ -6,6 +6,7 @@ import it.unisa.di.ittraining.registrotirocinio.DataRegistroSuccessivaFineExcept
 import it.unisa.di.ittraining.registrotirocinio.MassimoNumeroOreException;
 import it.unisa.di.ittraining.registrotirocinio.OrarioFinePrecedenteInizioException;
 import it.unisa.di.ittraining.registrotirocinio.OrarioNonValidoException;
+import it.unisa.di.ittraining.registrotirocinio.OrePrevisteSuperateException;
 import it.unisa.di.ittraining.registrotirocinio.RegistroService;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -41,6 +42,7 @@ public class RegistroFormValidator implements Validator {
           || form.getGiornoInizio() == null
           || form.getAnnoFine() == null || form.getMeseFine() == null 
           || form.getGiornoFine() == null) {
+
         throw new DataRegistroNonValidaException("Il campo di qualche data non "
            + "è stato compilato come dovuto");
       }
@@ -64,6 +66,7 @@ public class RegistroFormValidator implements Validator {
     try {
       if (form.getOraInizio() == null || form.getMinutoInizio() == null 
           || form.getOraFine() == null || form.getMinutoFine() == null) {
+
         throw new OrarioNonValidoException("Alcuni campi degli orari non "
              + "sono stati compilati correttamente");
       }
@@ -81,6 +84,7 @@ public class RegistroFormValidator implements Validator {
     try {
       if (form.getOraInizio() == null || form.getMinutoInizio() == null 
            || form.getOraFine() == null || form.getMinutoFine() == null) {
+
         throw new OrarioNonValidoException("Alcuni campi degli orari non "
              + "sono stati compilati correttamente");
       }
@@ -103,6 +107,15 @@ public class RegistroFormValidator implements Validator {
     } catch (MassimoNumeroOreException e) {
       // TODO Auto-generated catch block
       errors.rejectValue("oraFine", "formRegistro.ore.eccessive");
+    }
+    
+    try {
+      LocalTime orarioInizio = LocalTime.of(form.getOraInizio(), form.getMinutoInizio());
+      LocalTime orarioFine = LocalTime.of(form.getOraFine(), form.getMinutoFine());
+      registriService.verificaNumeroOreRegistro(orarioInizio, orarioFine, form.getIdDomanda());
+    } catch (OrePrevisteSuperateException e) {
+      // TODO Auto-generated catch block
+      errors.rejectValue("oraFine", "formRegistro.oretotali.eccessive");
     }
   }
 }

@@ -7,8 +7,10 @@ import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioRepository;
 import it.unisa.di.ittraining.registrotirocinio.DataRegistroNonValidaException;
 import it.unisa.di.ittraining.registrotirocinio.DataRegistroPrecedenteInizioException;
 import it.unisa.di.ittraining.registrotirocinio.DataRegistroSuccessivaFineException;
+import it.unisa.di.ittraining.registrotirocinio.MassimoNumeroOreException;
 import it.unisa.di.ittraining.registrotirocinio.OrarioFinePrecedenteInizioException;
 import it.unisa.di.ittraining.registrotirocinio.OrarioNonValidoException;
+import it.unisa.di.ittraining.registrotirocinio.OrePrevisteSuperateException;
 import it.unisa.di.ittraining.registrotirocinio.Registro;
 import it.unisa.di.ittraining.registrotirocinio.RegistroRepository;
 import it.unisa.di.ittraining.registrotirocinio.RegistroService;
@@ -38,7 +40,8 @@ public class CompilaRegistroTest {
   @Test
   public void compilaRegistroSuccesso() throws DataRegistroSuccessivaFineException, 
       DataRegistroPrecedenteInizioException, DataRegistroNonValidaException, 
-      OrarioNonValidoException, OrarioFinePrecedenteInizioException {
+      OrarioNonValidoException, OrarioFinePrecedenteInizioException,
+      MassimoNumeroOreException, OrePrevisteSuperateException {
 
     DomandaTirocinio domanda = new DomandaTirocinio();
     domanda.setId(111L);
@@ -73,7 +76,8 @@ public class CompilaRegistroTest {
   @Test(expected = OrarioFinePrecedenteInizioException.class)
   public void compilaRegistroOraFineNonValido() throws DataRegistroSuccessivaFineException, 
       DataRegistroPrecedenteInizioException, DataRegistroNonValidaException, 
-      OrarioNonValidoException, OrarioFinePrecedenteInizioException {
+      OrarioNonValidoException, OrarioFinePrecedenteInizioException,
+      MassimoNumeroOreException, OrePrevisteSuperateException {
 
     DomandaTirocinio domanda = new DomandaTirocinio();
     domanda.setId(111L);
@@ -107,7 +111,8 @@ public class CompilaRegistroTest {
   @Test(expected = OrarioFinePrecedenteInizioException.class)
   public void compilaRegistroOraInizioNonValido() throws DataRegistroSuccessivaFineException, 
       DataRegistroPrecedenteInizioException, DataRegistroNonValidaException, 
-      OrarioNonValidoException, OrarioFinePrecedenteInizioException {
+      OrarioNonValidoException, OrarioFinePrecedenteInizioException,
+      MassimoNumeroOreException, OrePrevisteSuperateException {
   
     DomandaTirocinio domanda = new DomandaTirocinio();
     domanda.setId(111L);
@@ -142,7 +147,8 @@ public class CompilaRegistroTest {
   public void compilaRegistroDataRegistroPrecedenteInizio() 
       throws DataRegistroSuccessivaFineException, 
       DataRegistroPrecedenteInizioException, DataRegistroNonValidaException,
-      OrarioNonValidoException, OrarioFinePrecedenteInizioException {
+      OrarioNonValidoException, OrarioFinePrecedenteInizioException,
+      MassimoNumeroOreException, OrePrevisteSuperateException {
 
     DomandaTirocinio domanda = new DomandaTirocinio();
     domanda.setId(111L);
@@ -177,7 +183,8 @@ public class CompilaRegistroTest {
   public void compilaRegistroDataRegistroSuccessivaFine() 
       throws DataRegistroSuccessivaFineException, 
       DataRegistroPrecedenteInizioException, DataRegistroNonValidaException,
-      OrarioNonValidoException, OrarioFinePrecedenteInizioException {
+      OrarioNonValidoException, OrarioFinePrecedenteInizioException,
+      MassimoNumeroOreException, OrePrevisteSuperateException {
     
     DomandaTirocinio domanda = new DomandaTirocinio();
     domanda.setId(111L);
