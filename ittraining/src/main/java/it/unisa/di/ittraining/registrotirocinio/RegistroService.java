@@ -47,6 +47,15 @@ public class RegistroService {
   }
 
   /**
+* Permette di eliminare un'attività di tirocinio dal Database.
+*/
+  public void cancellaTirocinio(long id) {
+    Registro registro = registriRep.findById(id);
+
+    registriRep.delete(registro);
+  }
+
+  /**
 * Permette di validare la data dell'attiività, assicurandosi
 * che non sia nè prima dell'inizio del tirocinio nè dopo
 * la fine del tirocinio.
