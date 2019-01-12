@@ -264,14 +264,4 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
     return somma;
   }
   
-  public boolean equals(Object o) {
-    if (!this.getClass().getSimpleName().equals(o.getClass().getSimpleName())) {
-      return false;
-    }
-    DomandaTirocinio domanda = (DomandaTirocinio) o;
-    if (this.id == domanda.getId()) {
-      return true;
-    }
-    return false;
-  }
 }

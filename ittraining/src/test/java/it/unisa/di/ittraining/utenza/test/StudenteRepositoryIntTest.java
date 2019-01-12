@@ -28,6 +28,10 @@ public class StudenteRepositoryIntTest {
 
   private Studente studente;
 
+  /**
+  * Metodo eseguito prima del test. Permette di istanziare uno studente
+  * e salvarlo all'interno del Database.
+  */
   @Before
   public void salvaStudente() {
     studente = new Studente();

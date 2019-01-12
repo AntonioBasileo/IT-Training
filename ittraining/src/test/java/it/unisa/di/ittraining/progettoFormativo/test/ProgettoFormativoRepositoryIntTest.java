@@ -32,6 +32,10 @@ public class ProgettoFormativoRepositoryIntTest {
 
   private DomandaTirocinio domandaTirocinio;
 
+  /**
+  * Metodo eseguito prima del test. Permette di istanziare una domanda e un progetto
+  * formativo e salvarli all'interno del Database.
+  */
   @Before
   public void salvaProgetto() {
 

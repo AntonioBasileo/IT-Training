@@ -26,6 +26,10 @@ public class ProgettoFormativoController {
   @Autowired
   private DomandaTirocinioService domandeService;
 
+  /**
+  * Permette al tutor aziendale di accettare una domanda e di inserire il progetto formativo
+  * da associare ad essa.
+  */
   @RequestMapping(value = "/home/mostra-domande-aziendale/inserisci-progetto", 
        method = RequestMethod.POST)
   public String inserisciProgetto(@ModelAttribute("progettoFormAccetta") 
@@ -38,6 +42,9 @@ public class ProgettoFormativoController {
     return "redirect:/home/mostra-domande-aziendale";
   }
 
+  /**
+  * Permette al tutor accademico di approvare un progetto formativo.
+  */
   @RequestMapping(value = "/home/mostra-domande-accademico/approva-progetto", 
        method = RequestMethod.GET)
   public String approvaProgetto(@RequestParam Long id, RedirectAttributes redirectAttributes) {
@@ -53,7 +60,10 @@ public class ProgettoFormativoController {
 
     return "redirect:/home/mostra-domande-accademico";
   }
-  
+
+  /**
+  * Permette al tutor accademico di rifiutare un progetto formativo.
+  */
   @RequestMapping(value = "/home/mostra-domande-accademico/rifiuta-progetto", 
        method = RequestMethod.GET)
   public String rifiutaProgetto(@RequestParam Long id, RedirectAttributes redirectAttributes) {

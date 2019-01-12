@@ -33,6 +33,9 @@ public class ConvenzioneController {
   @Autowired
   private UtenteService utentiService;
 
+  /**
+  * Permette di mostrare il form per aggiungere una convenzione.
+  */
   @RequestMapping(value = "/home/convenzione-form", method = RequestMethod.GET)
   public String mostraFormConvenzione(Model model) {
 
@@ -50,6 +53,10 @@ public class ConvenzioneController {
     return "aggiungi-ente";
   }
 
+  /**
+  * Permette elaborare i dati inseriti all'interno del form, validarli attraverso il validator
+  * e, se non ci sono errori, aggiungere la convenzione all'interno del Database.
+  */
   @RequestMapping (value = "/home/convenzione-form/aggiungi-ente", method = RequestMethod.POST)
   public String aggiungiEnte(@ModelAttribute("convenzioneForm") ConvenzioneForm convenzioneForm, 
         Model model, BindingResult result, RedirectAttributes redirectAttributes) 
@@ -85,6 +92,9 @@ public class ConvenzioneController {
     return "redirect:/home";
   }
 
+  /**
+  * Permette di mostrare la lista degli enti convenzionati.
+  */
   @RequestMapping(value = "/home/lista-enti", method = RequestMethod.GET)
   public String showListaEnti(Model model) {
     if (utentiService.getUtenteAutenticato() == null 

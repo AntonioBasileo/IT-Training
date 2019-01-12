@@ -39,6 +39,10 @@ public class GestioneAziendaRepositoryIntTest {
 
   private List<Azienda> aziende;
 
+  /**
+  * Metodo eseguito prima del test. Permette di istanziare una lista di
+  * aziende, un tutor accademico e salvarli all'interno del Database.
+  */
   @Before
   public void salva() {
 

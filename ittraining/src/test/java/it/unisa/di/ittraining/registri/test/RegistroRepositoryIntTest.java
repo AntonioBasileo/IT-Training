@@ -37,6 +37,10 @@ public class RegistroRepositoryIntTest {
   private Registro registro2;
   private Registro registro3;
 
+  /**
+  * Metodo eseguito prima del test. Permette di istanziare una domanda,
+  * delle attività del registro associato alla domanda e salvarle all'interno del Database.
+  */
   @Before
   public void salvaRegistro() {
 

@@ -15,13 +15,21 @@ public class HomeController {
   @Autowired
   private UtenteService utentiService;
 
+
+  /**
+  * Permette agli utenti di visualizzare la pagina principale.
+  */
   @RequestMapping(value = "/home", method = RequestMethod.GET)
   public String getHome(HttpSession session, Model model) {
+
     if (utentiService.getUtenteAutenticato() != null) {
+
       if (!model.containsAttribute("utente")) {
+
         model.addAttribute("utente", utentiService.getUtenteAutenticato());
       }
     }
+
     return "home";
   }
 }

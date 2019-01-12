@@ -44,6 +44,10 @@ public class RegistriController {
 
   private long idDomandaCompilazione;
 
+  /**
+  * Permette allo studente di visualizzare la lista delle domande delle quali
+  * è possibile compilare il registro.
+  */
   @RequestMapping(value = "/home/domande-registri", method = RequestMethod.GET)
   public String showRegistri(HttpSession session, Model model) {
 
@@ -64,6 +68,9 @@ public class RegistriController {
     return "registri-domande";
   }
 
+  /**
+  * Permette di visualizzare il form per compilare il registro.
+  */
   @RequestMapping(value = "/home/registro-form", method = RequestMethod.GET)
   public String showRegistroForm(@RequestParam Long id, Model model) {
     if (utentiService.getUtenteAutenticato() == null 
@@ -83,6 +90,10 @@ public class RegistriController {
     return "compila-registro";
   }
 
+  /**
+  * Permette di elaborare i dati inseriti nel form, validarli e, se non ci sono errori, aggiungere
+  * una nuova attività all'interno del Database.
+  */
   @RequestMapping(value = "/home/registro-form/compila-registro", method = RequestMethod.POST)
   public String compilaRegistro(@ModelAttribute("registroForm") RegistroForm registroForm, 
       BindingResult result, Model model, RedirectAttributes redirectAttributes, HttpSession session)
@@ -121,13 +132,17 @@ public class RegistriController {
     registro.setInizio(inizio);
     registro.setFine(fine);
     registro.setNumero_minuti(((ChronoUnit.MILLIS.between(inizio, fine) / 1000) / 60));
-    registriService.registraTirocinio(registro, registroForm.getId_domanda());
+    registriService.registraTirocinio(registro, registroForm.getIdDomanda());
 
     redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.valido");
 
-    return "redirect:/home/registro-form?id=" + registroForm.getId_domanda();
+    return "redirect:/home/registro-form?id=" + registroForm.getIdDomanda();
   }
 
+  /**
+  * Permette al tutor aziendale di visualizzare i registri degli studenti
+  * che stanno svolgendo l'attività di tirocnio presso l'azienda a cui appartiene.
+  */
   @RequestMapping(value = "/home/registri-aziendale", method = RequestMethod.GET)
   public String showRegistriAziendale(Model model) {
 
@@ -144,6 +159,9 @@ public class RegistriController {
     return "registri-aziendale";
   }
 
+  /**
+  * Permette al tutor accademico di visualizzare i registri approvati dai tutor aziendali.
+  */
   @RequestMapping(value = "/home/registri-accademico", method = RequestMethod.GET)
   public String showRegistriAccademico(Model model) {
 
@@ -161,6 +179,10 @@ public class RegistriController {
     return "registri-accademico";
   }
 
+  /**
+  * Permette all'impiegato di segreteria di visualizzare i registri approvati
+  * dai tutor accademici.
+  */
   @RequestMapping(value = "/home/registri-segreteria", method = RequestMethod.GET)
   public String showRegistriSegreteria(Model model) {
 
@@ -179,7 +201,11 @@ public class RegistriController {
     return "registri-segreteria";
   }
 
-  @RequestMapping(value = "/approva-registro", method = RequestMethod.GET)
+  /**
+  * Permette ai tutor aziendali, ai tutor accademici e all'impiegato di segreteria
+  * di approvare i registri degli studenti.
+  */
+  @RequestMapping(value = "/home/registri/approva-registro", method = RequestMethod.GET)
   public String approvaRegistro(@RequestParam Long id, RedirectAttributes redirectAttributes) {
 
     if (utentiService.getUtenteAutenticato() == null) {

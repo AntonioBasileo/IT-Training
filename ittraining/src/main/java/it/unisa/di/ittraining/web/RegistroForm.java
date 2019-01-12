@@ -106,20 +106,20 @@ public class RegistroForm {
     this.minutoFine = minutoFine;
   }
 
-  public Long getId_domanda() {
-    return idDomanda;
-  }
-
-  public void setId_domanda(Long idDomanda) {
-    this.idDomanda = idDomanda;
-  }
-
   public String getDescrizione() {
     return descrizione;
   }
 
   public void setDescrizione(String descrizione) {
     this.descrizione = descrizione;
+  }
+
+  public Long getIdDomanda() {
+    return idDomanda;
+  }
+
+  public void setIdDomanda(Long idDomanda) {
+    this.idDomanda = idDomanda;
   }
 
   private Integer giornoInizio;

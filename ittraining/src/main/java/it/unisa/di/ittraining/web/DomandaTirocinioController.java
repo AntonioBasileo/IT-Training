@@ -41,6 +41,9 @@ public class DomandaTirocinioController {
   @Autowired
   private DomandaTirocinioFormValidator validator;
 
+  /**
+  * Permette di mostrare il form per la compilazione della domanda di tirocinio.
+  */
   @RequestMapping(value = "/home/compila-domanda-form", method = RequestMethod.GET)
   public String showDomandaTirocinioForm(HttpServletRequest request, Model model) {
 
@@ -60,6 +63,10 @@ public class DomandaTirocinioController {
     return "compila-domanda";
   }
 
+  /**
+  * Permette elaborare i dati inseriti all'interno del form, validarli attraverso il validator
+  * e, se non ci sono errori, aggiungere la domanda di tirocinio all'interno del Database.
+  */
   @RequestMapping(value = "/home/compila-domanda-form/compila-domanda", 
       method = RequestMethod.POST)
   public String elaboraDomandaTirocinio(@ModelAttribute("domandaForm") 
@@ -104,6 +111,9 @@ public class DomandaTirocinioController {
     return "redirect:/home";
   }
 
+  /**
+  * Permette di mostrare la lista delle domande inviate dallo studente.
+  */
   @RequestMapping(value = "/home/mostra-domande-studente", method = RequestMethod.GET)
   public String elencaDomandeStudente(HttpSession session, Model model) {
 
@@ -125,6 +135,10 @@ public class DomandaTirocinioController {
     return "lista-domande-studente";
   }
 
+  /**
+  * Permette al tutor aziendale di visualizzare le domande verso l'azienda
+  * alla quale appartiene.
+  */
   @RequestMapping(value = "/home/mostra-domande-aziendale", method = RequestMethod.GET)
   public String elencaDomandeAziendali(Model model) {
 
@@ -154,6 +168,9 @@ public class DomandaTirocinioController {
     return "lista-domande-aziendale";
   }
 
+  /**
+  * Permette al tutor aziendale di rifiutare una domanda di tirocinio.
+  */
   @RequestMapping(value = "/home/mostra-domande-aziendale/rifiuta-domanda", 
       method = RequestMethod.POST)
   public String rifiutaDomanda(@ModelAttribute("progettoFormRifiuta") ProgettoFormativoForm form, 
@@ -166,6 +183,9 @@ public class DomandaTirocinioController {
     return "redirect:/home/mostra-domande-aziendale";
   }
 
+  /**
+  * Permette al tutor accademico di visualizzare le domande inviate dai suoi studenti.
+  */
   @RequestMapping(value = "/home/mostra-domande-accademico", method = RequestMethod.GET)
   public String mostraDomandeAccademico(Model model) {
 
@@ -186,6 +206,9 @@ public class DomandaTirocinioController {
     return "lista-domande-accademico";
   }
 
+  /**
+  * Permette alla segreteria di visualizzare tutte le domande inviate dagli studenti.
+  */
   @RequestMapping(value = "/home/mostra-domande-segreteria", method = RequestMethod.GET)
   public String mostraDomandeSegreteria(Model model) {
 
