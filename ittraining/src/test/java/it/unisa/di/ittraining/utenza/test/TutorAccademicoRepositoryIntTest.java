@@ -39,6 +39,10 @@ public class TutorAccademicoRepositoryIntTest {
 
   private Studente studente;
 
+  /**
+  * Metodo eseguito prima del test. Permette di istanziare un tutor accademico
+  * e di salvarlo all'interno del Database.
+  */
   @Before
   public void salvaTutorAccademico() {
 

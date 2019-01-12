@@ -48,7 +48,7 @@
 	      <div class="row"></div>
           <div class="row">
 		    <form:form class="col s12" id="registroForm" action="/home/registro-form/compila-registro" method="POST" modelAttribute="registroForm">
-		    		<form:input path="id_domanda" type="hidden" value="${domanda.id}"/>
+		    		<form:input path="idDomanda" type="hidden" value="${domanda.id}"/>
 				      <div class="row">
 				        <div class="input-field col s3">
 				          <form:input path="giornoInizio" id="giornoInizio" type="hidden" class="validate" value="${domanda.inizioTirocinio.getDayOfMonth()}" />

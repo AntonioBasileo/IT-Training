@@ -42,6 +42,10 @@ public class DomandaTirocinioRepositoryIntTest {
 
   private DomandaTirocinio domandaTirocinio;
 
+  /**
+  * Metodo eseguito prima del test. Permette di istanziare uno studente
+  * e salvarlo all'interno del Database.
+  */
   @Before
   public void salvaDomanda() {
 

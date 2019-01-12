@@ -73,6 +73,9 @@ public class RegistrazioneController {
   @Autowired
   private UtenteService utentiService;
 
+  /**
+  * Permette di visualizzare il form per la registrazione dello studente.
+  */
   @RequestMapping(value = "/registrazione/registrazione-studente-form", method = RequestMethod.GET)
   public String showRegistrazioneStudenteForm(Model model) {
     if (utentiService.getUtenteAutenticato() != null) {
@@ -84,7 +87,11 @@ public class RegistrazioneController {
     return "registrazione-studente";
   }
 
-  @RequestMapping(value = "/registrazione/registrazione-segreteria-form", method = RequestMethod.GET)
+  /**
+  * Permette di visualizzare il form per la registrazione dell'impiegato di segreteria.
+  */
+  @RequestMapping(value = "/registrazione/registrazione-segreteria-form", 
+        method = RequestMethod.GET)
   public String showRegistrazioneSegreteriaForm(Model model) {
     if (utentiService.getUtenteAutenticato() != null) {
       return "not-available";
@@ -94,7 +101,10 @@ public class RegistrazioneController {
     }
     return "registrazione-segreteria";
   }
- 
+
+  /**
+  * Permette di visualizzare il form per la registrazione del tutor accademico.
+  */
   @RequestMapping(value = "/registrazione/registrazione-accademico-form", 
       method = RequestMethod.GET)
   public String showRegistrazioneTutorAccademicoForm(Model model) {
@@ -108,6 +118,9 @@ public class RegistrazioneController {
     return "registrazione-tutor-accademico";
   }
 
+  /**
+  * Permette di visualizzare il form per la registrazione del tutor aziendale.
+  */
   @RequestMapping(value = "/registrazione/registrazione-aziendale-form", method = RequestMethod.GET)
   public String showRegistrazioneTutorAziendaleForm(Model model) {
   
@@ -122,8 +135,10 @@ public class RegistrazioneController {
     return "registrazione-tutor-aziendale";
   }
 
-
-
+  /**
+  * Permette di elaborare i dati inseriti dallo studente, validarli
+  * e, se non ci sono errori, inserire il nuovo studente all'interno del Database.
+  */
   @RequestMapping(value = 
        "/registrazione/registrazione-studente-form/richiesta-registrazione-studente", 
        method = RequestMethod.POST)
@@ -174,6 +189,10 @@ public class RegistrazioneController {
     return "redirect:/home";
   }
 
+  /**
+  * Permette di elaborare i dati inseriti dall'impiegato di segreteria, validarli
+  * e, se non ci sono errori, inserire il nuovo impiegato all'interno del Database.
+  */
   @RequestMapping(value = 
          "/registrazione/registrazione-segreteria-form/richiesta-registrazione-segreteria", 
          method = RequestMethod.POST)
@@ -229,6 +248,10 @@ public class RegistrazioneController {
     return "redirect:/home";
   }
 
+  /**
+  * Permette di elaborare i dati inseriti dal tutor accademico, validarli
+  * e, se non ci sono errori, inserire il nuovo tutor all'interno del Database.
+  */
   @RequestMapping(value = "/registrazione/registrazione-accademico-form/richiesta-"
       + "registrazione-accademico", method = RequestMethod.POST)
   public String elaboraRichieicostaIscrizioneTutorAccademico(HttpSession session, 
@@ -281,7 +304,11 @@ public class RegistrazioneController {
     return "redirect:/home";
 
   }
-  
+
+  /**
+  * Permette di elaborare i dati inseriti dal tutor aziendale, validarli
+  * e, se non ci sono errori, inserire il nuovo tutor all'interno del Database.
+  */
   @RequestMapping(value = "/registrazione/registrazione-aziendale-form/richiesta-"
       + "registrazione-aziendale", method = RequestMethod.POST)
   public String elaboraRichiestaIscrizioneTutorAziendale(HttpSession session, 

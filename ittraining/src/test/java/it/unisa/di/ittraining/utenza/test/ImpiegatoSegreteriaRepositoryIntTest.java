@@ -26,6 +26,11 @@ public class ImpiegatoSegreteriaRepositoryIntTest {
 
   private ImpiegatoSegreteria impiegatoSegreteria;
 
+  /**
+  * Metodo eseguito prima del test. Permette di istanziare
+  * un impiegato di segreteria e salvarlo all'interno
+  * del Database.
+  */
   @Before
   public void salvaImpiegato() {
     impiegatoSegreteria = new ImpiegatoSegreteria();

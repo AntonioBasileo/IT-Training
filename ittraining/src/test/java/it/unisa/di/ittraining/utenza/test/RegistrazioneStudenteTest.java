@@ -1,6 +1,6 @@
 package it.unisa.di.ittraining.utenza.test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
@@ -29,7 +29,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
 
 
 @RunWith(MockitoJUnitRunner.class)
