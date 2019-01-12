@@ -89,7 +89,7 @@
 				          <c:choose>
 				          	<c:when test="${lista.status == 4 }">
 						          <div class="row right">
-									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
+									  <a class="btn waves-effect waves-light" href="/home/registri/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
 								  </div>
 							</c:when>
 				          	<c:when test="${lista.status == 5 }">

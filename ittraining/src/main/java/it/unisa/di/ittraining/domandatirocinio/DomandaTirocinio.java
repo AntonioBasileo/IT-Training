@@ -263,4 +263,5 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 
     return somma;
   }
+  
 }

@@ -43,7 +43,9 @@ public class UtenteController {
   @Autowired
   private TutorAccademicoService tutorService;
 
-  
+  /**
+  * Permette di visualizzare il form per eseguire il login.
+  */
   @RequestMapping(value = "/home/login-form", method = RequestMethod.GET)
 
   public String showLoginForm(HttpSession session, Model model) {
@@ -62,6 +64,9 @@ public class UtenteController {
     return "login";
   }
 
+  /**
+  * Permette di elaborare le richieste di autenticazione da parte degli utenti.
+  */
   @RequestMapping(value = "/login", method = RequestMethod.POST)
 
   public String login(HttpSession session,
@@ -89,7 +94,7 @@ public class UtenteController {
 
       redirectAttributes.addFlashAttribute("testoNotifica", "toast.login.nonValido");
 
-      return "redirect:/login";
+      return "redirect:/home/login-form";
 
     } catch (PasswordErrataException e) {
 
@@ -102,7 +107,7 @@ public class UtenteController {
 
       redirectAttributes.addFlashAttribute("testoNotifica", "toast.login.nonValido");
 
-      return "redirect:/login";
+      return "redirect:/home/login-form";
     }
 
 
@@ -110,6 +115,9 @@ public class UtenteController {
 
   }
 
+  /**
+  * Permette di eseguire il logout dell'utente.
+  */
   @RequestMapping(value = "/logout", method = RequestMethod.GET)
   
   public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
@@ -125,6 +133,9 @@ public class UtenteController {
     return "redirect:/home";
   }
 
+  /**
+  * Permette allo studente di visualizzare la lista dei tutor accademici.
+  */
   @RequestMapping(value = "/home/lista-tutor", method = RequestMethod.GET)
   
   public String mostraElencoTutorAccademici(Model model) {
@@ -151,6 +162,9 @@ public class UtenteController {
     return "/lista-tutor";
   }
 
+  /**
+  * Permette allo studente di scegliere un tutor accademico.
+  */
   @RequestMapping(value = "/home/lista-tutor/scegli-tutor", method = RequestMethod.GET)
   
   public String scegliTutorAccademico(@RequestParam String op) throws NomeNonValidoException,

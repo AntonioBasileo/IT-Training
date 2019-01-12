@@ -29,7 +29,7 @@ public class RegistroService {
   public Registro registraTirocinio(Registro registro, long id)
       throws DataRegistroSuccessivaFineException,DataRegistroPrecedenteInizioException,
       DataRegistroNonValidaException,OrarioNonValidoException,
-      OrarioFinePrecedenteInizioException {
+      OrarioFinePrecedenteInizioException, MassimoNumeroOreException, OrePrevisteSuperateException {
     DomandaTirocinio domanda = domandeRep.findById(id);
 
     registro.setDomanda(domanda);
@@ -38,7 +38,9 @@ public class RegistroService {
         domanda.getFineTirocinio()));
     registro.setInizio(validaOrarioInizio(registro.getInizio(), registro.getFine()));
     registro.setFine(validaOrarioFine(registro.getInizio(), registro.getFine()));
-
+    validaNumeroOre(registro.getInizio(), registro.getFine());
+    verificaNumeroOreRegistro(registro.getInizio(), registro.getFine(), id);
+    
     registro = registriRep.save(registro);
 
     return registro;
@@ -100,7 +102,8 @@ public class RegistroService {
   }
  
   /**
-* Metodo che notifica allo studente che ha raggiunto le ore di tirocinio previste.
+* Metodo che notifica allo studente il limite di attività di tirocinio
+* è di otto ore.
 */
   public float validaNumeroOre(LocalTime inizio, LocalTime fine) 
       throws MassimoNumeroOreException {
@@ -108,6 +111,43 @@ public class RegistroService {
 
     if (x > 480) {
       throw new MassimoNumeroOreException();
+    }
+
+    return x;
+  }
+
+  /**
+* Metodo che notifica allo studente ha raggiunto oppure superato il numero di ore
+* di tirocinio previste.
+*/
+  public float verificaNumeroOreRegistro(LocalTime inizio, LocalTime fine, long id) 
+      throws OrePrevisteSuperateException {
+
+    DomandaTirocinio domanda = domandeRep.findById(id);
+    float x = ((ChronoUnit.MILLIS.between(inizio, fine) / 1000) / 60);
+
+    if (domanda.getCfu() == 6) {
+
+      if ((domanda.getNumeroOre() + x) > 9000) {
+    
+        throw new OrePrevisteSuperateException();
+      }
+    }
+    
+    if (domanda.getCfu() == 12) {
+
+      if ((domanda.getNumeroOre() + x) > 18000) {
+    
+        throw new OrePrevisteSuperateException();
+      }
+    }
+    
+    if (domanda.getCfu() == 18) {
+
+      if ((domanda.getNumeroOre() + x) > 27000) {
+    
+        throw new OrePrevisteSuperateException();
+      }
     }
 
     return x;
