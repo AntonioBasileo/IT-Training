@@ -57,7 +57,7 @@
 					      <p>Sei sicuro di voler eliminare questa attività dal tuo registro?</p>
 					    </div>
 					    <div class="modal-footer">						      
-					    	  <a href="/home/registro-form/cancella-tirocinio?id=${registro.id}" class="waves-effect waves-light btn-flat">Sì</a>
+					    	  <a href="/home/registro-form/cancella-tirocinio?id=${registro.id}&idDomanda=${domanda.id}" class="waves-effect waves-light btn-flat">Sì</a>
 						      <a href="#" class="modal-close waves-effect waves-light btn-flat">No</a>
 					    </div>
 					  </div>

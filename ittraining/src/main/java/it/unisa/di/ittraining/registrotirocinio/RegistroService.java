@@ -32,14 +32,14 @@ public class RegistroService {
       OrarioFinePrecedenteInizioException, MassimoNumeroOreException, OrePrevisteSuperateException {
     DomandaTirocinio domanda = domandeRep.findById(id);
 
-    registro.setDomanda(domanda);
-
     registro.setData(validaDataRegistro(registro.getData(), domanda.getInizioTirocinio(), 
         domanda.getFineTirocinio()));
     registro.setInizio(validaOrarioInizio(registro.getInizio(), registro.getFine()));
     registro.setFine(validaOrarioFine(registro.getInizio(), registro.getFine()));
     validaNumeroOre(registro.getInizio(), registro.getFine());
     verificaNumeroOreRegistro(registro.getInizio(), registro.getFine(), id);
+    
+    registro.setDomanda(domanda);
     
     registro = registriRep.save(registro);
 
@@ -129,11 +129,11 @@ public class RegistroService {
 * Metodo che notifica allo studente ha raggiunto oppure superato il numero di ore
 * di tirocinio previste.
 */
-  public float verificaNumeroOreRegistro(LocalTime inizio, LocalTime fine, long id) 
+  public long verificaNumeroOreRegistro(LocalTime inizio, LocalTime fine, long id) 
       throws OrePrevisteSuperateException {
 
     DomandaTirocinio domanda = domandeRep.findById(id);
-    float x = ((ChronoUnit.MILLIS.between(inizio, fine) / 1000) / 60);
+    long x = ((ChronoUnit.MILLIS.between(inizio, fine) / 1000) / 60);
 
     if (domanda.getCfu() == 6) {
 
@@ -159,6 +159,6 @@ public class RegistroService {
       }
     }
 
-    return x;
+    return (domanda.getNumeroOre() + x);
   }
 }
