@@ -79,6 +79,7 @@ public class RegistriController {
          || !(utentiService.getUtenteAutenticato().getClass().getSimpleName().equals("Studente"))) {
       return "not-available";
     }
+
     idDomandaCompilazione = id;
 
     DomandaTirocinio domanda = domandeService.getDomandaById(idDomandaCompilazione);
@@ -140,6 +141,19 @@ public class RegistriController {
     redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.valido");
 
     return "redirect:/home/registro-form?id=" + registroForm.getIdDomanda();
+  }
+
+  /**
+  * Permette di eliminare un'attività dal registro dello studente.
+  */
+  @RequestMapping(value = "/home/registro-form/cancella-tirocinio", method = RequestMethod.GET)
+  public String cancellaTirocinio(@RequestParam Long id, RedirectAttributes redirectAttributes) {
+
+    registriService.cancellaTirocinio(id);
+    
+    redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.eliminatirocinio");
+    
+    return "redirect:/home/registro-form?id=" + idDomandaCompilazione;
   }
 
   /**
