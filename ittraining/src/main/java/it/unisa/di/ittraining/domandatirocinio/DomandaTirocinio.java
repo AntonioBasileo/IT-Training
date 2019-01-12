@@ -254,13 +254,13 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 * Permette di risalire al numero di ore effettuate
 * durante il tirocinio.
 */
-  public float getNumeroOre() {
-    float somma = 0;
+  public long getNumeroOre() {
+    long somma = 0;
 
     for (Registro r: registri) {
       somma += r.getNumero_minuti();
     }
-
+    
     return somma;
   }
   

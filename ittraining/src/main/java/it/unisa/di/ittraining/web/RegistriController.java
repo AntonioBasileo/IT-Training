@@ -44,8 +44,6 @@ public class RegistriController {
   @Autowired
   private UtenteService utentiService;
 
-  private long idDomandaCompilazione;
-
   /**
   * Permette allo studente di visualizzare la lista delle domande delle quali
   * è possibile compilare il registro.
@@ -80,9 +78,7 @@ public class RegistriController {
       return "not-available";
     }
 
-    idDomandaCompilazione = id;
-
-    DomandaTirocinio domanda = domandeService.getDomandaById(idDomandaCompilazione);
+    DomandaTirocinio domanda = domandeService.getDomandaById(id);
 
     model.addAttribute("domanda", domanda);
 
@@ -104,14 +100,6 @@ public class RegistriController {
       DataRegistroNonValidaException, OrarioNonValidoException, 
       OrarioFinePrecedenteInizioException, MassimoNumeroOreException, OrePrevisteSuperateException {
 
-    if (!model.containsAttribute("listaDomandeApprovate")) {
-      List<DomandaTirocinio> domande = 
-          domandeService.elencaDomandeStudenteStatus((String)session.getAttribute("username"), 
-          DomandaTirocinio.APPROVATA);
-
-      model.addAttribute("listaDomandeApprovate", domande);
-    }
-
     validator.validate(registroForm, result);
 
     if (result.hasErrors()) {
@@ -121,7 +109,7 @@ public class RegistriController {
       redirectAttributes.addFlashAttribute("registroForm", registroForm);
       redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.nonValido");
 
-      return "redirect:/home/registro-form?id=" + idDomandaCompilazione;
+      return "redirect:/home/registro-form?id=" + registroForm.getIdDomanda();
     }
 
     Registro registro = new Registro();
@@ -147,13 +135,14 @@ public class RegistriController {
   * Permette di eliminare un'attività dal registro dello studente.
   */
   @RequestMapping(value = "/home/registro-form/cancella-tirocinio", method = RequestMethod.GET)
-  public String cancellaTirocinio(@RequestParam Long id, RedirectAttributes redirectAttributes) {
+  public String cancellaTirocinio(@RequestParam Long id, @RequestParam Long idDomanda,
+      RedirectAttributes redirectAttributes) {
 
     registriService.cancellaTirocinio(id);
     
     redirectAttributes.addFlashAttribute("testoNotifica", "toast.registro.eliminatirocinio");
     
-    return "redirect:/home/registro-form?id=" + idDomandaCompilazione;
+    return "redirect:/home/registro-form?id=" + idDomanda;
   }
 
   /**
