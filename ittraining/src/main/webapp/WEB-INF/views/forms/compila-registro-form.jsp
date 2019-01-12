@@ -142,117 +142,13 @@
 				
 	      		<div class="row"></div>
 	      		<div class="row"></div>
-				
-				<c:if test="${domanda.cfu == 6}">
-					<c:choose>	
-				        <c:when test="${domanda.getNumeroOre() < 9000}">
+	      		
 				          <div class="row right">
 							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
 							    <i class="material-icons right">send</i>
 							  </button>
 						  </div>
-						</c:when>	
-						
-				        <c:when test="${domanda.getNumeroOre() >= 9000}">
-				          <c:choose>
-				          	<c:when test="${lista.status == 4 }">
-						          <div class="row">
-									  <p class="teal-text">Hai raggiunto il numero di ore previsto</p>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 5 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato dal tutor aziendale</p>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 6 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato dal tutor accademico</p>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 7 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato definitivamente dalla segreteria</p>
-								  </div>
-							</c:when>
-						  </c:choose>
-						</c:when>
-				    </c:choose>
-			    </c:if>
-			    
-			    <c:if test="${domanda.cfu == 12}">
-					<c:choose>	
-				        <c:when test="${domanda.getNumeroOre() < 18000}">
-				          <div class="row right">
-							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
-							    <i class="material-icons right">send</i>
-							  </button>
-						  </div>
-						</c:when>	
-						
-				        <c:when test="${domanda.getNumeroOre() >= 18000}">
-				          <c:choose>
-				          	<c:when test="${lista.status == 4 }">
-						          <div class="row">
-									  <p class="teal-text">Hai raggiunto il numero di ore previsto</p>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 5 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato dal tutor aziendale</p>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 6 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato dal tutor accademico</p>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 7 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato definitivamente dalla segreteria</p>
-								  </div>
-							</c:when>
-						  </c:choose>
-						</c:when>
-				    </c:choose>
-			    </c:if>
-			    
-			    <c:if test="${domanda.cfu == 18}">
-					<c:choose>	
-				        <c:when test="${domanda.getNumeroOre() < 27000}">
-				          <div class="row">
-							  <button class="btn waves-effect waves-light" type="submit" name="registro_submit">Compila
-							    <i class="material-icons right">send</i>
-							  </button>
-						  </div>
-						</c:when>	
-						
-				        <c:when test="${domanda.getNumeroOre() >= 27000}">
-				          <c:choose>
-				          	<c:when test="${lista.status == 4 }">
-						          <div class="row right">
-									  <p class="teal-text">Hai raggiunto il numero di ore previsto</p>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 5 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato dal tutor aziendale</p>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 6 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato dal tutor accademico</p>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 7 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato definitivamente dalla segreteria</p>
-								  </div>
-							</c:when>
-						  </c:choose>
-						</c:when>
-				    </c:choose>
-			    </c:if>
+						  
 		    </form:form>
 		  </div>
 		  </div>
