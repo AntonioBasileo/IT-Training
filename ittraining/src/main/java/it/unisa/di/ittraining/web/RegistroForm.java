@@ -107,11 +107,11 @@ public class RegistroForm {
   }
 
   public Long getId_domanda() {
-    return id_domanda;
+    return idDomanda;
   }
 
-  public void setId_domanda(Long id_domanda) {
-    this.id_domanda = id_domanda;
+  public void setId_domanda(Long idDomanda) {
+    this.idDomanda = idDomanda;
   }
 
   public String getDescrizione() {
@@ -135,7 +135,7 @@ public class RegistroForm {
   private Integer minutoInizio;
   private Integer oraFine;
   private Integer minutoFine;
-  private Long id_domanda;
+  private Long idDomanda;
   private String descrizione;
 
 }
