@@ -94,7 +94,7 @@ public class UtenteController {
 
       redirectAttributes.addFlashAttribute("testoNotifica", "toast.login.nonValido");
 
-      return "redirect:/login";
+      return "redirect:/home/login-form";
 
     } catch (PasswordErrataException e) {
 
@@ -107,7 +107,7 @@ public class UtenteController {
 
       redirectAttributes.addFlashAttribute("testoNotifica", "toast.login.nonValido");
 
-      return "redirect:/login";
+      return "redirect:/home/login-form";
     }
 
 
