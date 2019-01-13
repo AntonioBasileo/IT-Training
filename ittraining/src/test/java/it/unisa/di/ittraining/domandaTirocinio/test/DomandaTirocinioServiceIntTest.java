@@ -183,6 +183,8 @@ public class DomandaTirocinioServiceIntTest {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+    
+    utenteService.logout();
 
     studenteRep.flush();
     aziendaRep.flush();

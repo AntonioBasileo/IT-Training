@@ -99,6 +99,7 @@ public class ProgettoFormativoRepositoryIntTest {
     ProgettoFormativo progetto = new ProgettoFormativo();
     progetto.setDescrizione("Attività di testing");
     progetto.setId(111L);
+    domandaTirocinio.setStatus(DomandaTirocinio.ACCETTATA_AZIENDA);
     progetto.setDomanda(domandaTirocinio);
     progetto = progettoFormativoRep.save(progetto);
 
