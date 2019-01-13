@@ -4,9 +4,10 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
+
 <html>
 
-		<div class="row card panel" style="padding: 20px;">
+		<div class="row card panel" style="padding: 30px;">
 	      <div class="row">
 	      	<h6 class="teal-text">Domanda presso <c:out value="${domanda.azienda.getNome()}"/></h6>
 	      	<div class=" row">
@@ -29,6 +30,7 @@
               <th>Ora inizio</th>
               <th>Ora fine</th>
               <th>Descrizione</th>
+              <th>Elimina attività</th>
           </tr>
         </thead>
 		
@@ -40,10 +42,28 @@
 	            <td><c:out value="${registro.inizio}"/></td>
 	            <td><c:out value="${registro.fine}"/></td>
 	            <td><c:out value="${registro.descrizione}"/></td>
+	            <td><a href="#modal${registro.id}" class="modal-trigger waves-effect waves-light btn-flat"><i class="material-icons right">delete</i></a></td>
 	          </tr>
 	        </c:forEach>
+	        
 		</tbody>
       </table>
+		
+			    <c:forEach items="${domanda.getRegistri()}" var="registro" varStatus="loop">
+	        		  <!-- Modal Structure -->
+					  <div id="modal${registro.id}" class="modal">
+					    <div class="modal-content">
+					      <h5 class="teal-text">Elimina attività</h5>
+					      <p>Sei sicuro di voler eliminare questa attività dal tuo registro?</p>
+					    </div>
+					    <div class="modal-footer">						      
+					    	  <a href="/home/registro-form/cancella-tirocinio?id=${registro.id}&idDomanda=${domanda.id}" class="waves-effect waves-light btn-flat">Sì</a>
+						      <a href="#" class="modal-close waves-effect waves-light btn-flat">No</a>
+					    </div>
+					  </div>
+				</c:forEach>
+
+					  
 	      <div class="row"></div>
 	      <div class="row"></div>
           <div class="row">
