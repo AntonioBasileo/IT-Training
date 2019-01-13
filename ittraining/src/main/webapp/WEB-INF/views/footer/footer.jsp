@@ -12,15 +12,14 @@
 			                <ul>
 			                  <li>antonio.basileo92@gmail.com</li>
 			                  <li>alessiadagosto@hotmail.it</li>
-			                  <li>lauraoliva@gmail.com</li>
-			                  <li>romualdomanzo@gmail.com</li>
+			                  <li>lauraoliva1997@gmail.com</li>
 			                </ul>
 			              </div>
 			            </div>
 			          </div>
 			          <div class="footer-copyright">
 			            <div class="container">
-			            © 2019 Copyright Antonio Basileo, Alessia D'Agosto, Laura Oliva, Romualdo Manzo
+			            © 2019 Copyright Antonio Basileo, Alessia D'Agosto, Laura Oliva
 			            </div>
 			          </div>
 			        </footer>
