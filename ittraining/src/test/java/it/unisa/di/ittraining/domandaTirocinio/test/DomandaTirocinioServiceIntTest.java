@@ -87,7 +87,12 @@ public class DomandaTirocinioServiceIntTest {
   private TutorAziendaleRepository tutorAziendaleRep;
   
   private DomandaTirocinio domandaTirocinio;
-  
+
+  /**
+  * Metodo eseguito prima del test. Istanzia un'azienda, un tutor aziendale,
+  * uno studente e una domanda di tirocinio e inserisce tutto nel database
+  * per simulare la compilazione e l'invio del modulo di tirocinio.
+  */
   @Before
   public void registraDomanda() {
    
