@@ -12,7 +12,7 @@
 			                <ul>
 			                  <li>antonio.basileo92@gmail.com</li>
 			                  <li>alessiadagosto@hotmail.it</li>
-			                  <li>lauraoliva1997@gmail.com</li>
+			                  <li>lauraoliva2997@gmail.com</li>
 			                </ul>
 			              </div>
 			            </div>
