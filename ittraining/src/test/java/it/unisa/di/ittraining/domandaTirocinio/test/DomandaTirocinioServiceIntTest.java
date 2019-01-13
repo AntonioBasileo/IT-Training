@@ -6,6 +6,7 @@ import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
+import it.unisa.di.ittraining.azienda.AziendaRepository;
 import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.EmailNonAssociataException;
@@ -13,6 +14,7 @@ import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
 import it.unisa.di.ittraining.azienda.TelefonoNonValidoException;
 import it.unisa.di.ittraining.azienda.TutorAziendale;
+import it.unisa.di.ittraining.azienda.TutorAziendaleRepository;
 import it.unisa.di.ittraining.domandatirocinio.DataFinePrecedenteDataInizioException;
 import it.unisa.di.ittraining.domandatirocinio.DataNonValidaException;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
@@ -23,6 +25,7 @@ import it.unisa.di.ittraining.domandatirocinio.NumeroCfuNonValidoException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 import it.unisa.di.ittraining.studente.Studente;
+import it.unisa.di.ittraining.studente.StudenteRepository;
 import it.unisa.di.ittraining.studente.StudentiService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
@@ -64,15 +67,24 @@ public class DomandaTirocinioServiceIntTest {
   
   @Autowired
   private DomandaTirocinioService domandaTirocinioService;
-  
-  @Autowired
-  private DomandaTirocinioRepository domandaRep;
 
   @Autowired 
   private UtenteService utenteService;
   
   @Autowired
   private StudentiService studenteService;
+  
+  @Autowired
+  private StudenteRepository studenteRep;
+
+  @Autowired
+  private AziendaRepository aziendaRep;
+
+  @Autowired
+  private DomandaTirocinioRepository domandaRep;
+
+  @Autowired
+  private TutorAziendaleRepository tutorAziendaleRep;
   
   private DomandaTirocinio domandaTirocinio;
   
@@ -167,6 +179,9 @@ public class DomandaTirocinioServiceIntTest {
       e.printStackTrace();
     }
 
+    studenteRep.flush();
+    aziendaRep.flush();
+    tutorAziendaleRep.flush();
     domandaRep.flush();
   }
 
