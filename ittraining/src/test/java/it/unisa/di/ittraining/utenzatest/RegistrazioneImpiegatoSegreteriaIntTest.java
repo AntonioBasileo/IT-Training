@@ -2,11 +2,9 @@ package it.unisa.di.ittraining.utenzatest;
 
 import static org.junit.Assert.assertEquals;
 
-import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
-import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
-import it.unisa.di.ittraining.studente.Studente;
-import it.unisa.di.ittraining.studente.StudenteRepository;
-import it.unisa.di.ittraining.studente.StudentiService;
+import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteria;
+import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaRepository;
+import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
@@ -37,42 +35,40 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @Rollback
-public class RegistrazioneStudenteIntegTest {
+public class RegistrazioneImpiegatoSegreteriaIntTest {
   
   @Autowired
-  private StudentiService studenteService;
+  private ImpiegatoSegreteriaService impiegatoService;
   
   @Autowired
-  private StudenteRepository studenteRep;
-  
-  @Test
-  public void registraStudente() {
+  private ImpiegatoSegreteriaRepository impiegatoRep;
     
-    Studente studente = new Studente();
-    studente.setNome("Carlo");
-    studente.setCognome("Rossi");
-    studente.setDataDiNascita(LocalDate.of(1995, Month.JUNE, 10));
-    studente.setMatricola("0512100001");
-    studente.setSesso("M");
-    studente.setEmail("carlo@studenti.unisa.it");
-    studente.setPassword("carlo1995");
-    studente.setUsername("carlo1995");
-    studente.setTelefono("3404050000");
+  @Test
+  public void registraImpiegatoSegreteria() {
+
+    ImpiegatoSegreteria impiegato = new ImpiegatoSegreteria();
+    impiegato.setNome("Alessia");
+    impiegato.setCognome("D'Agosto");
+    impiegato.setDataDiNascita(LocalDate.of(1990, Month.JULY, 12));
+    impiegato.setSesso("F");
+    impiegato.setEmail("alessia@unisa.it");
+    impiegato.setPassword("abdfkgnds");
+    impiegato.setUsername("alessia");
+    impiegato.setTelefono("3404050000");
     
     try {
-      studente = studenteService.registraStudente(studente);
+      impiegato = impiegatoService.registraImpiegato(impiegato);
     } catch (NomeNonValidoException | NomeCognomeTroppoLungoException 
-          | NomeCognomeTroppoCortoException | CognomeNonValidoException 
-          | DataDiNascitaNonValidaException | UsernameNonValidoException
-          | UsernameEsistenteException | EmailNonValidaException 
-          | EmailEsistenteException | SessoNonValidoException
-          | TelefonoNonValidoException | MatricolaStudenteNonValidaException 
-          | MatricolaStudenteEsistenteException
-          | PasswordNonValidaException | PasswordNonCorrispondentiException e) {
+          | NomeCognomeTroppoCortoException
+          | CognomeNonValidoException | EmailNonValidaException 
+          | EmailEsistenteException | PasswordNonValidaException
+          | PasswordNonCorrispondentiException | DataDiNascitaNonValidaException 
+          | UsernameNonValidoException | UsernameEsistenteException 
+          | SessoNonValidoException | TelefonoNonValidoException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
     
-    assertEquals(studente, studenteRep.findByUsername(studente.getUsername()));
+    assertEquals(impiegato, impiegatoRep.findByUsername(impiegato.getUsername()));
   }
 }
