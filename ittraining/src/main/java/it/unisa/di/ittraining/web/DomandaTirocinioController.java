@@ -98,9 +98,12 @@ public class DomandaTirocinioController {
     LocalDate fine = LocalDate.of(domandaForm.getAnnoFine(),
         domandaForm.getMeseFine(),
         domandaForm.getGiornoFine());
-    domanda.setData(LocalDate.now());
-    domanda.setInizioTirocinio(inizio);
-    domanda.setFineTirocinio(fine);
+    
+    LocalDate oggi = LocalDate.now();
+    
+    domanda.setData(oggi.plusDays(1));
+    domanda.setInizioTirocinio(inizio.plusDays(1));
+    domanda.setFineTirocinio(fine.plusDays(1));
     domanda.setCfu(domandaForm.getCfu());
     domanda.setStatus(DomandaTirocinio.IN_ATTESA);
 

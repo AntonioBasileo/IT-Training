@@ -34,6 +34,7 @@ public class RegistroService {
 
     registro.setData(validaDataRegistro(registro.getData(), domanda.getInizioTirocinio(), 
         domanda.getFineTirocinio()));
+    registro.setData(registro.getData().plusDays(1));
     registro.setInizio(validaOrarioInizio(registro.getInizio(), registro.getFine()));
     registro.setFine(validaOrarioFine(registro.getInizio(), registro.getFine()));
     validaNumeroOreTirocinio(registro.getInizio(), registro.getFine());

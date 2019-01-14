@@ -125,10 +125,8 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
   @Override
   public int compareTo(DomandaTirocinio domanda) {
 
-    if (getData().isBefore(domanda.getData())) {
+    if (getStatus() == IN_ATTESA) {
       return 1;
-    } else if (getData().isAfter(domanda.getData())) {
-      return -1;
     } else {
       return 0;
     }

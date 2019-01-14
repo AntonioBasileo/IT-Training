@@ -68,6 +68,9 @@ public class DomandaTirocinioService {
   public DomandaTirocinio aggiornaStatoDomanda(long id, int status) {
 
     DomandaTirocinio domanda = domandeRep.findById(id);
+    domanda.setData(domanda.getData().plusDays(1));
+    domanda.setInizioTirocinio(domanda.getInizioTirocinio().plusDays(1));
+    domanda.setFineTirocinio(domanda.getFineTirocinio().plusDays(1));
     domanda.setStatus(status);
 
     return domandeRep.save(domanda);
