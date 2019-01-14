@@ -394,11 +394,11 @@ public class AziendaService {
       PasswordNonCorrispondentiException {
 
     if (password == null) {
-      throw new PasswordNonValidaException("STUDENTE SERVICE - Il campo password non è valido");
+      throw new PasswordNonValidaException("AZIENDA SERVICE - Il campo password non è valido");
     }
 
     if (!password.matches(Utente.PASSWORD_PATTERN)) {
-      throw new PasswordNonValidaException("STUDENTE SERVICE - Non rispecchia il formato");
+      throw new PasswordNonValidaException("AZIENDA SERVICE - Non rispecchia il formato");
     }
 
     return password;
