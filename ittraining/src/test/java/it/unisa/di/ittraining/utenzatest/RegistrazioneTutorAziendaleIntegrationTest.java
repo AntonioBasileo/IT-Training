@@ -93,6 +93,7 @@ public class RegistrazioneTutorAziendaleIntegrationTest {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+
     assertEquals(tutorAziendale, tutorRep.findByUsername(tutorAziendale.getUsername()));
   }
 }
