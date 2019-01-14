@@ -1,8 +1,9 @@
 package it.unisa.di.ittraining.utenzatest;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoRepository;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
@@ -11,15 +12,12 @@ import it.unisa.di.ittraining.utente.EmailNonValidaException;
 import it.unisa.di.ittraining.utente.NomeCognomeTroppoCortoException;
 import it.unisa.di.ittraining.utente.NomeCognomeTroppoLungoException;
 import it.unisa.di.ittraining.utente.NomeNonValidoException;
-import it.unisa.di.ittraining.utente.PasswordErrataException;
 import it.unisa.di.ittraining.utente.PasswordNonCorrispondentiException;
 import it.unisa.di.ittraining.utente.PasswordNonValidaException;
 import it.unisa.di.ittraining.utente.SessoNonValidoException;
 import it.unisa.di.ittraining.utente.TelefonoNonValidoException;
 import it.unisa.di.ittraining.utente.UsernameEsistenteException;
-import it.unisa.di.ittraining.utente.UsernameNonEsistenteException;
 import it.unisa.di.ittraining.utente.UsernameNonValidoException;
-import it.unisa.di.ittraining.utente.UtenteService;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -37,50 +35,39 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @Rollback
-public class AutenticazioneTutorAccademicoIntTest {
+public class RegistrazioneTutorAccademicoIntegrationTest {
 
   @Autowired
   private TutorAccademicoService tutorService;
-
-  @Autowired
-  private UtenteService utentiService;
   
-  @SuppressWarnings("static-access")
+  @Autowired
+  private TutorAccademicoRepository tutorRep;
+  
   @Test
-  public void verificaLogin() {
+  public void registraTutorAccademico() {
+    TutorAccademico tutorAccademico = new TutorAccademico();
+    tutorAccademico.setNome("Franco");
+    tutorAccademico.setCognome("Rossi");
+    tutorAccademico.setDataDiNascita(LocalDate.of(1960, Month.AUGUST, 30));
+    tutorAccademico.setTelefono("1234567890");
+    tutorAccademico.setEmail("franco@unisa.it");
+    tutorAccademico.setUsername("francoR");
+    tutorAccademico.setPassword("franco123");
+    tutorAccademico.setSesso("M");
+ 
+    try {
+      tutorAccademico = tutorService.registraTutorAccademico(tutorAccademico);
+    } catch (NomeNonValidoException | NomeCognomeTroppoLungoException 
+       | NomeCognomeTroppoCortoException | CognomeNonValidoException 
+       | EmailNonValidaException | EmailEsistenteException 
+       | TelefonoNonValidoException | DataDiNascitaNonValidaException 
+       | PasswordNonValidaException | PasswordNonCorrispondentiException 
+       | SessoNonValidoException | UsernameNonValidoException | UsernameEsistenteException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
-    TutorAccademico tutor = new TutorAccademico();
-    tutor.setUsername("Francesca");
-    tutor.setNome("Franca");
-    tutor.setCognome("Neri");
-    tutor.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
-    tutor.setTelefono("0987654324");
-    tutor.setEmail("franca@unisa.it");
-    tutor.setPassword("franca1");
-    tutor.setSesso("F");
-    
-    try {
-      tutor = tutorService.registraTutorAccademico(tutor);
-    } catch (NomeNonValidoException | NomeCognomeTroppoLungoException
-        | NomeCognomeTroppoCortoException
-        | CognomeNonValidoException | EmailNonValidaException
-        | EmailEsistenteException | TelefonoNonValidoException
-        | DataDiNascitaNonValidaException | PasswordNonValidaException
-        | PasswordNonCorrispondentiException
-        | SessoNonValidoException | UsernameNonValidoException | UsernameEsistenteException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    
-    try {
-      utentiService.login(tutor.getUsername(), tutor.getPassword());
-    } catch (UsernameNonEsistenteException | PasswordErrataException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    
-    assertEquals(tutor.getUsername(), utentiService.getUtenteAutenticato().getUsername());
-    
-    utentiService.logout();
+    assertTrue(tutorRep.existsByEmail(tutorAccademico.getEmail()));
+  
   }
 }

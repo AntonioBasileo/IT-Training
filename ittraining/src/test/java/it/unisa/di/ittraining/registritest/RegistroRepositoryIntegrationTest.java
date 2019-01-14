@@ -23,7 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class RegistroRepositoryIntTest {
+public class RegistroRepositoryIntegrationTest {
 
   @Autowired
   private RegistroRepository registroRep;
@@ -45,7 +45,6 @@ public class RegistroRepositoryIntTest {
   public void salvaRegistro() {
 
     domandaTirocinio = new DomandaTirocinio();
-    domandaTirocinio.setId(222L);
     domandaTirocinio.setCfu(6);
     domandaTirocinio.setInizioTirocinio(LocalDate.of(2019, Month.FEBRUARY, 12));
     domandaTirocinio.setFineTirocinio(LocalDate.of(2019, Month.MARCH, 20));
