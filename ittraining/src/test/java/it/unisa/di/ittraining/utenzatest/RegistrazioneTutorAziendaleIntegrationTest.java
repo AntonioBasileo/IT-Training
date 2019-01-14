@@ -55,11 +55,11 @@ public class RegistrazioneTutorAziendaleIntegrationTest {
   public void registraTutorAziendale() {
 
     Azienda azienda = new Azienda();
-    azienda.setNome("theorem");
+    azienda.setNome("theoremAzienda");
     azienda.setSede("Fisciano");
-    azienda.setEmail("gianfili@gmail.com");
-    azienda.setIndirizzo("via Rossi 12");
-    azienda.setTelefono("0981234567");
+    azienda.setEmail("theoremazienda@gmail.com");
+    azienda.setIndirizzo("via Rossi 2");
+    azienda.setTelefono("0981234467");
     
     try {
       azienda = tutorService.registraAzienda(azienda);
@@ -71,14 +71,14 @@ public class RegistrazioneTutorAziendaleIntegrationTest {
     }
     
     TutorAziendale tutorAziendale = new TutorAziendale();
-    tutorAziendale.setUsername("giancarlodasantommaso");
-    tutorAziendale.setNome("Lina");
-    tutorAziendale.setCognome("Neri");
+    tutorAziendale.setUsername("Giancarlo");
+    tutorAziendale.setNome("Carlo");
+    tutorAziendale.setCognome("Bianchi");
     tutorAziendale.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
-    tutorAziendale.setTelefono("0987654321");
+    tutorAziendale.setTelefono("0987654322");
     tutorAziendale.setEmail(azienda.getEmail());
-    tutorAziendale.setPassword("lina123");
-    tutorAziendale.setSesso("F");
+    tutorAziendale.setPassword("carlobla");
+    tutorAziendale.setSesso("M");
     
     try {
       tutorAziendale = tutorService.registraTutorAziendale(tutorAziendale,azienda.getNome());

@@ -57,14 +57,14 @@ public class DomandaTirocinioRepositoryIntegrationTest {
     domande = new ArrayList<>();
 
     Studente studente = new Studente();
-    studente.setNome("Laura");
-    studente.setCognome("Oliva");
+    studente.setNome("Federico");
+    studente.setCognome("Rossi");
     studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
-    studente.setMatricola("0512100000");
-    studente.setSesso("F");
-    studente.setEmail("laura@studenti.unisa.it");
+    studente.setMatricola("0512100011");
+    studente.setSesso("M");
+    studente.setEmail("federico@studenti.unisa.it");
     studente.setPassword("ab12cd34ef");
-    studente.setUsername("laura1997");
+    studente.setUsername("federico");
     studente.setTelefono("3404050333");
     studente = studenteRep.save(studente);
 

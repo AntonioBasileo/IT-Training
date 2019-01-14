@@ -59,8 +59,8 @@ public class RegistrazioneTutorAccademicoTest {
     tutorAccademico.setCognome("Rossi");
     tutorAccademico.setDataDiNascita(LocalDate.of(1960, Month.AUGUST, 30));
     tutorAccademico.setTelefono("1234567890");
-    tutorAccademico.setEmail("franco@unisa.it");
-    tutorAccademico.setUsername("francoR");
+    tutorAccademico.setEmail("francorossi@unisa.it");
+    tutorAccademico.setUsername("francoRossi");
     tutorAccademico.setPassword("franco123");
     tutorAccademico.setSesso("M");
 
