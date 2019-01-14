@@ -1,4 +1,4 @@
-package it.unisa.di.ittraining.utenza.test;
+package it.unisa.di.ittraining.utenzatest;
 
 import static org.mockito.Mockito.when;
 

@@ -1,4 +1,4 @@
-package it.unisa.di.ittraining.convenzioni.test;
+package it.unisa.di.ittraining.convenzionitest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -123,7 +123,6 @@ public class AggiungiEnteIntTest {
   @Test
   public void searchAzienda() {
     Azienda azienda1 = aziendeRep.findByNome(azienda.getNome());
-    System.out.println("Scemo! Il nome dell'azienda è: " + azienda1.getNome());
     assertEquals(azienda, azienda1);
   }
   

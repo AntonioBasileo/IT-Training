@@ -1,4 +1,4 @@
-package it.unisa.di.ittraining.domandaTirocinio.test;
+package it.unisa.di.ittraining.progettoformativotest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,6 +8,8 @@ import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.azienda.TutorAziendaleRepository;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioRepository;
+import it.unisa.di.ittraining.progettoformativo.ProgettoFormativo;
+import it.unisa.di.ittraining.progettoformativo.ProgettoFormativoRepository;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudenteRepository;
 
@@ -26,8 +28,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class DomandaTirocinioRepositoryIntTest {
+public class ProgettoFormativoRepositoryIntTest {
 
+  @Autowired
+  private ProgettoFormativoRepository progettoFormativoRep;
+
+  @Autowired
+  private DomandaTirocinioRepository domandaTirocinioRep;
+  
   @Autowired
   private StudenteRepository studenteRep;
 
@@ -35,19 +43,16 @@ public class DomandaTirocinioRepositoryIntTest {
   private AziendaRepository aziendaRep;
 
   @Autowired
-  private DomandaTirocinioRepository domandaRep;
-
-  @Autowired
   private TutorAziendaleRepository tutorAziendaleRep;
 
   private DomandaTirocinio domandaTirocinio;
 
   /**
-  * Metodo eseguito prima del test. Permette di istanziare uno studente
-  * e salvarlo all'interno del Database.
+  * Metodo eseguito prima del test. Permette di istanziare una domanda e un progetto
+  * formativo e salvarli all'interno del Database.
   */
   @Before
-  public void salvaDomanda() {
+  public void salvaProgetto() {
 
     Studente studente = new Studente();
     studente.setNome("Laura");
@@ -89,18 +94,26 @@ public class DomandaTirocinioRepositoryIntTest {
     domandaTirocinio.setFineTirocinio(LocalDate.of(2019, Month.MARCH, 20));
     domandaTirocinio.setAzienda(azienda);
     domandaTirocinio.setStudente(studente);
-    domandaTirocinio = domandaRep.save(domandaTirocinio);
+    domandaTirocinio = domandaTirocinioRep.save(domandaTirocinio);
+
+    ProgettoFormativo progetto = new ProgettoFormativo();
+    progetto.setDescrizione("Attività di testing");
+    domandaTirocinio.setStatus(DomandaTirocinio.ACCETTATA_AZIENDA);
+    progetto.setDomanda(domandaTirocinio);
+    progetto = progettoFormativoRep.save(progetto);
 
     studenteRep.flush();
     aziendaRep.flush();
     tutorAziendaleRep.flush();
-    domandaRep.flush();
-
+    domandaTirocinioRep.flush();
+    progettoFormativoRep.flush();
   }
 
   @Test
-  public void findById() {
-    DomandaTirocinio domanda = domandaRep.findById((long) domandaTirocinio.getId());
+  public void verificaProgettoFormativo() {
+    DomandaTirocinio domanda = domandaTirocinioRep.findById((long)domandaTirocinio.getId());
+    assertEquals(domandaTirocinio.getProgettoFormativo(), 
+        domanda.getProgettoFormativo());
     assertEquals(domandaTirocinio, domanda);
   }
 }

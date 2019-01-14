@@ -1,6 +1,7 @@
-package it.unisa.di.ittraining.progettoFormativo.test;
+package it.unisa.di.ittraining.domandatirociniotest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaRepository;
@@ -8,13 +9,13 @@ import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.azienda.TutorAziendaleRepository;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioRepository;
-import it.unisa.di.ittraining.progettoformativo.ProgettoFormativo;
-import it.unisa.di.ittraining.progettoformativo.ProgettoFormativoRepository;
 import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudenteRepository;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,14 +29,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class ProgettoFormativoRepositoryIntTest {
+public class DomandaTirocinioRepositoryIntTest {
 
-  @Autowired
-  private ProgettoFormativoRepository progettoFormativoRep;
-
-  @Autowired
-  private DomandaTirocinioRepository domandaTirocinioRep;
-  
   @Autowired
   private StudenteRepository studenteRep;
 
@@ -43,16 +38,23 @@ public class ProgettoFormativoRepositoryIntTest {
   private AziendaRepository aziendaRep;
 
   @Autowired
+  private DomandaTirocinioRepository domandaRep;
+
+  @Autowired
   private TutorAziendaleRepository tutorAziendaleRep;
 
   private DomandaTirocinio domandaTirocinio;
+    
+  private List<DomandaTirocinio> domande;
 
   /**
-  * Metodo eseguito prima del test. Permette di istanziare una domanda e un progetto
-  * formativo e salvarli all'interno del Database.
+  * Metodo eseguito prima del test. Permette di istanziare uno studente
+  * e salvarlo all'interno del Database.
   */
   @Before
-  public void salvaProgetto() {
+  public void salvaDomanda() {
+
+    domande = new ArrayList<>();
 
     Studente studente = new Studente();
     studente.setNome("Laura");
@@ -94,27 +96,78 @@ public class ProgettoFormativoRepositoryIntTest {
     domandaTirocinio.setFineTirocinio(LocalDate.of(2019, Month.MARCH, 20));
     domandaTirocinio.setAzienda(azienda);
     domandaTirocinio.setStudente(studente);
-    domandaTirocinio = domandaTirocinioRep.save(domandaTirocinio);
+    domandaTirocinio.setStatus(0);
+    domandaTirocinio = domandaRep.save(domandaTirocinio);
 
-    ProgettoFormativo progetto = new ProgettoFormativo();
-    progetto.setDescrizione("Attività di testing");
-    progetto.setId(111L);
-    domandaTirocinio.setStatus(DomandaTirocinio.ACCETTATA_AZIENDA);
-    progetto.setDomanda(domandaTirocinio);
-    progetto = progettoFormativoRep.save(progetto);
-
+    DomandaTirocinio domandaTirocinio1 = new DomandaTirocinio();
+    domandaTirocinio1.setCfu(6);
+    domandaTirocinio1.setOreTotali(150);
+    domandaTirocinio1.setData(LocalDate.now());
+    domandaTirocinio1.setInizioTirocinio(LocalDate.of(2019, Month.MAY, 2));
+    domandaTirocinio1.setFineTirocinio(LocalDate.of(2019, Month.JUNE, 20));
+    domandaTirocinio1.setAzienda(azienda);
+    domandaTirocinio1.setStudente(studente);
+    domandaTirocinio1.setStatus(0);
+    domandaTirocinio1 = domandaRep.save(domandaTirocinio1);
+    
+    domande.add(domandaTirocinio);
+    domande.add(domandaTirocinio1);
+    
     studenteRep.flush();
     aziendaRep.flush();
     tutorAziendaleRep.flush();
-    domandaTirocinioRep.flush();
-    progettoFormativoRep.flush();
+    domandaRep.flush();
+
   }
 
   @Test
-  public void verificaProgettoFormativo() {
-    DomandaTirocinio domanda = domandaTirocinioRep.findById((long)domandaTirocinio.getId());
-    assertEquals(domandaTirocinio.getProgettoFormativo(), 
-        domanda.getProgettoFormativo());
+  public void findById() {
+    DomandaTirocinio domanda = domandaRep.findById((long) domandaTirocinio.getId());
     assertEquals(domandaTirocinio, domanda);
+  }
+  
+  @Test
+  public void findAllByStudenteUsername() {
+    List<DomandaTirocinio> domandeSalvate = 
+        domandaRep.findAllByStudenteUsername(domandaTirocinio.getStudente().getUsername());
+    for (DomandaTirocinio d: domande) {
+      assertTrue(domandeSalvate.contains(d));
+    }
+  }
+  
+  @Test
+  public void findAllByStudenteUsernameAndStatus() {
+    List<DomandaTirocinio> domandeSalvate = 
+        domandaRep.findAllByStudenteUsernameAndStatus(domandaTirocinio.getStudente().getUsername(), 
+            domandaTirocinio.getStatus());
+    for (DomandaTirocinio d: domande) {
+      assertTrue(domandeSalvate.contains(d));
+    }
+  }
+  
+  @Test
+  public void findAllByAzienda() {
+    List<DomandaTirocinio> domandeSalvate = 
+        domandaRep.findAllByAzienda(domandaTirocinio.getAzienda());
+    for (DomandaTirocinio d: domande) {
+      assertTrue(domandeSalvate.contains(d));
+    }
+  }
+  
+  @Test
+  public void findAllByStatus() {
+    List<DomandaTirocinio> domandeSalvate = 
+         domandaRep.findAllByStatus(domandaTirocinio.getStatus());
+    for (DomandaTirocinio d: domande) {
+      assertTrue(domandeSalvate.contains(d));
+    }
+  }
+  
+  @Test
+  public void findAll() {
+    List<DomandaTirocinio> domandeSalvate = domandaRep.findAll();
+    for (DomandaTirocinio d: domande) {
+      assertTrue(domandeSalvate.contains(d));
+    }
   }
 }
