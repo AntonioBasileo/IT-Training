@@ -5,16 +5,12 @@ import static org.junit.Assert.assertTrue;
 
 import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
-import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaRepository;
 import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
-import it.unisa.di.ittraining.azienda.EmailNonAssociataException;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
-import it.unisa.di.ittraining.azienda.TutorAziendale;
-import it.unisa.di.ittraining.azienda.TutorAziendaleRepository;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteria;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
@@ -62,9 +58,6 @@ public class AziendaServiceIntegrationTest {
   
   @Autowired
   private AziendaRepository aziendeRep;
-  
-  @Autowired
-  private TutorAziendaleRepository aziendaleRep;
   
   @Autowired
   private UtenteService utentiService;
@@ -142,34 +135,9 @@ public class AziendaServiceIntegrationTest {
     aziende.add(azienda1);
     aziende.add(azienda2);
     
-    TutorAziendale tutoraz = new TutorAziendale();
-    tutoraz.setNome("Antonio");
-    tutoraz.setCognome("Russo");
-    tutoraz.setUsername("antorusso");
-    tutoraz.setDataDiNascita(LocalDate.of(1980, Month.MAY, 21));
-    tutoraz.setPassword("antorusso80");
-    tutoraz.setEmail(azienda.getEmail());
-    tutoraz.setSesso("M");
-    tutoraz.setTelefono("3498761234");
-    
-    try {
-      tutoraz = aziendeService.registraTutorAziendale(tutoraz, azienda.getNome());
-    } catch (NomeNonValidoException | NomeCognomeTroppoLungoException 
-        | NomeCognomeTroppoCortoException | CognomeNonValidoException 
-        | EmailNonValidaException | EmailEsistenteException | EmailNonAssociataException
-        | UsernameNonValidoException | UsernameEsistenteException | PasswordNonValidaException
-        | PasswordNonCorrispondentiException | DataDiNascitaNonValidaException 
-        | AziendaNonValidaException | AziendaEsistenteException | SessoNonValidoException 
-        | AziendaNonEsistenteException 
-        | it.unisa.di.ittraining.azienda.TelefonoNonValidoException e2) {
-      // TODO Auto-generated catch block
-      e2.printStackTrace();
-    }
-    
     assertEquals(azienda, aziendeRep.findByNome(azienda.getNome()));
     assertEquals(azienda1, aziendeRep.findByNome(azienda1.getNome()));
     assertEquals(azienda2, aziendeRep.findByNome(azienda2.getNome()));
-    assertEquals(tutoraz, aziendaleRep.findByUsername(tutoraz.getUsername()));
     
     List<Azienda> aziendeSalvate = aziendeRep.findAll();
     
