@@ -109,14 +109,14 @@ public class AutenticazioneIntTest {
     utentiService.logout();
     
     Studente studente = new Studente(); 
-    studente.setNome("Laura");
-    studente.setCognome("Oliva");
+    studente.setNome("Sara");
+    studente.setCognome("Calcagnile");
     studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
-    studente.setMatricola("0512100000");
+    studente.setMatricola("0512101234");
     studente.setSesso("F");
-    studente.setEmail("laura@studenti.unisa.it");
+    studente.setEmail("s.calcagnile@studenti.unisa.it");
     studente.setPassword("ab12cd34ef");
-    studente.setUsername("laura1997");
+    studente.setUsername("saretta1994");
     studente.setTelefono("3404050333");
     
     try {
