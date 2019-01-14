@@ -1,6 +1,6 @@
 package it.unisa.di.ittraining.utenzatest;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoRepository;
@@ -67,7 +67,7 @@ public class RegistrazioneTutorAccademicoIntegrationTest {
       e.printStackTrace();
     }
 
-    assertTrue(tutorRep.existsByEmail(tutorAccademico.getEmail()));
+    assertEquals(tutorAccademico, tutorRep.findByUsername(tutorAccademico.getUsername()));
   
   }
 }
