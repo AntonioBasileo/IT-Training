@@ -6,6 +6,7 @@ import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
+import it.unisa.di.ittraining.azienda.AziendaRepository;
 import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.EmailNonAssociataException;
@@ -13,15 +14,18 @@ import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
 import it.unisa.di.ittraining.azienda.TelefonoNonValidoException;
 import it.unisa.di.ittraining.azienda.TutorAziendale;
+import it.unisa.di.ittraining.azienda.TutorAziendaleRepository;
 import it.unisa.di.ittraining.domandatirocinio.DataFinePrecedenteDataInizioException;
 import it.unisa.di.ittraining.domandatirocinio.DataNonValidaException;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinio;
+import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioRepository;
 import it.unisa.di.ittraining.domandatirocinio.DomandaTirocinioService;
 import it.unisa.di.ittraining.domandatirocinio.MassimoNumeroCfuCumulabiliException;
 import it.unisa.di.ittraining.domandatirocinio.NumeroCfuNonValidoException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 import it.unisa.di.ittraining.studente.Studente;
+import it.unisa.di.ittraining.studente.StudenteRepository;
 import it.unisa.di.ittraining.studente.StudentiService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
@@ -44,6 +48,7 @@ import java.time.Month;
 
 import javax.transaction.Transactional;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +60,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @Rollback
-public class DomandaTirocinioServiceTest {
+public class DomandaTirocinioServiceIntTest {
   
   @Autowired
   private AziendaService aziendaService;
@@ -69,11 +74,30 @@ public class DomandaTirocinioServiceTest {
   @Autowired
   private StudentiService studenteService;
   
-  @Test
+  @Autowired
+  private StudenteRepository studenteRep;
+
+  @Autowired
+  private AziendaRepository aziendaRep;
+
+  @Autowired
+  private DomandaTirocinioRepository domandaRep;
+
+  @Autowired
+  private TutorAziendaleRepository tutorAziendaleRep;
+  
+  private DomandaTirocinio domandaTirocinio;
+
+  /**
+  * Metodo eseguito prima del test. Istanzia un'azienda, un tutor aziendale,
+  * uno studente e una domanda di tirocinio e inserisce tutto nel database
+  * per simulare la compilazione e l'invio del modulo di tirocinio.
+  */
+  @Before
   public void registraDomanda() {
    
     Azienda azienda = new Azienda();
-    azienda.setNome("Grafica SRL");
+    azienda.setNome("GraficaSRL");
     azienda.setTelefono("3333333333");
     azienda.setSede("Avellino");
     azienda.setIndirizzo("Via Roma 45");
@@ -88,7 +112,7 @@ public class DomandaTirocinioServiceTest {
     }
     
     TutorAziendale tutorAziendale = new TutorAziendale();
-    tutorAziendale.setUsername("giancarlodasantommaso");
+    tutorAziendale.setUsername("linaGrafica");
     tutorAziendale.setNome("Lina");
     tutorAziendale.setCognome("Neri");
     tutorAziendale.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
@@ -142,8 +166,7 @@ public class DomandaTirocinioServiceTest {
       e1.printStackTrace();
     }
     
-    DomandaTirocinio domandaTirocinio = new DomandaTirocinio();
-    domandaTirocinio.setId(111L);
+    domandaTirocinio = new DomandaTirocinio();
     domandaTirocinio.setCfu(6);
     domandaTirocinio.setData(LocalDate.now());
     domandaTirocinio.setInizioTirocinio(LocalDate.of(2019, Month.FEBRUARY, 12));
@@ -151,11 +174,8 @@ public class DomandaTirocinioServiceTest {
     domandaTirocinio.setAzienda(azienda);
     domandaTirocinio.setStudente(studente);
     
-    DomandaTirocinio domandaSalvata = new DomandaTirocinio();
-    
     try {
-      domandaSalvata = domandaTirocinioService.registraDomanda(domandaTirocinio, azienda.getNome());
-      System.out.println("SONO QUI!");
+      domandaTirocinioService.registraDomanda(domandaTirocinio, azienda.getNome());
     } catch (AziendaNonValidaException | AziendaNonEsistenteException 
         | DataDiNascitaNonValidaException | DataNonValidaException 
         | DataFinePrecedenteDataInizioException | MassimoNumeroCfuCumulabiliException
@@ -164,7 +184,17 @@ public class DomandaTirocinioServiceTest {
       e.printStackTrace();
     }
     
-    assertEquals(domandaTirocinio, domandaSalvata);
+    utenteService.logout();
+
+    studenteRep.flush();
+    aziendaRep.flush();
+    tutorAziendaleRep.flush();
+    domandaRep.flush();
   }
 
+  @Test
+  public void findById() {
+    DomandaTirocinio domanda = domandaRep.findById((long) domandaTirocinio.getId());
+    assertEquals(domandaTirocinio, domanda);
+  }
 }

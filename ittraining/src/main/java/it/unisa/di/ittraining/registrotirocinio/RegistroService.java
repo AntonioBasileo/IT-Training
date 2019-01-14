@@ -36,7 +36,7 @@ public class RegistroService {
         domanda.getFineTirocinio()));
     registro.setInizio(validaOrarioInizio(registro.getInizio(), registro.getFine()));
     registro.setFine(validaOrarioFine(registro.getInizio(), registro.getFine()));
-    validaNumeroOre(registro.getInizio(), registro.getFine());
+    validaNumeroOreTirocinio(registro.getInizio(), registro.getFine());
     verificaNumeroOreRegistro(registro.getInizio(), registro.getFine(), id);
     
     registro.setDomanda(domanda);
@@ -49,6 +49,7 @@ public class RegistroService {
   /**
 * Permette di eliminare un'attività di tirocinio dal Database.
 */
+  @Transactional(rollbackFor = Exception.class)
   public void cancellaTirocinio(long id) {
     Registro registro = registriRep.findById(id);
 
@@ -114,7 +115,7 @@ public class RegistroService {
 * Metodo che notifica allo studente il limite di attività di tirocinio
 * è di otto ore.
 */
-  public float validaNumeroOre(LocalTime inizio, LocalTime fine) 
+  public float validaNumeroOreTirocinio(LocalTime inizio, LocalTime fine) 
       throws MassimoNumeroOreException {
     float x = ((ChronoUnit.MILLIS.between(inizio, fine) / 1000) / 60);
 

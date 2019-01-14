@@ -10,8 +10,6 @@ import it.unisa.di.ittraining.azienda.TutorAziendaleRepository;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,49 +23,25 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class GestioneAziendaRepositoryIntTest {
+public class TutorAziendaleRepositoryIntTest {
 
   @Autowired
   private TutorAziendaleRepository tutorAziendaleRep;
-
+  
   @Autowired
   private AziendaRepository aziendaRep;
-
+  
   private TutorAziendale tutorAziendale;
 
-  private Azienda azienda;
-
-  private List<Azienda> aziende;
-
   /**
-  * Metodo eseguito prima del test. Permette di istanziare una lista di
-  * aziende, un tutor accademico e salvarli all'interno del Database.
+  * Metodo eseguito prima del test. Permette di istanziare un'azienda
+  * e associarle un tutor aziendale, salvando entrambi all'interno del
+  * Database.
   */
   @Before
   public void salva() {
 
-    aziende = new ArrayList<>();
-    Azienda azienda2 = new Azienda();
-    azienda2.setNome("Informatica Center");
-    azienda2.setTelefono("3663333333");
-    azienda2.setSede("Avellino");
-    azienda2.setIndirizzo("Via Mazzini 45");
-    azienda2.setEmail("informatica@gmail.com");
-    azienda2 = aziendaRep.save(azienda2);
-    
-    aziende.add(azienda2);
-    
-    Azienda azienda3 = new Azienda();
-    azienda3.setNome("Azienda3");
-    azienda3.setTelefono("3383333333");
-    azienda3.setSede("Salerno");
-    azienda3.setIndirizzo("Via Piave 21");
-    azienda3.setEmail("azienda3@gmail.com");
-    azienda3 = aziendaRep.save(azienda3);
-
-    aziende.add(azienda3);
-    
-    azienda = new Azienda();
+    Azienda azienda = new Azienda();
     azienda.setNome("Grafica SRL");
     azienda.setTelefono("3333333333");
     azienda.setSede("Avellino");
@@ -75,10 +49,8 @@ public class GestioneAziendaRepositoryIntTest {
     azienda.setEmail("grafica@gmail.com");
     azienda = aziendaRep.save(azienda);
 
-    aziende.add(azienda);
-    
     tutorAziendale = new TutorAziendale();
-    tutorAziendale.setUsername("giancarlodasantommaso");
+    tutorAziendale.setUsername("linaGrafica");
     tutorAziendale.setNome("Lina");
     tutorAziendale.setCognome("Neri");
     tutorAziendale.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
@@ -88,11 +60,11 @@ public class GestioneAziendaRepositoryIntTest {
     tutorAziendale.setSesso("F");
     tutorAziendale.setAzienda(azienda);
     tutorAziendale = tutorAziendaleRep.save(tutorAziendale);
-
+    
     aziendaRep.flush();
-
     tutorAziendaleRep.flush();
   }
+
 
   @Test
   public void findTutorAziendaleByUsernameAndPassword() {
@@ -111,38 +83,6 @@ public class GestioneAziendaRepositoryIntTest {
   @Test
   public void existsTutorAziendaleByEmail() {
     boolean flag = tutorAziendaleRep.existsByEmail(tutorAziendale.getEmail());
-    assertTrue(flag);
-  }
-
-  @Test
-  public void findAziendaByNome() {
-    Azienda azienda1 = aziendaRep.findByNome(tutorAziendale.getAzienda().getNome());
-    assertEquals(azienda, azienda1);
-  }
-
-  @Test
-  public void findAllAziende() {
-    List<Azienda> aziende2 = aziendaRep.findAll();
-    for (Azienda a: aziende) {
-      assertTrue(aziende2.contains(a));
-    }
-  }
-
-  @Test
-  public void existsAziendaByEmail() {
-    boolean flag = aziendaRep.existsByEmail(azienda.getEmail());
-    assertTrue(flag);
-  }
-
-  @Test
-  public void existsAziendaByNomeAndEmail() {
-    boolean flag = aziendaRep.existsByNomeAndEmail(azienda.getNome(), azienda.getEmail());
-    assertTrue(flag);
-  }
-
-  @Test
-  public void existsAziendaByNome() {
-    boolean flag = aziendaRep.existsByNome(azienda.getNome());
     assertTrue(flag);
   }
 }

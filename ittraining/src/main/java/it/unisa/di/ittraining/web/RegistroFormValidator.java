@@ -103,7 +103,7 @@ public class RegistroFormValidator implements Validator {
     try {
       LocalTime orarioInizio = LocalTime.of(form.getOraInizio(), form.getMinutoInizio());
       LocalTime orarioFine = LocalTime.of(form.getOraFine(), form.getMinutoFine());
-      registriService.validaNumeroOre(orarioInizio, orarioFine);
+      registriService.validaNumeroOreTirocinio(orarioInizio, orarioFine);
     } catch (MassimoNumeroOreException e) {
       // TODO Auto-generated catch block
       errors.rejectValue("oraFine", "formRegistro.ore.eccessive");
