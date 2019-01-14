@@ -62,7 +62,7 @@ public class DomandaTirocinioRepositoryIntTest {
     studente = studenteRep.save(studente);
 
     Azienda azienda = new Azienda();
-    azienda.setNome("Grafica SRL");
+    azienda.setNome("WebDevelopmentSRL");
     azienda.setTelefono("3333333333");
     azienda.setSede("Avellino");
     azienda.setIndirizzo("Via Roma 45");
@@ -70,7 +70,7 @@ public class DomandaTirocinioRepositoryIntTest {
     azienda = aziendaRep.save(azienda);
 
     TutorAziendale tutorAziendale = new TutorAziendale();
-    tutorAziendale.setUsername("giancarlodasantommaso");
+    tutorAziendale.setUsername("linaWeb");
     tutorAziendale.setNome("Lina");
     tutorAziendale.setCognome("Neri");
     tutorAziendale.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
@@ -82,7 +82,6 @@ public class DomandaTirocinioRepositoryIntTest {
     tutorAziendale = tutorAziendaleRep.save(tutorAziendale);
 
     domandaTirocinio = new DomandaTirocinio();
-    domandaTirocinio.setId(111L);
     domandaTirocinio.setCfu(6);
     domandaTirocinio.setOreTotali(150);
     domandaTirocinio.setData(LocalDate.now());
@@ -96,6 +95,7 @@ public class DomandaTirocinioRepositoryIntTest {
     aziendaRep.flush();
     tutorAziendaleRep.flush();
     domandaRep.flush();
+
   }
 
   @Test

@@ -84,6 +84,7 @@ public class TutorAccademicoService {
   /**
 * Permette associare lo studente al tutor accademico scelto.
 */
+  @Transactional(rollbackFor = Exception.class)
   public void associaTutorAccademico(String op) {
 
     TutorAccademico tutor = rep.findByUsername(op);

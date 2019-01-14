@@ -60,6 +60,7 @@ public class CompilazioneDomandaTirocinioTest {
       AziendaNonEsistenteException, DataDiNascitaNonValidaException, 
       DataNonValidaException, DataFinePrecedenteDataInizioException,
       MassimoNumeroCfuCumulabiliException, NumeroCfuNonValidoException {
+
     Azienda azienda = new Azienda();
     azienda.setNome("Grafica SRL");
     azienda.setTelefono("3333333333");
