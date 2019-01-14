@@ -1,4 +1,4 @@
-package it.unisa.di.ittraining.convenzioni.test;
+package it.unisa.di.ittraining.convenzionitest;
 
 import static org.mockito.Mockito.when;
 

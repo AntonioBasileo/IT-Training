@@ -1,4 +1,4 @@
-package it.unisa.di.ittraining.progettoFormativo.test;
+package it.unisa.di.ittraining.progettoformativotest;
 
 import static org.mockito.Mockito.when;
 

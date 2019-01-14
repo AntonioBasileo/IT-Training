@@ -1,4 +1,4 @@
-package it.unisa.di.ittraining.domandaTirocinio.test;
+package it.unisa.di.ittraining.domandatirociniotest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
