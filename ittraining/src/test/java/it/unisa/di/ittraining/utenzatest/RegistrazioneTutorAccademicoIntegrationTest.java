@@ -1,10 +1,10 @@
 package it.unisa.di.ittraining.utenzatest;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteria;
-import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaRepository;
-import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaService;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoRepository;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
@@ -35,40 +35,39 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @Rollback
-public class RegistrazioneImpiegatoSegreteriaIntTest {
-  
-  @Autowired
-  private ImpiegatoSegreteriaService impiegatoService;
-  
-  @Autowired
-  private ImpiegatoSegreteriaRepository impiegatoRep;
-    
-  @Test
-  public void registraImpiegatoSegreteria() {
+public class RegistrazioneTutorAccademicoIntegrationTest {
 
-    ImpiegatoSegreteria impiegato = new ImpiegatoSegreteria();
-    impiegato.setNome("Alessia");
-    impiegato.setCognome("D'Agosto");
-    impiegato.setDataDiNascita(LocalDate.of(1990, Month.JULY, 12));
-    impiegato.setSesso("F");
-    impiegato.setEmail("alessia@unisa.it");
-    impiegato.setPassword("abdfkgnds");
-    impiegato.setUsername("alessia");
-    impiegato.setTelefono("3404050000");
-    
+  @Autowired
+  private TutorAccademicoService tutorService;
+  
+  @Autowired
+  private TutorAccademicoRepository tutorRep;
+  
+  @Test
+  public void registraTutorAccademico() {
+    TutorAccademico tutorAccademico = new TutorAccademico();
+    tutorAccademico.setNome("Franco");
+    tutorAccademico.setCognome("Rossi");
+    tutorAccademico.setDataDiNascita(LocalDate.of(1960, Month.AUGUST, 30));
+    tutorAccademico.setTelefono("1234567890");
+    tutorAccademico.setEmail("franco@unisa.it");
+    tutorAccademico.setUsername("francoR");
+    tutorAccademico.setPassword("franco123");
+    tutorAccademico.setSesso("M");
+ 
     try {
-      impiegato = impiegatoService.registraImpiegato(impiegato);
+      tutorAccademico = tutorService.registraTutorAccademico(tutorAccademico);
     } catch (NomeNonValidoException | NomeCognomeTroppoLungoException 
-          | NomeCognomeTroppoCortoException
-          | CognomeNonValidoException | EmailNonValidaException 
-          | EmailEsistenteException | PasswordNonValidaException
-          | PasswordNonCorrispondentiException | DataDiNascitaNonValidaException 
-          | UsernameNonValidoException | UsernameEsistenteException 
-          | SessoNonValidoException | TelefonoNonValidoException e) {
+       | NomeCognomeTroppoCortoException | CognomeNonValidoException 
+       | EmailNonValidaException | EmailEsistenteException 
+       | TelefonoNonValidoException | DataDiNascitaNonValidaException 
+       | PasswordNonValidaException | PasswordNonCorrispondentiException 
+       | SessoNonValidoException | UsernameNonValidoException | UsernameEsistenteException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    
-    assertEquals(impiegato, impiegatoRep.findByUsername(impiegato.getUsername()));
+
+    assertTrue(tutorRep.existsByEmail(tutorAccademico.getEmail()));
+  
   }
 }

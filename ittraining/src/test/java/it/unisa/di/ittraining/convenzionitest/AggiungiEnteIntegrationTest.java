@@ -42,7 +42,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @Rollback
-public class AggiungiEnteIntTest {
+public class AggiungiEnteIntegrationTest {
 
   @Autowired
   private ImpiegatoSegreteriaService impiegatoService;
