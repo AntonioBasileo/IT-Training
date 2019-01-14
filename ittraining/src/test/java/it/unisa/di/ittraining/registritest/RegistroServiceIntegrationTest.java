@@ -106,7 +106,7 @@ public class RegistroServiceIntegrationTest {
     studente.setDataDiNascita(LocalDate.of(1995, Month.APRIL, 29));
     studente.setMatricola("0512100002");
     studente.setSesso("F");
-    studente.setEmail("chiara@studenti.unisa.it");
+    studente.setEmail("chiararossi@studenti.unisa.it");
     studente.setPassword("chiara");
     studente.setUsername("chiara");
     studente.setTelefono("3404050111");
@@ -125,11 +125,11 @@ public class RegistroServiceIntegrationTest {
     }
     
     Azienda azienda = new Azienda();
-    azienda.setNome("GraficaSRL");
+    azienda.setNome("GraficaSRL2");
     azienda.setTelefono("3333333333");
     azienda.setSede("Avellino");
     azienda.setIndirizzo("Via Roma 45");
-    azienda.setEmail("grafica@gmail.com");
+    azienda.setEmail("grafica2azienda@gmail.com");
 
     try {
       azienda = aziendaService.registraAzienda(azienda);
@@ -141,7 +141,7 @@ public class RegistroServiceIntegrationTest {
     }
     
     TutorAziendale tutorAziendale = new TutorAziendale();
-    tutorAziendale.setUsername("linaGrafica");
+    tutorAziendale.setUsername("Giancarla");
     tutorAziendale.setNome("Lina");
     tutorAziendale.setCognome("Neri");
     tutorAziendale.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
@@ -207,13 +207,13 @@ public class RegistroServiceIntegrationTest {
     utenteService.logout();
     
     TutorAccademico tutorAccademico = new TutorAccademico();
-    tutorAccademico.setUsername("Francesca");
-    tutorAccademico.setNome("Franca");
-    tutorAccademico.setCognome("Neri");
+    tutorAccademico.setUsername("Ilaria");
+    tutorAccademico.setNome("Ilaria");
+    tutorAccademico.setCognome("Bianchi");
     tutorAccademico.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
     tutorAccademico.setTelefono("0987654324");
-    tutorAccademico.setEmail("franca@unisa.it");
-    tutorAccademico.setPassword("franca1");
+    tutorAccademico.setEmail("ilaria@unisa.it");
+    tutorAccademico.setPassword("ilaria1");
     tutorAccademico.setSesso("F");
     
     try {

@@ -90,11 +90,11 @@ public class DomandaTirocinioServiceIntegrationTest {
   public void registraDomanda() {
         
     Azienda azienda = new Azienda();
-    azienda.setNome("GraficaSRL");
+    azienda.setNome("Grafica");
     azienda.setTelefono("3333333333");
     azienda.setSede("Avellino");
     azienda.setIndirizzo("Via Roma 45");
-    azienda.setEmail("grafica@gmail.com");
+    azienda.setEmail("graficablabla@gmail.com");
 
     try {
       azienda = aziendaService.registraAzienda(azienda);
@@ -129,14 +129,14 @@ public class DomandaTirocinioServiceIntegrationTest {
     }
     
     Studente studente = new Studente();
-    studente.setNome("Laura");
-    studente.setCognome("Oliva");
+    studente.setNome("Chiara");
+    studente.setCognome("Blue");
     studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
-    studente.setMatricola("0512100000");
+    studente.setMatricola("0512100100");
     studente.setSesso("F");
-    studente.setEmail("laura@studenti.unisa.it");
+    studente.setEmail("chiara@studenti.unisa.it");
     studente.setPassword("ab12cd34ef");
-    studente.setUsername("laura1997");
+    studente.setUsername("chiara1995");
     studente.setTelefono("3404050333");
 
     try {
@@ -237,7 +237,7 @@ public class DomandaTirocinioServiceIntegrationTest {
     tutorAccademico.setCognome("Neri");
     tutorAccademico.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
     tutorAccademico.setTelefono("0987654324");
-    tutorAccademico.setEmail("franca@unisa.it");
+    tutorAccademico.setEmail("francablabla@unisa.it");
     tutorAccademico.setPassword("franca1");
     tutorAccademico.setSesso("F");
     
@@ -318,11 +318,11 @@ public class DomandaTirocinioServiceIntegrationTest {
   public void rifiutaDomanda() {
     
     Azienda azienda = new Azienda();
-    azienda.setNome("Informatica center");
-    azienda.setTelefono("3333333333");
+    azienda.setNome("InformaticaCenterAzienda");
+    azienda.setTelefono("3333333111");
     azienda.setSede("Avellino");
-    azienda.setIndirizzo("Via Nazionale 45");
-    azienda.setEmail("itcenter@gmail.com");
+    azienda.setIndirizzo("Via Nazionale 15");
+    azienda.setEmail("itcenterazienda@gmail.com");
 
     try {
       azienda = aziendaService.registraAzienda(azienda);
