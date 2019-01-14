@@ -49,6 +49,7 @@ public class RegistroService {
   /**
 * Permette di eliminare un'attività di tirocinio dal Database.
 */
+  @Transactional(rollbackFor = Exception.class)
   public void cancellaTirocinio(long id) {
     Registro registro = registriRep.findById(id);
 

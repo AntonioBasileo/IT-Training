@@ -11,7 +11,6 @@ import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteria;
-import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaRepository;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
@@ -51,9 +50,6 @@ public class AggiungiEnteIntTest {
 
   @Autowired
   private ImpiegatoSegreteriaService impiegatoService;
-  
-  @Autowired
-  private ImpiegatoSegreteriaRepository impiegatiRep;
 
   @Autowired
   private AziendaService aziendeService;
@@ -97,8 +93,6 @@ public class AggiungiEnteIntTest {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-
-    impiegatiRep.flush();
     
     try {
       utentiService.login(impiegato.getUsername(), impiegato.getPassword());
@@ -122,8 +116,6 @@ public class AggiungiEnteIntTest {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    
-    aziendeRep.flush();
     
     utentiService.logout();
   }

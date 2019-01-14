@@ -64,6 +64,7 @@ public class DomandaTirocinioService {
   /**
 * Permette di aggiornare lo stato della domanda con l'id indicato.
 */
+  @Transactional(rollbackFor = Exception.class)
   public DomandaTirocinio aggiornaStatoDomanda(long id, int status) {
 
     DomandaTirocinio domanda = domandeRep.findById(id);

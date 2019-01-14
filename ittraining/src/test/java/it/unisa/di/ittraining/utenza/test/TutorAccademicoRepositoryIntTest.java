@@ -3,8 +3,6 @@ package it.unisa.di.ittraining.utenza.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import it.unisa.di.ittraining.studente.Studente;
-import it.unisa.di.ittraining.studente.StudenteRepository;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoRepository;
 
@@ -30,14 +28,9 @@ public class TutorAccademicoRepositoryIntTest {
   @Autowired
   private TutorAccademicoRepository tutorAccademicoRep;
 
-  @Autowired
-  private StudenteRepository studenteRep;
-
   private TutorAccademico tutorAccademico;
 
   private List<TutorAccademico> tutorsAccademici;
-
-  private Studente studente;
 
   /**
   * Metodo eseguito prima del test. Permette di istanziare un tutor accademico
@@ -46,17 +39,6 @@ public class TutorAccademicoRepositoryIntTest {
   @Before
   public void salvaTutorAccademico() {
 
-    studente = new Studente(); 
-    studente.setNome("Laura");
-    studente.setCognome("Oliva");
-    studente.setDataDiNascita(LocalDate.of(1997, Month.JUNE, 29));
-    studente.setMatricola("0512100000");
-    studente.setSesso("F");
-    studente.setEmail("laura@studenti.unisa.it");
-    studente.setPassword("ab12cd34ef");
-    studente.setUsername("laura1997");
-    studente.setTelefono("3404050333");
-    studente = studenteRep.save(studente);
     tutorsAccademici = new ArrayList<>();
 
     TutorAccademico tutorAccademico1 = new TutorAccademico();
@@ -94,7 +76,6 @@ public class TutorAccademicoRepositoryIntTest {
     tutorAccademico.setEmail("franca@unisa.it");
     tutorAccademico.setPassword("franca1");
     tutorAccademico.setSesso("F");
-    tutorAccademico.addStudente(studente);
     tutorAccademico = tutorAccademicoRep.save(tutorAccademico);
 
     tutorsAccademici.add(tutorAccademico);
@@ -130,9 +111,4 @@ public class TutorAccademicoRepositoryIntTest {
     assertTrue(flag);
   }
 
-  @Test
-  public void verificaTutorAccademicoStudente() {
-    Studente studente1 = studenteRep.findByUsername(studente.getUsername());
-    assertEquals(studente.getTutor(), studente1.getTutor());
-  }
 }
