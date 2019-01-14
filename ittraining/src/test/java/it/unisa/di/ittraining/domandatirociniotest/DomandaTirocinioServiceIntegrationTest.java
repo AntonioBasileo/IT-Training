@@ -249,6 +249,17 @@ public class DomandaTirocinioServiceIntegrationTest {
     }
     
     try {
+      utenteService.login(studente.getUsername(), studente.getPassword());
+    } catch (UsernameNonEsistenteException | PasswordErrataException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
+    
+    tutorAccademicoService.associaTutorAccademico(tutorAccademico.getUsername());
+    
+    utenteService.logout();
+    
+    try {
       utenteService.login(tutorAccademico.getUsername(), tutorAccademico.getPassword());
     } catch (UsernameNonEsistenteException | PasswordErrataException e) {
       // TODO Auto-generated catch block
