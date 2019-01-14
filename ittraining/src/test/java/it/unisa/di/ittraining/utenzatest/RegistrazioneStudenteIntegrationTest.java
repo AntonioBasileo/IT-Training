@@ -37,7 +37,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @Rollback
-public class RegistrazioneStudenteIntegTest {
+public class RegistrazioneStudenteIntegrationTest {
   
   @Autowired
   private StudentiService studenteService;
