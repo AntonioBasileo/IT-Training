@@ -70,7 +70,6 @@ public class AutenticazioneIntegrationTest {
   @Autowired
   private UtenteService utentiService;
   
-  @SuppressWarnings("static-access")
   @Test
   public void verificaLogin() {
 
