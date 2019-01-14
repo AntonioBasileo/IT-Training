@@ -1,7 +1,6 @@
 package it.unisa.di.ittraining.tutoraccademico;
 
 import it.unisa.di.ittraining.studente.Studente;
-import it.unisa.di.ittraining.studente.StudenteRepository;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
@@ -33,9 +32,6 @@ public class TutorAccademicoService {
 
   @Autowired
   private UtenteService utentiService;
-
-  @Autowired
-  private StudenteRepository studenteRep;
 
   @Autowired
   private UtenteRepository utenteRep;
@@ -85,15 +81,16 @@ public class TutorAccademicoService {
 * Permette associare lo studente al tutor accademico scelto.
 */
   @Transactional(rollbackFor = Exception.class)
-  public void associaTutorAccademico(String op) {
+  public TutorAccademico associaTutorAccademico(String op) {
 
     TutorAccademico tutor = rep.findByUsername(op);
     Studente studente = (Studente)utentiService.getUtenteAutenticato();
 
-    studente.setTutor(tutor);
+    tutor.addStudente(studente);
 
-    studenteRep.save(studente);
+    tutor = rep.save(tutor);
 
+    return tutor;
   }
 
   public List<TutorAccademico> elencaTutorAccademici() {

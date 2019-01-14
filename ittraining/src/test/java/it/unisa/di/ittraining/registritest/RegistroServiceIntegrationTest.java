@@ -235,7 +235,7 @@ public class RegistroServiceIntegrationTest {
       e1.printStackTrace();
     }
     
-    tutorAccademicoService.associaTutorAccademico(tutorAccademico.getUsername());
+    tutorAccademico = tutorAccademicoService.associaTutorAccademico(tutorAccademico.getUsername());
     
     utenteService.logout();
     
