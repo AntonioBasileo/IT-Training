@@ -47,11 +47,11 @@ public class RegistrazioneTutorAccademicoIntegrationTest {
   public void registraTutorAccademico() {
     TutorAccademico tutorAccademico = new TutorAccademico();
     tutorAccademico.setNome("Franco");
-    tutorAccademico.setCognome("Rossi");
+    tutorAccademico.setCognome("Neri");
     tutorAccademico.setDataDiNascita(LocalDate.of(1960, Month.AUGUST, 30));
-    tutorAccademico.setTelefono("1234567890");
+    tutorAccademico.setTelefono("1234567898");
     tutorAccademico.setEmail("franco@unisa.it");
-    tutorAccademico.setUsername("francoR");
+    tutorAccademico.setUsername("francoblabla");
     tutorAccademico.setPassword("franco123");
     tutorAccademico.setSesso("M");
  
@@ -67,7 +67,8 @@ public class RegistrazioneTutorAccademicoIntegrationTest {
       e.printStackTrace();
     }
 
-    assertEquals(tutorAccademico, tutorRep.findByUsername(tutorAccademico.getUsername()));
+    assertEquals(tutorAccademico.getUsername(), tutorRep.findByUsername(tutorAccademico
+        .getUsername()).getUsername());
   
   }
 }
