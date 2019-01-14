@@ -1,11 +1,8 @@
 package it.unisa.di.ittraining.convenzionitest;
 
-import static org.junit.Assert.assertEquals;
-
 import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
-import it.unisa.di.ittraining.azienda.AziendaRepository;
 import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
@@ -34,7 +31,6 @@ import java.time.Month;
 
 import javax.transaction.Transactional;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,19 +51,9 @@ public class AggiungiEnteIntTest {
   private AziendaService aziendeService;
   
   @Autowired
-  private AziendaRepository aziendeRep;
-  
-  @Autowired
   private UtenteService utentiService;
-  
-  private Azienda azienda;
 
-  /**
-  * Metodo eseguito prima del test. Permette di istanziare un impiegato
-  * di segreteria, salvarlo nel database per poi permettergli di aggiungere
-  * una convenzione.
-  */
-  @Before
+  @Test
   public void aggiungiConvenzione() {
 
     ImpiegatoSegreteria impiegato = new ImpiegatoSegreteria();
@@ -101,7 +87,7 @@ public class AggiungiEnteIntTest {
       e.printStackTrace();
     }
     
-    azienda = new Azienda();
+    Azienda azienda = new Azienda();
     azienda.setNome("3D Graphic");
     azienda.setEmail("3d.srl@gmail.com");
     azienda.setSede("napoli");
@@ -118,12 +104,6 @@ public class AggiungiEnteIntTest {
     }
     
     utentiService.logout();
-  }
-  
-  @Test
-  public void searchAzienda() {
-    Azienda azienda1 = aziendeRep.findByNome(azienda.getNome());
-    assertEquals(azienda, azienda1);
   }
   
 }
