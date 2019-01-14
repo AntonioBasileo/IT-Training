@@ -246,7 +246,7 @@ public class RegistroServiceIntegrationTest {
       e.printStackTrace();
     }
       
-    domandaTirocinioService.aggiornaStatoDomanda(domandaTirocinio.getId(), 
+    domandaTirocinio = domandaTirocinioService.aggiornaStatoDomanda(domandaTirocinio.getId(), 
           DomandaTirocinio.APPROVATA);
       
     utenteService.logout();
@@ -276,10 +276,13 @@ public class RegistroServiceIntegrationTest {
       e.printStackTrace();
     }
     
-    utenteService.logout();
-    
     assertEquals(registro, registroRep.findById((long)registro.getId()));
+    
+    registroService.cancellaTirocinio(registro.getId());
+    
+    assertEquals(null, registroRep.findById((long)registro.getId()));
+    
+    utenteService.logout();
   }
-  
   
 }

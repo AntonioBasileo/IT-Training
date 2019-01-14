@@ -1,5 +1,6 @@
 package it.unisa.di.ittraining.domandatirociniotest;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import it.unisa.di.ittraining.azienda.Azienda;
@@ -266,10 +267,10 @@ public class DomandaTirocinioServiceIntegrationTest {
       e.printStackTrace();
     }
     
-    domandaTirocinioService.aggiornaStatoDomanda(domandaTirocinio.getId(), 
+    domandaTirocinio = domandaTirocinioService.aggiornaStatoDomanda(domandaTirocinio.getId(), 
         DomandaTirocinio.APPROVATA);
   
-    domandaTirocinioService.aggiornaStatoDomanda(domandaTirocinio1.getId(), 
+    domandaTirocinio1 = domandaTirocinioService.aggiornaStatoDomanda(domandaTirocinio1.getId(), 
             DomandaTirocinio.APPROVATA);
     
     List<DomandaTirocinio> domandeApprovate = new ArrayList<>();
@@ -410,8 +411,10 @@ public class DomandaTirocinioServiceIntegrationTest {
       e.printStackTrace();
     }
 
-    domandaTirocinioService.aggiornaStatoDomanda(domandaTirocinio.getId(),
+    domandaTirocinio = domandaTirocinioService.aggiornaStatoDomanda(domandaTirocinio.getId(),
         DomandaTirocinio.RIFIUTATA_AZIENDA);
+    
+    assertEquals(DomandaTirocinio.RIFIUTATA_AZIENDA, domandaTirocinio.getStatus());
   }
   
   @Test
@@ -555,8 +558,10 @@ public class DomandaTirocinioServiceIntegrationTest {
       e.printStackTrace();
     }
     
-    domandaTirocinioService.aggiornaStatoDomanda(domandaTirocinio.getId(), 
+    domandaTirocinio = domandaTirocinioService.aggiornaStatoDomanda(domandaTirocinio.getId(), 
         DomandaTirocinio.PROGETTO_RIFIUTATO);
+    
+    assertEquals(DomandaTirocinio.PROGETTO_RIFIUTATO, domandaTirocinio.getStatus());
   }
   
 }
