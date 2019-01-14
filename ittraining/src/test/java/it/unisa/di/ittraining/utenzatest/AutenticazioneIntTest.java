@@ -75,13 +75,13 @@ public class AutenticazioneIntTest {
   public void verificaLogin() {
 
     TutorAccademico tutorac = new TutorAccademico();
-    tutorac.setUsername("Francesca");
-    tutorac.setNome("Franca");
-    tutorac.setCognome("Neri");
+    tutorac.setUsername("pietro70");
+    tutorac.setNome("Pietro");
+    tutorac.setCognome("Ferullo");
     tutorac.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
     tutorac.setTelefono("0987654324");
-    tutorac.setEmail("franca@unisa.it");
-    tutorac.setPassword("franca1");
+    tutorac.setEmail("p.ferullo@unisa.it");
+    tutorac.setPassword("pietroferu70");
     tutorac.setSesso("F");
     
     try {
