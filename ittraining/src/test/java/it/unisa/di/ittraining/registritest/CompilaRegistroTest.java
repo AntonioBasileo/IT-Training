@@ -1,4 +1,4 @@
-package it.unisa.di.ittraining.registri.test;
+package it.unisa.di.ittraining.registritest;
 
 import static org.mockito.Mockito.when;
 

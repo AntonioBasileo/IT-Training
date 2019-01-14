@@ -1,10 +1,9 @@
-package it.unisa.di.ittraining.utenza.test;
+package it.unisa.di.ittraining.utenzatest;
 
 import static org.junit.Assert.assertEquals;
 
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
-import it.unisa.di.ittraining.utente.AutenticazioneHolder;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.EmailEsistenteException;
