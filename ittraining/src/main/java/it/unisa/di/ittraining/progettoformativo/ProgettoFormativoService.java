@@ -23,6 +23,9 @@ public class ProgettoFormativoService {
   public ProgettoFormativo inserisciProgetto(ProgettoFormativo progetto, long id) {
 
     DomandaTirocinio domanda = domandeRep.findById(id);
+    domanda.setData(domanda.getData().plusDays(1));
+    domanda.setInizioTirocinio(domanda.getInizioTirocinio().plusDays(1));
+    domanda.setFineTirocinio(domanda.getFineTirocinio().plusDays(1));
     domanda.setStatus(DomandaTirocinio.ACCETTATA_AZIENDA);
 
     progetto.setDomanda(domanda);
