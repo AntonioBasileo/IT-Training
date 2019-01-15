@@ -1,19 +1,17 @@
 package it.unisa.di.ittraining.utenzatest;
 
-import static org.junit.Assert.assertTrue;
-
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
+import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteria;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaService;
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
+import it.unisa.di.ittraining.studente.Studente;
 import it.unisa.di.ittraining.studente.StudentiService;
-import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
-import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoRepository;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
@@ -31,7 +29,6 @@ import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -46,7 +43,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @Rollback
-public class ValidaCampiTest {
+public class ValidaCampiIntegrationTest {
 
   @Autowired
   private StudentiService studenteService;
@@ -59,11 +56,6 @@ public class ValidaCampiTest {
 
   @Autowired
   private TutorAccademicoService tutorAccademicoService;
-  
-  @Autowired
-  private TutorAccademicoRepository tutorAccademicoRep;
-  
-  private List<TutorAccademico> tutors;
     
   @Test
   public void validaMatricolaStudente() {
@@ -84,6 +76,46 @@ public class ValidaCampiTest {
     studenteService.validaMatricolaStudente(matricola);
   }
   
+  @Test (expected = MatricolaStudenteNonValidaException.class)
+  public void validaMatricolaStudenteNulla() throws MatricolaStudenteNonValidaException, 
+      MatricolaStudenteEsistenteException {
+    String matricola = null;
+    studenteService.validaMatricolaStudente(matricola);
+  }
+  
+  @Test (expected = MatricolaStudenteEsistenteException.class)
+  public void validaMatricolaStudenteEsistente() throws MatricolaStudenteNonValidaException, 
+      MatricolaStudenteEsistenteException {
+
+    Studente studente = new Studente();
+    studente.setUsername("anninodag88");
+    studente.setNome("annino");
+    studente.setCognome("d'agosto");
+    studente.setSesso("M");
+    studente.setMatricola("0512103023");
+    studente.setDataDiNascita(LocalDate.of(1993, Month.APRIL, 22));
+    studente.setEmail("annino.dagosto@studenti.unisa.it");
+    studente.setPassword("123456567799");
+    studente.setTelefono("0912345612");
+    
+    try {
+      studente = studenteService.registraStudente(studente);
+    } catch (NomeNonValidoException | NomeCognomeTroppoLungoException 
+        | NomeCognomeTroppoCortoException
+        | CognomeNonValidoException | DataDiNascitaNonValidaException 
+        | UsernameNonValidoException
+        | UsernameEsistenteException | EmailNonValidaException 
+        | EmailEsistenteException | SessoNonValidoException
+        | TelefonoNonValidoException | PasswordNonValidaException 
+        | PasswordNonCorrispondentiException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    String matricola = "0512103023";
+    studenteService.validaMatricolaStudente(matricola);
+  }
+  
   @Test
   public void validaNomeStudente() {
     String nome = "Elisabetta";
@@ -95,6 +127,13 @@ public class ValidaCampiTest {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+  }
+  
+  @Test (expected = NomeNonValidoException.class)
+  public void validaNomeStudenteNullo() throws NomeNonValidoException, 
+      NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
+    String nome = null;
+    studenteService.validaNome(nome);
   }
   
   @Test (expected = NomeCognomeTroppoCortoException.class)
@@ -127,6 +166,19 @@ public class ValidaCampiTest {
     }
   }
   
+  @Test (expected = CognomeNonValidoException.class)
+  public void validaCognomeStudenteNullo() throws CognomeNonValidoException {
+    String cognome = null;
+    
+    try {
+      studenteService.validaCognome(cognome);
+    } catch (NomeCognomeTroppoLungoException 
+        | NomeCognomeTroppoCortoException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
+  
   @Test (expected = NomeCognomeTroppoCortoException.class)
   public void validaCognomeStudenteTroppoCorto() throws CognomeNonValidoException, 
       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
@@ -141,6 +193,13 @@ public class ValidaCampiTest {
           + "sdkfnsdkfsdpngspkgnkfngòskdnfgskldnfgsdknf"
           + "sgkndsfòkgnsdkfgnsdlfkngldsfngldsfkng"
           + "lkfgnsldkfngsldfnglsdfngldfang";
+    studenteService.validaCognome(cognome);
+  }
+  
+  @Test (expected = CognomeNonValidoException.class)
+  public void validaCognomeStudenteNoMatch() throws CognomeNonValidoException, 
+       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
+    String cognome = "ddddddddddddddddddddddddd'apice";
     studenteService.validaCognome(cognome);
   }
   
@@ -162,6 +221,13 @@ public class ValidaCampiTest {
     String email = "basileo@unisa.it";
     studenteService.validaEmailStudente(email);
   }
+  
+  @Test (expected = EmailNonValidaException.class)
+  public void validaEmailStudenteNulla() throws EmailNonValidaException, 
+      EmailEsistenteException {
+    String email = null;
+    studenteService.validaEmailStudente(email);
+  }
 
   @Test
   public void validaSessoStudente() {
@@ -180,6 +246,12 @@ public class ValidaCampiTest {
     studenteService.validaSesso(sesso);
   }
   
+  @Test (expected = SessoNonValidoException.class)
+  public void validaSessoStudenteNullo() throws SessoNonValidoException {
+    String sesso = null;
+    studenteService.validaSesso(sesso);
+  }
+  
   @Test
   public void validaDataDiNascitaStudente() {
     LocalDate data = LocalDate.of(1996, Month.JANUARY, 2);
@@ -194,6 +266,12 @@ public class ValidaCampiTest {
   @Test (expected = DataDiNascitaNonValidaException.class)
   public void validaDataDiNascitaStudenteNonValidaMin() throws DataDiNascitaNonValidaException {
     LocalDate data = LocalDate.of(2005, Month.JANUARY, 2);
+    studenteService.validaDataDiNascita(data);
+  }
+
+  @Test (expected = DataDiNascitaNonValidaException.class)
+  public void validaDataDiNascitaStudenteNulla() throws DataDiNascitaNonValidaException {
+    LocalDate data = null;
     studenteService.validaDataDiNascita(data);
   }
   
@@ -220,6 +298,12 @@ public class ValidaCampiTest {
     studenteService.validaTelefono(telefono);
   }
   
+  @Test (expected = TelefonoNonValidoException.class)
+  public void validaTelefonoStudenteNullo() throws TelefonoNonValidoException {
+    String telefono = null;
+    studenteService.validaTelefono(telefono);
+  }
+  
   @Test
   public void validaUsernameStudente() {
     String username = "Christian";
@@ -235,6 +319,13 @@ public class ValidaCampiTest {
   public void validaUsernameStudenteNonValido() throws UsernameNonValidoException, 
       UsernameEsistenteException {
     String username = "Christian_12";
+    studenteService.validaUsername(username);
+  }
+  
+  @Test (expected = UsernameNonValidoException.class)
+  public void validaUsernameStudenteNullo() throws UsernameNonValidoException, 
+      UsernameEsistenteException {
+    String username = null;
     studenteService.validaUsername(username);
   }
   
@@ -258,6 +349,38 @@ public class ValidaCampiTest {
     studenteService.validaPasswords(password, confermaPass);
   }
   
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordStudenteNoMatchPassword() throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = "p";
+    String confermaPass = "passwoooord";
+    studenteService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordStudenteNoMatchConfirm() throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = "passwoooord";
+    String confermaPass = "p";
+    studenteService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordStudentePasswordNulla() throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = null;
+    String confermaPass = "passwoooord";
+    studenteService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordStudenteConfirmPasswordNulla() throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = "passwoooord";
+    String confermaPass = null;
+    studenteService.validaPasswords(password, confermaPass);
+  }
+  
   @Test
   public void validaPasswordStudente() {
     String password = "password";
@@ -273,6 +396,13 @@ public class ValidaCampiTest {
   public void validaPasswordStudenteNonValida() throws PasswordNonValidaException, 
       PasswordNonCorrispondentiException {
     String password = "12";
+    studenteService.validaPassword(password);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordStudenteNulla() throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = null;
     studenteService.validaPassword(password);
   }
 
@@ -455,10 +585,6 @@ public class ValidaCampiTest {
     String password = "ci";
     tutorService.validaPassword(password);
   }
-
-  
-
-  
   
   //Test per i campi segreteria
   
@@ -484,6 +610,20 @@ public class ValidaCampiTest {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+  }
+  
+  @Test (expected = NomeNonValidoException.class)
+  public void validaNomeImpiegatoSegreteriaNullo() throws NomeNonValidoException, 
+      NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
+    String nome = null;
+    impiegatoService.validaNome(nome);
+  }
+  
+  @Test (expected = NomeNonValidoException.class)
+  public void validaNomeImpiegatoSegreteriaNoMatch() throws NomeNonValidoException, 
+      NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
+    String nome = "dddddddddddddddddd'''urge";
+    impiegatoService.validaNome(nome);
   }
   
   @Test (expected = NomeCognomeTroppoCortoException.class)
@@ -514,6 +654,20 @@ public class ValidaCampiTest {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+  }
+  
+  @Test (expected = CognomeNonValidoException.class)
+  public void validaCognomeImpiegatoSegreteriaNullo() throws CognomeNonValidoException, 
+      NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
+    String cognome = null;
+    impiegatoService.validaCognome(cognome);
+  }
+  
+  @Test (expected = CognomeNonValidoException.class)
+  public void validaCognomeImpiegatoSegreteriaNoMatch() throws CognomeNonValidoException, 
+      NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
+    String cognome = "dddddddd'''''''arge";
+    impiegatoService.validaCognome(cognome);
   }
   
   @Test (expected = NomeCognomeTroppoCortoException.class)
@@ -551,6 +705,12 @@ public class ValidaCampiTest {
     impiegatoService.validaSesso(sesso);
   }
   
+  @Test (expected = SessoNonValidoException.class)
+  public void validaSessoImpiegatoSegreteriaNullo() throws SessoNonValidoException {
+    String sesso = null;
+    impiegatoService.validaSesso(sesso);
+  }
+  
   @Test
   public void validaDataDiNascitaImpiegatoSegreteria() {
     LocalDate data = LocalDate.of(1980, Month.JANUARY, 2);
@@ -566,6 +726,13 @@ public class ValidaCampiTest {
   public void validaDataDiNascitaImpiegatoSegreteriaNonValidaMin() 
        throws DataDiNascitaNonValidaException {
     LocalDate data = LocalDate.of(2005, Month.JANUARY, 2);
+    impiegatoService.validaDataDiNascita(data);
+  }
+
+  @Test (expected = DataDiNascitaNonValidaException.class)
+  public void validaDataDiNascitaImpiegatoSegreteriaNulla() 
+       throws DataDiNascitaNonValidaException {
+    LocalDate data = null;
     impiegatoService.validaDataDiNascita(data);
   }
   
@@ -593,6 +760,12 @@ public class ValidaCampiTest {
     impiegatoService.validaTelefono(telefono);
   }
   
+  @Test (expected = TelefonoNonValidoException.class)
+  public void validaTelefonoImpiegatoSegreteriaNullo() throws TelefonoNonValidoException {
+    String telefono = null;
+    impiegatoService.validaTelefono(telefono);
+  }
+  
   @Test
   public void validaUsernameImpiegatoSegreteria() {
     String username = "Filippo";
@@ -608,6 +781,43 @@ public class ValidaCampiTest {
   public void validaUsernameImpiegatoSegreteriaNonValido() throws UsernameNonValidoException, 
       UsernameEsistenteException {
     String username = "Filippo_12";
+    impiegatoService.validaUsername(username);
+  }
+  
+  @Test (expected = UsernameNonValidoException.class)
+  public void validaUsernameImpiegatoSegreteriaNullo() throws UsernameNonValidoException, 
+      UsernameEsistenteException {
+    String username = null;
+    impiegatoService.validaUsername(username);
+  }
+  
+  @Test (expected = UsernameEsistenteException.class)
+  public void validaUsernameImpiegatoSegreteriaEsistente() throws UsernameNonValidoException, 
+      UsernameEsistenteException {
+    ImpiegatoSegreteria impiegato = new ImpiegatoSegreteria();
+    impiegato.setNome("nicola");
+    impiegato.setCognome("assuntino");
+    impiegato.setUsername("nicolaassuntino93");
+    impiegato.setPassword("nicolassuntino88");
+    impiegato.setEmail("n.assuntino@unisa.it");
+    impiegato.setTelefono("3292113456");
+    impiegato.setSesso("M");
+    impiegato.setDataDiNascita(LocalDate.of(1988, Month.APRIL, 11));
+    
+    try {
+      impiegatoService.registraImpiegato(impiegato);
+    } catch (NomeNonValidoException | NomeCognomeTroppoLungoException 
+        | NomeCognomeTroppoCortoException
+        | CognomeNonValidoException | EmailNonValidaException 
+        | EmailEsistenteException | PasswordNonValidaException
+        | PasswordNonCorrispondentiException | DataDiNascitaNonValidaException 
+        | SessoNonValidoException
+        | TelefonoNonValidoException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    String username = "nicolaassuntino93";
     impiegatoService.validaUsername(username);
   }
   
@@ -630,6 +840,50 @@ public class ValidaCampiTest {
     String password = "filippo";
     String confermaPass = "filippooooo";
     impiegatoService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordImpiegatoSegreteriaNulla() 
+        throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = null;
+    String confermaPass = "filippooooo";
+    impiegatoService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaConfirmImpiegatoSegreteriaNulla() 
+        throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = "filippooooo";
+    String confermaPass = null;
+    impiegatoService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaConfirmImpiegatoSegreteriaNoMatch() 
+        throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = "filippooooo";
+    String confermaPass = "p";
+    impiegatoService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordImpiegatoSegreteriaNoMatch() 
+        throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = "f";
+    String confermaPass = "filippooooo";
+    impiegatoService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordImpiegatoSegreteriaSingleNulla() 
+        throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = null;
+    impiegatoService.validaPassword(password);
   }
   
   @Test
@@ -1005,55 +1259,6 @@ public class ValidaCampiTest {
       PasswordNonCorrispondentiException {
     String password = "ci";
     tutorAccademicoService.validaPassword(password);
-  }
-
-  @Test
-  public void elencaTutorAccademici() {
-   
-    TutorAccademico tutor = new TutorAccademico();
-    tutor.setNome("Carletto");
-    tutor.setCognome("Neri");
-    tutor.setDataDiNascita(LocalDate.of(1970, Month.AUGUST, 30));
-    tutor.setTelefono("1234567898");
-    tutor.setEmail("carletto@unisa.it");
-    tutor.setUsername("carletto");
-    tutor.setPassword("carlo123");
-    tutor.setSesso("M");
-    
-    
-    TutorAccademico tutor1 = new TutorAccademico();
-    tutor1.setNome("Luigi");
-    tutor1.setCognome("rossi");
-    tutor1.setDataDiNascita(LocalDate.of(1960, Month.AUGUST, 20));
-    tutor1.setTelefono("7658901234");
-    tutor1.setEmail("luigi@unisa.it");
-    tutor1.setUsername("luigine");
-    tutor1.setPassword("luigi123");
-    tutor1.setSesso("M");
-    
-    
-    try {
-      tutor = tutorAccademicoService.registraTutorAccademico(tutor);
-      tutor1 = tutorAccademicoService.registraTutorAccademico(tutor1);
-    } catch (NomeNonValidoException | NomeCognomeTroppoLungoException 
-         | NomeCognomeTroppoCortoException | CognomeNonValidoException 
-         | EmailNonValidaException | EmailEsistenteException 
-         | TelefonoNonValidoException | DataDiNascitaNonValidaException 
-         | PasswordNonValidaException | PasswordNonCorrispondentiException 
-         | SessoNonValidoException | UsernameNonValidoException | UsernameEsistenteException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-       
-    
-    tutors.add(tutor);
-    tutors.add(tutor1);
-    
-    List<TutorAccademico> tutorSalvati = tutorAccademicoService.elencaTutorAccademici();
-    
-    for (TutorAccademico a: tutors) {
-      assertTrue(tutorSalvati.contains(a));
-    }
   }
   
 }
