@@ -72,7 +72,7 @@ public class TutorAccademicoService {
     tutor.setSesso(validaSesso(tutor.getSesso()));
     tutor.setUsername(validaUsername(tutor.getUsername()));
 
-    rep.save(tutor);
+    tutor = rep.save(tutor);
 
     return tutor;
   }
