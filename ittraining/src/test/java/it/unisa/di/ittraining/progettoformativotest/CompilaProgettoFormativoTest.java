@@ -54,6 +54,7 @@ public class CompilaProgettoFormativoTest {
     domandaTirocinio.setInizioTirocinio(LocalDate.of(2019, Month.FEBRUARY, 12));
     domandaTirocinio.setFineTirocinio(LocalDate.of(2019, Month.MARCH, 20));
     domandaTirocinio.setAzienda(azienda);
+    domandaTirocinio.setData(LocalDate.now());
 
     ProgettoFormativo progetto = new ProgettoFormativo();
     progetto.setDescrizione("Sviluppo di un'applicazione Web");
