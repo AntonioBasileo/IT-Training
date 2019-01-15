@@ -1,7 +1,5 @@
 package it.unisa.di.ittraining.utenzatest;
 
-import static org.junit.Assert.assertTrue;
-
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaService;
@@ -12,8 +10,6 @@ import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaService;
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
 import it.unisa.di.ittraining.studente.MatricolaStudenteNonValidaException;
 import it.unisa.di.ittraining.studente.StudentiService;
-import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
-import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoRepository;
 import it.unisa.di.ittraining.tutoraccademico.TutorAccademicoService;
 import it.unisa.di.ittraining.utente.CognomeNonValidoException;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
@@ -31,7 +27,6 @@ import it.unisa.di.ittraining.utente.UsernameNonValidoException;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -59,11 +54,6 @@ public class ValidaCampiTest {
 
   @Autowired
   private TutorAccademicoService tutorAccademicoService;
-  
-  @Autowired
-  private TutorAccademicoRepository tutorAccademicoRep;
-  
-  private List<TutorAccademico> tutors;
     
   @Test
   public void validaMatricolaStudente() {
@@ -1005,55 +995,6 @@ public class ValidaCampiTest {
       PasswordNonCorrispondentiException {
     String password = "ci";
     tutorAccademicoService.validaPassword(password);
-  }
-
-  @Test
-  public void elencaTutorAccademici() {
-   
-    TutorAccademico tutor = new TutorAccademico();
-    tutor.setNome("Carletto");
-    tutor.setCognome("Neri");
-    tutor.setDataDiNascita(LocalDate.of(1970, Month.AUGUST, 30));
-    tutor.setTelefono("1234567898");
-    tutor.setEmail("carletto@unisa.it");
-    tutor.setUsername("carletto");
-    tutor.setPassword("carlo123");
-    tutor.setSesso("M");
-    
-    
-    TutorAccademico tutor1 = new TutorAccademico();
-    tutor1.setNome("Luigi");
-    tutor1.setCognome("rossi");
-    tutor1.setDataDiNascita(LocalDate.of(1960, Month.AUGUST, 20));
-    tutor1.setTelefono("7658901234");
-    tutor1.setEmail("luigi@unisa.it");
-    tutor1.setUsername("luigine");
-    tutor1.setPassword("luigi123");
-    tutor1.setSesso("M");
-    
-    
-    try {
-      tutor = tutorAccademicoService.registraTutorAccademico(tutor);
-      tutor1 = tutorAccademicoService.registraTutorAccademico(tutor1);
-    } catch (NomeNonValidoException | NomeCognomeTroppoLungoException 
-         | NomeCognomeTroppoCortoException | CognomeNonValidoException 
-         | EmailNonValidaException | EmailEsistenteException 
-         | TelefonoNonValidoException | DataDiNascitaNonValidaException 
-         | PasswordNonValidaException | PasswordNonCorrispondentiException 
-         | SessoNonValidoException | UsernameNonValidoException | UsernameEsistenteException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-       
-    
-    tutors.add(tutor);
-    tutors.add(tutor1);
-    
-    List<TutorAccademico> tutorSalvati = tutorAccademicoService.elencaTutorAccademici();
-    
-    for (TutorAccademico a: tutors) {
-      assertTrue(tutorSalvati.contains(a));
-    }
   }
   
 }
