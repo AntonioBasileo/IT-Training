@@ -37,13 +37,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @Rollback
-public class TutorAccademicoServiceIntTest {
+public class TutorAccademicoServiceIntegrationTest {
 
   @Autowired
   private TutorAccademicoService tutorAccademicoService;
 
   private List<TutorAccademico> tutors;
 
+  /**
+  * Metodo eseguito prima del test. Permette di creare una lista
+  * di tutor accademici e di salvarli nel Database.
+  */
   @Before
   public void elencaTutors() {
 
@@ -89,8 +93,8 @@ public class TutorAccademicoServiceIntTest {
   @Test
   public void elencaTutorsAccademici() {
     List<TutorAccademico> tutorSalvati = tutorAccademicoService.elencaTutorAccademici();
-    for (TutorAccademico a: tutors) {
-      assertTrue(tutorSalvati.contains(a));
+    for (TutorAccademico t: tutors) {
+      assertTrue(tutorSalvati.contains(t));
     }
   }
   
