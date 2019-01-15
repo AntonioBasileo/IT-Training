@@ -26,7 +26,7 @@ public abstract class Utente {
   public static final String NOME_PATTERN = "^[a-zA-Z]{3,}(\\s*[a-zA-Z]{2,}?)*$";
 
   /** Espressione regolare che definisce il formato del campo cognome. */
-  public static final String COGNOME_PATTERN = "^(([a-zA-Z]{1,4})\\'?"
+  public static final String COGNOME_PATTERN = "^(([a-zA-Z]{1,})\\'?"
       + "\\s?)?[a-zA-Z]{2,}(\\s*[a-zA-Z]{2,}?)*$";
 
   /** Costante che definisce la minima lunghezza del campo nome. */
