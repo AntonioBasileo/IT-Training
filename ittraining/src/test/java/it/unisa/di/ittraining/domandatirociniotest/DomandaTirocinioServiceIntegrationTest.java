@@ -106,8 +106,8 @@ public class DomandaTirocinioServiceIntegrationTest {
     }
     
     TutorAziendale tutorAziendale = new TutorAziendale();
-    tutorAziendale.setUsername("linaGrafica");
-    tutorAziendale.setNome("Lina");
+    tutorAziendale.setUsername("LinaBlaGrafica");
+    tutorAziendale.setNome("LinaBla");
     tutorAziendale.setCognome("Neri");
     tutorAziendale.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
     tutorAziendale.setTelefono("0987654321");
@@ -232,8 +232,8 @@ public class DomandaTirocinioServiceIntegrationTest {
     utenteService.logout();
     
     TutorAccademico tutorAccademico = new TutorAccademico();
-    tutorAccademico.setUsername("Francesca");
-    tutorAccademico.setNome("Franca");
+    tutorAccademico.setUsername("FrancescaBla");
+    tutorAccademico.setNome("FrancaBla");
     tutorAccademico.setCognome("Neri");
     tutorAccademico.setDataDiNascita(LocalDate.of(1970, Month.DECEMBER, 30));
     tutorAccademico.setTelefono("0987654324");
