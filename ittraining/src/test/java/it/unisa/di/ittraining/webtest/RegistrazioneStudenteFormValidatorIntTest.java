@@ -1,6 +1,5 @@
 package it.unisa.di.ittraining.webtest;
 
-import it.unisa.di.ittraining.studente.StudentiService;
 import it.unisa.di.ittraining.web.RegistrazioneStudenteForm;
 import it.unisa.di.ittraining.web.RegistrazioneStudenteFormValidator;
 
@@ -8,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -20,8 +20,11 @@ import org.springframework.validation.Errors;
 @Rollback
 public class RegistrazioneStudenteFormValidatorIntTest {
 
+  @Mock
+  private Errors errors;
+  
   @Autowired
-  private StudentiService studenteService;
+  private RegistrazioneStudenteFormValidator validator;
   
   @Test
   public void registrazioneStudenteFormValidator() {
@@ -38,9 +41,8 @@ public class RegistrazioneStudenteFormValidatorIntTest {
     studenteForm.setConfermaPassword("marica");
     studenteForm.setTelefono("3204444444");
     studenteForm.setEmail("marica@studenti.unisa.it");
-    
-    RegistrazioneStudenteFormValidator validator = new RegistrazioneStudenteFormValidator();
-    Errors errore = null;
-    validator.validate((Object)studenteForm, (Errors) errore);
+  
+    validator.validate((Object)studenteForm, (Errors) errors);
   }
+  
 }
