@@ -14,7 +14,6 @@ import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.UtenteService;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -129,8 +128,6 @@ public class DomandaTirocinioController {
       List<DomandaTirocinio> domande = 
           domandeService.elencaDomandeStudente((String)session.getAttribute("username"));
 
-      Collections.sort(domande);
-
       model.addAttribute("listaDomandeStudente", domande);
 
     }
@@ -154,8 +151,6 @@ public class DomandaTirocinioController {
     if (!model.containsAttribute("listaDomandeAzienda")) {
       TutorAziendale tutor = (TutorAziendale)utentiService.getUtenteAutenticato();
       List<DomandaTirocinio> domande = domandeService.elencaDomandeAziendali(tutor.getAzienda());
-
-      Collections.sort(domande);
 
       model.addAttribute("listaDomandeAzienda", domande);
     }
@@ -200,7 +195,6 @@ public class DomandaTirocinioController {
 
     if (!model.containsAttribute("listaDomandeAccademico")) {
       TutorAccademico tutor = (TutorAccademico)utentiService.getUtenteAutenticato();
-      Collections.sort(tutor.getAllDomande());
 
       model.addAttribute("listaDomandeAccademico", tutor.getAllDomande());
 

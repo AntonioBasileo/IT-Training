@@ -569,6 +569,11 @@ public class DomandaTirocinioServiceIntegrationTest {
         DomandaTirocinio.PROGETTO_RIFIUTATO);
     
     assertEquals(DomandaTirocinio.PROGETTO_RIFIUTATO, domandaTirocinio.getStatus());
+    
+    DomandaTirocinio domandaSalvata = 
+        domandaTirocinioService.getDomandaById(domandaTirocinio.getId());
+
+    assertEquals(domandaTirocinio, domandaSalvata);
   }
   
 }
