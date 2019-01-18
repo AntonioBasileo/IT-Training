@@ -235,7 +235,7 @@ public class DomandaTirocinioService {
   public int validaNumeroCfu(int cfu) throws MassimoNumeroCfuCumulabiliException,
       NumeroCfuNonValidoException {
 
-    if (cfu == 0) {
+    if (cfu < DomandaTirocinio.MIN_CFU) {
       throw new NumeroCfuNonValidoException();
     }
 
@@ -243,10 +243,6 @@ public class DomandaTirocinioService {
 
     if ((studente.getCfuDomande() + cfu) > DomandaTirocinio.MAX_CFU) {
       throw new MassimoNumeroCfuCumulabiliException();
-    }
-
-    if (cfu < DomandaTirocinio.MIN_CFU) {
-      throw new NumeroCfuNonValidoException();
     }
 
     return cfu;

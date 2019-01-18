@@ -64,7 +64,7 @@ public class AziendaServiceIntegrationTest {
 
   @Test
   public void aggiungiConvenzione() {
-
+  
     ImpiegatoSegreteria impiegato = new ImpiegatoSegreteria();
     impiegato.setNome("nicola");
     impiegato.setCognome("rossi");
@@ -143,6 +143,12 @@ public class AziendaServiceIntegrationTest {
     
     for (Azienda a: aziende) {
       assertTrue(aziendeSalvate.contains(a));
+    }
+    
+    List<Azienda> aziendeSalvate1 = aziendeService.elancaAziende();
+
+    for (Azienda a: aziende) {
+      assertTrue(aziendeSalvate1.contains(a));
     }
   }
   

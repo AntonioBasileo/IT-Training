@@ -158,7 +158,7 @@ public class AziendaService {
   }
 
   /**
- * Questo di validare l'email dell'azienda.
+ * Questo metodo permette di validare l'email dell'azienda.
  */
   public String validaEmailAziendale(String nomeAzienda, String email) 
       throws EmailNonValidaException, 
