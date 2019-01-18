@@ -21,6 +21,10 @@
 	      	<div class=" row">
 	      		 <p>Data fine: <c:out value="${domanda.fineTirocinio.getDayOfMonth()}"/>/<c:out value="${domanda.fineTirocinio.getMonthValue()}"/>/<c:out value="${domanda.fineTirocinio.getYear()}"/></p>
 	      	</div>
+	      	
+	      	<div class=" row">
+	      		 <p>Numero ore svolte: <c:out value="${domanda.getNumeroOre() / 60}"/></p>
+	      	</div>
 	    </div>
 	      
 	      <table>

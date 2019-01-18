@@ -4,7 +4,9 @@ import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaRepository;
+import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.studente.Studente;
+import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 import it.unisa.di.ittraining.utente.DataDiNascitaNonValidaException;
 import it.unisa.di.ittraining.utente.UtenteService;
 import java.time.LocalDate;
@@ -112,11 +114,17 @@ public class DomandaTirocinioService {
   public List<DomandaTirocinio> getAllRegistriAzienda() {
 
     List<DomandaTirocinio> newList = new ArrayList<>();
+    
+    TutorAziendale tutor = ((TutorAziendale)utentiService.getUtenteAutenticato());
 
-    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.APPROVATA));
-    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE));
-    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
-    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
+    newList.addAll(domandeRep.findAllByAziendaAndStatus(tutor.getAzienda(),
+        DomandaTirocinio.APPROVATA));
+    newList.addAll(domandeRep.findAllByAziendaAndStatus(tutor.getAzienda(),
+        DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE));
+    newList.addAll(domandeRep.findAllByAziendaAndStatus(tutor.getAzienda(),
+        DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
+    newList.addAll(domandeRep.findAllByAziendaAndStatus(tutor.getAzienda(),
+        DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
 
     return newList;
   }
@@ -128,10 +136,19 @@ public class DomandaTirocinioService {
   public List<DomandaTirocinio> getAllRegistriAccademico() {
 
     List<DomandaTirocinio> newList = new ArrayList<>();
+    
+    TutorAccademico tutor = (TutorAccademico)utentiService.getUtenteAutenticato();
+    
+    for (Studente s: tutor.getStudenti()) {
 
-    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE));
-    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
-    newList.addAll(domandeRep.findAllByStatus(DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
+      newList.addAll(domandeRep.findAllByStudenteUsernameAndStatus(s.getUsername(),
+          DomandaTirocinio.REGISTRO_APPROVATO_AZIENDALE));
+      newList.addAll(domandeRep.findAllByStudenteUsernameAndStatus(s.getUsername(),
+          DomandaTirocinio.REGISTRO_APPROVATO_ACCADEMICO));
+      newList.addAll(domandeRep.findAllByStudenteUsernameAndStatus(s.getUsername(),
+          DomandaTirocinio.REGISTRO_APPROVATO_SEGRETERIA));
+    
+    }
 
     return newList;
   }

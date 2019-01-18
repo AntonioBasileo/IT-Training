@@ -22,7 +22,7 @@ public class Registro {
   private LocalDate data;
   private LocalTime inizio;
   private LocalTime fine;
-  private float numeroMinuti;
+  private long numeroMinuti;
   private String descrizione;
   private int status;
 
@@ -89,7 +89,7 @@ public class Registro {
     this.numeroMinuti = numeroMinuti;
   }
 
-  public float getStatus() {
+  public int getStatus() {
     return status;
   }
 

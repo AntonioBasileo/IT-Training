@@ -10,12 +10,12 @@
 				<div class="col s12">
 						<div class="card horizontal">
 							<div class="card-image">
-								<img src="resources/images/choose.svg">
+								<img src="../resources/images/choose.svg">
 							</div>
 								<div class="card-stacked">
 								<div class="card-content">
 									<h5 class="teal-text">Spiacenti</h5>
-									<p>Non è presente ancora alcuna domanda</p>
+									<p>Non è presente ancora alcuna domanda. Probabilmente non è stato scelto ancora da alcuno studente</p>
 								</div>
 					        <div class="card-action">
 					          <a href="/home">Torna alla home</a>
