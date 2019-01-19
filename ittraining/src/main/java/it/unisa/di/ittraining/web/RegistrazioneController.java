@@ -167,23 +167,20 @@ public class RegistrazioneController {
     LocalDate date = LocalDate.of(registrazioneStudente.getAnnoNascita(),
         registrazioneStudente.getMeseNascita(),
         registrazioneStudente.getGiornoNascita());
-    if (utentiService.validaPasswords(registrazioneStudente.getPassword(), 
-        registrazioneStudente.getConfermaPassword())) {
 
-      Studente studente = new Studente();
+    Studente studente = new Studente();
 
-      studente.setNome(registrazioneStudente.getNome());
-      studente.setCognome(registrazioneStudente.getCognome());
-      studente.setEmail(registrazioneStudente.getEmail());
-      studente.setDataDiNascita(date);
-      studente.setMatricola(registrazioneStudente.getMatricola());
-      studente.setUsername(registrazioneStudente.getUsername());
-      studente.setPassword(registrazioneStudente.getPassword());
-      studente.setSesso(registrazioneStudente.getSesso());
-      studente.setTelefono(registrazioneStudente.getTelefono());
-      studentiService.registraStudente(studente);
+    studente.setNome(registrazioneStudente.getNome());
+    studente.setCognome(registrazioneStudente.getCognome());
+    studente.setEmail(registrazioneStudente.getEmail());
+    studente.setDataDiNascita(date);
+    studente.setMatricola(registrazioneStudente.getMatricola());
+    studente.setUsername(registrazioneStudente.getUsername());
+    studente.setPassword(registrazioneStudente.getPassword());
+    studente.setSesso(registrazioneStudente.getSesso());
+    studente.setTelefono(registrazioneStudente.getTelefono());
+    studentiService.registraStudente(studente);
 
-    }
     redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaValida");
 
     return "redirect:/home";
@@ -225,23 +222,19 @@ public class RegistrazioneController {
     LocalDate date = LocalDate.of(registrazioneSegreteria.getAnnoNascita(),
         registrazioneSegreteria.getMeseNascita(),
         registrazioneSegreteria.getGiornoNascita());
-    if (utentiService.validaPasswords(registrazioneSegreteria.getPassword(), 
-          registrazioneSegreteria.getConfermaPassword())) {
 
-      ImpiegatoSegreteria impiegato = new ImpiegatoSegreteria();
+    ImpiegatoSegreteria impiegato = new ImpiegatoSegreteria();
 
-      impiegato.setNome(registrazioneSegreteria.getNome());
-      impiegato.setCognome(registrazioneSegreteria.getCognome());
-      impiegato.setSesso(registrazioneSegreteria.getSesso());
-      impiegato.setEmail(registrazioneSegreteria.getEmail());
-      impiegato.setUsername(registrazioneSegreteria.getUsername());
-      impiegato.setPassword(registrazioneSegreteria.getPassword());
-      impiegato.setDataDiNascita(date);
-      impiegato.setTelefono(registrazioneSegreteria.getTelefono());
+    impiegato.setNome(registrazioneSegreteria.getNome());
+    impiegato.setCognome(registrazioneSegreteria.getCognome());
+    impiegato.setSesso(registrazioneSegreteria.getSesso());
+    impiegato.setEmail(registrazioneSegreteria.getEmail());
+    impiegato.setUsername(registrazioneSegreteria.getUsername());
+    impiegato.setPassword(registrazioneSegreteria.getPassword());
+    impiegato.setDataDiNascita(date);
+    impiegato.setTelefono(registrazioneSegreteria.getTelefono());
 
-      segreteriaService.registraImpiegato(impiegato);
-
-    }
+    segreteriaService.registraImpiegato(impiegato);
 
     redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaValida");
 
@@ -281,23 +274,20 @@ public class RegistrazioneController {
         registrazioneAccademico.getMeseNascita(),
         registrazioneAccademico.getGiornoNascita());
 
-    if (utentiService.validaPasswords(registrazioneAccademico.getPassword(), 
-        registrazioneAccademico.getConfermaPassword())) {
 
-      TutorAccademico tutor = new TutorAccademico();
+    TutorAccademico tutor = new TutorAccademico();
 
-      tutor.setNome(registrazioneAccademico.getNome());
-      tutor.setCognome(registrazioneAccademico.getCognome());
-      tutor.setEmail(registrazioneAccademico.getEmail());
-      tutor.setDataDiNascita(date);
-      tutor.setUsername(registrazioneAccademico.getUsername());
-      tutor.setPassword(registrazioneAccademico.getPassword());
-      tutor.setSesso(registrazioneAccademico.getSesso());
-      tutor.setTelefono(registrazioneAccademico.getTelefono());
+    tutor.setNome(registrazioneAccademico.getNome());
+    tutor.setCognome(registrazioneAccademico.getCognome());
+    tutor.setEmail(registrazioneAccademico.getEmail());
+    tutor.setDataDiNascita(date);
+    tutor.setUsername(registrazioneAccademico.getUsername());
+    tutor.setPassword(registrazioneAccademico.getPassword());
+    tutor.setSesso(registrazioneAccademico.getSesso());
+    tutor.setTelefono(registrazioneAccademico.getTelefono());
 
-      tutorAccademicoService.registraTutorAccademico(tutor);
+    tutorAccademicoService.registraTutorAccademico(tutor);
 
-    }
 
     redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaValida");
 
@@ -342,21 +332,19 @@ public class RegistrazioneController {
         registrazioneAziendale.getMeseNascita(),
         registrazioneAziendale.getGiornoNascita());
 
-    if (utentiService.validaPasswords(registrazioneAziendale.getPassword(), 
-         registrazioneAziendale.getConfermaPassword())) {
-      TutorAziendale tutor = new TutorAziendale();
+    TutorAziendale tutor = new TutorAziendale();
 
-      tutor.setNome(registrazioneAziendale.getNome());
-      tutor.setCognome(registrazioneAziendale.getCognome());
-      tutor.setEmail(registrazioneAziendale.getEmail());
-      tutor.setDataDiNascita(date);
-      tutor.setUsername(registrazioneAziendale.getUsername());
-      tutor.setPassword(registrazioneAziendale.getPassword());
-      tutor.setSesso(registrazioneAziendale.getSesso());
-      tutor.setTelefono(registrazioneAziendale.getTelefono());
-      aziendeService.registraTutorAziendale(tutor, registrazioneAziendale.getNomeAzienda());
+    tutor.setNome(registrazioneAziendale.getNome());
+    tutor.setCognome(registrazioneAziendale.getCognome());
+    tutor.setEmail(registrazioneAziendale.getEmail());
+    tutor.setDataDiNascita(date);
+    tutor.setUsername(registrazioneAziendale.getUsername());
+    tutor.setPassword(registrazioneAziendale.getPassword());
+    tutor.setSesso(registrazioneAziendale.getSesso());
+    tutor.setTelefono(registrazioneAziendale.getTelefono());
+    
+    aziendeService.registraTutorAziendale(tutor, registrazioneAziendale.getNomeAzienda());
 
-    }
     redirectAttributes.addFlashAttribute("testoNotifica", "toast.iscrizioni.richiestaValida");
     return "redirect:/home";
   }
