@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
+public class DomandaTirocinio {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -118,19 +118,6 @@ public class DomandaTirocinio implements Comparable<DomandaTirocinio> {
 
   /** Costante che definisce il numero massimo di CFU da poter associare ad una domanda. */
   public static final int MIN_CFU = 2;
-
-  /**
- * Definisce l'ordine di comparazione tra le domande di tirocinio in base al campo data.
- */
-  @Override
-  public int compareTo(DomandaTirocinio domanda) {
-
-    if (getStatus() == IN_ATTESA) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
 
   public Long getId() {
     return id;

@@ -1,11 +1,15 @@
 package it.unisa.di.ittraining.utenzatest;
 
+import it.unisa.di.ittraining.azienda.Azienda;
 import it.unisa.di.ittraining.azienda.AziendaEsistenteException;
+import it.unisa.di.ittraining.azienda.AziendaNonEsistenteException;
 import it.unisa.di.ittraining.azienda.AziendaNonValidaException;
 import it.unisa.di.ittraining.azienda.AziendaService;
 import it.unisa.di.ittraining.azienda.EmailAziendaEsistenteException;
+import it.unisa.di.ittraining.azienda.EmailNonAssociataException;
 import it.unisa.di.ittraining.azienda.IndirizzoNonValidoException;
 import it.unisa.di.ittraining.azienda.SedeNonValidaException;
+import it.unisa.di.ittraining.azienda.TutorAziendale;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteria;
 import it.unisa.di.ittraining.impiegatosegreteria.ImpiegatoSegreteriaService;
 import it.unisa.di.ittraining.studente.MatricolaStudenteEsistenteException;
@@ -56,6 +60,124 @@ public class ValidaCampiIntegrationTest {
 
   @Autowired
   private TutorAccademicoService tutorAccademicoService;
+  
+  
+  //Gestione azienda
+  @Test(expected = AziendaEsistenteException.class)
+  public void validaNomeAziendaNullo() throws AziendaNonValidaException,
+      AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException,
+      EmailNonValidaException, EmailAziendaEsistenteException,
+      it.unisa.di.ittraining.azienda.TelefonoNonValidoException {
+
+    Azienda azienda = new Azienda();
+    azienda.setNome("InovaTech");
+    azienda.setIndirizzo("Via Ubaldo Leprino 35");
+    azienda.setSede("Caserta");
+    azienda.setTelefono("3490876123");
+    azienda.setEmail("inovatech@gmail.com");
+    
+    tutorService.registraAzienda(azienda);
+    
+    String nomeAzienda = "InovaTech";
+    
+    tutorService.validaNome(nomeAzienda);
+  }
+  
+  @Test(expected = AziendaNonValidaException.class)
+  public void validaNomeAziendaForTutorNullo() throws AziendaNonValidaException,
+      AziendaNonEsistenteException {
+
+    String nomeAzienda = null;
+
+    tutorService.validaNomeForTutor(nomeAzienda);
+  }
+  
+  @Test(expected = AziendaNonValidaException.class)
+  public void validaNomeAziendaForTutorTroppoLungo() throws AziendaNonValidaException,
+      AziendaNonEsistenteException {
+
+    String nomeAzienda = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+    tutorService.validaNomeForTutor(nomeAzienda);
+  }
+  
+  @Test(expected = AziendaNonValidaException.class)
+  public void validaNomeAziendaForTutorTroppoCorto() throws AziendaNonValidaException,
+      AziendaNonEsistenteException {
+
+    String nomeAzienda = "a";
+
+    tutorService.validaNomeForTutor(nomeAzienda);
+  }
+  
+  @Test(expected = AziendaNonEsistenteException.class)
+  public void validaNomeAziendaForTutorNonEsistente() throws AziendaNonValidaException,
+      AziendaNonEsistenteException {
+
+    String nomeAzienda = "abocacenter";
+
+    tutorService.validaNomeForTutor(nomeAzienda);
+  }
+  
+  @Test
+  public void validaNomeAziendaForTutorSuccesso() throws AziendaNonValidaException,
+      AziendaNonEsistenteException, AziendaEsistenteException,
+      SedeNonValidaException, IndirizzoNonValidoException, EmailNonValidaException,
+      EmailAziendaEsistenteException,
+      it.unisa.di.ittraining.azienda.TelefonoNonValidoException {
+
+    Azienda azienda = new Azienda();
+    azienda.setNome("Abudabi Transation Center");
+    azienda.setIndirizzo("Via Ubaldo Leprino 35");
+    azienda.setSede("Caserta");
+    azienda.setTelefono("3490876123");
+    azienda.setEmail("inovatech-abudabi@gmail.com");
+    
+    tutorService.registraAzienda(azienda);
+
+    tutorService.validaNomeForTutor("Abudabi Transation Center");
+  }
+  
+  @Test(expected = EmailNonValidaException.class)
+  public void validaEmailAziendaleNulla() throws EmailNonValidaException,
+      EmailAziendaEsistenteException {
+
+    String email = null;
+  
+    tutorService.validaEmailAziendale("Abudabi Transation Center", email);
+
+  }
+  
+  @Test(expected = it.unisa.di.ittraining.azienda.TelefonoNonValidoException.class)
+  public void validaTelefonoAziendaleNullo() throws EmailNonValidaException,
+      EmailAziendaEsistenteException, it.unisa.di.ittraining.azienda.TelefonoNonValidoException {
+
+    String telefono = null;
+  
+    tutorService.validaTelefono(telefono);
+
+  }
     
   @Test
   public void validaMatricolaStudente() {
@@ -133,6 +255,13 @@ public class ValidaCampiIntegrationTest {
   public void validaNomeStudenteNullo() throws NomeNonValidoException, 
       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
     String nome = null;
+    studenteService.validaNome(nome);
+  }
+  
+  @Test (expected = NomeNonValidoException.class)
+  public void validaNomeStudenteNoMatch() throws NomeNonValidoException, 
+      NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
+    String nome = "09893489435398534";
     studenteService.validaNome(nome);
   }
   
@@ -428,6 +557,20 @@ public class ValidaCampiIntegrationTest {
     tutorService.validaNomeTutor(nome);
   }
   
+  @Test (expected = NomeNonValidoException.class)
+  public void validaNomeTutorAziendaleNullo() throws NomeNonValidoException, 
+      NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
+    String nome = null;
+    tutorService.validaNomeTutor(nome);
+  }
+  
+  @Test (expected = NomeNonValidoException.class)
+  public void validaNomeTutorAziendaleNoMatch() throws NomeNonValidoException, 
+      NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
+    String nome = "09989324394230";
+    tutorService.validaNomeTutor(nome);
+  }
+  
   @Test (expected = NomeCognomeTroppoLungoException.class)
   public void validaNomeTutorAziendaleTroppoLungo() throws NomeNonValidoException, 
        NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException {
@@ -449,6 +592,24 @@ public class ValidaCampiIntegrationTest {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+  }
+  
+  @Test (expected = CognomeNonValidoException.class)
+  public void validaomeTutorAziendaleTroppoLungo() throws NomeNonValidoException, 
+       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
+       CognomeNonValidoException {
+
+    String cognome = null;
+    tutorService.validaCognome(cognome);
+  }
+  
+  @Test (expected = CognomeNonValidoException.class)
+  public void validaomeTutorAziendaleNoMatch() throws NomeNonValidoException, 
+       NomeCognomeTroppoLungoException, NomeCognomeTroppoCortoException,
+       CognomeNonValidoException {
+
+    String cognome = "ddddddddd'''''''''''''''arge";
+    tutorService.validaCognome(cognome);
   }
   
   @Test (expected = NomeCognomeTroppoCortoException.class)
@@ -486,6 +647,12 @@ public class ValidaCampiIntegrationTest {
     tutorService.validaSesso(sesso);
   }
   
+  @Test (expected = SessoNonValidoException.class)
+  public void validaSessoTutorAziendaleNullo() throws SessoNonValidoException {
+    String sesso = null;
+    tutorService.validaSesso(sesso);
+  }
+  
   @Test
   public void validaDataDiNascitaTutorAziendale() {
     LocalDate data = LocalDate.of(1980, Month.JANUARY, 2);
@@ -501,6 +668,13 @@ public class ValidaCampiIntegrationTest {
   public void validaDataDiNascitaTutorAziendaleNonValidaMin() 
        throws DataDiNascitaNonValidaException {
     LocalDate data = LocalDate.of(2005, Month.JANUARY, 2);
+    tutorService.validaDataDiNascita(data);
+  }
+
+  @Test (expected = DataDiNascitaNonValidaException.class)
+  public void validaDataDiNascitaTutorAziendaleNulla() 
+       throws DataDiNascitaNonValidaException {
+    LocalDate data = null;
     tutorService.validaDataDiNascita(data);
   }
   
@@ -547,6 +721,50 @@ public class ValidaCampiIntegrationTest {
     tutorService.validaUsername(username);
   }
   
+  @Test (expected = UsernameEsistenteException.class)
+  public void validaUsernameTutorAziendaleEsistente() throws UsernameNonValidoException, 
+      UsernameEsistenteException, AziendaNonValidaException,
+      AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException,
+      EmailNonValidaException, EmailAziendaEsistenteException,
+      it.unisa.di.ittraining.azienda.TelefonoNonValidoException,
+      NomeNonValidoException, NomeCognomeTroppoLungoException,
+      NomeCognomeTroppoCortoException, CognomeNonValidoException,
+      EmailEsistenteException, EmailNonAssociataException, PasswordNonValidaException,
+      PasswordNonCorrispondentiException, DataDiNascitaNonValidaException,
+      SessoNonValidoException, AziendaNonEsistenteException {
+  
+    Azienda azienda = new Azienda();
+    azienda.setNome("Ipernovatechnology");
+    azienda.setIndirizzo("Via dei Fratelli 82");
+    azienda.setSede("Milano");
+    azienda.setTelefono("3278765123");
+    azienda.setEmail("ipernova.technology@gmail.com");
+    
+    tutorService.registraAzienda(azienda);
+    
+    TutorAziendale tutor = new TutorAziendale();
+    tutor.setNome("elide");
+    tutor.setCognome("pugliese");
+    tutor.setEmail(azienda.getEmail());
+    tutor.setUsername("ironman");
+    tutor.setPassword("ironman");
+    tutor.setTelefono("3512695340");
+    tutor.setSesso("F");
+    tutor.setDataDiNascita(LocalDate.of(1975, Month.JANUARY, 13));
+    
+    tutorService.registraTutorAziendale(tutor, azienda.getNome());
+    
+    String username = "ironman";
+    tutorService.validaUsername(username);
+  }
+  
+  @Test (expected = UsernameNonValidoException.class)
+  public void validaUsernameTutorAziendaleNullo() throws UsernameNonValidoException, 
+      UsernameEsistenteException {
+    String username = null;
+    tutorService.validaUsername(username);
+  }
+  
   @Test
   public void validaPasswordAndConfirmPasswordTutorAziendale() {
     String password = "carmine";
@@ -568,6 +786,42 @@ public class ValidaCampiIntegrationTest {
     tutorService.validaPasswords(password, confermaPass);
   }
   
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordsTutorAziendaleNulla() 
+        throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = null;
+    String confermaPass = "filippooooo";
+    tutorService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaConfirmPasswordTutorAziendaleNulla() 
+        throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = "carmine";
+    String confermaPass = null;
+    tutorService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaConfirmPasswordTutorAziendaleNoMatch() 
+        throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = "carmine";
+    String confermaPass = "c";
+    tutorService.validaPasswords(password, confermaPass);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordTutorAziendaleNoMatch() 
+        throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = "c";
+    String confermaPass = "carmine";
+    tutorService.validaPasswords(password, confermaPass);
+  }
+  
   @Test
   public void validaPasswordTutorAziendale() {
     String password = "carmine";
@@ -584,6 +838,66 @@ public class ValidaCampiIntegrationTest {
       PasswordNonCorrispondentiException {
     String password = "ci";
     tutorService.validaPassword(password);
+  }
+  
+  @Test (expected = PasswordNonValidaException.class)
+  public void validaPasswordTutorAziendaleNulla() throws PasswordNonValidaException, 
+      PasswordNonCorrispondentiException {
+    String password = null;
+    tutorService.validaPassword(password);
+  }
+  
+  @Test (expected = EmailNonValidaException.class)
+  public void validaEmailTutorAziendaleNulla() throws EmailNonValidaException,
+      EmailEsistenteException, EmailNonAssociataException {
+    
+    String email = null;
+    tutorService.validaEmailTutor("Assistenza informatica", email);
+  }
+  
+  @Test (expected = EmailNonValidaException.class)
+  public void validaEmailTutorAziendaleNoMatch() throws EmailNonValidaException,
+      EmailEsistenteException, EmailNonAssociataException {
+    
+    String email = "ababab@@@@@@@@@gmail....com";
+    tutorService.validaEmailTutor("Assistenza informatica", email);
+  }
+  
+  @Test (expected = EmailEsistenteException.class)
+  public void validaEmailTutorAziendaleEsistente() throws UsernameNonValidoException, 
+      UsernameEsistenteException, AziendaNonValidaException,
+      AziendaEsistenteException, SedeNonValidaException, IndirizzoNonValidoException,
+      EmailNonValidaException, EmailAziendaEsistenteException,
+      it.unisa.di.ittraining.azienda.TelefonoNonValidoException,
+      NomeNonValidoException, NomeCognomeTroppoLungoException,
+      NomeCognomeTroppoCortoException, CognomeNonValidoException,
+      EmailEsistenteException, EmailNonAssociataException, PasswordNonValidaException,
+      PasswordNonCorrispondentiException, DataDiNascitaNonValidaException,
+      SessoNonValidoException, AziendaNonEsistenteException {
+  
+    Azienda azienda = new Azienda();
+    azienda.setNome("Borderlinetechnology");
+    azienda.setIndirizzo("Via dei Fratelli 82");
+    azienda.setSede("Milano");
+    azienda.setTelefono("3278765123");
+    azienda.setEmail("borderline.technology@gmail.com");
+    
+    tutorService.registraAzienda(azienda);
+    
+    TutorAziendale tutor = new TutorAziendale();
+    tutor.setNome("martina");
+    tutor.setCognome("di micco");
+    tutor.setEmail(azienda.getEmail());
+    tutor.setUsername("irondimicco");
+    tutor.setPassword("irondimicco");
+    tutor.setTelefono("3512695340");
+    tutor.setSesso("F");
+    tutor.setDataDiNascita(LocalDate.of(1980, Month.MARCH, 7));
+    
+    tutorService.registraTutorAziendale(tutor, azienda.getNome());
+    
+    String email = "borderline.technology@gmail.com";
+    tutorService.validaEmailTutor(azienda.getNome(), email);
   }
   
   //Test per i campi segreteria

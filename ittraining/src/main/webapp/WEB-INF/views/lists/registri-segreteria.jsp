@@ -36,6 +36,11 @@
 		<div class="row card panel" style="padding: 20px;">
 	      <div class="row">
 	      	<h6 class="teal-text">Domanda presso <c:out value="${lista.azienda.getNome()}"/></h6>
+	      	
+	      	<div class=" row">
+	      		 <p>Studente: <c:out value="${lista.getStudente().getNome()}"/> <c:out value="${lista.getStudente().getCognome()}"/></p>
+	      	</div>
+	      	
 	      	<div class=" row">
 	      		 <p>Numero di CFU: <c:out value="${lista.cfu}"/></p>
 	      	</div>
@@ -46,6 +51,10 @@
 	      	
 	      	<div class=" row">
 	      		 <p>Data fine: <c:out value="${lista.fineTirocinio.getDayOfMonth()}"/>/<c:out value="${lista.fineTirocinio.getMonthValue()}"/>/<c:out value="${lista.fineTirocinio.getYear()}"/></p>
+	      	</div>
+	      	
+	      	<div class=" row">
+	      		 <p>Numero ore svolte: <c:out value="${lista.getNumeroOre() / 60}"/></p>
 	      	</div>
 	    </div>
 	      
@@ -84,7 +93,7 @@
 						  </div>
 						</c:when>	
 						
-				        <c:when test="${lista.getNumeroOre() >= 9000}">
+				        <c:when test="${lista.getNumeroOre() == 9000}">
 				          <c:choose>
 				          	<c:when test="${lista.status == 6 }">
 						          <div class="row right">
@@ -92,7 +101,7 @@
 								  </div>
 							</c:when>
 				          	<c:when test="${lista.status == 7 }">
-						          <div class="row">
+						          <div class="row right">
 									  <p class="teal-text">Registro approvato</p>
 								  </div>
 							</c:when>
@@ -101,7 +110,7 @@
 				    </c:choose>
 			    </c:if>
 			    
-			    <c:if test="${domanda.cfu == 12}">
+			    <c:if test="${lista.cfu == 12}">
 					<c:choose>	
 				        <c:when test="${lista.getNumeroOre() < 18000}">
 				          <div class="row">
@@ -109,15 +118,15 @@
 						  </div>
 						</c:when>	
 						
-				        <c:when test="${lista.getNumeroOre() >= 18000}">
+				        <c:when test="${lista.getNumeroOre() == 18000}">
 				          <c:choose>
 				          	<c:when test="${lista.status == 6 }">
-						          <div class="row">
-									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
+						          <div class="row right">
+									  <a class="btn waves-effect waves-light" href="/home/registri/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
 								  </div>
 							</c:when>
 				          	<c:when test="${lista.status == 7 }">
-						          <div class="row">
+						          <div class="row right">
 									  <p class="teal-text">Registro approvato</p>
 								  </div>
 							</c:when>
@@ -126,7 +135,7 @@
 				    </c:choose>
 			    </c:if>
 			    
-			    <c:if test="${domanda.cfu == 18}">
+			    <c:if test="${lista.cfu == 18}">
 					<c:choose>	
 				        <c:when test="${lista.getNumeroOre() < 27000}">
 				          <div class="row">
@@ -134,25 +143,15 @@
 						  </div>
 						</c:when>	
 						
-				        <c:when test="${lista.getNumeroOre() >= 27000}">
+				        <c:when test="${lista.getNumeroOre() == 27000}">
 				          <c:choose>
-				          	<c:when test="${lista.status == 4 }">
-						          <div class="row right">
-									  <a class="btn waves-effect waves-light" href="/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
-								  </div>
-							</c:when>
-				          	<c:when test="${lista.status == 5 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato</p>
-								  </div>
-							</c:when>
 				          	<c:when test="${lista.status == 6 }">
-						          <div class="row">
-									  <p class="teal-text">Registro approvato</p>
+						          <div class="row right">
+									  <a class="btn waves-effect waves-light" href="/home/registri/approva-registro?id=${lista.id}"><i class="material-icons right">send</i>Approva</a>
 								  </div>
 							</c:when>
 				          	<c:when test="${lista.status == 7 }">
-						          <div class="row">
+						          <div class="row right">
 									  <p class="teal-text">Registro approvato</p>
 								  </div>
 							</c:when>

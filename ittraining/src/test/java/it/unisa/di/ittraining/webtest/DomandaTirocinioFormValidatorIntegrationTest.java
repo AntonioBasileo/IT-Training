@@ -48,7 +48,7 @@ import org.springframework.validation.Errors;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @Rollback
-public class DomandaTirocinioFormValidatorIntTest {
+public class DomandaTirocinioFormValidatorIntegrationTest {
 
   @Mock
    private Errors errors;
@@ -131,4 +131,5 @@ public class DomandaTirocinioFormValidatorIntTest {
     
     utenteService.logout();
   }
+
 }

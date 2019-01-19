@@ -37,7 +37,8 @@ public class RegistroService {
     registro.setData(registro.getData().plusDays(1));
     registro.setInizio(validaOrarioInizio(registro.getInizio(), registro.getFine()));
     registro.setFine(validaOrarioFine(registro.getInizio(), registro.getFine()));
-    validaNumeroOreTirocinio(registro.getInizio(), registro.getFine());
+    registro.setNumero_minuti((long)validaNumeroOreTirocinio(registro.getInizio(),
+        registro.getFine()));
     verificaNumeroOreRegistro(registro.getInizio(), registro.getFine(), id);
     
     registro.setDomanda(domanda);
@@ -85,7 +86,7 @@ public class RegistroService {
   */
   public LocalTime validaOrarioInizio(LocalTime inizio, LocalTime orarioFine) 
       throws OrarioNonValidoException, OrarioFinePrecedenteInizioException {
-    if (orarioFine == null) {
+    if (inizio == null) {
       throw new OrarioNonValidoException();
     }
 
