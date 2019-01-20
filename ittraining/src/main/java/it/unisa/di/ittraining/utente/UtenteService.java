@@ -44,29 +44,6 @@ public class UtenteService {
   public static final int MAX_DISTANZA_ANNO_NASCITA = 130;
 
   /** 
-  * Questo metodo verifica che il campo password e conferma password
-  * abbiano lo stesso valore.
-  */
-  public boolean validaPasswords(String password, String confirmPassword)
-      throws PasswordNonValidaException, PasswordNonCorrispondentiException {
-
-    if (password == null || confirmPassword == null) {
-      throw new PasswordNonValidaException("I campi password possono essere sono nulli");
-    }
-
-    if (!password.matches(Utente.PASSWORD_PATTERN) 
-        || !confirmPassword.matches(Utente.PASSWORD_PATTERN)) {
-      throw new PasswordNonValidaException("I campi password non rispettano il formato previsto");
-    }
-
-    if (!password.equals(confirmPassword)) {
-      throw new PasswordNonCorrispondentiException("Le due password non corrispondono");
-    }
-
-    return true;
-  }
-
-  /** 
   * Attraverso questo metodo è possibile
   * risalire all'utente autenticato.
   */
