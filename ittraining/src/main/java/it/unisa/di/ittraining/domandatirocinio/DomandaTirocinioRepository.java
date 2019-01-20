@@ -1,7 +1,6 @@
 package it.unisa.di.ittraining.domandatirocinio;
 
 import it.unisa.di.ittraining.azienda.Azienda;
-import it.unisa.di.ittraining.tutoraccademico.TutorAccademico;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
