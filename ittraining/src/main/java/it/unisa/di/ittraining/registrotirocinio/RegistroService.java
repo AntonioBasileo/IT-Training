@@ -140,7 +140,7 @@ public class RegistroService {
 
     if (domanda.getCfu() == 6) {
 
-      if ((domanda.getNumeroOre() + x) > 9000) {
+      if ((domanda.getNumeroOre() + x) >= 9000) {
     
         throw new OrePrevisteSuperateException();
       }
@@ -148,7 +148,7 @@ public class RegistroService {
     
     if (domanda.getCfu() == 12) {
 
-      if ((domanda.getNumeroOre() + x) > 18000) {
+      if ((domanda.getNumeroOre() + x) >= 18000) {
     
         throw new OrePrevisteSuperateException();
       }
@@ -156,7 +156,7 @@ public class RegistroService {
     
     if (domanda.getCfu() == 18) {
 
-      if ((domanda.getNumeroOre() + x) > 27000) {
+      if ((domanda.getNumeroOre() + x) >= 27000) {
     
         throw new OrePrevisteSuperateException();
       }
