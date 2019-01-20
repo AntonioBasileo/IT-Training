@@ -24,7 +24,6 @@ public class Registro {
   private LocalTime fine;
   private long numeroMinuti;
   private String descrizione;
-  private int status;
 
   public Long getId() {
     return id;
@@ -88,14 +87,5 @@ public class Registro {
   public void setNumero_minuti(long numeroMinuti) {
     this.numeroMinuti = numeroMinuti;
   }
-
-  public int getStatus() {
-    return status;
-  }
-
-  public void setStatus(int status) {
-    this.status = status;
-  }
-
 
 }
