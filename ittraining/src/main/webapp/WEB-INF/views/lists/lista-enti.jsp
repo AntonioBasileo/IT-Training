@@ -13,7 +13,7 @@
 			      <p><span class="teal-text">Indirizzo: </span> <c:out value="${lista.indirizzo}"/></p>
 			      <div class="row"></div>
 			      <p><span class="teal-text">Telefono: </span><c:out value="${lista.telefono}"/></p>
-			      <a href="/home/compila-domanda-form?azienda=${lista.nome}" class="secondary-content"><i class="material-icons left">business_center</i>Compila domanda</a>
+			      <a href="/home/compila-domanda-form?azienda=${lista.nome}" class="secondary-content"><i class="material-icons left">create</i>Compila domanda</a>
 			    </li>
 			</c:forEach>
 		  </ul>
