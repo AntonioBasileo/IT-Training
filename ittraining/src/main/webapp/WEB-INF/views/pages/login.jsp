@@ -7,7 +7,7 @@
 		
 		<meta charset="ISO-8859-1">
 		
-		<title>IT Training - Registrazione studente</title>
+		<title>IT Training - Login</title>
 		
 	    <!--Import Google Icon Font-->
 	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
